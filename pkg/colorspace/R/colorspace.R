@@ -889,8 +889,8 @@ whitepoint(NULL)
 
 #' Compute the Convex Combination of Two Colors
 #' 
-#' This function can be used to compute the result of color mixing (it assumes
-#' additive mixing).
+#' This function can be used to compute the result of color mixing, assuming
+#' additive mixing (e.g., as appropriate for RGB or XYZ).
 #' 
 #' 
 #' @param alpha The mixed color is obtained by combining an amount
@@ -913,6 +913,9 @@ mixcolor <-
   function(alpha, color1, color2, where = class(color1))
   {
     alpha = as.numeric(alpha)
+    if(where %in% c("polarLUV", "polarLAB", "HSV", "HLS")) {
+      warning(sprintf("convex combination of colors in polar coordinates (%s) may not be appropriate", where))
+    }
     c1 = coords(as(color1, where))
     c2 = coords(as(color2, where))
     na = length(alpha)
