@@ -270,7 +270,7 @@ points(0, 100, cex = 1.6, xpd = TRUE)
 
 ## Additive mixing of two colors
 
-In additive color models like `sRGB()`, `RGB()`, or `XYZ()` it can be useful to combine
+In additive color models like `RGB()` or `XYZ()` it can be useful to combine
 colors by additive mixing. Below a fully saturated red and green are mixed,
 yielding a medium brownish yellow.
 
