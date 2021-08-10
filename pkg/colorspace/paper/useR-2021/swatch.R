@@ -1,3 +1,45 @@
+oldbase.pals <- function() {
+  c("default", "rainbow", paste0(c("cm", "gray", "heat", "terrain", "topo"), ".colors"))
+}
+
+oldbase.colors <- function(n, palette = "default", ...) {
+  palette <- match.arg(palette, oldbase.pals())
+  if(palette == "default") {
+    palette.colors(n, palette = "R3", ...)
+  } else {
+    do.call(palette, list(n = n, ...))
+  }
+}
+
+oldbase.swatch <- function(palette = oldbase.pals(), n = 7, nrow = 4,
+                           border = "black", cex = 1, ...)
+{
+     cols <- sapply(palette, oldbase.colors, n = n)
+     ncol <- ncol(cols)
+     nswatch <- min(ncol, nrow)
+     op <- par(mar = rep(0.1, 4),
+               mfrow = c(1, min(5, ceiling(ncol/nrow))),
+     	       cex = cex, ...)
+     on.exit(par(op))
+     while (length(palette)) {
+ 	subset <- seq_len(min(nrow, ncol(cols)))
+ 	plot.new()
+ 	plot.window(c(0, n), c(0.25, nrow + 0.25))
+ 	y <- rev(subset)
+ 	text(0, y + 0.1, palette[subset], adj = c(0, 0))
+ 	y <- rep(y, each = n)
+ 	rect(rep(0:(n-1), n), y, rep(1:n, n), y - 0.5,
+ 	     col = cols[, subset], border = border)
+ 	palette <- palette[-subset]
+ 	cols    <- cols [, -subset, drop = FALSE]
+     }
+}
+
+## height=4.3, width=10
+oldbase.swatch(oma = c(0, 0, 1.5, 0))
+mtext("  Old base R palettes", adj = 0, cex = 1.5, outer = TRUE, line = -2.5)
+
+
 palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 8,
                            border = "black", cex = 1, ...)
 {
@@ -21,6 +63,10 @@ palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 8,
  	cols    <- cols [, -subset, drop = FALSE]
      }
 }
+
+## height=5, width=12
+palette.swatch(palette.pals()[-1], nrow = 5, oma = c(0, 0, 1.5, 0))
+mtext("  Qualitative (palette.colors)", adj = 0, cex = 1.5, outer = TRUE, line = -2.5)
 
 hcl.swatch <- function(palette = NULL, type = NULL, n = 5, nrow = 11,
   border = if (n < 15) "black" else NA, ...) {
@@ -47,10 +93,6 @@ hcl.swatch <- function(palette = NULL, type = NULL, n = 5, nrow = 11,
 
     par(mfrow = c(1, 1), mar = c(5.1, 4.1, 4.1, 2.1), cex = 1)
 }
-
-## height=5, width=12
-palette.swatch(palette.pals()[-1], nrow = 5, oma = c(0, 0, 1.5, 0))
-mtext("  Qualitative (palette.colors)", adj = 0, cex = 1.5, outer = TRUE, line = -2.5)
 
 ## height=10, width=8
 hcl.swatch(type = "sequential", nrow = 14)

@@ -1,0 +1,271 @@
+---
+title: Base R Shows Its Colors
+author:
+  # see ?rjournal_article for more information
+  - name: Achim Zeileis
+    affiliation: Universität Innsbruck
+    address:
+    - Department of Statistics
+    url: https://www.zeileis.org/
+    orcid: 0000-0003-0918-3766
+    email:  Achim.Zeileis@R-project.org
+  - name: Paul Murrell
+    affiliation: University of Auckland
+    address:
+    - Department of Statistics
+    url: https://www.stat.auckland.ac.nz/~paul/
+    orcid: 0000-0002-3224-8858
+    email:  paul@stat.auckland.ac.nz
+abstract: >
+  Starting from R 4.0.0 R has a new and much improved default palette.
+  More than 100 well-established palettes provided in `palette.colors()` and `hcl.colors()`.
+  Overview and guidance.
+preamble: |
+  \let\proglang=\text
+  
+# per R journal requirement, the bib filename should be the same as the output 
+# tex file. Don't forget to rename the bib file and change this example value.
+bibliography: color.bib
+output: rticles::rjournal_article
+---
+
+```{r preliminaries, include = FALSE}
+library("colorspace")
+```
+
+# Color palettes in (base) R
+
+## History
+
+Color is an integral part of data visualization and statistical graphics.
+
+Although graphics were emphasized to be one of the strengths of R already early on [@color:Ihaka+Gentleman:1996],
+base R provided shockingly few functions for choosing colors from readily available palettes. And those palettes
+that were provided (see Figure \ref{fig:oldbase}) were standard when they were implemented but turned out to be
+rather poor.
+
+- The colors from the default `palette()` could be accessed through numbers `1` to `8` and were mostly used for coding _categorical_ information.
+- The functions `heat.colors()`, `terrain.colors()`, `topo.colors()`, and `gray.colors()` were mostly used as _sequential_ palettes for ordered or numeric information.
+- The function `cm.colors()` was the only _diverging_ palette.
+- The function `rainbow()` implements the infamous rainbow (or jet) color palette that was very widely used for all types, possibly after restricting the hue range: _categorical_, _sequential_, and _diverging_.
+
+```{r oldbase, echo=FALSE, fig.height=1.75, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Old base R palettes.'}
+oldbase.pals <- function() {
+  c("default (R3)", "rainbow", paste0(c("heat", "terrain", "topo", "cm", "gray"), ".colors"))
+}
+
+oldbase.colors <- function(n, palette = "default", ...) {
+  palette <- match.arg(palette, oldbase.pals())
+  if(palette == oldbase.pals()[1]) {
+    palette.colors(n, palette = "R3", ...)
+  } else {
+    do.call(palette, list(n = n, ...))
+  }
+}
+
+oldbase.swatch <- function(palette = oldbase.pals(), n = 8, nrow = 2,
+                           border = "black", cex = 1, ...)
+{
+     cols <- sapply(palette, oldbase.colors, n = n)
+     ncol <- ncol(cols)
+     nswatch <- min(ncol, nrow)
+     op <- par(mar = rep(0.1, 4),
+               mfrow = c(1, min(5, ceiling(ncol/nrow))),
+     	       cex = cex, ...)
+     on.exit(par(op))
+     while (length(palette)) {
+ 	subset <- seq_len(min(nrow, ncol(cols)))
+ 	plot.new()
+ 	plot.window(c(0, n), c(0.25, nrow + 0.25))
+ 	y <- rev(subset)
+ 	text(0, y + 0.1, palette[subset], adj = c(0, 0))
+ 	y <- rep(y, each = n)
+ 	rect(rep(0:(n-1), n), y, rep(1:n, n), y - 0.5,
+ 	     col = cols[, subset], border = border)
+ 	palette <- palette[-subset]
+ 	cols    <- cols [, -subset, drop = FALSE]
+     }
+}
+
+oldbase.swatch()
+```
+
+However, all of these palettes -- except `gray.colors()` -- have significant problems: They are ugly and have poor perceptual properties.
+The colors are highly saturated (garish, flashy) and unbalanced with respect to chroma and luminance. Most of them also use sequences
+of hues obtained in the RGB (red-green-blue) space, leading to clustering of colors at the red, green, and blue primaries.
+
+Better color palettes had been neglected in base R for a long time. There are various reasons for this:
+
+- Functions like `colorRampPalette()` allowed users to create new palettes on the fly -- provided they had useful colors available upon which
+  the palette could be based.
+- Better palettes were easily available starting with \CRANpkg{RColorBrewer} [@color:RColorBrewer], later
+  \CRANpkg{colorspace} [@color:Ihaka:2003; @color:Zeileis+Hornik+Murrell:2009], and somewhat more recently
+  \CRANpkg{viridis} [@color:viridis], \CRANpkg{rcartocolor} [@color:rcartocolor], or \CRANpkg{scico} [@color:scico].
+- Instead of using base graphics, frameworks like \CRANpkg{ggplot2} [@color:ggplot2] or \CRANpkg{lattice} [@color:lattice]
+  that bring along their own color themes were adopted very widely.
+
+
+## New base R palettes
+
+`palette.colors()` for qualitative palettes [@color:grDevices2]
+
+`hcl.colors()` for qualitative, sequential, and diverging palettes obtained in HCL (hue-chroma-luminance) space [@color:Wiki+HCL]
+see @color:grDevices and @color:Zeileis+Fisher+Hornik:2020.
+
+Both accompanied by a function to query the available palette names (`palette.pals()` and `hcl.pals()`, respectively).
+Color swatches shown in Figures \ref{fig:palette}, \ref{fig:hcls}, and \ref{fig:hcld} which are also shown by running
+the `example()` of the two functions which make basic `palette.swatch()` and `hcl.swatch()` functions available.
+Here, focus on `palette.colors()`, more details on `hcl.colors()` later.
+
+```{r palette, echo=FALSE, fig.height=3.5, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Qualitative palettes from \\code{palette.colors()}.'}
+palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 4,
+                           border = "black", cex = 1, ...)
+{
+     cols <- sapply(palette, palette.colors, n = n)
+     ncol <- ncol(cols)
+     nswatch <- min(ncol, nrow)
+     op <- par(mar = rep(0.1, 4),
+               mfrow = c(1, min(5, ceiling(ncol/nrow))),
+     	       cex = cex, ...)
+     on.exit(par(op))
+     while (length(palette)) {
+ 	subset <- seq_len(min(nrow, ncol(cols)))
+ 	plot.new()
+ 	plot.window(c(0, n), c(0.25, nrow + 0.25))
+ 	y <- rev(subset)
+ 	text(0, y + 0.1, palette[subset], adj = c(0, 0))
+ 	y <- rep(y, each = n)
+ 	rect(rep(0:(n-1), n), y, rep(1:n, n), y - 0.5,
+ 	     col = cols[, subset], border = border)
+ 	palette <- palette[-subset]
+ 	cols    <- cols [, -subset, drop = FALSE]
+     }
+}
+
+## height=5, width=12
+palette.swatch()
+```
+
+
+## Illustration
+
+Power of color often overestimated.
+Color vision deficiencies ($\sim 8$% of male and $\sim 0.5$% of female viewers).
+Other physical or technical limitations.
+
+Time series line plot using base graphics, see Figure \ref{fig:tsplot}. Essentially:
+
+```{r tsplot-pseudocode, eval=FALSE}
+p <- c(1:3, 5)
+plot(EuStockMarkets, log = "y", plot.type = "single", col = p, ...)
+legend("topleft", colnames(EuStockMarkets), col = p, ...)
+```
+
+Figure also uses @color:Okabe+Ito:2008 palette and emulates a kind of red-green
+color blindness known as protanopia using the \pkg{colorspace} package based on
+the algorithms of @color:Machado+Oliveira+Fernandes:2009.
+
+```{r tsplot, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Time series line plot of \\code{EuStockMarkets}. Rows: Old \\code{"R3"} default palette (top), new \\code{"R4"} default palette (middle), \\code{"OkabeIto"} palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated protanope vision (right). A color legend is used in the first row and direct labels in the other rows.'}
+tsplot <- function(palette = "R3", protan = FALSE, legend = TRUE, ...) {
+  ## color palette
+  palette <- match.arg(palette, c("R3", "R4", "Okabe-Ito"))
+  p <- switch(palette,
+    "R3" = palette.colors(8, "R3")[c(1:3, 5)],
+    "R4" = palette.colors(8, "R4")[c(1:3, 5)],
+    "Okabe-Ito" = palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)]
+  )
+  
+  ## emulate protanope vision?
+  if(protan) p <- colorspace::protan(p) 
+  
+  ## time series plot
+  eu <- window(EuStockMarkets, end = 1998)
+  plot(eu, log = "y", ylab = "EU Stock Prices", plot.type = "single", col = p, xlim = c(1991.6, 1998.4), lwd = 1.5, ...)
+  text(1991.3, 6000, palette, pos = 4, cex = 1.5)
+
+  ## legend or direct labeling
+  if(legend) {
+    legend(1991.3, 6000, colnames(eu), col = p, lty = 1, lwd = 3, bty = "n")
+  } else {
+    text(1998, tail(eu, 1), colnames(eu), pos = 4, col = p, xpd = TRUE)
+  }
+  
+  invisible(p)
+}
+
+par(mfrow = c(3, 2), mar = c(5, 4, 2, 1))
+tsplot(palette = "R3", protan = FALSE, legend = TRUE, main = "Normal")
+tsplot(palette = "R3", protan = TRUE, legend = TRUE, main = "Protanope")
+par(mar = c(5, 4, 1, 1))
+tsplot(palette = "R4", protan = FALSE, legend = FALSE)
+tsplot(palette = "R4", protan = TRUE, legend = FALSE)
+tsplot(palette = "Okabe-Ito", protan = FALSE, legend = FALSE)
+tsplot(palette = "Okabe-Ito", protan = TRUE, legend = FALSE)
+```
+
+Old \code{R3} default palette: Too flashy, cyan too light, hard to distinguish for protanope viewers.
+
+New \code{R4} default palette: Similar hues, more balanced brightness, avoid garish colors, distinguishable for viewers with color vision deficiencies.
+
+Okabe-Ito: Designed to be robust against color vision deficiencies. Even easier to distinguish.
+
+
+# HCL-based color palettes
+
+## Construction principles
+
+## Available palettes
+
+```{r hcls, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Sequential palettes from \\code{hcl.colors()}.'}
+hcl.swatch <- function(palette = NULL, type = NULL, n = 5, nrow = 11,
+  border = if (n < 15) "black" else NA, ...) {
+    if(is.null(palette)) palette <- hcl.pals(type)
+    cols <- sapply(palette, hcl.colors, n = n)
+    ncol <- ncol(cols)
+    nswatch <- min(ncol, nrow)
+
+    par(mar = rep(0.1, 4),
+        mfrow = c(1, min(6, ceiling(ncol/nrow))),
+        cex = 0.7, ...)
+
+    while (length(palette)) {
+        subset <- 1:min(nrow, ncol(cols))
+        plot.new()
+        plot.window(c(0, n), c(0, nrow + 1))
+        text(0, rev(subset) + 0.1, palette[subset], adj = c(0, 0))
+        y <- rep(subset, each = n)
+        rect(rep(0:(n-1), n), rev(y), rep(1:n, n), rev(y) - 0.5,
+             col = cols[, subset], border = border)
+        palette <- palette[-subset]
+        cols <- cols[, -subset, drop = FALSE]
+    }
+
+    par(mfrow = c(1, 1), mar = c(5.1, 4.1, 4.1, 2.1), cex = 1)
+}
+
+hcl.swatch(type = "sequential", nrow = 12)
+```
+
+```{r hcld, echo=FALSE, fig.height=4.5, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Diverging palettes from \\code{hcl.colors()}.'}
+hcl.swatch(c(hcl.pals("diverging"), hcl.pals("divergingx")), nrow = 6)
+```
+
+## Illustration
+
+Sharpiegate.
+
+# Concluding remarks
+
+Mention gray shading in `hist()` and `boxplot()`?
+
+
+# Comments about the style and template
+
+This file is only a basic article template. For full details of _The R Journal_ style and information on how to prepare your article for submission, see the [Instructions for Authors](https://journal.r-project.org/share/author-guide.pdf).
+
+`rticles::rjournal_article` will help you build the correct files requirements: 
+
+A tex file will be generated from this Rmd file and correctly included in
+`RJwapper.tex` as expected to build `RJwrapper.pdf`.
+All figure files will be kept in the default rmarkdown `*_files` folder. This
+happens because `keep_tex = TRUE` by default in `rticles::rjournal_article`
