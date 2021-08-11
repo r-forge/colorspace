@@ -26,7 +26,7 @@ abstract: >
   Compile document with `rmarkdown::render("color.Rmd")`.
   More details at <https://journal.R-project.org/share/author-guide.pdf>.  
 preamble: |
-  \let\proglang=\text
+  \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
 bibliography: color.bib
 output: rticles::rjournal_article
 ---
