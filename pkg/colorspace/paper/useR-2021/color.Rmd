@@ -19,12 +19,14 @@ author:
 abstract: >
   Starting from R 4.0.0 R has a new and much improved default palette.
   More than 100 well-established palettes provided in `palette.colors()` and `hcl.colors()`.
-  Overview and guidance.
+  Overview and guidance.  
+  **Meta:**
+  Abstract must not have more than 150 words.
+  File name of tex and bib should be the same.
+  Compile document with `rmarkdown::render("color.Rmd")`.
+  More details at <https://journal.R-project.org/share/author-guide.pdf>.  
 preamble: |
   \let\proglang=\text
-  
-# per R journal requirement, the bib filename should be the same as the output 
-# tex file. Don't forget to rename the bib file and change this example value.
 bibliography: color.bib
 output: rticles::rjournal_article
 ---
@@ -40,9 +42,9 @@ library("colorspace")
 Color is an integral part of data visualization and statistical graphics.
 
 Although graphics were emphasized to be one of the strengths of R already early on [@color:Ihaka+Gentleman:1996],
-base R provided shockingly few functions for choosing colors from readily available palettes. And those palettes
-that were provided (see Figure \ref{fig:oldbase}) were standard when they were implemented but turned out to be
-rather poor.
+base R provided shockingly few functions for choosing colors from readily available palettes. And the palettes
+that were provided (see Figure \ref{fig:oldbase}) were standard when they were implemented but have meanwhile
+been widely recognized as being rather poor.
 
 - The colors from the default `palette()` could be accessed through numbers `1` to `8` and were mostly used for coding _categorical_ information.
 - The functions `heat.colors()`, `terrain.colors()`, `topo.colors()`, and `gray.colors()` were mostly used as _sequential_ palettes for ordered or numeric information.
@@ -92,28 +94,34 @@ oldbase.swatch()
 
 However, all of these palettes -- except `gray.colors()` -- have significant problems: They are ugly and have poor perceptual properties.
 The colors are highly saturated (garish, flashy) and unbalanced with respect to chroma and luminance. Most of them also use sequences
-of hues obtained in the RGB (red-green-blue) space, leading to clustering of colors at the red, green, and blue primaries.
+of hues obtained in the RGB (red-green-blue) space or simple derivations thereof like HSV (hue-saturation-value) or HLS (hue-lightness-saturation).
+This leads to clustering of colors at the red, green, and blue primaries.
 
 Better color palettes had been neglected in base R for a long time. There are various reasons for this:
 
 - Functions like `colorRampPalette()` allowed users to create new palettes on the fly -- provided they had useful colors available upon which
   the palette could be based.
-- Better palettes were easily available starting with \CRANpkg{RColorBrewer} [@color:RColorBrewer], later
+- Better palettes were easily available in packages on CRAN (Comprehensive R Archive Network)
+  starting with \CRANpkg{RColorBrewer} [@color:RColorBrewer], later
   \CRANpkg{colorspace} [@color:Ihaka:2003; @color:Zeileis+Hornik+Murrell:2009], and somewhat more recently
-  \CRANpkg{viridis} [@color:viridis], \CRANpkg{rcartocolor} [@color:rcartocolor], or \CRANpkg{scico} [@color:scico].
+  \CRANpkg{viridis} [@color:viridis], \CRANpkg{rcartocolor} [@color:rcartocolor], or \CRANpkg{scico} [@color:scico],
+  among many others.
 - Instead of using base graphics, frameworks like \CRANpkg{ggplot2} [@color:ggplot2] or \CRANpkg{lattice} [@color:lattice]
-  that bring along their own color themes were adopted very widely.
+  which bring along their own color themes were adopted very widely.
 
 
 ## New base R palettes
 
-`palette.colors()` for qualitative palettes [@color:grDevices2]
+On the road to R version 4.0.0 this deficit of base R was finally overcome by introducing two new palette functions:
 
-`hcl.colors()` for qualitative, sequential, and diverging palettes obtained in HCL (hue-chroma-luminance) space [@color:Wiki+HCL]
-see @color:grDevices and @color:Zeileis+Fisher+Hornik:2020.
+- `palette.colors()` provides a new improved default color palette as well as a few other well-established qualitative palettes [@color:grDevices2]
+- `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardize approach in
+  the so-called HCL (hue-chroma-luminance) space [@color:Wiki+HCL], see @color:grDevices and @color:Zeileis+Fisher+Hornik:2020.
+  Most of these HCL palette approximate very closely well-established palettes from \pkg{RColorBrewer}, \pkg{viridis}, \pkg{rcartocolor},
+  \pkg{scico}, and others.
 
-Both accompanied by a function to query the available palette names (`palette.pals()` and `hcl.pals()`, respectively).
-Color swatches shown in Figures \ref{fig:palette}, \ref{fig:hcls}, and \ref{fig:hcld} which are also shown by running
+Both are accompanied by functions to query the available palette names (`palette.pals()` and `hcl.pals()`, respectively).
+The color swatches shown in Figures \ref{fig:palette}, \ref{fig:hcls}, and \ref{fig:hcld} which are also shown by running
 the `example()` of the two functions which make basic `palette.swatch()` and `hcl.swatch()` functions available.
 Here, focus on `palette.colors()`, more details on `hcl.colors()` later.
 
@@ -146,14 +154,29 @@ palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 4,
 palette.swatch()
 ```
 
+Briefly explain principles for selection of `R4` (similar hues, limited differences in chroma/luminance, dark/colorful, work ok for colorblind viewers).
+`Okabe-Ito` [@color:Okabe-Ito:2008] was designed to be very robust under color vision deficiencies. As it uses somewhat different hues than the old `R4` palette
+and was hence not used as the new default palette in R but it is the default in `palette.colors()`.
+The robustness of both palettes is illustrated in Figure \ref{fig:cvd}.
+
+```{r cvd, echo=FALSE, fig.height=3.5, fig.width=12, out.width='0.85\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Color vision deficiency emulation for \\code{R4} (left) and \\code{Okabe-Ito} (right) palettes.'}
+layout(rbind(1:2), widths = c(0.46, 0.54))
+swatchplot(palette.colors(palette = "R4"), cvd = TRUE)
+swatchplot(palette.colors(palette = "Okabe-Ito"), cvd = TRUE)
+```
+
+The other palettes are from well-established software packages like \pkg{ggplot2} [@color:ggplot2], ColorBrewer.org [@color:Harrower+Brewer:2003],
+or Tableau [@color:Tableau]. Moreover, two palettes with many colors (36 and 26, respectively) are used from the
+\CRANpkg{Polychrome} package [@color:Polychrome].
 
 ## Illustration
 
+Show usage of new qualitative palettes in practice. Consider:
 Power of color often overestimated.
 Color vision deficiencies ($\sim 8$% of male and $\sim 0.5$% of female viewers).
 Other physical or technical limitations.
 
-Time series line plot using base graphics, see Figure \ref{fig:tsplot}. Essentially:
+Starting point: Time series line plot using base graphics, see Figure \ref{fig:tsplot} (top left), essentially:
 
 ```{r tsplot-pseudocode, eval=FALSE}
 p <- c(1:3, 5)
@@ -161,7 +184,10 @@ plot(EuStockMarkets, log = "y", plot.type = "single", col = p, ...)
 legend("topleft", colnames(EuStockMarkets), col = p, ...)
 ```
 
-Figure also uses @color:Okabe+Ito:2008 palette and emulates a kind of red-green
+The first two rows show the old default colors from R 3.x.y and the new default colors startin from R 4.0.0.
+Additionally, the figure uses @color:Okabe+Ito:2008 palette and it switches from a color legend to direct labeling.
+
+In the right column: Emulation of a kind of red-green
 color blindness known as protanopia using the \pkg{colorspace} package based on
 the algorithms of @color:Machado+Oliveira+Fernandes:2009.
 
@@ -203,20 +229,77 @@ tsplot(palette = "Okabe-Ito", protan = FALSE, legend = FALSE)
 tsplot(palette = "Okabe-Ito", protan = TRUE, legend = FALSE)
 ```
 
-Old \code{R3} default palette: Too flashy, cyan too light, hard to distinguish for protanope viewers.
+Old `R3` default palette: Too flashy, cyan too light, hard to distinguish for protanope viewers.
+The colors for the German stock index DAX and the Swiss stock index SMI look almost identical to protanope viewers.
 
-New \code{R4} default palette: Similar hues, more balanced brightness, avoid garish colors, distinguishable for viewers with color vision deficiencies.
+New `R4` default palette: Similar hues, more balanced brightness, avoid garish colors, distinguishable for viewers with color vision deficiencies. Cyan much better.
 
-Okabe-Ito: Designed to be robust against color vision deficiencies. Even easier to distinguish.
+`Okabe-Ito`: Even easier to distinguish.
 
 
 # HCL-based color palettes
 
 ## Construction principles
 
+HCL makes it easy to describe colors for humans, using the three basic properties hue, chroma, and luminane (see Figure \ref{fig:hcl}).
+
+```{r hcl, echo=FALSE, fig.height=2.4, fig.width=5, out.width='0.4\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Varying hue, chroma, and luminance separately, keeping the other two properties fixed.'}
+swatchplot(
+  "Hue\n(Type of color)"    = sequential_hcl(5, h = c(0, 300), c = c(60, 60), l = 65),
+  "Chroma\n(Colorfulness)"  = sequential_hcl(5, h = 0, c = c(100, 0), l = 65, rev = TRUE, power = 1),
+  "Luminance\n(Brightness)" = sequential_hcl(5, h = 260, c = c(25, 25), l = c(25, 90), rev = TRUE, power = 1),
+  nrow = 3, line = 8, off = 0
+)
+```
+
+For qualitative palettes mainly vary hue. Completely balanced if chroma and luminance kept fixed which
+was suggested by @color:Ihaka:2003 and is implemented in `hcl.colors()`. See left panel of Figure \ref{fig:hclpal}
+and Figure \ref{fig:hclq}.
+Two drawbacks: Relatively few colors that can be clearly distinguished (about six), even fewer under
+color vision deficiencies (about three). Hence in most situations better allow limited variations in chroma and luminance
+as in `palette.colors()`. No general HCL-based strategy for such palettes.
+
+```{r hclpal, echo=FALSE, fig.height=2.4, fig.width=15, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Basic idea for HCL palettes.'}
+swatchplot(
+  "Qualitative (Set 2)"     = rbind("Color" = hcl.colors(5, "Set 2"),     "Desaturated" = desaturate(hcl.colors(5, "Set 2"))),
+  "Sequential (Blues)"    = rbind("Color" = hcl.colors(7, "Blues"),    "Desaturated" = desaturate(hcl.colors(7, "Blues"))),
+  "Diverging (Green-Brown)" = rbind("Color" = hcl.colors(7, "Green-Brown"), "Desaturated" = desaturate(hcl.colors(7, "Green-Brown"))),
+  nrow = 3, off = 0, line = 7
+)
+```
+For sequential and diverging palettes monotonic changes in luminance are most important (see middle and right panel
+in Figure \ref{fig:hclpal}). Add changes in chroma and possibly also hue (see Figure \ref{fig:specplot}).
+`Blues 2` uses a constant hue and monotonic changes in chroma and luminance going from dark and colorful blue to
+light gray. `Blues` uses similar luminance trajectory, slightly varies hue, and has triangular chroma curve (rather
+than monotonic). `Blues 2` mostly emphasizes the dark and colorful blue while `Blues` makes the colors more easily
+distinguishable in the middle.
+
+Diverging combines two sequential, making both arms as balanced as possible.
+
+
+```{r specplot, echo=TRUE, fig.height=5, fig.width=5, fig.show='hide'}
+specplot(hcl.colors(7, "Blues"), hcl.colors(7, "Blues 2"))
+specplot(hcl.colors(7, "Green-Brown"))
+```
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.49\textwidth]{color_files/figure-latex/specplot-1} 
+\includegraphics[width=0.49\textwidth]{color_files/figure-latex/specplot-2}
+\caption{Spectrum of luminance (blue, left axis), chroma (green, left axis), and hue (red, right axis) trajectories.
+Left: Sequential \code{Blues} (solid) and \code{Blues 2} (dashed) palettes.
+Right: Diverging \code{Green-Brown} palette.}\label{fig:specplot}
+\end{figure}
+
+
 ## Available palettes
 
-```{r hcls, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Sequential palettes from \\code{hcl.colors()}.'}
+Overview of qualitative (Figure \ref{fig:hclq}), sequential (Figure \ref{fig:hcls}), and diverging (Figure \ref{fig:hcld})
+palettes based on HCL principles. Many closely approximate colors from ColorBrewer.org, CARTO Color, Viridis, and 
+Crameri's scientific colors. See <http://colorspace.R-Forge.R-project.org/articles/approximations.html> for one-to-one
+comparisons.
+
+```{r hclq, echo=FALSE, fig.height=2, fig.width=8, out.width='0.85\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Qualitative palettes from \\code{hcl.colors()}.'}
 hcl.swatch <- function(palette = NULL, type = NULL, n = 5, nrow = 11,
   border = if (n < 15) "black" else NA, ...) {
     if(is.null(palette)) palette <- hcl.pals(type)
@@ -243,6 +326,10 @@ hcl.swatch <- function(palette = NULL, type = NULL, n = 5, nrow = 11,
     par(mfrow = c(1, 1), mar = c(5.1, 4.1, 4.1, 2.1), cex = 1)
 }
 
+hcl.swatch(type = "qualitative", nrow = 2)
+```
+
+```{r hcls, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Sequential palettes from \\code{hcl.colors()}.'}
 hcl.swatch(type = "sequential", nrow = 12)
 ```
 
@@ -252,20 +339,47 @@ hcl.swatch(c(hcl.pals("diverging"), hcl.pals("divergingx")), nrow = 6)
 
 ## Illustration
 
-Sharpiegate.
+Risk maps: Communication to the public particularly important.
 
-# Concluding remarks
+Example: Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$), 2019-08-30--2019-09-04, during hurricane Dorian.
 
-Mention gray shading in `hist()` and `boxplot()`?
+Source: National Oceanic and Atmospheric Administration.
+
+Original: Works poorly because too much chroma everywhere and non-monotonic luminance (dark to light and back to dark).
+Extremely hard to read for colorblind viewers (see Figure \ref{fig:dorian}).
+
+Better HCL-based alternative: `OrRd` and also merging some probability intervals to make matching of intervals to colors easier, still clearly conveys overall shape.
+
+Might have contributed to Trump's confusion in "Sharpiegate" incident. See @color:Zeileis+Stauffer:2019 for a more detailed discussion and other alternative color palettes.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orig.png} 
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orig-deutan.png} 
+
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd.png} 
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd-deutan.png} 
+\caption{Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$), 2019-08-30--2019-09-04..}\label{fig:dorian}
+\end{figure}
 
 
-# Comments about the style and template
 
-This file is only a basic article template. For full details of _The R Journal_ style and information on how to prepare your article for submission, see the [Instructions for Authors](https://journal.r-project.org/share/author-guide.pdf).
 
-`rticles::rjournal_article` will help you build the correct files requirements: 
+# New defaults in graphical functions
 
-A tex file will be generated from this Rmd file and correctly included in
-`RJwapper.tex` as expected to build `RJwrapper.pdf`.
-All figure files will be kept in the default rmarkdown `*_files` folder. This
-happens because `keep_tex = TRUE` by default in `rticles::rjournal_article`
+Many graphics functions have now slightly different default output, namely when they are using colors `2`, `3`, `4`, etc. but still red, green, blue.
+
+Moreover, a couple of functions explicitly have new defauls, namely: `image()` and `filled.contour()`, now using sequential `YlOrRd` palette
+(from ColorBrewer) which uses similar hues as the old `heat.colors()`. See Figure \ref{fig:graphics}.
+
+Finally, it might be worth mentioning that `hist()` and `boxplot()` (and thus `plot(num ~ factor, ...)`) have a new default color:
+light gray which makes it a bit easier to compare the shaded areas.
+
+```{r graphics, echo=-1, fig.height=4, fig.width=14, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='New defaults in base graphics.'}
+par(mfrow = c(1, 3))
+image(volcano)
+boxplot(weight ~ feed, data = chickwts)
+hist(chickwts$weight)
+```
+
+
