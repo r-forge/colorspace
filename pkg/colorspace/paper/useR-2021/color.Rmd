@@ -43,9 +43,10 @@ meaning that groups are identified rapidly and without conscious effort
 [@Ware:2012].
 
 ```{r colorcat, echo=FALSE, fig.height=3, fig.width=5, out.width='.6\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a scatterplot that has two groups of points and it is REALLY easy to see that there are two groups and which points belong to which group.'}
-library(ggplot2)
-ggplot(mtcars) +
-    geom_point(aes(disp, mpg, color = factor(am)), size=3) +
+library("ggplot2")
+data("whiteside", package = "MASS")
+ggplot(whiteside) +
+    geom_point(aes(Temp, Gas, color = Insul), size = 2) +
     ggtitle("PLACE HOLDER") +
     theme(legend.position = "none") +
     theme_minimal()
@@ -59,7 +60,7 @@ visual features, such as location, have already been used.  For example,
 color might be used to fill in different regions on a map.
 
 ```{r colorcont, echo=FALSE, fig.height=5, fig.width=7, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a choropleth map.'}
-library(maps)
+library("maps")
 crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
 vars <- lapply(names(crimes)[-1], 
                function(j) {
