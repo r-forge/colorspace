@@ -40,19 +40,20 @@ library("colorspace")
 Color can be a very effective way to distinguish between different groups
 within a data visualisation.  Color is a "preattentive" visual feature,
 meaning that groups are identified rapidly and without conscious effort
-[@Ware12].
+[@Ware:2012].
 
 ```{r colorcat, echo=FALSE, fig.height=3, fig.width=5, out.width='.6\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a scatterplot that has two groups of points and it is REALLY easy to see that there are two groups and which points belong to which group.'}
 library(ggplot2)
 ggplot(mtcars) +
     geom_point(aes(disp, mpg, color = factor(am)), size=3) +
     ggtitle("PLACE HOLDER") +
-    theme(legend.position = "none")
+    theme(legend.position = "none") +
+    theme_minimal()
 ```
 
 Employing
  color to represent values on a continuous numeric scale will be less successful
-[@cleveland+mcgill+1984], but color can
+[@Cleveland+McGill:1984], but color can
 still be useful to convey additional variables when more effective
 visual features, such as location, have already been used.  For example,
 color might be used to fill in different regions on a map.
@@ -71,7 +72,8 @@ ggplot(crimes, aes(map_id = state)) +
     geom_map(aes(fill = Murder), map = states_map) +
     expand_limits(x = states_map$long, y = states_map$lat) +
     ggtitle("PLACE HOLDER") +
-    coord_fixed()
+    coord_fixed() +
+    theme_minimal()
 ```
 
 R provides several ways to specify colors:  by name, e.g., `"red"`;
@@ -141,7 +143,7 @@ The colors are highly saturated, which can be distracting and overly
 stimulating 
 and the colors are unbalanced with respect to chroma and luminance,
 which means that they have unequal visual impact
-[@whiterose; @bartram+patra+stone; @saliency]. 
+[@Lonsdale+Lonsdale:2019; @Bartram+Patra+Stone:2017; @Etchebehere+Fedorovskaya:2017]. 
 The palettes do not perform well for viewers with some form
 of colorblindness (nearly 10% of the population).
 Most of the palettes also use sequences
@@ -153,11 +155,11 @@ Better color palettes had been neglected in base R for a long time. There are va
 - Functions like `colorRampPalette()` allowed users to create new palettes on the fly -- provided they had useful colors available upon which
   the palette could be based.
 - Better palettes were easily available in packages on CRAN (Comprehensive R Archive Network)
-  starting with \CRANpkg{RColorBrewer} [@color:RColorBrewer], later
-  \CRANpkg{colorspace} [@color:Ihaka:2003; @color:Zeileis+Hornik+Murrell:2009], and somewhat more recently
-  \CRANpkg{viridis} [@color:viridis], \CRANpkg{rcartocolor} [@color:rcartocolor], or \CRANpkg{scico} [@color:scico],
+  starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
+  \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and somewhat more recently
+  \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], or \CRANpkg{scico} [@scico],
   among many others.
-- Instead of using base graphics, frameworks like \CRANpkg{ggplot2} [@color:ggplot2] or \CRANpkg{lattice} [@color:lattice]
+- Instead of using base graphics, frameworks like \CRANpkg{ggplot2} [@ggplot2] or \CRANpkg{lattice} [@lattice]
   which bring along their own color themes were adopted very widely.
 
 
@@ -165,10 +167,10 @@ Better color palettes had been neglected in base R for a long time. There are va
 
 On the road to R version 4.0.0 this deficit of base R was finally overcome by introducing two new palette functions:
 
-- `palette.colors()` provides a new improved default color palette as well as a few other well-established qualitative palettes [@color:grDevices2]
-- `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardize approach in
-  the so-called HCL (hue-chroma-luminance) space [@color:Wiki+HCL], see @color:grDevices and @color:Zeileis+Fisher+Hornik:2020.
-  Most of these HCL palette approximate very closely well-established palettes from \pkg{RColorBrewer}, \pkg{viridis}, \pkg{rcartocolor},
+- `palette.colors()` provides a new improved default color palette as well as a few other well-established qualitative palettes [@grDevices2]
+- `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
+  the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL], see @grDevices and @Zeileis+Fisher+Hornik:2020.
+  Most of these HCL palettes approximate very closely well-established palettes from \pkg{RColorBrewer}, \pkg{viridis}, \pkg{rcartocolor},
   \pkg{scico}, and others.
 
 Both are accompanied by functions to query the available palette names (`palette.pals()` and `hcl.pals()`, respectively).
@@ -206,7 +208,7 @@ palette.swatch()
 ```
 
 Briefly explain principles for selection of `R4` (similar hues, limited differences in chroma/luminance, dark/colorful, work ok for colorblind viewers).
-`Okabe-Ito` [@color:Okabe+Ito:2008] was designed to be very robust under color vision deficiencies. As it uses somewhat different hues than the old `R4` palette
+`Okabe-Ito` [@Okabe+Ito:2008] was designed to be very robust under color vision deficiencies. As it uses somewhat different hues than the old `R4` palette
 and was hence not used as the new default palette in R but it is the default in `palette.colors()`.
 The robustness of both palettes is illustrated in Figure \ref{fig:cvd}.
 
@@ -216,9 +218,9 @@ swatchplot(palette.colors(palette = "R4"), cvd = TRUE)
 swatchplot(palette.colors(palette = "Okabe-Ito"), cvd = TRUE)
 ```
 
-The other palettes are from well-established software packages like \pkg{ggplot2} [@color:ggplot2], ColorBrewer.org [@color:Harrower+Brewer:2003],
-or Tableau [@color:Tableau]. Moreover, two palettes with many colors (36 and 26, respectively) are used from the
-\CRANpkg{Polychrome} package [@color:Polychrome].
+The other palettes are from well-established software packages like \pkg{ggplot2} [@ggplot2], ColorBrewer.org [@Harrower+Brewer:2003],
+or Tableau [@Tableau]. Moreover, two palettes with many colors (36 and 26, respectively) are used from the
+\CRANpkg{Polychrome} package [@Polychrome].
 
 ## Illustration
 
@@ -236,11 +238,11 @@ legend("topleft", colnames(EuStockMarkets), col = p, ...)
 ```
 
 The first two rows show the old default colors from R 3.x.y and the new default colors startin from R 4.0.0.
-Additionally, the figure uses @color:Okabe+Ito:2008 palette and it switches from a color legend to direct labeling.
+Additionally, the figure uses @Okabe+Ito:2008 palette and it switches from a color legend to direct labeling.
 
 In the right column: Emulation of a kind of red-green
 color blindness known as protanopia using the \pkg{colorspace} package based on
-the algorithms of @color:Machado+Oliveira+Fernandes:2009.
+the algorithms of @Machado+Oliveira+Fernandes:2009.
 
 ```{r tsplot, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Time series line plot of \\code{EuStockMarkets}. Rows: Old \\code{"R3"} default palette (top), new \\code{"R4"} default palette (middle), \\code{"OkabeIto"} palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated protanope vision (right). A color legend is used in the first row and direct labels in the other rows.'}
 tsplot <- function(palette = "R3", protan = FALSE, legend = TRUE, ...) {
@@ -292,7 +294,7 @@ New `R4` default palette: Similar hues, more balanced brightness, avoid garish c
 
 ## Construction principles
 
-HCL makes it easy to describe colors for humans, using the three basic properties hue, chroma, and luminane (see Figure \ref{fig:hcl}).
+HCL makes it easy to describe colors for humans, using the three basic properties hue, chroma, and luminance (see Figure \ref{fig:hcl}).
 
 ```{r hcl, echo=FALSE, fig.height=2.4, fig.width=5, out.width='0.4\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Varying hue, chroma, and luminance separately, keeping the other two properties fixed.'}
 swatchplot(
@@ -304,7 +306,7 @@ swatchplot(
 ```
 
 For qualitative palettes mainly vary hue. Completely balanced if chroma and luminance kept fixed which
-was suggested by @color:Ihaka:2003 and is implemented in `hcl.colors()`. See left panel of Figure \ref{fig:hclpal}
+was suggested by @Ihaka:2003 and is implemented in `hcl.colors()`. See left panel of Figure \ref{fig:hclpal}
 and Figure \ref{fig:hclq}.
 Two drawbacks: Relatively few colors that can be clearly distinguished (about six), even fewer under
 color vision deficiencies (about three). Hence in most situations better allow limited variations in chroma and luminance
@@ -401,7 +403,7 @@ Extremely hard to read for colorblind viewers (see Figure \ref{fig:dorian}).
 
 Better HCL-based alternative: `OrRd` and also merging some probability intervals to make matching of intervals to colors easier, still clearly conveys overall shape.
 
-Might have contributed to Trump's confusion in "Sharpiegate" incident. See @color:Zeileis+Stauffer:2019 for a more detailed discussion and other alternative color palettes.
+Might have contributed to Trump's confusion in "Sharpiegate" incident. See @Zeileis+Stauffer:2019 for a more detailed discussion and other alternative color palettes.
 
 \begin{figure}[htbp]
 \centering
