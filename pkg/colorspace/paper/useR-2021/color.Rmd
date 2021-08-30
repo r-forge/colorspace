@@ -1,5 +1,5 @@
 ---
-title: Base R Shows Its Colors
+title: Coloring in R's Blind Spot
 author:
   # see ?rjournal_article for more information
   - name: Achim Zeileis
@@ -35,20 +35,64 @@ output: rticles::rjournal_article
 library("colorspace")
 ```
 
-# Color palettes in (base) R
+# Introduction
 
-## History
+Color can be a very effective way to distinguish between different groups
+within a data visualisation.  Color is a "preattentive" visual feature,
+meaning that groups are identified rapidly and without conscious effort
+[@Ware12].
 
-Color is an integral part of data visualization and statistical graphics.
+```{r colorcat, echo=FALSE, fig.height=3, fig.width=5, out.width='.6\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a scatterplot that has two groups of points and it is REALLY easy to see that there are two groups and which points belong to which group.'}
+library(ggplot2)
+ggplot(mtcars) +
+    geom_point(aes(disp, mpg, color = factor(am)), size=3) +
+    ggtitle("PLACE HOLDER") +
+    theme(legend.position = "none")
+```
 
-Although graphics were emphasized to be one of the strengths of R already early on [@color:Ihaka+Gentleman:1996],
-base R provided shockingly few functions for choosing colors from readily available palettes. And the palettes
+Employing
+ color to represent values on a continuous numeric scale will be less successful
+[@cleveland+mcgill+1984], but color can
+still be useful to convey additional variables when more effective
+visual features, such as location, have already been used.  For example,
+color might be used to fill in different regions on a map.
+
+```{r colorcont, echo=FALSE, fig.height=5, fig.width=7, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a choropleth map.'}
+library(maps)
+crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
+vars <- lapply(names(crimes)[-1], 
+               function(j) {
+                   data.frame(state = crimes$state, variable = j, 
+                   value = crimes[[j]])
+               })
+crimes_long <- do.call("rbind", vars)
+states_map <- map_data("state")
+ggplot(crimes, aes(map_id = state)) +
+    geom_map(aes(fill = Murder), map = states_map) +
+    expand_limits(x = states_map$long, y = states_map$lat) +
+    ggtitle("PLACE HOLDER") +
+    coord_fixed()
+```
+
+R provides several ways to specify colors:  by name, e.g., `"red"`;
+by hexadecimal RGB code, e.g., `"#FF0000"`; or by integer.
+An integer specification provides an index into a "palette",
+with a default set of palette colors provided.
+However, this leaves the problem of selecting a good palette; 
+a sensible, effective, and appropriate set of colours.
+
+## History of R palettes
+
+Early versions of R provided very few functions for choosing colors from readily available palettes. And the palettes
 that were provided (see Figure \ref{fig:oldbase}) were standard when they were implemented but have meanwhile
 been widely recognized as being rather poor.
 
-- The colors from the default `palette()` could be accessed through numbers `1` to `8` and were mostly used for coding _categorical_ information.
-- The functions `heat.colors()`, `terrain.colors()`, `topo.colors()`, and `gray.colors()` were mostly used as _sequential_ palettes for ordered or numeric information.
-- The function `cm.colors()` was the only _diverging_ palette.
+- The colors from the default `palette()`, accessed through numbers `1` to `8`,
+could be used for coding _categorical_ information.
+- The functions `heat.colors()`, `terrain.colors()`, `topo.colors()`, and `gray.colors()` could be used as _sequential_ palettes for ordered or numeric information.
+- The function `cm.colors()` provided a _diverging_ palette for values that are
+distributed around 
+a "neutral" value, such as zero.
 - The function `rainbow()` implements the infamous rainbow (or jet) color palette that was very widely used for all types, possibly after restricting the hue range: _categorical_, _sequential_, and _diverging_.
 
 ```{r oldbase, echo=FALSE, fig.height=1.75, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Old base R palettes.'}
@@ -92,8 +136,15 @@ oldbase.swatch <- function(palette = oldbase.pals(), n = 8, nrow = 2,
 oldbase.swatch()
 ```
 
-However, all of these palettes -- except `gray.colors()` -- have significant problems: They are ugly and have poor perceptual properties.
-The colors are highly saturated (garish, flashy) and unbalanced with respect to chroma and luminance. Most of them also use sequences
+All of these palettes -- except `gray.colors()` -- have poor perceptual properties.
+The colors are highly saturated, which can be distracting and overly 
+stimulating 
+and the colors are unbalanced with respect to chroma and luminance,
+which means that they have unequal visual impact
+[@whiterose; @bartram+patra+stone; @saliency]. 
+The palettes do not perform well for viewers with some form
+of colorblindness (nearly 10% of the population).
+Most of the palettes also use sequences
 of hues obtained in the RGB (red-green-blue) space or simple derivations thereof like HSV (hue-saturation-value) or HLS (hue-lightness-saturation).
 This leads to clustering of colors at the red, green, and blue primaries.
 
@@ -155,7 +206,7 @@ palette.swatch()
 ```
 
 Briefly explain principles for selection of `R4` (similar hues, limited differences in chroma/luminance, dark/colorful, work ok for colorblind viewers).
-`Okabe-Ito` [@color:Okabe-Ito:2008] was designed to be very robust under color vision deficiencies. As it uses somewhat different hues than the old `R4` palette
+`Okabe-Ito` [@color:Okabe+Ito:2008] was designed to be very robust under color vision deficiencies. As it uses somewhat different hues than the old `R4` palette
 and was hence not used as the new default palette in R but it is the default in `palette.colors()`.
 The robustness of both palettes is illustrated in Figure \ref{fig:cvd}.
 
