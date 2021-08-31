@@ -42,12 +42,13 @@ within a data visualisation.  Color is a "preattentive" visual feature,
 meaning that groups are identified rapidly and without conscious effort
 [@Ware:2012].
 
-```{r colorcat, echo=FALSE, fig.height=3, fig.width=5, out.width='.6\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a scatterplot that has two groups of points and it is REALLY easy to see that there are two groups and which points belong to which group.'}
+```{r colorcat, echo=FALSE, fig.height=3, fig.width=5, out.width='.6\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a scatterplot that has two groups of points and it is REALLY easy to see that there are two groups and which points belong to which group. Maybe: Gas consumption by outside temperature before and after installing an insulation.'}
 library("ggplot2")
 data("whiteside", package = "MASS")
-ggplot(whiteside) +
-    geom_point(aes(Temp, Gas, color = Insul), size = 2) +
-    ggtitle("PLACE HOLDER") +
+ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
+    geom_point(size = 2) +
+    scale_color_manual(name = "Insulation", values = palette.colors(palette = "R4")[c(2, 4)]) +
+    ggtitle("Whiteside's data") + xlab("Outside temperature") + ylab("Gas consumption") +
     theme(legend.position = "none") +
     theme_minimal()
 ```
@@ -71,6 +72,7 @@ crimes_long <- do.call("rbind", vars)
 states_map <- map_data("state")
 ggplot(crimes, aes(map_id = state)) +
     geom_map(aes(fill = Murder), map = states_map) +
+    scale_fill_gradientn(colors = hcl.colors(99, "Blues", rev = TRUE)) + 
     expand_limits(x = states_map$long, y = states_map$lat) +
     ggtitle("PLACE HOLDER") +
     coord_fixed() +
