@@ -47,7 +47,7 @@ still be useful to convey additional variables when more effective
 visual features, such as location, have already been used.  For example,
 color might be used to fill in different regions on a map.
 
-```{r colorcat, echo=FALSE, fig.height=4, fig.width=6.6, fig.show = 'hide'}
+```{r colorcat, echo=FALSE, fig.height=4, fig.width=6, fig.show = 'hide'}
 library("ggplot2")
 data("whiteside", package = "MASS")
 ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
@@ -78,9 +78,9 @@ tm_shape(nz) +
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=0.63\textwidth]{color_files/figure-latex/colorcat-1} 
+\includegraphics[width=0.6\textwidth]{color_files/figure-latex/colorcat-1} 
 \hfill
-\includegraphics[width=0.27\textwidth]{color_files/figure-latex/colorcont-1}
+\includegraphics[width=0.28\textwidth]{color_files/figure-latex/colorcont-1}
 \caption{Typical usage of color for coding qualitative/categorical (left) and quantiative/continuous (right) information.
 Left: Scatter plot of weekly gas consumption by outside temperature before and after installing a house insulation.
 Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.
@@ -103,9 +103,9 @@ print(palette("R3"))
 However, a more important task than specifying one particular color
 is the task of specifying a set of colors to use in combination
 with each other.
-For example, in the left panel of Figure~\ref{fig:colorcatcont}, we need two colors
+For example, in the left panel of Figure \ref{fig:colorcatcont}, we need two colors
 that are very easily perceived as different from each other. 
-In the right panel of Figure~\ref{fig:colorcatcont}, we require a large set of colors
+In the right panel of Figure \ref{fig:colorcatcont}, we require a large set of colors
 that appear to change monotonically, e.g., from darker to lighter.
 We call this the problem of selecting a good \emph{palette} of colors.
 
@@ -123,7 +123,7 @@ distributed around
 a "neutral" value, such as zero.
 - The function `rainbow()` implements the infamous rainbow (or jet) color palette that was very widely used for all types, possibly after restricting the hue range: _categorical_, _sequential_, and _diverging_.
 
-```{r oldbase, echo=FALSE, fig.height=1.75, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Old base R palettes.'}
+```{r oldbase, echo=FALSE, fig.height=1.75, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Old base R palettes.'}
 oldbase.pals <- function() {
   c("default (R3)", "rainbow", paste0(c("heat", "terrain", "topo", "cm", "gray"), ".colors"))
 }
@@ -164,7 +164,7 @@ oldbase.swatch <- function(palette = oldbase.pals(), n = 8, nrow = 2,
 oldbase.swatch()
 ```
 
-All of these palettes---except `gray.colors()`---have poor perceptual properties.
+All of these palettes -- except `gray.colors()` -- have poor perceptual properties.
 The colors are highly saturated, which can be distracting and overly 
 stimulating, 
 and the colors are unbalanced with respect to chroma and luminance,
@@ -201,8 +201,8 @@ a range of modern color palettes.
 
 ## A new default color palette
 
-The default color palette in R---the default set of colors that can
-be specified by integer index---has been replaced.  The new palette
+The default color palette in R -- the default set of colors that can
+be specified by integer index -- has been replaced.  The new palette
 follows the same basic hues as the old default palette, but
 the palette is less saturated overall and
 reduces the size of changes in chroma and luminance across the palette.
