@@ -38,11 +38,16 @@ library("colorspace")
 # Introduction
 
 Color can be a very effective way to distinguish between different groups
-within a data visualisation.  Color is a "preattentive" visual feature,
+within a data visualization.  Color is a "preattentive" visual feature,
 meaning that groups are identified rapidly and without conscious effort
 [@Ware:2012].
+Employing color to represent values on a continuous numeric scale will be
+less successful [@Cleveland+McGill:1984], but color can
+still be useful to convey additional variables when more effective
+visual features, such as location, have already been used.  For example,
+color might be used to fill in different regions on a map.
 
-```{r colorcat, echo=FALSE, fig.height=3, fig.width=5, out.width='.6\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a scatterplot that has two groups of points and it is REALLY easy to see that there are two groups and which points belong to which group. Maybe: Gas consumption by outside temperature before and after installing an insulation.'}
+```{r colorcat, echo=FALSE, fig.height=4, fig.width=6.6, fig.show = 'hide'}
 library("ggplot2")
 data("whiteside", package = "MASS")
 ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
@@ -53,31 +58,35 @@ ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
     theme_minimal()
 ```
 
-Employing
- color to represent values on a continuous numeric scale will be less successful
-[@Cleveland+McGill:1984], but color can
-still be useful to convey additional variables when more effective
-visual features, such as location, have already been used.  For example,
-color might be used to fill in different regions on a map.
-
-```{r colorcont, echo=FALSE, fig.height=5, fig.width=7, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='A placeholder for a choropleth map.'}
-library("maps")
-crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
-vars <- lapply(names(crimes)[-1], 
-               function(j) {
-                   data.frame(state = crimes$state, variable = j, 
-                   value = crimes[[j]])
-               })
-crimes_long <- do.call("rbind", vars)
-states_map <- map_data("state")
-ggplot(crimes, aes(map_id = state)) +
-    geom_map(aes(fill = Murder), map = states_map) +
-    scale_fill_gradientn(colors = hcl.colors(99, "Blues", rev = TRUE)) + 
-    expand_limits(x = states_map$long, y = states_map$lat) +
-    ggtitle("PLACE HOLDER") +
-    coord_fixed() +
-    theme_minimal()
+```{r colorcont, echo=FALSE, fig.height=4, fig.width=3, fig.show = 'hide'}
+library("tmap")
+data("nz", package = "spData")
+myfun <- function(x) {
+  y <- format(round(x), big.mark = ",")
+  z <- grepl("0,000", y, fixed = TRUE) | grepl("5,000", y, fixed = TRUE)
+  z[range(seq_along(x))] <- TRUE
+  y[!z] <- ""
+  return(y)
+}
+tm_shape(nz) +
+  tm_polygons(col = "Median_income",
+    palette = "Blues", style = "cont", breaks = seq(20, 35, by = 5/3) * 1000,
+    title = "Median income",
+    legend.format = list(fun = myfun)) +
+  tm_layout(frame = FALSE)
 ```
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.63\textwidth]{color_files/figure-latex/colorcat-1} 
+\hfill
+\includegraphics[width=0.27\textwidth]{color_files/figure-latex/colorcont-1}
+\caption{Typical usage of color for coding qualitative/categorical (left) and quantiative/continuous (right) information.
+Left: Scatter plot of weekly gas consumption by outside temperature before and after installing a house insulation.
+Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.
+}\label{fig:colorcatcont}
+\end{figure}
+
 
 R provides several ways to specify colors:  by name (e.g., `"red"`);
 by hexadecimal RGB code (e.g., `"#FF0000"`); or by integer (e.g., `2`).
@@ -94,9 +103,9 @@ print(palette("R3"))
 However, a more important task than specifying one particular color
 is the task of specifying a set of colors to use in combination
 with each other.
-For example, in Figure \ref{fig:colorcat}, we need two colors
+For example, in the left panel of Figure~\ref{fig:colorcatcont}, we need two colors
 that are very easily perceived as different from each other. 
-In Figure \ref{fig:colorcont}, we require a large set of colors
+In the right panel of Figure~\ref{fig:colorcatcont}, we require a large set of colors
 that appear to change monotonically, e.g., from darker to lighter.
 We call this the problem of selecting a good \emph{palette} of colors.
 
