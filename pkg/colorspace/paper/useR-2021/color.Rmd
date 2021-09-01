@@ -79,17 +79,31 @@ ggplot(crimes, aes(map_id = state)) +
     theme_minimal()
 ```
 
-R provides several ways to specify colors:  by name, e.g., `"red"`;
-by hexadecimal RGB code, e.g., `"#FF0000"`; or by integer.
-An integer specification provides an index into a "palette",
+R provides several ways to specify colors:  by name (e.g., `"red"`);
+by hexadecimal RGB code (e.g., `"#FF0000"`); or by integer (e.g., `2`).
+When we specify an integer, that provides an index into a "palette",
 with a default set of palette colors provided.
-However, this leaves the problem of selecting a good palette; 
-a sensible, effective, and appropriate set of colours.
 
-## History of R palettes
+```{r eval=FALSE}
+palette()
+```
+```{r echo=FALSE}
+print(palette("R3"))
+```
+
+However, a more important task than specifying one particular color
+is the task of specifying a set of colors to use in combination
+with each other.
+For example, in Figure \ref{fig:colorcat}, we need two colors
+that are very easily perceived as different from each other. 
+In Figure \ref{fig:colorcont}, we require a large set of colors
+that appear to change monotonically, e.g., from darker to lighter.
+We call this the problem of selecting a good \emph{palette} of colors.
+
+# A brief history of R palettes
 
 Early versions of R provided very few functions for choosing colors from readily available palettes. And the palettes
-that were provided (see Figure \ref{fig:oldbase}) were standard when they were implemented but have meanwhile
+that were provided (see Figure \ref{fig:oldbase}) were standard when they were implemented, but have meanwhile
 been widely recognized as being rather poor.
 
 - The colors from the default `palette()`, accessed through numbers `1` to `8`,
@@ -141,47 +155,57 @@ oldbase.swatch <- function(palette = oldbase.pals(), n = 8, nrow = 2,
 oldbase.swatch()
 ```
 
-All of these palettes -- except `gray.colors()` -- have poor perceptual properties.
+All of these palettes---except `gray.colors()`---have poor perceptual properties.
 The colors are highly saturated, which can be distracting and overly 
-stimulating 
+stimulating, 
 and the colors are unbalanced with respect to chroma and luminance,
 which means that they have unequal visual impact
 [@Lonsdale+Lonsdale:2019; @Bartram+Patra+Stone:2017; @Etchebehere+Fedorovskaya:2017]. 
-The palettes do not perform well for viewers with some form
+In addition, the palettes do not perform well for viewers with some form
 of colorblindness (nearly 10% of the population).
 Most of the palettes also use sequences
-of hues obtained in the RGB (red-green-blue) space or simple derivations thereof like HSV (hue-saturation-value) or HLS (hue-lightness-saturation).
-This leads to clustering of colors at the red, green, and blue primaries.
+of hues obtained in the RGB (red-green-blue) space or simple derivations thereof like HSV (hue-saturation-value) or HLS (hue-lightness-saturation),
+which leads to clustering of colors at the red, green, and blue primaries.
 
-Better color palettes had been neglected in base R for a long time. There are various reasons for this:
+In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
+This makes it easier to generate a palette, though the user is still required
+to select, for example, start and end colors from which
+a palette of colors can then be interpolated.
 
-- Functions like `colorRampPalette()` allowed users to create new palettes on the fly -- provided they had useful colors available upon which
-  the palette could be based.
-- Better palettes were easily available in packages on CRAN (Comprehensive R Archive Network)
+Over time, 
+better palettes became available via packages on CRAN (Comprehensive R Archive Network)
   starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
   \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and somewhat more recently
   \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], or \CRANpkg{scico} [@scico],
   among many others.
-- Instead of using base graphics, frameworks like \CRANpkg{ggplot2} [@ggplot2] or \CRANpkg{lattice} [@lattice]
-  which bring along their own color themes were adopted very widely.
 
+In addition, higher-level graphics systems
+ like \CRANpkg{ggplot2} [@ggplot2] and \CRANpkg{lattice} [@lattice]
+developed their own color themes.
 
-## New base R palettes
+# A new set of R palettes
 
-On the road to R version 4.0.0 this deficit of base R was finally overcome by introducing two new palette functions:
+On the road to R version 4.0.0 an attempt was made to
+address the limited and deficient set of palettes that are available 
+within the core R graphics sytem and to add
+a range of modern color palettes.
 
-- `palette.colors()` provides a new improved default color palette as well as a few other well-established qualitative palettes [@grDevices2]
-- `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
-  the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL], see @grDevices and @Zeileis+Fisher+Hornik:2020.
-  Most of these HCL palettes approximate very closely well-established palettes from \pkg{RColorBrewer}, \pkg{viridis}, \pkg{rcartocolor},
-  \pkg{scico}, and others.
+## A new default color palette
 
-Both are accompanied by functions to query the available palette names (`palette.pals()` and `hcl.pals()`, respectively).
-The color swatches shown in Figures \ref{fig:palette}, \ref{fig:hcls}, and \ref{fig:hcld} which are also shown by running
-the `example()` of the two functions which make basic `palette.swatch()` and `hcl.swatch()` functions available.
-Here, focus on `palette.colors()`, more details on `hcl.colors()` later.
+The default color palette in R---the default set of colors that can
+be specified by integer index---has been replaced.  The new palette
+follows the same basic hues as the old default palette, but
+the palette is less saturated overall and
+reduces the size of changes in chroma and luminance across the palette.
+This produces a calmer and less distracting palette with a more
+even visual impact.
+An attempt has also been made to improve the discriminability
+of the colors in the default palette for colorblind viewers.
+The old, "R3", default palette
+and the new, "R4" default palette are shown in
+Figure \ref{fig:default}.
 
-```{r palette, echo=FALSE, fig.height=3.5, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Qualitative palettes from \\code{palette.colors()}.'}
+```{r swatch, echo=FALSE}
 palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 4,
                            border = "black", cex = 1, ...)
 {
@@ -205,7 +229,148 @@ palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 4,
  	cols    <- cols [, -subset, drop = FALSE]
      }
 }
+```
+```{r default, echo=FALSE, fig.height=2, fig.width=6, out.width='.6\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='The old, "R3", default palette and the new, "R4", default palette.'}
+## height=5, width=12
+palette.swatch(c("R3", "R4"), nrow=2)
+```
 
+We can also get the full set of colors from the default palette using the 
+`palette()` function.
+
+```{r}
+palette()
+```
+
+More information about the construction of the new default palette
+is given in [@grDevices2].
+
+## The `palette.colors()` function
+
+The `palette.colors()` function, new in R 4.0.0, provides a way to
+access several other predefined palettes.  For example, by
+default it returns the 
+`Okabe-Ito` [@Okabe+Ito:2008] palette, which
+ was designed to be very robust under color vision deficiencies.
+
+```{r}
+palette.colors()
+```
+
+The old R default palette is available via the name `R3`.
+
+```{r}
+palette.colors(palette = "R3")
+```
+
+Table \ref{tab:palettecolors} shows the full list
+of palettes that are currently available, along with a description
+of their source, and an image that displays the palette.
+The `palette.pals()` function returns a character vector of 
+the available palette names.
+
+```{r}
+palette.pals()
+```
+
+The first argument to `palette.colors()` is a number of colors.
+For example, the following code just selects the first 4 colors from
+the Okabe-Ito palette.
+
+```{r}
+palette.colors(4)
+```
+
+Each palette has a fixed number of colors;  we can ask for more, but
+will only receive further colors if we ask for the palette to be
+repeated.  The following code asks for 10 colors from the Okabe-Ito
+palette, which only has 9, so the black is recycled.
+
+```{r}
+palette.colors(10, recycle = TRUE)
+```
+
+```{r echo=FALSE}
+library(grid)
+paletteGrid <- function(palette, n=NULL) {
+    cols <- palette.colors(n, palette)
+    n <- length(cols)
+    ncol <- 10
+    nrow <- ceiling(n / ncol)
+    pushViewport(viewport(layout=grid.layout(nrow, ncol, respect=TRUE)),
+                 viewport(layout.pos.col=1:ncol, layout.pos.row=1:nrow))
+    x <- rep((1:ncol - 1)/ncol, nrow)[1:n]
+    y <- rep(1 - (1:nrow - 1)/nrow, each=ncol)[1:n]
+    grid.rect(x, y, just=c("left", "top"), 
+              width=unit(1/ncol, "npc"),
+              height=unit(1/nrow, "npc"),
+              gp=gpar(fill=cols))
+    popViewport(2)
+}
+```
+```{r R3palette, echo=FALSE, fig.show="hide", fig.width=10, fig.height=1}
+paletteGrid("R3")
+```
+```{r R4palette, echo=FALSE, fig.show="hide", fig.width=10, fig.height=1}
+paletteGrid("R4")
+```
+```{r ggplot2palette, echo=FALSE, fig.show="hide", fig.width=10, fig.height=1}
+paletteGrid("ggplot2")
+```
+```{r OkabeItopalette, echo=FALSE, fig.show="hide", fig.width=10, fig.height=1}
+paletteGrid("Okabe-Ito")
+```
+
+\begin{table}
+\begin{tabular}[ht]{l p{3in} p{1in}}
+{\tt "R3"} & The default R palette prior to R 4.0.0 (8 colors) & 
+  \includegraphics[scale=.1]{color_files/figure-latex/R3palette-1} \\[4mm]
+{\tt "R4"} & The default R palette from R 4.0.0 (8 colors) &
+  \includegraphics[scale=.1]{color_files/figure-latex/R4palette-1} \\[4mm]
+{\tt "ggplot2"} & The \pkg{ggplot2} palette (8 colors) & 
+  \includegraphics[scale=.1]{color_files/figure-latex/ggplot2palette-1} \\[4mm]
+{\tt "Okabe-Ito"} & The `Okabe-Ito` \citep{Okabe+Ito:2008} palette, which
+ was designed to be very robust under color vision deficiencies (9 colors). &
+  \includegraphics[scale=.1]{color_files/figure-latex/OkabeItopalette-1} \\[4mm]
+\end{tabular}
+\caption{\label{tab:palettecolors}The color palettes provided by
+`palette.colors()`.}
+\end{table}
+
+
+Each of these palettes can be set as the default palette by passing
+the palette name to the `palette()` function.  For example,
+the following code sets the Okabe-Ito palette as the default palette.
+
+```{r}
+palette("Okabe-Ito")
+```
+
+The palettes available via `palette.colors()` are known as 
+*qualitative palettes* because they are appropriate for 
+encoding qualitative (categorical) variables.  In other words,
+these palettes are appropriate for differentiating between groups.
+
+## The `hcl.colors()` function
+
+
+
+\newpage
+
+ base R was finally overcome by introducing two new palette functions:
+
+- `palette.colors()` provides a new improved default color palette as well as a few other well-established qualitative palettes [@grDevices2]
+- `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
+  the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL], see @grDevices and @Zeileis+Fisher+Hornik:2020.
+  Most of these HCL palettes approximate very closely well-established palettes from \pkg{RColorBrewer}, \pkg{viridis}, \pkg{rcartocolor},
+  \pkg{scico}, and others.
+
+Both are accompanied by functions to query the available palette names (`palette.pals()` and `hcl.pals()`, respectively).
+The color swatches shown in Figures \ref{fig:palette}, \ref{fig:hcls}, and \ref{fig:hcld} which are also shown by running
+the `example()` of the two functions which make basic `palette.swatch()` and `hcl.swatch()` functions available.
+Here, focus on `palette.colors()`, more details on `hcl.colors()` later.
+
+```{r palette, echo=FALSE, fig.height=3.5, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Qualitative palettes from \\code{palette.colors()}.'}
 ## height=5, width=12
 palette.swatch()
 ```
