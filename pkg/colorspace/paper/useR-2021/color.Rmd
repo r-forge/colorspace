@@ -255,19 +255,19 @@ Although these limitations have been well known for some time, no changes
 were made to these palettes provided by the core R graphics system for
 a number of years. The were various reasons for this including the following:
 
-* In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
+In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
 This makes it easier to generate a palette, though the user is still required
 to select, for example, start and end colors from which
 a palette of colors can then be interpolated.
 
-* Over time, 
+Over time, 
 better palettes became available via packages on CRAN (Comprehensive R Archive Network)
   starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
   \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and somewhat more recently
   \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], or \CRANpkg{scico} [@scico],
   among many others.
 
-* In addition, higher-level graphics systems
+In addition, higher-level graphics systems
  like \CRANpkg{ggplot2} [@ggplot2] and \CRANpkg{lattice} [@lattice]
 developed their own color themes.
 
