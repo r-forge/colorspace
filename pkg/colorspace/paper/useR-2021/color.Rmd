@@ -94,8 +94,8 @@ Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.
 R provides several ways to specify colors:  by name (e.g., `"red"`);
 by hexadecimal RGB code (e.g., `"#FF0000"`); or by integer (e.g., `2`).
 When we specify an integer, that provides an index into a 
-default set of colors;  the colour `2`
-means the second colour in the default set of colours.
+default set of colors;  the color `2`
+means the second color in the default set of colors.
 
 However, a more important task than specifying one particular color
 is the task of specifying a set of colors to use in combination
@@ -230,14 +230,14 @@ These provided the default
   palette("R4")
   ```
 
-  R colour specifications are not particularly readable, so for each
+  R color specifications are not particularly readable, so for each
   palette, Figure \ref{fig:oldPalettes}
   represents the vector of R colors by a "swatch"
   of rectangles filled with the corresponding colors.
 
   The functions `heat.colors()`, `terrain.colors()`, `topo.colors()`, and 
   `gray.colors()` all take an argument `n` to generate that number of colors.
-  These colours 
+  These colors 
   could be used as _sequential_ palettes for ordered or numeric information.
 
   The function `cm.colors()` also generates `n` colors.
@@ -479,9 +479,9 @@ and remind us how bad things used to be.
 
   Finally, there are two palettes from the 
   \CRANpkg{Polychrome} package [@Polychrome].
-  These are much larger palettes, with colours chosen to be evenly
+  These are much larger palettes, with colors chosen to be evenly
   spread throughout HCL colorspace.  The `"Polychrome 36"` palette
-  represents the largest set of colours that could be generated
+  represents the largest set of colors that could be generated
   while still being visually distinguishable.  The `"Alphabet"`
   palette is just a smaller, but still large, set.  These palettes
   may be useful if you are attempting to represent a very large
