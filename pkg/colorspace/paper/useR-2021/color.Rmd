@@ -116,7 +116,7 @@ that were provided were standard when they were implemented, but have meanwhile
 been widely recognized as being rather poor.  
 
 ```{r echo=FALSE}
-library(grid)
+library("grid")
 cellSize <- unit(4, "mm")
 ncol <- 10
 ns <- 3
@@ -189,71 +189,60 @@ drawBorder <- function(..., name=NULL) {
 }
 ```
 
-  ```{r oldPalettes, echo=FALSE, fig.width=6, fig.height=3, fig.keep="last", out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Old base R palettes.'}
-  paletteGrids(list("palette()"=palette.colors(palette="R3"),
-                    "rainbow(8)"=rainbow(8),
-                    "blank"=NULL,
-                    "blank"=NULL,
-                    "blank"=NULL,
-                    "blank"=NULL,
-                    "heat.colors(8)"=heat.colors(8), 
-                    "topo.colors(8)"=topo.colors(8),
-                    "terrain.colors(8)"=terrain.colors(8), 
-                    "gray.colors(8)"=gray.colors(8),
-                    "blank"=NULL,
-                    "blank"=NULL,
-                    "blank"=NULL,
-                    "blank"=NULL,
-                    "blank"=NULL,
-                    "cm.colors(8)"=cm.colors(8)))
-  downViewport("top")
-  drawBorder(1, name="bg1")
-  drawBorder(3:4, name="bg2")
-  drawBorder(6, name="bg3")
-  scene <- grid.grab()
-  scene <- reorderGrob(scene, c("bg1", "bg2", "bg3"))
-  grid.newpage()
-  grid.draw(scene)
-  ```
+```{r oldPalettes, echo=FALSE, fig.width=6, fig.height=3, fig.keep="last", out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Old base R palettes.'}
+paletteGrids(list("palette()"=palette.colors(palette="R3"),
+                  "rainbow(8)"=rainbow(8),
+                  "blank"=NULL,
+                  "blank"=NULL,
+                  "blank"=NULL,
+                  "blank"=NULL,
+                  "heat.colors(8)"=heat.colors(8), 
+                  "topo.colors(8)"=topo.colors(8),
+                  "terrain.colors(8)"=terrain.colors(8), 
+                  "gray.colors(8)"=gray.colors(8),
+                  "blank"=NULL,
+                  "blank"=NULL,
+                  "blank"=NULL,
+                  "blank"=NULL,
+                  "blank"=NULL,
+                  "cm.colors(8)"=cm.colors(8)))
+downViewport("top")
+drawBorder(1, name="bg1")
+drawBorder(3:4, name="bg2")
+drawBorder(6, name="bg3")
+scene <- grid.grab()
+scene <- reorderGrob(scene, c("bg1", "bg2", "bg3"))
+grid.newpage()
+grid.draw(scene)
+```
 
 The `palette()` function generated a vector of eight colors.
-These provided the default
-  set of colors that an integer color specification selects from.
-  These colors could be used for coding _categorical_ information.
+These provided the default set of colors that an integer color specification selects from
+and could be used for coding _categorical_ information.
 
-  ```{r eval=FALSE}
-  palette()
-  ```
-  ```{r echo=FALSE}
-  palette("R3")
-  palette()
-  palette("R4")
-  ```
+```{r echo=2}
+palette("R3")
+palette()
+palette("R4")
+```
 
-  R color specifications are not particularly readable, so for each
-  palette, Figure \ref{fig:oldPalettes}
-  represents the vector of R colors by a "swatch"
-  of rectangles filled with the corresponding colors.
+See also Figure \ref{fig:oldPalettes} that depicts `palette()` along
+with other old base R palettes using "swatches" of rectangles filled with the
+corresponding colors. The other palette functions  all take an argument `n` to generate
+that number of colors (possibly along with further arguments that allow for
+certain customizations):
 
-  The functions `heat.colors()`, `terrain.colors()`, `topo.colors()`, and 
-  `gray.colors()` all take an argument `n` to generate that number of colors.
-  These colors 
+* `heat.colors()`, `terrain.colors()`, `topo.colors()`, and `gray.colors()`
   could be used as _sequential_ palettes for ordered or numeric information.
-
-  The function `cm.colors()` also generates `n` colors.
-  These colors could be used as a _diverging_ palette for values that are
-  distributed around 
-  a "neutral" value, such as zero.
-
-  The function `rainbow()` also generates `n` colors.
-  This function implements the infamous rainbow (or "jet") color palette 
-  that was very widely used for all types, possibly after restricting 
-  the hue range: _categorical_, _sequential_, and _diverging_.
+* `cm.colors()` could be used as a _diverging_ palette for values that are
+  distributed around a "neutral" value, such as zero.
+* `rainbow()` implements the infamous rainbow (or "jet") color palette 
+  that was very widely used for all types (possibly after restricting 
+  the hue range): _categorical_, _sequential_, and _diverging_.
 
 All of these palettes -- except `gray.colors()` -- have poor perceptual properties.
 The colors are highly saturated, which can be distracting and overly 
-stimulating, 
-and the colors are unbalanced with respect to chroma and luminance,
+stimulating, and the colors are unbalanced with respect to chroma and luminance,
 which means that they have unequal visual impact
 [@Lonsdale+Lonsdale:2019; @Bartram+Patra+Stone:2017; @Etchebehere+Fedorovskaya:2017]. 
 In addition, the palettes do not perform well for viewers with some form
@@ -262,24 +251,25 @@ Most of the palettes also use sequences
 of hues obtained in the RGB (red-green-blue) space or simple derivations thereof like HSV (hue-saturation-value) or HLS (hue-lightness-saturation),
 which leads to clustering of colors at the red, green, and blue primaries.
 
-In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
+Although these limitations have been well known for some time, no changes
+were made to these palettes provided by the core R graphics system for
+a number of years. The were various reasons for this including the following:
+
+* In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
 This makes it easier to generate a palette, though the user is still required
 to select, for example, start and end colors from which
 a palette of colors can then be interpolated.
 
-Over time, 
+* Over time, 
 better palettes became available via packages on CRAN (Comprehensive R Archive Network)
   starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
   \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and somewhat more recently
   \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], or \CRANpkg{scico} [@scico],
   among many others.
-In addition, higher-level graphics systems
+
+* In addition, higher-level graphics systems
  like \CRANpkg{ggplot2} [@ggplot2] and \CRANpkg{lattice} [@lattice]
 developed their own color themes.
-
-These external developments meant that there were no changes to
-the palettes provided by the core R graphics system for
-a number of years.
 
 ```{r oldbase, eval=FALSE, echo=FALSE, fig.height=1.75, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Old R palette functions.  The label above each swatch shows the function call that produces that set of colors.'}
 oldbase.pals <- function() {
@@ -326,8 +316,12 @@ oldbase.swatch()
 
 On the road to R version 4.0.0 an attempt was made to
 address the limited and deficient set of palettes that are available 
-within the core R graphics sytem and to add
-a range of modern color palettes.
+within the core R graphics sytem and to add a range of modern color palettes.
+In particular, `palette()` has a new improved default color palette,
+`palette.colors()` provides further well-established qualitative palettes [@grDevices2], and
+`hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
+the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL], see @grDevices and @Zeileis+Fisher+Hornik:2020.
+
 
 ## A new default color palette
 
@@ -342,45 +336,47 @@ An attempt has also been made to improve the discriminability
 of the colors in the default palette for colorblind viewers.
 The new, "R4", default palette is shown at top-left of Figure 
 \ref{fig:newPalettes}.
+More information about the construction of the new default palette
+is given in [@grDevices2].
 
-  ```{r newPalettes, echo=FALSE, fig.width=6, fig.height=4, fig.keep="last", out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='New R palettes available from the `palette.colors()` function.  The label above each swatch shows the argument to provide to `palette.colors()` to produce the set of colors.  The palette at top-left is the new default that is also produced by `palette()`.  The "Okabe-Ito" palette is the default that is produced by `palette.colors()` (with no arguments).'}
-  paletteGrids(list('palette="R4"'=palette.colors(palette="R4"),
-                    'palette="Okabe-Ito"'=palette.colors(palette="Okabe-Ito"),
-                    blank=NULL,
-                    blank=NULL,
-                    blank=NULL,
-                    blank=NULL,
-                    'palette="ggplot2"'=palette.colors(palette="ggplot2"),
-                    'palette="Tableau 10"'=palette.colors(palette="Tableau 10"),
-                    'palette="Classic Tableau"'=palette.colors(palette="Classic Tableau"),
-                    blank=NULL,
-                    blank=NULL,
-                    blank=NULL,
-                    'palette="Accent"'=palette.colors(palette="Accent"),
-                    'palette="Paired"'=palette.colors(palette="Paired"),
-                    'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
-                    'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
-                    'palette="Set 1"'=palette.colors(palette="Set 1"),
-                    'palette="Set 2"'=palette.colors(palette="Set 2"),
-                    'palette="Set 3"'=palette.colors(palette="Set 3"),
-                    'palette="Dark 2"'=palette.colors(palette="Dark 2"),
-                    blank=NULL,
-                    blank=NULL,
-                    blank=NULL,
-                    blank=NULL,
-                    'palette="Alphabet"'=palette.colors(palette="Alphabet"),
-                    'palette="Polychrome 36"'=palette.colors(palette="Polychrome 36")))
-  downViewport("top")
-  drawBorder(1, name="bg1")
-  drawBorder(3, name="bg2")
-  drawBorder(5:7, name="bg3")
-  drawBorder(9, name="bg4",
-             y2=unit(1, "npc") - 4*cellSize - gap)
-  scene <- grid.grab()
-  scene <- reorderGrob(scene, c("bg1", "bg2", "bg3", "bg4"))
-  grid.newpage()
-  grid.draw(scene)
-  ```
+```{r newPalettes, echo=FALSE, fig.width=6, fig.height=4, fig.keep="last", out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='New base R palettes available from the \\code{palette.colors()} function.  The label above each swatch shows the argument to provide to \\code{palette.colors()} to produce the set of colors.  The palette at top-left is the new default that is also produced by \\code{palette()}.  The "Okabe-Ito" palette is the default that is produced by \\code{palette.colors()} (with no arguments).'}
+paletteGrids(list('palette="R4"'=palette.colors(palette="R4"),
+                  'palette="Okabe-Ito"'=palette.colors(palette="Okabe-Ito"),
+                  blank=NULL,
+                  blank=NULL,
+                  blank=NULL,
+                  blank=NULL,
+                  'palette="ggplot2"'=palette.colors(palette="ggplot2"),
+                  'palette="Tableau 10"'=palette.colors(palette="Tableau 10"),
+                  'palette="Classic Tableau"'=palette.colors(palette="Classic Tableau"),
+                  blank=NULL,
+                  blank=NULL,
+                  blank=NULL,
+                  'palette="Accent"'=palette.colors(palette="Accent"),
+                  'palette="Paired"'=palette.colors(palette="Paired"),
+                  'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
+                  'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
+                  'palette="Set 1"'=palette.colors(palette="Set 1"),
+                  'palette="Set 2"'=palette.colors(palette="Set 2"),
+                  'palette="Set 3"'=palette.colors(palette="Set 3"),
+                  'palette="Dark 2"'=palette.colors(palette="Dark 2"),
+                  blank=NULL,
+                  blank=NULL,
+                  blank=NULL,
+                  blank=NULL,
+                  'palette="Alphabet"'=palette.colors(palette="Alphabet"),
+                  'palette="Polychrome 36"'=palette.colors(palette="Polychrome 36")))
+downViewport("top")
+drawBorder(1, name="bg1")
+drawBorder(3, name="bg2")
+drawBorder(5:7, name="bg3")
+drawBorder(9, name="bg4",
+           y2=unit(1, "npc") - 4*cellSize - gap)
+scene <- grid.grab()
+scene <- reorderGrob(scene, c("bg1", "bg2", "bg3", "bg4"))
+grid.newpage()
+grid.draw(scene)
+```
 
 ```{r swatch, echo=FALSE}
 palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 4,
@@ -407,23 +403,17 @@ palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 4,
      }
 }
 ```
-  ```{r oldvsnew, echo=FALSE, eval=FALSE, fig.width=6, fig.height=1}
-  paletteGrids(list('"R3"'=palette.colors(palette="R3"), 
-                    '"R4"'=palette.colors(palette="R4")),
-               nswatch=1)
-  ```
-
-More information about the construction of the new default palette
-is given in [@grDevices2].
+```{r oldvsnew, echo=FALSE, eval=FALSE, fig.width=6, fig.height=1}
+paletteGrids(list('"R3"'=palette.colors(palette="R3"), 
+                  '"R4"'=palette.colors(palette="R4")),
+             nswatch=1)
+```
 
 ## The `palette.colors()` function
 
 The `palette.colors()` function, new in R 4.0.0, provides a way to
-access several other predefined palettes.  These are shown in
-Figure \ref{fig:newPalettes}.
-
-The palettes available via `palette.colors()` are known as 
-*qualitative palettes* because they are appropriate for 
+access several other predefined palettes (see Figure \ref{fig:newPalettes}).
+All of these are *qualitative palettes* because they are appropriate for 
 encoding qualitative (categorical) variables.  In other words,
 these palettes are appropriate for differentiating between groups.
 
@@ -433,65 +423,64 @@ By default `palette.colors()` returns the
 the different colors in this palette should be distinguishable
 for all viewers. 
 
-  ```{r okabeito, echo=FALSE, eval=FALSE, fig.width=2, fig.height=.5}
-  paletteGrids(list("palette.colors()"=palette.colors()))
-  ```
+```{r okabeito, echo=FALSE, eval=FALSE, fig.width=2, fig.height=.5}
+paletteGrids(list("palette.colors()"=palette.colors()))
+```
 
 The `palette` argument allows us to select a different palette.
 For example, the old R default palette is available via the name `"R3"`.
 This palette is really only useful to reproduce old behaviour
 and remind us how bad things used to be.
 
-  ```{r r3, echo=FALSE, eval=FALSE, fig.width=2, fig.height=.5}
-  paletteGrids(list('palette="R3"'=palette.colors(palette="R3")))
-  ```
+```{r r3, echo=FALSE, eval=FALSE, fig.width=2, fig.height=.5}
+paletteGrids(list('palette="R3"'=palette.colors(palette="R3")))
+```
 
-  There are several palettes that have been taken from the color schemes of
-  the \pkg{ggplot2} package and Tableau [@Tableau], both 
-  well-established graphics systems.  The `"Tableau 10"` palette
-  represents the redesign of the default palette in Tableau (CITE!).
-  These palettes may be useful
-  to emulate the look and feel of plots from those other systems.
+There are several palettes that have been taken from the color schemes of
+the \pkg{ggplot2} package and Tableau [@Tableau], both 
+well-established graphics systems.  The `"Tableau 10"` palette
+represents the redesign of the default palette in Tableau [@Stone:2016].
+These palettes may be useful
+to emulate the look and feel of plots from those other systems.
 
-  ```{r otherssystems, echo=FALSE, eval=FALSE, fig.width=6, fig.height=.5}
-  paletteGrids(list('palette="ggplot2"'=palette.colors(palette="ggplot2"),
-                    'palette="Tableau 10"'=palette.colors(palette="Tableau 10"),
-                    'palette="Classic Tableau"'=palette.colors(palette="Classic Tableau")))
-  ```
+```{r otherssystems, echo=FALSE, eval=FALSE, fig.width=6, fig.height=.5}
+paletteGrids(list('palette="ggplot2"'=palette.colors(palette="ggplot2"),
+                  'palette="Tableau 10"'=palette.colors(palette="Tableau 10"),
+                  'palette="Classic Tableau"'=palette.colors(palette="Classic Tableau")))
+```
 
-  Several palettes come from the ColorBrewer.org [@Harrower+Brewer:2003].
-  These palettes were originally designed for filling regions
-  on maps, but may also be useful for filling regions within data
-  visualisations like bar plots, 
-  density plots, and heatmaps.
-  
+Several palettes come from ColorBrewer.org [@Harrower+Brewer:2003] and
+were originally designed for filling regions on maps. However, they
+are also useful for filling regions within data visualizations like bar plots, 
+density plots, and heatmaps, among others.
 
-  ```{r colorbrewer, echo=FALSE, eval=FALSE, fig.width=6, fig.height=2}
-  paletteGrids(list('palette="Accent"'=palette.colors(palette="Accent"),
-                    'palette="Paired"'=palette.colors(palette="Paired"),
-                    'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
-                    'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
-                    'palette="Set 1"'=palette.colors(palette="Set 1"),
-                    'palette="Set 2"'=palette.colors(palette="Set 2"),
-                    'palette="Set 3"'=palette.colors(palette="Set 3"),
-                    'palette="Dark 2"'=palette.colors(palette="Dark 2")))
-  ```
+```{r colorbrewer, echo=FALSE, eval=FALSE, fig.width=6, fig.height=2}
+paletteGrids(list('palette="Accent"'=palette.colors(palette="Accent"),
+                  'palette="Paired"'=palette.colors(palette="Paired"),
+                  'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
+                  'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
+                  'palette="Set 1"'=palette.colors(palette="Set 1"),
+                  'palette="Set 2"'=palette.colors(palette="Set 2"),
+                  'palette="Set 3"'=palette.colors(palette="Set 3"),
+                  'palette="Dark 2"'=palette.colors(palette="Dark 2")))
+```
 
-  Finally, there are two palettes from the 
-  \CRANpkg{Polychrome} package [@Polychrome].
-  These are much larger palettes, with colors chosen to be evenly
-  spread throughout HCL colorspace.  The `"Polychrome 36"` palette
-  represents the largest set of colors that could be generated
-  while still being visually distinguishable.  The `"Alphabet"`
-  palette is just a smaller, but still large, set.  These palettes
-  may be useful if you are attempting to represent a very large
-  number of categories at once.  The result is unlikely to be
-  easy to interpret, but these palettes will be your best chance.
-  
-  ```{r polychrome, echo=FALSE, eval=FALSE, fig.width=6, fig.height=3}
-  paletteGrids(list('palette="Alphabet"'=palette.colors(palette="Alphabet"),
-                    'palette="Polychrome 36"'=palette.colors(palette="Polychrome 36")))
-  ```
+Finally, there are two palettes from the 
+\CRANpkg{Polychrome} package [@Polychrome].
+These are much larger palettes, with colors chosen to be evenly
+spread throughout HCL colorspace.  The `"Polychrome 36"` palette
+represents the largest set of colors that could be generated
+while still being visually distinguishable.  The `"Alphabet"`
+palette is just a smaller, but still large, set (one for each letter
+of the alphabet).  These palettes
+may be useful if you are attempting to represent a very large
+number of categories at once.  The result is unlikely to be
+easy to interpret, but these palettes will be your best chance.
+
+```{r polychrome, echo=FALSE, eval=FALSE, fig.width=6, fig.height=3}
+paletteGrids(list('palette="Alphabet"'=palette.colors(palette="Alphabet"),
+                  'palette="Polychrome 36"'=palette.colors(palette="Polychrome 36")))
+```
 
 The `palette.pals()` function returns a character vector of 
 the available palette names.
