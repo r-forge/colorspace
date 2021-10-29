@@ -18,7 +18,7 @@
 
 \title{Strategies and Software for Robust Color Palettes in Data Visualizations}
 \subtitle{\phantom{.}\\Achim Zeileis}
-\author{\vspace*{-6.3cm}\hspace*{12.5cm}\includegraphics[width=1.6cm]{../EGU2020/palmfooter.png}\\[4.7cm]} %% -6.83 with "for Statistical Graphics"
+\author{\vspace*{-6.53cm}\hspace*{12.5cm}\includegraphics[width=1.6cm]{../EGU2020/palmfooter.png}\\[4.7cm]}
 \URL{https://colorspace.R-Forge.R-project.org/}
 
 %% need no \usepackage{Sweave}
@@ -117,7 +117,7 @@ Because Bob Ross would not approve of this!
 \begin{frame}
 \frametitle{Motivation}
 
-\textbf{colorspace package:}
+\textbf{R package colorspace:}
 \begin{itemize}
   \item Flexible HCL-based color palettes (base graphics, ggplot2, shiny app, \dots).
   \item Color manipulation tools (desaturation, lighten/darken, \dots).
@@ -130,8 +130,8 @@ Because Bob Ross would not approve of this!
 \textbf{Base R:}
 \begin{itemize}
   \item New default color palette for base graphics.
-  \item \code{palette.colors()}: Well-established qualitative color palettes.
   \item \code{hcl.colors()}: HCL-based color palettes (fixed/named).
+  \item \code{palette.colors()}: Well-established qualitative color palettes.
 \end{itemize}
 
 \end{frame}
@@ -391,7 +391,7 @@ specplot(
 \begin{frame}[fragile]
 \frametitle{Color palettes: Somewhere over the Rainbow}
 
-\textbf{colorspace package:}
+\textbf{R package colorspace:}
 
 \begin{itemize}
   \item Flexible HCL-based palettes:\\
@@ -414,7 +414,7 @@ specplot(
 \begin{frame}[fragile]
 \frametitle{Color palettes: Somewhere over the Rainbow}
 
-\textbf{Qualitative:} Fixed chroma/luminance too balanced for color vision deficiencies.
+\textbf{Qualitative:} Lack of luminance contrasts critical for color vision deficiencies.
 
 \bigskip
 
@@ -634,10 +634,10 @@ palette.colors(8, palette = "Okabe-Ito")[-1] |>
 %% 
 %% \end{frame}
  
-\subsection{colorspace package}
+\subsection{R package colorspace}
 
 \begin{frame}
-\frametitle{colorspace package}
+\frametitle{R package colorspace}
 
 \textbf{Origin of the package:} Convert colors between various three-dimensional representations of color.
 
@@ -838,18 +838,24 @@ demoplot(deutan(blyl), "heatmap")
 
 \textbf{Colors and palettes:}
 \begin{itemize}
-  \item Do not overestimate the effectiveness of color.
-  \item Choose type of palette based on the data to be visualized.
+  \item Check whether color is appropriate for coding your information.
+  \item Use appropriate type of palette.
+  \item Don't reinvent the wheel, start out from well-established palettes.  
   \item For areas use light colors (higher luminance, lower chroma).
   \item For points/lines darker colors are needed (lower luminance, higher chroma).
-  \item For palettes with more colors stronger luminance contrasts are needed.
-  \item Triangular chroma trajectories useful for distinguishing central colors.
+  \item Check robustness of palette.
+%  \item Be careful with palettes with too much chroma.
+%  \item For palettes with more colors stronger luminance contrasts are needed.
+%  \item Triangular chroma trajectories useful for distinguishing central colors.
 \end{itemize}
+
+
+
 
 \bigskip
 \pause
 
-\textbf{R packages:}
+\textbf{R:}
 \begin{itemize}
   \item \pkg{colorspace} facilitates exploration, manipulation, and assessment.
   \item HCL approximations of palettes from \pkg{RColorBrewer}, \pkg{rcartocolor}, \pkg{scico}, \dots
@@ -903,7 +909,7 @@ Zeileis A, Hornik K, Murrell P (2009).
 
 \title{}
 \subtitle{\large \textbf{Web:} \url{https://www.zeileis.org/}\\[0.3cm] \textbf{Twitter:} \href{https://twitter.com/AchimZeileis}{\tt @AchimZeileis}}
-\author{\vspace*{-5.9cm}\hspace*{12.5cm}\includegraphics[width=1.6cm]{../EGU2020/palmfooter.png}\\[4.7cm]}
+\author{\vspace*{-5.89cm}\hspace*{12.5cm}\includegraphics[width=1.6cm]{../EGU2020/palmfooter.png}\\[4.7cm]}
 \URL{}
 \section{Links}
 
