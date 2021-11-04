@@ -42,6 +42,29 @@ theme_set(theme_minimal())
 \begin{frame}
 \frametitle{Motivation}
 
+\begin{minipage}[t]{0.58\textwidth}
+\vspace*{-0.3cm}
+
+\includegraphics[width=\textwidth]{painbow_award.png}
+
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.37\textwidth}
+
+{\footnotesize
+
+\textbf{Source:} \url{https://xkcd.com/2537/}
+
+}
+
+\end{minipage}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Motivation}
+
 \begin{minipage}{0.46\textwidth}
 \includegraphics[width=\textwidth]{../EGU2020/images/sharpie-small.png}
 
