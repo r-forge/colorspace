@@ -116,96 +116,22 @@ that were provided were standard when they were implemented, but have meanwhile
 been widely recognized as being rather poor.  
 
 ```{r echo=FALSE}
-library("grid")
-library("colorspace")
-cellSize <- unit(4, "mm")
-ncol <- 10
-ns <- 3
-gap <- unit(1, "lines")
-border <- unit(0, "mm")
-bgcol <- "grey80"
-bgfill <- "white"
-paletteGrid <- function(cols, qual=FALSE) {
-    n <- length(cols)
-    nrow <- ceiling(n / ncol)
-    pushViewport(viewport(width=ncol*cellSize, height=nrow*cellSize,
-                          x=0, y=1,
-                          just=c("left", "top")))
-    x <- rep((1:ncol - 1)/ncol, nrow)[1:n] + .5/ncol
-    y <- rep(1 - (1:nrow - 1)/nrow, each=ncol)[1:n] - .5/nrow
-    if (qual) {
-        grid.circle(x, y, r=.4/nrow,
-                    gp=gpar(col=darken(cols, .5), fill=cols, lwd=2))
-    } else {    
-        grid.rect(x, y, 
-                  width=unit(1/ncol, "npc"),
-                  height=unit(1/nrow, "npc"),
-                  gp=gpar(col=darken(cols, .5), fill=cols, lwd=1,
-                          linejoin="mitre"))
-    }
-    upViewport()
-}
-paletteGrids <- function(colList, nswatch=ns, qual=FALSE) {
-    n <- length(colList)
-    qual <- rep(qual, length.out=n)
-    nrow <- ceiling(n / nswatch)
-    layout <- grid.layout(nrow, nswatch,
-                          heights=cellSize + gap,
-                          widths=ncol*cellSize + gap,
-                          just=c("left", "top"))
-    pushViewport(viewport(width=unit(1, "npc") - 2*border,
-                          height=unit(1, "npc") - 2*border,
-                          layout=layout, name="top"))
-    for (i in 1:n) {
-        row <- (i-1) %/% nswatch + 1
-        col <- (i-1) %% nswatch + 1
-        if (!is.null(colList[[i]])) {
-            pushViewport(viewport(layout.pos.row=row, layout.pos.col=col))
-            grid.text(names(colList)[i], 0, unit(1, "npc") - .5*gap, 
-                      just=c("left", "top"),
-                      gp=gpar(cex=.7, fontfamily="mono"))
-            pushViewport(viewport(y=unit(1, "npc") - gap, just="top"))
-            paletteGrid(colList[[i]], qual=qual[i])
-            upViewport(2)
-        }
-    }
-    upViewport()
-}
-drawBorder <- function(row, y=.5, just="centre",
-                       height=unit(1, "npc") + 2*border) {
-  pushViewport(viewport(layout.pos.row=row, layout.pos.col=1:3))
-  grid.rect(width=unit(1, "npc") + 2*border,
-            height=height,
-            y=y, just=just,
-            gp=gpar(col=bgcol, fill=bgfill),
-            name="bg1")
-  upViewport()
-}
-drawBorder <- function(row, 
-                       y1=unit(1, "npc") - unit(1, "mm"),
-                       y2=unit(0, "npc"),
-                       name=NULL) {
-  pushViewport(viewport(layout.pos.row=row, layout.pos.col=1:3))
-  grid.segments(unit(0, "npc") - border, y1,
-                unit(0, "npc") - border, y2,
-                gp=gpar(col=bgcol, lwd=7, lineend="butt"),
-                name=name)
-  upViewport()
-}
-drawBorder <- function(..., name=NULL) {
-  grid.null(name=name)
-}
+source("paletteGrid.R")
 ```
 
 ```{r oldPalettes, echo=FALSE, fig.width=6, fig.height=3, fig.keep="last", out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Old base R palettes.'}
 paletteGrids(list("palette()"=palette.colors(palette="R3"),
-                  "rainbow(8)"=rainbow(8),
-                  "cm.colors(8)"=cm.colors(8),
                   "heat.colors(8)"=heat.colors(8), 
-                  "topo.colors(8)"=topo.colors(8),
                   "terrain.colors(8)"=terrain.colors(8), 
-                  "gray.colors(8)"=gray.colors(8)),
-             qual=c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE))
+                  "rainbow(8)"=rainbow(8),
+                  "gray.colors(8)"=gray.colors(8),
+                  "topo.colors(8)"=topo.colors(8),
+                  NULL, 
+                  NULL,
+                  "cm.colors(8)"=cm.colors(8)),
+             qual=c(TRUE, FALSE, FALSE, 
+                    TRUE, FALSE, FALSE, 
+                    FALSE, FALSE, FALSE))
 downViewport("top")
 drawBorder(1, name="bg1")
 drawBorder(3:4, name="bg2")
@@ -227,7 +153,8 @@ palette("R4")
 ```
 
 See also Figure \ref{fig:oldPalettes} that depicts `palette()` along
-with other old base R palettes using "swatches" of rectangles filled with the
+with other old base R palettes using "swatches" of circles or
+rectangles filled with the
 corresponding colors. The other palette functions  all take an argument `n` to generate
 that number of colors (possibly along with further arguments that allow for
 certain customizations):
@@ -352,14 +279,14 @@ paletteGrids(list('palette="R4"'=palette.colors(palette="R4"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
-                  'palette="Accent"'=palette.colors(palette="Accent"),
-                  'palette="Paired"'=palette.colors(palette="Paired"),
-                  'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
-                  'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
                   'palette="Set 1"'=palette.colors(palette="Set 1"),
-                  'palette="Set 2"'=palette.colors(palette="Set 2"),
-                  'palette="Set 3"'=palette.colors(palette="Set 3"),
                   'palette="Dark 2"'=palette.colors(palette="Dark 2"),
+                  'palette="Accent"'=palette.colors(palette="Accent"),
+                  'palette="Set 2"'=palette.colors(palette="Set 2"),
+                  'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
+                  'palette="Paired"'=palette.colors(palette="Paired"),
+                  'palette="Set 3"'=palette.colors(palette="Set 3"),
+                  'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
@@ -379,37 +306,6 @@ grid.newpage()
 grid.draw(scene)
 ```
 
-```{r swatch, echo=FALSE}
-palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 4,
-                           border = "black", cex = 1, ...)
-{
-     cols <- sapply(palette, palette.colors, n = n)
-     ncol <- ncol(cols)
-     nswatch <- min(ncol, nrow)
-     op <- par(mar = rep(0.1, 4),
-               mfrow = c(1, min(5, ceiling(ncol/nrow))),
-     	       cex = cex, ...)
-     on.exit(par(op))
-     while (length(palette)) {
- 	subset <- seq_len(min(nrow, ncol(cols)))
- 	plot.new()
- 	plot.window(c(0, n), c(0.25, nrow + 0.25))
- 	y <- rev(subset)
- 	text(0, y + 0.1, palette[subset], adj = c(0, 0))
- 	y <- rep(y, each = n)
- 	rect(rep(0:(n-1), n), y, rep(1:n, n), y - 0.5,
- 	     col = cols[, subset], border = border)
- 	palette <- palette[-subset]
- 	cols    <- cols [, -subset, drop = FALSE]
-     }
-}
-```
-```{r oldvsnew, echo=FALSE, eval=FALSE, fig.width=6, fig.height=1}
-paletteGrids(list('"R3"'=palette.colors(palette="R3"), 
-                  '"R4"'=palette.colors(palette="R4")),
-             nswatch=1)
-```
-
 ## The `palette.colors()` function
 
 The `palette.colors()` function, new in R 4.0.0, provides a way to
@@ -424,18 +320,10 @@ By default `palette.colors()` returns the
 the different colors in this palette should be distinguishable
 for all viewers. 
 
-```{r okabeito, echo=FALSE, eval=FALSE, fig.width=2, fig.height=.5}
-paletteGrids(list("palette.colors()"=palette.colors()))
-```
-
 The `palette` argument allows us to select a different palette.
 For example, the old R default palette is available via the name `"R3"`.
 This palette is really only useful to reproduce old behaviour
 and remind us how bad things used to be.
-
-```{r r3, echo=FALSE, eval=FALSE, fig.width=2, fig.height=.5}
-paletteGrids(list('palette="R3"'=palette.colors(palette="R3")))
-```
 
 There are several palettes that have been taken from the color schemes of
 the \pkg{ggplot2} package and Tableau [@Tableau], both 
@@ -443,12 +331,6 @@ well-established graphics systems.  The `"Tableau 10"` palette
 represents the redesign of the default palette in Tableau [@Stone:2016].
 These palettes may be useful
 to emulate the look and feel of plots from those other systems.
-
-```{r otherssystems, echo=FALSE, eval=FALSE, fig.width=6, fig.height=.5}
-paletteGrids(list('palette="ggplot2"'=palette.colors(palette="ggplot2"),
-                  'palette="Tableau 10"'=palette.colors(palette="Tableau 10"),
-                  'palette="Classic Tableau"'=palette.colors(palette="Classic Tableau")))
-```
 
 Several palettes come from ColorBrewer.org [@Harrower+Brewer:2003] and
 were originally designed for filling regions on maps. However, they
@@ -462,17 +344,6 @@ the `"Paired"` palette may be useful to represent more than one
 categorical variable via color, e.g., high vs. low versions of 
             
 
-```{r colorbrewer, echo=FALSE, eval=FALSE, fig.width=6, fig.height=2}
-paletteGrids(list('palette="Accent"'=palette.colors(palette="Accent"),
-                  'palette="Paired"'=palette.colors(palette="Paired"),
-                  'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
-                  'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
-                  'palette="Set 1"'=palette.colors(palette="Set 1"),
-                  'palette="Set 2"'=palette.colors(palette="Set 2"),
-                  'palette="Set 3"'=palette.colors(palette="Set 3"),
-                  'palette="Dark 2"'=palette.colors(palette="Dark 2")))
-```
-
 Finally, there are two palettes from the 
 \CRANpkg{Polychrome} package [@Polychrome].
 These are much larger palettes, with colors chosen to be evenly
@@ -484,11 +355,6 @@ of the alphabet).  These palettes
 may be useful if you are attempting to represent a very large
 number of categories at once.  The result is unlikely to be
 easy to interpret, but these palettes will be your best chance.
-
-```{r polychrome, echo=FALSE, eval=FALSE, fig.width=6, fig.height=3}
-paletteGrids(list('palette="Alphabet"'=palette.colors(palette="Alphabet"),
-                  'palette="Polychrome 36"'=palette.colors(palette="Polychrome 36")))
-```
 
 The `palette.pals()` function returns a character vector of 
 the available palette names.
@@ -528,25 +394,25 @@ hcl.colors(5, palette="viridis")
 ```
 
 One difference with `hcl.colors()` is that the palette we are
- selecting colors from is \emph{not}
-a fixed set of colours.
-Instead, the palettes in `hcl.colors()` are a path within
-HCL space.
+selecting colors from is \emph{not} a fixed set of colours.  Instead,
+the palettes in `hcl.colors()` are a path within HCL space.  For each
+dimension, hue, chroma, and luminance, a palette can have a constant
+value, a monotonic trajectory, or a triangular trajectory.  For
+example, the trajectories for the `"Blues 3"` palette are shown in
+Figure \ref{fig:viridishcl}.  The palette is constant in the hue
+dimension, so the palette consists entirely of different shades of blue.
+The palette is monotonically increasing in the luminance dimension, so
+the blues vary from very dark to very light.  Finally, the palette has a
+triangular trajectory in the chroma dimension, so the blues are more
+colourful towards the middle of the palette.
 
-```{r echo=FALSE}
+```{r viridishcl, echo=FALSE, fig.width=5, fig.height=4, out.width='.8\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.'}
 library(colorspace)
-cols <- hcl.colors(5000, "viridis")
-rgb <- col2rgb(cols)
- lch <- as(RGB(t(rgb)), "polarLUV")
-pairs(coords(lch), col=cols,
-      panel=function(x, y, col, ...) {
-          n <- length(x)
-          segments(x[-n], y[-n], x[-1], y[-1], col=cols[-n], lwd=2)
-      })
+specplot(hcl.colors(100, "Blues 3"))
 ```
 
-This means that we can select as many colors as we like from these
-palettes.
+Because the palettes from `hcl.colors()` are based on a continuous
+path in HCL space, we can select as many colors as we like.
 The `hcl.pals()` function provides a full list of the
 available palette names that we can choose from.
 
@@ -562,79 +428,189 @@ Most of these palettes have one or more desirable perceptual properties:
   its perceptual properties for colorblind users.
 * **perceptual balance**.  This means that, for example,
   while there are changes in hue, chroma and luminance remain 
-  pretty much the same.  
-  
+  pretty much the same, so no colour stands out from the others.  
 
-```{r echo=FALSE}
-source("classification.R")
-pals$name <- tolower(substring(rownames(pals), 3))
-hclpals <- merge(data.frame(name=tolower(hcl.pals())), pals)
-plotSource <- function(p, start=0) {
-    typepals <- split(p, p$type, drop=TRUE)
-    names(typepals) <- NULL
-    rotate <- function(x, start=0) {
-        low <- x < start
-        if (any(low))
-            x[low] <- x[low] + 360
-        x
-    }   
-    reorder <- function(n) {
-        m1 <- matrix(1:n, ncol=3, byrow=TRUE)
-        m2 <- matrix(1:length(m1), ncol=3, byrow=TRUE)
-        m1[m2 > n] <- NA
-        m1[!is.na(m1)] <- 1:n
-        index <- as.numeric(t(m1))
-        index[!is.na(index)]
-    }
-    palBlock <- function(pals) {
-        cols <- lapply(pals$name, 
-                       function(x) hcl.colors(7, palette=x))
-        names(cols) <- pals$name
-        n <- length(cols)
-        c1 <- sapply(cols, "[", 1)
-        h1 <- colorspace::coords(as(colorspace::hex2RGB(c1), "polarLUV"))[, "H"]
-        index <- suppressWarnings(reorder(n))
-        o <- order(rotate(h1, start))[index]
-        nrow <- ceiling(n/3)
-        if (3*nrow != n) cols <- c(cols[o], 
-                                   vector("list", 
-                                          3*nrow - n))
-        c(cols, vector("list", 3))
-    }
-    palLists <- lapply(typepals, palBlock)
-    qualBlock <- function(pals) {
-        qual <- pals$type == "qualitative"
-        n <- length(qual)
-        cols <- lapply(pals$name, 
-                       function(x) hcl.colors(7, palette=x))
-        c1 <- sapply(cols, "[", 1)
-        h1 <- colorspace::coords(as(colorspace::hex2RGB(c1), "polarLUV"))[, "H"]
-        index <- suppressWarnings(reorder(n))
-        o <- order(rotate(h1, start))[index]
-        nrow <- ceiling(n/3)
-        if (3*nrow != n) qual <- c(qual[o], 
-                                   rep(FALSE, 
-                                       3*nrow - n))
-        c(qual, rep(FALSE, 3))
-    }
-    palQuals <- lapply(typepals, qualBlock)
-    palArg <- unlist(palLists, recursive=FALSE, use.names=TRUE)
-    names(palArg) <- paste0('palette="', names(palArg), '"')
-    do.call(paletteGrids, list(palArg, qual=unlist(palQuals)))
-    invisible()
-}          
-pkgpals <- split(hclpals, hclpals$source)
+These properties are very difficult to achieve in
+a single palette, which is one reason why there are multiple palettes
+available.  Furthermore, different properties will be more or less 
+important depending on the data being displayed and the point that
+a data visualisation is attempting to make.  For example, perceptual
+balance is not desirable when we want to highlight a particular
+point or category of interest, so we want some colours to
+be more obvious than others.
+The details always depend a lot on how many colors you need. For
+example, a palette with light gray, medium color, and full color may still
+work great on a white background if you are not interested much in the
+light gray group and just want them to be around in the background for
+reference.
+
+The following sections list the palettes available via `hcl.colors()`,
+broken down into qualitative, sequential, and diverging palettes.
+
+
+
+### Qualitative palettes
+
+The qualitative palettes available from `hcl.colors()` are shown
+in Figure \ref{fig:qualPalettes}.
+The common feature of these palettes are that they mainly vary hue. 
+
+```{r qualPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Qualitative palettes.'}
+pals <- hcl.pals("qualitative")
+args <- lapply(pals,
+               function(x) {
+                    hcl.colors(8, x)
+               })
+names(args) <- paste0('"', pals, '"')
+args <- c(args[c('"Pastel 1"', '"Dark 2"', '"Set 2"')],
+          list(NULL), args[c('"Dark 3"', '"Set 3"')],
+          list(NULL, NULL, NULL),
+          args[c('"Warm"', '"Cold"', '"Harmonic"')],
+          list(NULL, NULL), args['"Dynamic"'])
+paletteGrids(args, qual=TRUE)
 ```
 
-Many of the palettes provided by `hcl.colors()` are close approximations
-to well-known palettes from other sources.  For example,
-the palettes shown in Figure \ref{fig:viridisPalettes} are 
-from the \pkg{viridis} package.  These are all sequential palettes,
-but with a large change in hue as well, which makes them quite colorful
-and eye-catching.
+The first five palettes are close to the ColorBrewer.org 
+palettes of the same name. 
+They employ different levels of chroma and luminance and
+span the full hue range. 
+Most of these palettes are also available as a fixed set
+of colors via `palette.colors()`;  the difference is that
+`hcl.colors()` will return `n` colors interpolated from the full 
+range of hues, whereas `palette.colors()` will return the first `n`
+colors from a fixed set.
 
-The `"viridis"`, `"plasma"`,
-and `"inferno"` palettes come from the matplotlib Python library
+The ColorBrewer.org palettes were designed with good perceptual properties
+in mind, but also relied on expert opinion and trial and error.
+This means that a little more care should be taken when selecting one
+of these palettes because, for example, they are not all colorblind-safe.
+
+The remaining four palettes are taken from @Ihaka:2003. These
+palettes keep chroma and luminance fixed and restrict the range
+of hues (blues and greens for `"Cold"` and reds and oranges for 
+`"Warm"`).   Holding chroma and luminance fixed means that the visual impact
+is even across the palette.  This makes these palettes appropriate
+if all categories in a variable have equal importance, but they
+will not perform well for colorblind viewers and they will not 
+be appropriate for greyscale printing.
+
+When palettes are employed for shading areas in statistical displays
+(e.g., in bar plots, pie charts, or regions in maps), lighter colors
+(with moderate chroma and high luminance) such as `"Pastel 1"` or `"Set
+3"` are typically less distracting. By contrast, when coloring points
+or lines, colors with a higher chroma are often required: On
+a white background a moderate luminance as in `"Dark 2"` or `"Dark 3"`
+usually works better while on a black/dark background the luminance
+should be higher as in `"Set 3"` for example.  
+
+### Single-hue sequential palettes
+
+We further divide sequential palettes into single-hue (this section)
+and multi-hue palettes (the next section).
+
+Several of the sequential palettes vary only from dark to light, with
+a selection of underlying hues.  Certain hues will be more 
+appropriate for representing data on specific concepts, such
+as green for "nature" and red for "temperature".  Other
+sequential palettes also vary hue;  this may be appropriate 
+for drawing attention to very high or very low values.
+
+Figure \ref{fig:singleSeqPalettes} shows the sequential palettes that
+hold hue largely constant.  All of these palettes have a large
+monotonic variation in luminance, typically from dark to light.  This
+is also typically accompanied by a change in chroma from more
+colourful to less.  The result is a palette that makes it very easy to
+distinguish extreme values.  Some palettes also have a pronounced peak
+of chroma somewhere in the middle, which makes it easier to
+distinguish moderate values from extreme values (e.g., 
+`"Reds 3"` and `"Blues 3"`).
+
+```{r singleSeqPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Single-hue sequential palettes.'}
+single <- rownames(hcl_palettes("sequential (single-hue)"))
+pals <- hcl.pals("sequential")
+singlePals <- pals[pals %in% single]
+args <- lapply(singlePals,
+               function(x) {
+                    hcl.colors(8, x)
+               })
+names(args) <- paste0('"', singlePals, '"')
+args <- c(args[c('"Grays"', '"Blues 3"', '"Purples 3"',
+                 '"Light Grays"', '"Blues 2"', '"Purples 2"',
+                 '"Reds 3"', '"Greens 3"')], list(NULL),
+          args[c('"Reds 2"', '"Greens 2"', '"Oslo"')])
+paletteGrids(args, qual=FALSE)
+```
+
+All palettes in this group,
+except the last one, are inspired by the ColorBrewer.org palettes with
+the same base name, but are restricted to a
+single hue only. They are intended for a white/light background. The
+last palette, `"Oslo"`, is taken from the scientific color maps of 
+the \pkg{scico} package
+ and is intended for a black/dark background and hence the order
+is reversed starting from a light blue (not a light gray).
+
+When only a few colors
+are needed (e.g., for coding an ordinal categorical variable with few
+levels) then a lower luminance contrast may suffice
+(e.g., `"Light Grays"` or `"Blues 2"`).
+
+### Multi-hue sequential palettes
+
+To not only bring out extreme colors in a sequential palette but also
+better distinguish middle colors it is a common strategy to employ a
+sequence of hues.  This leads to a large range of possible palettes.
+
+Note that the palettes in this section
+differ substantially in the amount of chroma
+and luminance contrasts. For example, many palettes go from a dark
+high-chroma color to a neutral low-chroma color (e.g., `"Reds"`,
+`"Purples"`, `"Greens"`, `"Blues"`) or even light gray (e.g.,
+`"Purple-Blue"`). But some palettes also employ relatively high chroma
+throughout the palette (e.g., emulations of palettes from
+the \pkg{viridis} and \pkg{rcartocolors} packages). To
+emphasize the extremes the former strategy is typically more suitable
+while the latter works better if all values along the sequence should
+receive some more perceptual weight.
+
+```{r multiSeqPalettes, echo=FALSE, fig.width=6, fig.height=8, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Multi-hue sequential palettes.'}
+single <- rownames(hcl_palettes("sequential (single-hue)"))
+pals <- hcl.pals("sequential")
+multiPals <- pals[! pals %in% single]
+args <- lapply(multiPals,
+               function(x) {
+                    hcl.colors(8, x)
+               })
+names(args) <- paste0('"', multiPals, '"')
+args <- c(args[c('"Red-Blue"', '"Purple-Orange"', '"Green-Yellow"')],
+          args[c('"Red-Purple"', '"Purple-Blue"', '"Terrain"')],
+          args[c('"Red-Yellow"', '"Purple-Yellow"', '"Terrain 2"')],
+          args[c('"Heat"', '"Blue-Yellow"')], list(NULL),
+          args[c('"Heat 2"')], list(NULL, NULL),
+          list(NULL, NULL, NULL),
+          args[c('"Viridis"', '"Inferno"', '"Mako"')],
+          args[c('"Plasma"', '"Rocket"')], list(NULL),
+          list(NULL, NULL, NULL),
+          args[c('"Mint"', '"Peach"', '"Purp"')],
+          args[c('"Dark Mint"', '"OrYel"', '"PurpOr"')],
+          args[c('"Teal"', '"PinkYl"', '"Magenta"')],
+          args[c('"TealGrn"', '"RedOr"', '"Sunset"')],
+          args[c('"BluGrn"', '"Burg"', '"SunsetDark"')],
+          args[c('"Emrld"', '"BurgYl"', '"ag_Sunset"')],
+          args[c('"BluYl"', '"BrwnYl"')], list(NULL),
+          args[c('"ag_GrnYl"')], list(NULL, NULL))
+paletteGrids(args, qual=FALSE)
+```
+
+Of the palettes shown in Figure \ref{fig:multiSeqPalettes}
+`"Red-Blue"` to `"Terrain 2"` are various palettes created during the
+development of the \pkg{colorspace} package.  
+
+The next collection of palettes, `"Viridis"` to `"Mako"`, emulate 
+popular palettes within 
+the Python community.
+The `"Viridis"`, `"Plasma"`,
+and `"Inferno"` palettes come from the matplotlib Python library
 and work well for identifying features of interest in false-color images.
 This means that they should also work well for heatmaps.  
 The large range of hues means that these palettes can also serve
@@ -643,33 +619,62 @@ However, this versatility means that
 a palette that is purely sequential or purely qualitative may serve better 
 for specific purposes.
 
-The `"cividis"` palette is a version of `"viridis"` that is optimized
-for colorblind viewers.  This is necessarily less colorful because of
-the reduced range of hues available.
-The `"mako"` and `"rocket"` palettes are from the Seaborn Python
+The `"Mako"` and `"Rocket"` palettes are from the Seaborn Python
 library with an emphasis on high chroma and a wide range of luminance.
 This makes these palettes a good choice for heatmaps.
 
-```{r viridisPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='viridis palettes.'}
-grid.newpage()
-plotSource(pkgpals[[4]])
+The remaining palettes in Figure \ref{fig:multiSeqPalettes}, from
+`"Mint"` to `"Sunset"` closely match palettes provided in the
+\pkg{rcartocolors} package.  
+These palettes tend to span a much narrower range of hues, chroma,
+and luminance, so can be useful if we just need to represent a
+small number of ordered values, e.g., three-to-four. 
+The resulting colors from these palettes will have, for example, 
+more similar hues than a palette generated from `"Viridis"`, with
+its wide range of hues.
+
+```{r multiSeqPalettes2, echo=FALSE, fig.width=6, fig.height=8, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Multi-hue sequential palettes.'}
+single <- rownames(hcl_palettes("sequential (single-hue)"))
+pals <- hcl.pals("sequential")
+multiPals <- pals[! pals %in% single]
+args <- lapply(multiPals,
+               function(x) {
+                    hcl.colors(8, x)
+               })
+names(args) <- paste0('"', multiPals, '"')
+args <- c(args[c('"Reds"', '"Greens"', '"Blues"')],
+          args[c('"OrRd"', '"BuGn"', '"PuBu"')],
+          args[c('"Oranges"', '"YlGn"', '"BuPu"')],
+          args[c('"YlOrRd"', '"YlGnBu"', '"Purples"')],
+          args[c('"YlOrBr"', '"GnBu"', '"RdPu"')],
+          list(NULL), args[c('"PuBuGn"', '"PuRd"')],
+          list(NULL, NULL, NULL),
+          args[c('"Lajolla"', '"Hawaii"', '"Batlow"')],
+          args[c('"Turku"')], list(NULL, NULL))
+paletteGrids(args, qual=FALSE)
 ```
 
-Figure \ref{fig:colorBrewerPalettes} shows a range of 
-sequential and diverging palettes from ColorBrewer.org
-(`palette.colors()` only provides qualitative palettes).
-These palettes have also been selected to be colourful.
+Figure \ref{fig:multiSeqPalettes2} shows the remaining multi-hue 
+sequential palettes that are  available in `hcl.colors()`.
+The top group of palettes, starting with `"Reds"`, `"Greens"`,
+and `"Blues"`, closely match ColorBrewer.org palettes
+of the same name.  
 
-These palettes are designed for filling regions within maps,
-so they should work well for filling regions (barplots,
-heatmaps, and of course maps).
+The next group of palettes, `"Lajolla"` to `"Batlow"` closely match the
+palettes of the same name from the \pkg{scico} package.
+These palettes are constructed with a luminance scale 
+so that there is a clear visual ordering of the palette.
+They are also designed to be readable by colourblind users
+and to work for greyscale printing.  Finally, the palettes have been
+designed for perceptual balance, so that no colour has a greater
+visual emphasis than any other.
+Both `"Lajolla"` and `"Turku"`
+are intended for use with a black/dark background.
 
-Several of the sequential palettes vary only from dark to light, with
-a selection of underlying hues.  Certain hues will be more 
-appropriate for representing data on specific concepts, such
-as green for "nature" and red for "temperature".  Other
-sequential palettes also vary hue;  this may be appropriate 
-for drawing attention to very high or very low values.
+### Diverging palettes
+
+Figure \ref{fig:diverPalettes} shows the selection of diverging
+palettes for use with `hcl.colors()`.
 
 The diverging palettes again offer a range of underlying hues
 for either extreme, with either white or yellow as the central "neutral"
@@ -679,47 +684,93 @@ a turning point rather than a local minimum.  This is particularly
 true of the `"spectral"` palette which is almost a qualitative
 palette rather than a diverging palette.
 
-The ColorBrewer.org palettes were designed with good perceptual properties
-in mind, but also relied on expert opinion and trial and error.
-This means that a little more care should be taken when selecting one
-of these palettes because, for example, they are not all colorblind-safe.
+When choosing a particular palette for a display similar
+considerations apply as for the sequential palettes.  For example,
+large luminance differences are important when many colors are used
+while smaller luminance contrasts may suffice for palettes with fewer
+colors.
 
-```{r colorBrewerPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='RColorBrewer palettes.'}
-grid.newpage()
-plotSource(pkgpals[[2]], start=100)
+```{r diverPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Diverging palettes.'}
+pals <- hcl.pals("diverging")
+args <- lapply(pals,
+               function(x) {
+                    hcl.colors(8, x)
+               })
+names(args) <- paste0('"', pals, '"')
+args <- c(args[c('"Green-Orange"', '"Blue-Yellow 3"', '"Cyan-Magenta"',
+                 '"Green-Brown"', '"Blue-Yellow 2"', '"Tropic"')],
+          list(NULL, NULL, NULL),
+          args[c('"Blue-Red"', '"Blue-Red 3"', '"Red-Green"',
+                 '"Blue-Red 2"', '"Purple-Brown"', '"Purple-Green"')], 
+          list(NULL, NULL, NULL),
+          args[c('"Broc"', '"Vik"', '"Lisbon"',
+                 '"Cork"', '"Berlin"', '"Tofino"')])
+paletteGrids(args, qual=FALSE)
 ```
+
+Almost all of the palettes in the first two groups, those
+involving simple colour pairs like
+`"Blue-Red"` or `"Cyan-Magenta"`, were developed as part of the
+\pkg{colorspace} package, taking inspiration
+from various other palettes, including more balanced and simplified
+versions of several ColorBrewer.org palettes.  
+The exception is the `"Tropic"` palette,
+which closely matches the palette of the same name from the
+\pkg{rcartocolors} package.  
+
+The palettes `"Broc"` to `"Vik"` and `"Berlin"` to `"Tofino"` closely
+match the scientific color maps from the \pkg{scico} package,
+where the first three are intended for a white/light background and
+the other three for a black/dark background.
+
+### Flexible diverging palettes
+
+Figure \ref{fig:diverxPalettes} shows a set of 
+more flexible diverging
+palettes.  These do not impose
+any restrictions that the two "arms" of the palette need to be
+balanced and also may go through a non-gray neutral color (typically
+light yellow). Consequently, the chroma/luminance paths can be rather
+unbalanced.
+
+```{r diverxPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Flexible diverging palettes.'}
+pals <- hcl.pals("divergingx")
+args <- lapply(pals,
+               function(x) {
+                    hcl.colors(8, x)
+               })
+names(args) <- paste0('"', pals, '"')
+args <- c(args[c('"Temps"', '"ArmyRose"', '"Fall"')],
+          args[c('"TealRose"', '"Earth"')], list(NULL),
+          args[c('"Geyser"')], list(NULL, NULL),
+          list(NULL, NULL, NULL),
+          args[c('"RdGy"', '"Spectral"', '"PiYG"')],
+          args[c('"RdBu"', '"RdYlBu"', '"PRGn"')],
+          args[c('"PuOr"', '"RdYlGn"', '""')],
+          args[c('"BrBG"', '""', '""')],
+          list(NULL, NULL, NULL),
+          args[c('"Zissou 1"', '"Cividis"', '"Roma"')])
+paletteGrids(args, qual=FALSE)
+```
+The first group of palettes, including
+`"ArmyRose"` and `"Temps"` closely match the palettes of the same name
+from the \pkg{rcartocolors} package.
+
+The next group, based on two or three hues, like `"PuOr"` and `"RdYlGn"`
+closely match the
+palettes of the same name from ColorBrewer.org.  
+
+The final group contains
+`"Zissou 1"`, which closely matches the palette of the same name from
+the \pkg{wesanderson} package (CITE), `"Cividis"`,
+which is a colourblind-safe version of `"Viridis"` (from 
+the \pkg{viridis} package) and
+`"Roma"`, which closely matches the palette of the same name 
+from the \pkg{scico} package.
+
+
 
 \newpage
-
-Definitely designed with perception principles in mind and
-with colorblind viewers in mind.
-One point of difference is that there are diverging palettes 
-that go light-dark-light instead of dark-light-dark.
-The palettes seem relatively dark overall.
-
-```{r echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='scico palettes.'}
-grid.newpage()
-plotSource(pkgpals[[3]])
-```
-
-\newpage
-
-I could find no background material on the \pkg{rcartocolor} palettes
-(only got as far as the CARTO marketing material).  No good evidence
-that these have been constructed with perceptual properties in mind.
-
-Like the ColorBrewer.org palettes, there are both single-hue sequential
-palettes and multi-hue sequential palettes.
-These palettes tend to span a narrower range of lightness
-compared to the ColorBrewer.org palettes;  the darkest color is less
-dark and the lightest color is less light.  This means that
-these palettes should only be used to select a small number of colors;
-fewer distinct colors can be selected from these palettes.
-
-```{r echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='rcartocolor palettes.'}
-grid.newpage()
-plotSource(pkgpals[[1]], start=100)
-```
 
 \newpage
 
@@ -736,11 +787,6 @@ Both are accompanied by functions to query the available palette names (`palette
 The color swatches shown in Figures \ref{fig:palette}, \ref{fig:hcls}, and \ref{fig:hcld} which are also shown by running
 the `example()` of the two functions which make basic `palette.swatch()` and `hcl.swatch()` functions available.
 Here, focus on `palette.colors()`, more details on `hcl.colors()` later.
-
-```{r palette, echo=FALSE, fig.height=3.5, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Qualitative palettes from \\code{palette.colors()}.'}
-## height=5, width=12
-palette.swatch()
-```
 
 Briefly explain principles for selection of `R4` (similar hues, limited differences in chroma/luminance, dark/colorful, work ok for colorblind viewers).
 `Okabe-Ito` [@Okabe+Ito:2008] was designed to be very robust under color vision deficiencies. As it uses somewhat different hues than the old `R4` palette
