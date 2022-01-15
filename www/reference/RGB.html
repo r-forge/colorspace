@@ -86,7 +86,7 @@ color-class class." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -202,30 +202,31 @@ standard 61966).</p>
     <p>Ross Ihaka</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Create a random set of colors</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='fu'>RGB</span><span class='op'>(</span>R <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>20</span><span class='op'>)</span>, G <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>20</span><span class='op'>)</span>, B <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                R          G          B
-#&gt;  [1,] 0.26550866 0.93470523 0.82094629
-#&gt;  [2,] 0.37212390 0.21214252 0.64706019
-#&gt;  [3,] 0.57285336 0.65167377 0.78293276
-#&gt;  [4,] 0.90820779 0.12555510 0.55303631
-#&gt;  [5,] 0.20168193 0.26722067 0.52971958
-#&gt;  [6,] 0.89838968 0.38611409 0.78935623
-#&gt;  [7,] 0.94467527 0.01339033 0.02333120
-#&gt;  [8,] 0.66079779 0.38238796 0.47723007
-#&gt;  [9,] 0.62911404 0.86969085 0.73231374
-#&gt; [10,] 0.06178627 0.34034900 0.69273156
-#&gt; [11,] 0.20597457 0.48208012 0.47761962
-#&gt; [12,] 0.17655675 0.59956583 0.86120948
-#&gt; [13,] 0.68702285 0.49354131 0.43809711
-#&gt; [14,] 0.38410372 0.18621760 0.24479728
-#&gt; [15,] 0.76984142 0.82737332 0.07067905
-#&gt; [16,] 0.49769924 0.66846674 0.09946616
-#&gt; [17,] 0.71761851 0.79423986 0.31627171
-#&gt; [18,] 0.99190609 0.10794363 0.51863426
-#&gt; [19,] 0.38003518 0.72371095 0.66200508
-#&gt; [20,] 0.77744522 0.41127443 0.40683019</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># Create a random set of colors</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>RGB</span><span class='op'>(</span>R <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>20</span><span class='op'>)</span>, G <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>20</span><span class='op'>)</span>, B <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                R          G          B</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 0.26550866 0.93470523 0.82094629</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 0.37212390 0.21214252 0.64706019</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.57285336 0.65167377 0.78293276</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.90820779 0.12555510 0.55303631</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.20168193 0.26722067 0.52971958</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.89838968 0.38611409 0.78935623</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.94467527 0.01339033 0.02333120</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.66079779 0.38238796 0.47723007</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.62911404 0.86969085 0.73231374</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 0.06178627 0.34034900 0.69273156</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] 0.20597457 0.48208012 0.47761962</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] 0.17655675 0.59956583 0.86120948</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [13,] 0.68702285 0.49354131 0.43809711</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [14,] 0.38410372 0.18621760 0.24479728</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [15,] 0.76984142 0.82737332 0.07067905</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [16,] 0.49769924 0.66846674 0.09946616</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [17,] 0.71761851 0.79423986 0.31627171</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [18,] 0.99190609 0.10794363 0.51863426</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [19,] 0.38003518 0.72371095 0.66200508</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [20,] 0.77744522 0.41127443 0.40683019</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

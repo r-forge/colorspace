@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -244,33 +244,48 @@ with printing as character). The <code>default</code> can use any of these modes
     <div class='dont-index'><p><code><a href='https://rdrr.io/r/grDevices/rgb.html'>rgb</a></code>, <code><a href='desaturate.html'>desaturate</a></code>, <code><a href='lighten.html'>lighten</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## modify transparency of a color (in different formats)</span>
-<span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='st'>"black"</span>,   alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## name</span>
-</div><div class='output co'>#&gt; [1] "#00000000" "#00000080" "#000000FF"</div><div class='input'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='st'>"#000000"</span>, alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## hex string</span>
-</div><div class='output co'>#&gt; [1] "#00000000" "#00000080" "#000000FF"</div><div class='input'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='fl'>1</span>,         alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## palette() integer</span>
-</div><div class='output co'>#&gt; [1] "#00000000" "#00000080" "#000000FF"</div><div class='input'>
-<span class='co'>## three shades of gray (in different formats:</span>
-<span class='co'>## name/opaque, hex/opaque, hex/semi-transparent)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gray"</span>, <span class='st'>"#BEBEBE"</span>, <span class='st'>"#BEBEBE80"</span><span class='op'>)</span>
-
-<span class='co'>## adjust transparency</span>
-<span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>  <span class='co'>## only if necessary</span>
-</div><div class='output co'>#&gt; [1] "#BEBEBE"   "#BEBEBE"   "#BEBEBE80"</div><div class='input'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>  <span class='co'>## add</span>
-</div><div class='output co'>#&gt; [1] "#BEBEBEFF" "#BEBEBEFF" "#BEBEBE80"</div><div class='input'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='co'>## remove</span>
-</div><div class='output co'>#&gt; [1] "#BEBEBE" "#BEBEBE" "#BEBEBE"</div><div class='input'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>   <span class='co'>## modify</span>
-</div><div class='output co'>#&gt; [1] "#BEBEBECC" "#BEBEBECC" "#BEBEBECC"</div><div class='input'>
-<span class='co'>## extract transparency in different formats</span>
-<span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"numeric"</span><span class='op'>)</span> <span class='co'>## default</span>
-</div><div class='output co'>#&gt; [1] 1.0000000 1.0000000 0.5019608</div><div class='input'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"integer"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 255 255 128</div><div class='input'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"character"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "FF" "FF" "80"</div><div class='input'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"hexmode"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "ff" "ff" "80"</div><div class='input'>
-<span class='co'>## extract transparency with different default values</span>
-<span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1]        NA        NA 0.5019608</div><div class='input'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.5000000 0.5000000 0.5019608</div><div class='input'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='fl'>128L</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 0.5019608 0.5019608 0.5019608</div><div class='input'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='st'>"80"</span>, mode <span class='op'>=</span> <span class='st'>"integer"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 128 128 128</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## modify transparency of a color (in different formats)</span></span>
+<span class='r-in'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='st'>"black"</span>,   alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## name</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#00000000" "#00000080" "#000000FF"</span>
+<span class='r-in'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='st'>"#000000"</span>, alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## hex string</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#00000000" "#00000080" "#000000FF"</span>
+<span class='r-in'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='fl'>1</span>,         alpha <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span> <span class='co'>## palette() integer</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#00000000" "#00000080" "#000000FF"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## three shades of gray (in different formats:</span></span>
+<span class='r-in'><span class='co'>## name/opaque, hex/opaque, hex/semi-transparent)</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gray"</span>, <span class='st'>"#BEBEBE"</span>, <span class='st'>"#BEBEBE80"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## adjust transparency</span></span>
+<span class='r-in'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>  <span class='co'>## only if necessary</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#BEBEBE"   "#BEBEBE"   "#BEBEBE80"</span>
+<span class='r-in'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>  <span class='co'>## add</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#BEBEBEFF" "#BEBEBEFF" "#BEBEBE80"</span>
+<span class='r-in'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='co'>## remove</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#BEBEBE" "#BEBEBE" "#BEBEBE"</span>
+<span class='r-in'><span class='fu'>adjust_transparency</span><span class='op'>(</span><span class='va'>x</span>, alpha <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span>   <span class='co'>## modify</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#BEBEBECC" "#BEBEBECC" "#BEBEBECC"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## extract transparency in different formats</span></span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"numeric"</span><span class='op'>)</span> <span class='co'>## default</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1.0000000 1.0000000 0.5019608</span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"integer"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 255 255 128</span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"character"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "FF" "FF" "80"</span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, mode <span class='op'>=</span> <span class='st'>"hexmode"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "ff" "ff" "80"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## extract transparency with different default values</span></span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1]        NA        NA 0.5019608</span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.5000000 0.5000000 0.5019608</span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='fl'>128L</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.5019608 0.5019608 0.5019608</span>
+<span class='r-in'><span class='fu'>extract_transparency</span><span class='op'>(</span><span class='va'>x</span>, default <span class='op'>=</span> <span class='st'>"80"</span>, mode <span class='op'>=</span> <span class='st'>"integer"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 128 128 128</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

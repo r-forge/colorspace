@@ -22,8 +22,8 @@ The mixed color.  This is in the color space specified by
 \code{where}.
 }
 \description{
-This function can be used to compute the result of color mixing (it assumes
-additive mixing).
+This function can be used to compute the result of color mixing, assuming
+additive mixing (e.g., as appropriate for RGB or XYZ).
 }
 \examples{
 mixcolor(0.5, RGB(1, 0, 0), RGB(0, 1, 0))

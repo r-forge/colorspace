@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
 
       
 
-      </header><script src="color_spaces_files/header-attrs-2.8/header-attrs.js"></script><script src="color_spaces_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="color_spaces_files/header-attrs-2.11/header-attrs.js"></script><script src="color_spaces_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Color Spaces: S4 Classes and Utilities</h1>
@@ -143,7 +143,7 @@
 <code><a href="../reference/XYZ.html">XYZ()</a></code> was established by the CIE (Commission Internationale de l’Eclairage) based on experiments with human subjects. It provides a unique triplet of XYZ values, coding the standard observer’s perception of the color. It is device-independent but it is not perceptually uniform and the XYZ coordinates have no intuitive meaning. <span class="citation">(See Wikipedia <a href="#ref-color:Wiki+CIEXYZ" role="doc-biblioref">2020</a><a href="#ref-color:Wiki+CIEXYZ" role="doc-biblioref">a</a>.)</span>
 </li>
 <li>
-<code><a href="../reference/LUV.html">LUV()</a></code> and <code><a href="../reference/LAB.html">LAB()</a></code> were therefore proposed by the CIE as perceptually uniform color spaces where the former is typically preferred for emissive technologies (such as screens and monitors) whereas the latter is usually preferred when working with dyes and pigments. The L coordinate in both spaces has the same meaning and captures luminace (light-dark contrasts). Both the U and V coordinates as well as the A and B coordinates measure positions on red/green and yellow/blue axes, respectively, albeit in somewhat different ways. While this corresponds to how human color vision likely evolved (see the next section), these two color models still not correspond to perceptual axes that humans use to describe colors. <span class="citation">(See also Wikipedia <a href="#ref-color:Wiki+CIELUV" role="doc-biblioref">2020</a><a href="#ref-color:Wiki+CIELUV" role="doc-biblioref">c</a>, <a href="#ref-color:Wiki+CIELAB" role="doc-biblioref">2020</a><a href="#ref-color:Wiki+CIELAB" role="doc-biblioref">b</a>.)</span>
+<code><a href="../reference/LUV.html">LUV()</a></code> and <code><a href="../reference/LAB.html">LAB()</a></code> were therefore proposed by the CIE as perceptually uniform color spaces where the former is typically preferred for emissive technologies (such as screens and monitors) whereas the latter is usually preferred when working with dyes and pigments. The L coordinate in both spaces has the same meaning and captures luminance (light-dark contrasts). Both the U and V coordinates as well as the A and B coordinates measure positions on red/green and yellow/blue axes, respectively, albeit in somewhat different ways. While this corresponds to how human color vision likely evolved (see the next section), these two color models still not correspond to perceptual axes that humans use to describe colors. <span class="citation">(See also Wikipedia <a href="#ref-color:Wiki+CIELUV" role="doc-biblioref">2020</a><a href="#ref-color:Wiki+CIELUV" role="doc-biblioref">c</a>, <a href="#ref-color:Wiki+CIELAB" role="doc-biblioref">2020</a><a href="#ref-color:Wiki+CIELAB" role="doc-biblioref">b</a>.)</span>
 </li>
 <li>
 <code><a href="../reference/polarLUV.html">polarLUV()</a></code> and <code><a href="../reference/polarLAB.html">polarLAB()</a></code> therefore take polar coordinates in the UV plane and AB plane, respectively. Specifically, the polar coordinates of the LUV model are known as the HCL (Hue-Chroma-Luminance) model <span class="citation">(see Wikipedia <a href="#ref-color:Wiki+HCL" role="doc-biblioref">2020</a><a href="#ref-color:Wiki+HCL" role="doc-biblioref">e</a>, which points out that the LAB-based polar coordinates are also sometimes referred to as HCL)</span>. The HCL model captures the human perceptual axes very well without confounding effects as in the HSV or HLS approaches. (More details follow below.)</li>
@@ -207,7 +207,7 @@
 ## [1,] 0.8931564 0.5853740 0.6465459
 ## [2,] 0.5266113 0.7224335 0.4590469
 ## [3,] 0.4907804 0.6911937 0.8673877</code></pre>
-<p>The displayed coordinates can also be extracted as numeric matrices by <code><a href="../reference/coords.html">coords(x)</a></code> or <code><a href="../reference/coords.html">coords(y)</a></code>. We can also, for example, coerce from sRGB to HSV:</p>
+<p>The displayed coordinates can also be extracted as numeric matrices by <code>coords(x)</code> or <code>coords(y)</code>. We can also, for example, coerce from sRGB to HSV:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">as</span><span class="op">(</span><span class="va">y</span>, <span class="st">"HSV"</span><span class="op">)</span></code></pre></div>
 <pre><code>##             H         S         V

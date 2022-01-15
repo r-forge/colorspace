@@ -86,7 +86,7 @@ coordinates." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -307,47 +307,52 @@ doi: <a href='https://doi.org/10.1175/BAMS-D-13-00155.1'>10.1175/BAMS-D-13-00155
     <p>Reto Stauffer, Achim Zeileis</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## spectrum of the (in)famous RGB rainbow palette (in both RGB and HCL)</span>
-<span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>, rgb <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='specplot-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>## spectrum of HCL-based palettes: qualitative/sequential/diverging</span>
-<span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='hcl_palettes.html'>qualitative_hcl</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='st'>"Set 2"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='specplot-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='hcl_palettes.html'>sequential_hcl</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='st'>"Blues 2"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='specplot-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='hcl_palettes.html'>diverging_hcl</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='st'>"Blue-Red"</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='img'><img src='specplot-4.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>## return computed RGB and HCL coordinates</span>
-<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>, plot <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $HCL
-#&gt;               H         C        L
-#&gt;  [1,]  12.17395 179.04076 53.24059
-#&gt;  [2,]  39.43554 109.90223 72.26076
-#&gt;  [3,] 102.90782 109.54965 93.60562
-#&gt;  [4,] 126.52223 133.56847 88.07440
-#&gt;  [5,] 132.97247 118.65166 88.19667
-#&gt;  [6,] 192.16714  72.09794 91.11330
-#&gt;  [7,] 259.85512 127.32455 47.90415
-#&gt;  [8,] 267.22822 132.04235 33.81769
-#&gt;  [9,] 291.97946 133.06241 51.90335
-#&gt; [10,] 346.98811 133.87809 55.65064
-#&gt; 
-#&gt; $RGB
-#&gt;         R   G   B
-#&gt;  [1,] 1.0 0.0 0.0
-#&gt;  [2,] 1.0 0.6 0.0
-#&gt;  [3,] 0.8 1.0 0.0
-#&gt;  [4,] 0.2 1.0 0.0
-#&gt;  [5,] 0.0 1.0 0.4
-#&gt;  [6,] 0.0 1.0 1.0
-#&gt;  [7,] 0.0 0.4 1.0
-#&gt;  [8,] 0.2 0.0 1.0
-#&gt;  [9,] 0.8 0.0 1.0
-#&gt; [10,] 1.0 0.0 0.6
-#&gt; 
-#&gt; $hex
-#&gt;  [1] "#FF0000" "#FF9900" "#CCFF00" "#33FF00" "#00FF66" "#00FFFF" "#0066FF"
-#&gt;  [8] "#3300FF" "#CC00FF" "#FF0099"
-#&gt; </div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'>## spectrum of the (in)famous RGB rainbow palette (in both RGB and HCL)</span></span>
+<span class='r-in'><span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>, rgb <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='specplot-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## spectrum of HCL-based palettes: qualitative/sequential/diverging</span></span>
+<span class='r-in'><span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='hcl_palettes.html'>qualitative_hcl</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='st'>"Set 2"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='specplot-2.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='hcl_palettes.html'>sequential_hcl</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='st'>"Blues 2"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='specplot-3.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='hcl_palettes.html'>diverging_hcl</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='st'>"Blue-Red"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='specplot-4.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## return computed RGB and HCL coordinates</span></span>
+<span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'>specplot</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>, plot <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $HCL</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               H         C        L</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,]  12.17395 179.04076 53.24059</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,]  39.43554 109.90223 72.26076</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 102.90782 109.54965 93.60562</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 126.52223 133.56847 88.07440</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 132.97247 118.65166 88.19667</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 192.16714  72.09794 91.11330</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 259.85512 127.32455 47.90415</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 267.22822 132.04235 33.81769</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 291.97946 133.06241 51.90335</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 346.98811 133.87809 55.65064</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $RGB</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         R   G   B</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,] 1.0 0.0 0.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,] 1.0 0.6 0.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,] 0.8 1.0 0.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,] 0.2 1.0 0.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 0.0 1.0 0.4</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 0.0 1.0 1.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 0.0 0.4 1.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 0.2 0.0 1.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 0.8 0.0 1.0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 1.0 0.0 0.6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $hex</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] "#FF0000" "#FF9900" "#CCFF00" "#33FF00" "#00FF66" "#00FFFF" "#0066FF"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8] "#3300FF" "#CC00FF" "#FF0099"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

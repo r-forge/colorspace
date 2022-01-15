@@ -86,7 +86,7 @@ color-class class." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -205,21 +205,22 @@ standard <code><a href='sRGB.html'>sRGB</a></code> color space (IEC standard 619
     <p>Ross Ihaka</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># A rainbow of full-intensity hues</span>
-<span class='fu'>HLS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>360</span>, length.out <span class='op'>=</span> <span class='fl'>13</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>13</span><span class='op'>]</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;         H   L S
-#&gt;  [1,]   0 0.5 1
-#&gt;  [2,]  30 0.5 1
-#&gt;  [3,]  60 0.5 1
-#&gt;  [4,]  90 0.5 1
-#&gt;  [5,] 120 0.5 1
-#&gt;  [6,] 150 0.5 1
-#&gt;  [7,] 180 0.5 1
-#&gt;  [8,] 210 0.5 1
-#&gt;  [9,] 240 0.5 1
-#&gt; [10,] 270 0.5 1
-#&gt; [11,] 300 0.5 1
-#&gt; [12,] 330 0.5 1</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># A rainbow of full-intensity hues</span></span>
+<span class='r-in'><span class='fu'>HLS</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>360</span>, length.out <span class='op'>=</span> <span class='fl'>13</span><span class='op'>)</span><span class='op'>[</span><span class='op'>-</span><span class='fl'>13</span><span class='op'>]</span>, <span class='fl'>0.5</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         H   L S</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1,]   0 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [2,]  30 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [3,]  60 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [4,]  90 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [5,] 120 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [6,] 150 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [7,] 180 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [8,] 210 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [9,] 240 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [10,] 270 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [11,] 300 0.5 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [12,] 330 0.5 1</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

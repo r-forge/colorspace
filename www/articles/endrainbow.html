@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
 
       
 
-      </header><script src="endrainbow_files/header-attrs-2.8/header-attrs.js"></script><script src="endrainbow_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="endrainbow_files/header-attrs-2.11/header-attrs.js"></script><script src="endrainbow_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Somewhere over the Rainbow</h1>
@@ -137,7 +137,7 @@
 <div id="heatmap-from-the-grammar-of-graphics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#heatmap-from-the-grammar-of-graphics" class="anchor"></a>Heatmap from The Grammar of Graphics</h2>
-<p>Even in the excellent book <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“The Grammar of Graphics”</a> by <span class="citation">Wilkinson (<a href="#ref-color:Wilkinson:2005" role="doc-biblioref">2005</a>)</span>, the rainbow palette is used in one of the first figures, depicting a heatmap of a bivariate kernel density estimate. The figure is shown below on the left and is contrasted with an HCL-based sequential heat color palette on the right (<code><a href="../reference/hcl_palettes.html">sequential_hcl(99, palette = "Heat")</a></code>).</p>
+<p>Even in the excellent book <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“The Grammar of Graphics”</a> by <span class="citation">Wilkinson (<a href="#ref-color:Wilkinson:2005" role="doc-biblioref">2005</a>)</span>, the rainbow palette is used in one of the first figures, depicting a heatmap of a bivariate kernel density estimate. The figure is shown below on the left and is contrasted with an HCL-based sequential heat color palette on the right (<code>sequential_hcl(99, palette = "Heat")</code>).</p>
 <p><img src="screenshots/bkde-rainbow.png" style="width:49.0%"><img src="screenshots/bkde-heat.png" style="width:49.0%"></p>
 <p>The original palette changes back and forth between dark and light colors and hence high- and low-density regions are difficult to tell apart, especially when desaturated to grayscale. In contrast, the heat colors go from light to dark and still work very well in grayscale.</p>
 <p><img src="screenshots/bkde-rainbow-gray.png" style="width:49.0%"><img src="screenshots/bkde-heat-gray.png" style="width:49.0%"></p>
@@ -148,7 +148,7 @@
 <h2 class="hasAnchor">
 <a href="#map-of-model-deviations" class="anchor"></a>Map of model deviations</h2>
 <p>Often a subset of the RGB rainbow palette is used as a “traffic light”, coding “positive” (green) and “negative” (red) deviations from some neutral value (yellow), e.g., forecast errors or other model deviations, correlations, slopes, etc. A typical example is shown below, taken from Figure 5 of <span class="citation">Kneib (<a href="#ref-color:Kneib:2006" role="doc-biblioref">2006</a>)</span>, where deviations from a childhood moratlity model (without spatial effect) for Nigeria are depicted.</p>
-<p>The original palette is <code><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow(99, start = 0, end = 1/3)</a></code> (left) and as a better alternative <code><a href="../reference/hcl_palettes.html">diverging_hcl(99, "Purple-Green")</a></code> is used. This avoids the flashy colors and uses light gray as the neutral value, making it easier to look at the display for a longer time. Instead of diverging to red/green the palette diverges to purple/green as this works better for colorblind viewers (see below).</p>
+<p>The original palette is <code>rainbow(99, start = 0, end = 1/3)</code> (left) and as a better alternative <code>diverging_hcl(99, "Purple-Green")</code> is used. This avoids the flashy colors and uses light gray as the neutral value, making it easier to look at the display for a longer time. Instead of diverging to red/green the palette diverges to purple/green as this works better for colorblind viewers (see below).</p>
 <p><img src="screenshots/nigeria-rainbow.png" style="width:49.0%"><img src="screenshots/nigeria-purplegreen.png" style="width:49.0%"></p>
 <p>Emulating protanope vision most of the green-yellow contrasts in the RGB rainbow are collpased, making the plot very misleading while the HCL-based purple/green palette still works very well for colorblind viewers.</p>
 <p><img src="screenshots/nigeria-rainbow-protan.png" style="width:49.0%"><img src="screenshots/nigeria-purplegreen-protan.png" style="width:49.0%"></p>
@@ -159,7 +159,7 @@
 <h2 class="hasAnchor">
 <a href="#weather-map-precipitation" class="anchor"></a>Weather map: Precipitation</h2>
 <p>The shaded weather map below was taken from the web site of the <a href="https://www.noaa.gov/">NOAA</a> (National Oceanic and Atmospheric Administration) and it shows a 5-day accumulated precipitation forecast in the United States during the landfall of Hurricane Sandy in 2012. The original color palette (left) is not a classic rainbow but also combines flashy and highly-saturated colors almost everywhere in the palette. For experienced users of this particular product regions with low (vivid green colors) and high (reddish colors) precipitation amounts can be quickly identified. However, it is hard to grasp the message of the figure as a whole.</p>
-<p>As an alternative, a proper multi-hue <code><a href="../reference/hcl_palettes.html">sequential_hcl(13, "Purple-Yellow")</a></code> palette is used on the right. This has smooth gradients and the overall message can be grasped quickly, giving focus to the high-precipitation regions depicted with dark/colorful colors.</p>
+<p>As an alternative, a proper multi-hue <code>sequential_hcl(13, "Purple-Yellow")</code> palette is used on the right. This has smooth gradients and the overall message can be grasped quickly, giving focus to the high-precipitation regions depicted with dark/colorful colors.</p>
 <p><img src="screenshots/noaa-orig.png" style="width:49.0%"><img src="screenshots/noaa-purpleyellow.png" style="width:49.0%"></p>
 <p>Converting all colors to grayscale brings out even more clearly why the overall picture is so hard to grasp with the original palette: The gradients are discontinuous switching several times between bright and dark. Thus, it is hard to identify the region with the maximum precipitation forecast while this is very natural and straightforward with the HCL-based sequential palette.</p>
 <p><img src="screenshots/noaa-orig-desaturate.png" style="width:49.0%"><img src="screenshots/noaa-purpleyellow-desaturate.png" style="width:49.0%"></p>
@@ -172,7 +172,7 @@
 <h2 class="hasAnchor">
 <a href="#weather-map-dewpoint-temperature" class="anchor"></a>Weather map: Dewpoint temperature</h2>
 <p>Another shaded map for communicating a weather forecast is shown below, depicting <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll.arch/Tue/00z/east.3mods.2mtd_animate.html">dewpoint temperature forecasts</a> from a certain FV3 Global Forecast System (GFS) <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll/">product</a>. It also does not use a standard rainbow but a palette of similarly highly-saturated colors from a wide range of hues (left panel).</p>
-<p>As in the previous section, the palette is very discontinuous and breaks the values down into separate “classes” or “bands”. For experienced users this may help locating bands with very specific numeric values but leads to an uneven overall picture. In contrast, the <code><a href="../reference/hcl_palettes.html">sequential_hcl(23, "ag_Sunset")</a></code> palette (right panel) shows a smooth gradient, giving somewhat more emphasis to the darker low-temperature regions.</p>
+<p>As in the previous section, the palette is very discontinuous and breaks the values down into separate “classes” or “bands”. For experienced users this may help locating bands with very specific numeric values but leads to an uneven overall picture. In contrast, the <code>sequential_hcl(23, "ag_Sunset")</code> palette (right panel) shows a smooth gradient, giving somewhat more emphasis to the darker low-temperature regions.</p>
 <p><img src="screenshots/fv3gfs-rainbow.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset.png" style="width:49.0%"></p>
 <p>Depicting the hue/chroma/luminance trajectories of both palettes also shows the abrupt changes in the original palette which do not convey a continuous temperature scale. Instead, the HCL-based sunset palette is also built from a wide range of hues but changes hue, chroma, and luminance smoothly.</p>
 <p><img src="screenshots/fv3gfs-rainbow-spectrum.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset-spectrum.png" style="width:49.0%"></p>
@@ -184,7 +184,7 @@
 <h2 class="hasAnchor">
 <a href="#risk-map-influenza" class="anchor"></a>Risk map: Influenza</h2>
 <p>The shaded map below was taken from the web site of the <a href="https://influenza.rki.de/">Robert Koch-Institut</a> (Arbeitsgemeinschaft Influenza) and it shows the severity of influenza in Germany in week 8, 2019. The original color palette (left) is the classic rainbow ranging from “normal” (blue) to “strongly increased” (red). As all colors in the palette are very flashy and highly-saturated it is hard to grasp intuitively which areas are most affected by influenza. Also, the least interesting “normal” areas stand out as blue is the darkest color in the palette.</p>
-<p>As an alternative, a proper multi-hue <code><a href="../reference/hcl_palettes.html">sequential_hcl(99, "Purple-Yellow")</a></code> palette is used on the right. This has smooth gradients and the overall message can be grasped quickly, giving focus to the high-risk regions depicted with dark/colorful colors. However, the extremely sharp transitions between “normal” and “strongly increased” areas (e.g., in the North and the East) might indicate some overfitting in the underlying smoothing for the map.</p>
+<p>As an alternative, a proper multi-hue <code>sequential_hcl(99, "Purple-Yellow")</code> palette is used on the right. This has smooth gradients and the overall message can be grasped quickly, giving focus to the high-risk regions depicted with dark/colorful colors. However, the extremely sharp transitions between “normal” and “strongly increased” areas (e.g., in the North and the East) might indicate some overfitting in the underlying smoothing for the map.</p>
 <p><img src="screenshots/influenza-rainbow.png" style="width:49.0%"><img src="screenshots/influenza-purpleyellow.png" style="width:49.0%"></p>
 <p>Converting all colors to grayscale brings out even more clearly why the overall picture is so hard to grasp with the original palette: The gradients are discontinuous switching several times between bright and dark. Thus, it is hard to identify the high-risk regions while this is more natural and straightforward with the HCL-based sequential palette.</p>
 <p><img src="screenshots/influenza-rainbow-gray.png" style="width:49.0%"><img src="screenshots/influenza-purpleyellow-gray.png" style="width:49.0%"></p>

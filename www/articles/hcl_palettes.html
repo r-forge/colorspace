@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
 
       
 
-      </header><script src="hcl_palettes_files/header-attrs-2.8/header-attrs.js"></script><script src="hcl_palettes_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="hcl_palettes_files/header-attrs-2.11/header-attrs.js"></script><script src="hcl_palettes_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>HCL-Based Color Palettes</h1>
@@ -329,7 +329,7 @@ j = \left(1 + \frac{|c_\max - c_1|}{|c_\max - c_2|} \right)^{-1}
 <ul>
 <li>The number of colors in the palette that was used during registration is not actually stored and can be modified subsequently. The same holds for arguments <code>alpha</code> and <code>rev</code>.</li>
 <li>When registering a new palette with a previously-used name, the old palette gets overwritten. We recommend to not overwrite the palettes that are predefined in the package (albeit technically possible).</li>
-<li>The registration of a palette is only stored for the current session. When R is restarted and/or the <em>colorspace</em> package reloaded, only the predefined palettes from the package are available. Thus, to make a palette permanently available a registration R code like <code><a href="../reference/hcl_palettes.html">colorspace::qualitative_hcl(3, palette = "set2", l = 80, register = "myset")</a></code> can be placed in your <code>.Rprofile</code> or similar startup scripts.</li>
+<li>The registration of a palette is only stored for the current session. When R is restarted and/or the <em>colorspace</em> package reloaded, only the predefined palettes from the package are available. Thus, to make a palette permanently available a registration R code like <code>colorspace::qualitative_hcl(3, palette = "set2", l = 80, register = "myset")</code> can be placed in your <code>.Rprofile</code> or similar startup scripts.</li>
 </ul>
 </div>
 <div id="flexible-diverging-palettes" class="section level2">

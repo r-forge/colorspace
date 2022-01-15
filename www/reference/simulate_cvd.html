@@ -86,7 +86,7 @@ based on a CVD transform matrix." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
       </span>
     </div>
 
@@ -234,24 +234,28 @@ This can be handy to avoid too many conversions.</p>
     <div class='dont-index'><p><code><a href='cvd.html'>cvd</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># simulate color-vision deficiency by calling `simulate_cvd` with specified matrix</span>
-<span class='fu'>simulate_cvd</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#005000"</span>, <span class='st'>"blue"</span>, <span class='st'>"#00BB00"</span><span class='op'>)</span>, <span class='va'>tritanomaly_cvd</span><span class='op'>[</span><span class='st'>"6"</span><span class='op'>]</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "#004D19" "#000FAD" "#00B53B"</div><div class='input'>
-<span class='co'># simulate color-vision deficiency by calling the shortcut high-level function</span>
-<span class='fu'>tritan</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#005000"</span>, <span class='st'>"blue"</span>, <span class='st'>"#00BB00"</span><span class='op'>)</span>, severity <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "#004D19" "#000FAD" "#00B53B"</div><div class='input'>
-<span class='co'># simulate color-vision deficiency by calling `simulate_cvd` with interpolated cvd matrix</span>
-<span class='fu'>simulate_cvd</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#005000"</span>, <span class='st'>"blue"</span>, <span class='st'>"#00BB00"</span><span class='op'>)</span>,
-             <span class='fu'>interpolate_cvd_transform</span><span class='op'>(</span><span class='va'>tritanomaly_cvd</span>, severity <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "#004D19" "#000FAD" "#00B53B"</div><div class='input'>
-<span class='co'># apply CVD directly on RGB matrix</span>
-<span class='va'>RGB</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='hex2RGB.html'>hex2RGB</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>@</span><span class='va'>coords</span><span class='op'>*</span><span class='fl'>255</span><span class='op'>)</span>
-<span class='fu'>deutan</span><span class='op'>(</span><span class='va'>RGB</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [,1] [,2] [,3]
-#&gt; R   94  219    0
-#&gt; G   71  171   12
-#&gt; B    0   11  247</div><div class='input'>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='co'># simulate color-vision deficiency by calling `simulate_cvd` with specified matrix</span></span>
+<span class='r-in'><span class='fu'>simulate_cvd</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#005000"</span>, <span class='st'>"blue"</span>, <span class='st'>"#00BB00"</span><span class='op'>)</span>, <span class='va'>tritanomaly_cvd</span><span class='op'>[</span><span class='st'>"6"</span><span class='op'>]</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#004D19" "#000FAD" "#00B53B"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># simulate color-vision deficiency by calling the shortcut high-level function</span></span>
+<span class='r-in'><span class='fu'>tritan</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#005000"</span>, <span class='st'>"blue"</span>, <span class='st'>"#00BB00"</span><span class='op'>)</span>, severity <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#004D19" "#000FAD" "#00B53B"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># simulate color-vision deficiency by calling `simulate_cvd` with interpolated cvd matrix</span></span>
+<span class='r-in'><span class='fu'>simulate_cvd</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#005000"</span>, <span class='st'>"blue"</span>, <span class='st'>"#00BB00"</span><span class='op'>)</span>,</span>
+<span class='r-in'>             <span class='fu'>interpolate_cvd_transform</span><span class='op'>(</span><span class='va'>tritanomaly_cvd</span>, severity <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#004D19" "#000FAD" "#00B53B"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># apply CVD directly on RGB matrix</span></span>
+<span class='r-in'><span class='va'>RGB</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='hex2RGB.html'>hex2RGB</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>@</span><span class='va'>coords</span><span class='op'>*</span><span class='fl'>255</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>deutan</span><span class='op'>(</span><span class='va'>RGB</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [,1] [,2] [,3]</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> R   94  219    0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> G   71  171   12</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> B    0   11  247</span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
