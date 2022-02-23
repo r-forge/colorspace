@@ -69,7 +69,7 @@ colors, respectively. The relative luminances are weighted sums of scaled sRGB c
 is defined as \code{ifelse(RGB <= 0.03928, RGB/12.92, ((RGB + 0.055)/1.055)^2.4)} based on
 the \code{RGB} coordinates between 0 and 1.
 
-For use in the next major revision of the WCAG a new advanced perceptual contrast algorithm
+For use in the next major revision of the WCAG a new accessible perceptual contrast algorithm
 (APCA) has been proposed by Somers (2022), see also Muth (2022) for more background and details.
 APCA is still under development, here version 0.98G-4g is implemented. Unlike the standard WCAG
 algorithm, APCA takes into account which color is the text and which is the background. Hence
@@ -92,7 +92,7 @@ contrast_ratio(palette(), "white", algorithm = "APCA", plot = TRUE, digits = 0)
 W3C (2018). \dQuote{Web Content Accessibility Guidelines (WCAG) 2.1.}
 \url{https://www.w3.org/TR/WCAG21/}
 
-Somers A (2022). \dQuote{Advanced Perceptual Contrast Algorithm.}
+Somers A (2022). \dQuote{Accessible Perceptual Contrast Algorithm.}
 \url{https://github.com/Myndex/SAPC-APCA}
 
 Muth LC (2022). \dQuote{It's Time for a More Sophisticated Color Contrast Check for Data Visualizations.}

@@ -1,6 +1,6 @@
 # colorspace 2.0-3
 
-* Added the advanced perceptual contrast algorithm (APCA) that is under
+* Added the accessible perceptual contrast algorithm (APCA) that is under
   development for the next major revision of the WCAG as an alternative
   `algorithm` in `contrast_ratio()`. See <https://github.com/Myndex/SAPC-APCA>.
 
