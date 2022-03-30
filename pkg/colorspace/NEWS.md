@@ -1,3 +1,13 @@
+# colorspace 2.0-4
+
+* Support formal S4 color objects in `simulate_cvd()` (and hence in `deutan()`,
+  `protan()`, and `tritan()`). In that case colors are transformed internally
+  to sRGB coordinates, color vision deficiency is simulated, and then a formal
+  S4 color object (of the same class as the input) is returned. This has the
+  advantage that no rounding is applied as when going through hex color strings.
+  Similarly, for an RGB matrix input, the output is also not rounded anymore.
+
+
 # colorspace 2.0-3
 
 * Added the accessible perceptual contrast algorithm (APCA) that is under

@@ -1514,10 +1514,10 @@ detaching ‘package:ggplot2’
 > # apply CVD directly on RGB matrix
 > RGB <- t(hex2RGB(rainbow(3))@coords*255)
 > deutan(RGB)
-  [,1] [,2] [,3]
-R   94  219    0
-G   71  171   12
-B    0   11  247
+      [,1]     [,2]      [,3]
+R 93.66711 219.4647   0.00000
+G 71.42167 171.4878  12.09031
+B  0.00000  10.9497 247.06465
 > 
 > 
 > 
@@ -1674,7 +1674,7 @@ $hex
 > x <- sRGB(runif(10), runif(10), runif(10))
 > ## IGNORE_RDIFF_BEGIN
 > writehex(x, file.path(tempdir(), "random.txt"))
-[1] "/tmp/RtmpIRE9VF/random.txt"
+[1] "/tmp/RtmpRg4Umj/random.txt"
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -1684,7 +1684,7 @@ $hex
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.395 0.063 7.463 0 0 
+Time elapsed:  7.446 0.064 7.511 0 0 
 > grDevices::dev.off()
 null device 
           1 
