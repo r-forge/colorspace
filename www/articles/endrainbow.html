@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
       </span>
     </div>
 
@@ -107,7 +107,7 @@
 
       
 
-      </header><script src="endrainbow_files/header-attrs-2.11/header-attrs.js"></script><script src="endrainbow_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="endrainbow_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Somewhere over the Rainbow</h1>
@@ -123,94 +123,221 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>The go-to palette in many software packages is - or used to be until rather recently - the so-called rainbow: a palette created by changing the hue in highly-saturated RGB colors. This has been widely recognized as having a number of disadvantages including: abrupt shifts in brightness, misleading for viewers with color vision deficiencies, too flashy to look at for a longer time. See also the article on <a href="color_vision_deficiency.html">color vision deficiencies</a> that compares the base R <code><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow()</a></code> with better HCL-based alternatives using <code><a href="../reference/demoplot.html">demoplot()</a></code>. Here, we provide further rainbow examples taken from actual publications (rather than simplified demos).</p>
-<p>For more details on the limitations of the rainbow palette and further pointers see “<a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/">The End of the Rainbow</a>” by <span class="citation">Hawkins et al. (<a href="#ref-color:Hawkins+McNeall+Stephenson:2014" role="doc-biblioref">2014</a>)</span>, “<a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/">Examining Implicit Discretization in Spectral Schemes</a>” by <span class="citation">Quinan et al. (<a href="#ref-color:Quinan+Padilla+CreemRegehr:2019" role="doc-biblioref">2019</a>)</span>, or “<a href="https://dx.doi.org/10.1175/BAMS-D-13-00155.1">Somewhere over the Rainbow: How to Make Effective Use of Colors in Meteorological Visualizations</a>” by <span class="citation">Stauffer et al. (<a href="#ref-color:Stauffer+Mayr+Dabernig:2015" role="doc-biblioref">2015</a>)</span> as well as the <a href="https://twitter.com/hashtag/endrainbow">#endrainbow</a> hashtag on Twitter.</p>
-<p>In a nutshell, the (in-)famous RGB rainbow palette is virtually always a poor choice and properly balanced qualitative, sequential, or diverging palettes - such as the <a href="hcl_palettes.html">HCL-based color palettes</a> provided here - are preferable. Despite such alternatives becoming more and more widely available the rainbow palette is unfortunately still widely used. Below we illustrate some wild-caught examples, highlight their problems (e.g., by desaturation to grayscale or by emulating color vision deficiencies), and suggest better alternatives.</p>
+<p>The go-to palette in many software packages is - or used to be until
+rather recently - the so-called rainbow: a palette created by changing
+the hue in highly-saturated RGB colors. This has been widely recognized
+as having a number of disadvantages including: abrupt shifts in
+brightness, misleading for viewers with color vision deficiencies, too
+flashy to look at for a longer time. See also the article on <a href="color_vision_deficiency.html">color vision deficiencies</a> that
+compares the base R <code><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow()</a></code> with better HCL-based
+alternatives using <code><a href="../reference/demoplot.html">demoplot()</a></code>. Here, we provide further
+rainbow examples taken from actual publications (rather than simplified
+demos).</p>
+<p>For more details on the limitations of the rainbow palette and
+further pointers see “<a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/">The
+End of the Rainbow</a>” by <span class="citation">Hawkins et al. (<a href="#ref-color:Hawkins+McNeall+Stephenson:2014" role="doc-biblioref">2014</a>)</span>, “<a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/">Examining
+Implicit Discretization in Spectral Schemes</a>” by <span class="citation">Quinan et al. (<a href="#ref-color:Quinan+Padilla+CreemRegehr:2019" role="doc-biblioref">2019</a>)</span>, or “<a href="https://dx.doi.org/10.1175/BAMS-D-13-00155.1">Somewhere over the
+Rainbow: How to Make Effective Use of Colors in Meteorological
+Visualizations</a>” by <span class="citation">Stauffer et al. (<a href="#ref-color:Stauffer+Mayr+Dabernig:2015" role="doc-biblioref">2015</a>)</span> as well as the <a href="https://twitter.com/hashtag/endrainbow">#endrainbow</a> hashtag on
+Twitter.</p>
+<p>In a nutshell, the (in-)famous RGB rainbow palette is virtually
+always a poor choice and properly balanced qualitative, sequential, or
+diverging palettes - such as the <a href="hcl_palettes.html">HCL-based
+color palettes</a> provided here - are preferable. Despite such
+alternatives becoming more and more widely available the rainbow palette
+is unfortunately still widely used. Below we illustrate some wild-caught
+examples, highlight their problems (e.g., by desaturation to grayscale
+or by emulating color vision deficiencies), and suggest better
+alternatives.</p>
 </div>
 <div id="would-bob-ross-approve" class="section level2">
 <h2 class="hasAnchor">
 <a href="#would-bob-ross-approve" class="anchor"></a>Would Bob Ross approve?</h2>
-<p>When you see a (scientific) data visualization with a rainbow, ask yourself: Would <a href="https://www.bobross.com/">Bob Ross</a> approve of this?</p>
+<p>When you see a (scientific) data visualization with a rainbow, ask
+yourself: Would <a href="https://www.bobross.com/">Bob Ross</a> approve
+of this?</p>
 <p><img src="screenshots/bobross.jpg"></p>
-<p>Most likely not. In contrast, choosing a HCL-based palette instead will yield less flashy colors that change smoothly…very much in the spirit of <em>The Joy of Painting</em>.</p>
+<p>Most likely not. In contrast, choosing a HCL-based palette instead
+will yield less flashy colors that change smoothly…very much in the
+spirit of <em>The Joy of Painting</em>.</p>
 </div>
 <div id="heatmap-from-the-grammar-of-graphics" class="section level2">
 <h2 class="hasAnchor">
 <a href="#heatmap-from-the-grammar-of-graphics" class="anchor"></a>Heatmap from The Grammar of Graphics</h2>
-<p>Even in the excellent book <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“The Grammar of Graphics”</a> by <span class="citation">Wilkinson (<a href="#ref-color:Wilkinson:2005" role="doc-biblioref">2005</a>)</span>, the rainbow palette is used in one of the first figures, depicting a heatmap of a bivariate kernel density estimate. The figure is shown below on the left and is contrasted with an HCL-based sequential heat color palette on the right (<code>sequential_hcl(99, palette = "Heat")</code>).</p>
+<p>Even in the excellent book <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“The
+Grammar of Graphics”</a> by <span class="citation">Wilkinson (<a href="#ref-color:Wilkinson:2005" role="doc-biblioref">2005</a>)</span>,
+the rainbow palette is used in one of the first figures, depicting a
+heatmap of a bivariate kernel density estimate. The figure is shown
+below on the left and is contrasted with an HCL-based sequential heat
+color palette on the right
+(<code>sequential_hcl(99, palette = "Heat")</code>).</p>
 <p><img src="screenshots/bkde-rainbow.png" style="width:49.0%"><img src="screenshots/bkde-heat.png" style="width:49.0%"></p>
-<p>The original palette changes back and forth between dark and light colors and hence high- and low-density regions are difficult to tell apart, especially when desaturated to grayscale. In contrast, the heat colors go from light to dark and still work very well in grayscale.</p>
+<p>The original palette changes back and forth between dark and light
+colors and hence high- and low-density regions are difficult to tell
+apart, especially when desaturated to grayscale. In contrast, the heat
+colors go from light to dark and still work very well in grayscale.</p>
 <p><img src="screenshots/bkde-rainbow-gray.png" style="width:49.0%"><img src="screenshots/bkde-heat-gray.png" style="width:49.0%"></p>
-<p>Similarly, high- and low-density regions are much harder to distinguish for colorblind viewers in the original rainbow palette compared to the heat colors. Below deuteranope vision is emulated.</p>
+<p>Similarly, high- and low-density regions are much harder to
+distinguish for colorblind viewers in the original rainbow palette
+compared to the heat colors. Below deuteranope vision is emulated.</p>
 <p><img src="screenshots/bkde-rainbow-deutan.png" style="width:49.0%"><img src="screenshots/bkde-heat-deutan.png" style="width:49.0%"></p>
 </div>
 <div id="map-of-model-deviations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#map-of-model-deviations" class="anchor"></a>Map of model deviations</h2>
-<p>Often a subset of the RGB rainbow palette is used as a “traffic light”, coding “positive” (green) and “negative” (red) deviations from some neutral value (yellow), e.g., forecast errors or other model deviations, correlations, slopes, etc. A typical example is shown below, taken from Figure 5 of <span class="citation">Kneib (<a href="#ref-color:Kneib:2006" role="doc-biblioref">2006</a>)</span>, where deviations from a childhood moratlity model (without spatial effect) for Nigeria are depicted.</p>
-<p>The original palette is <code>rainbow(99, start = 0, end = 1/3)</code> (left) and as a better alternative <code>diverging_hcl(99, "Purple-Green")</code> is used. This avoids the flashy colors and uses light gray as the neutral value, making it easier to look at the display for a longer time. Instead of diverging to red/green the palette diverges to purple/green as this works better for colorblind viewers (see below).</p>
+<p>Often a subset of the RGB rainbow palette is used as a “traffic
+light”, coding “positive” (green) and “negative” (red) deviations from
+some neutral value (yellow), e.g., forecast errors or other model
+deviations, correlations, slopes, etc. A typical example is shown below,
+taken from Figure 5 of <span class="citation">Kneib (<a href="#ref-color:Kneib:2006" role="doc-biblioref">2006</a>)</span>,
+where deviations from a childhood moratlity model (without spatial
+effect) for Nigeria are depicted.</p>
+<p>The original palette is
+<code>rainbow(99, start = 0, end = 1/3)</code> (left) and as a better
+alternative <code>diverging_hcl(99, "Purple-Green")</code> is used. This
+avoids the flashy colors and uses light gray as the neutral value,
+making it easier to look at the display for a longer time. Instead of
+diverging to red/green the palette diverges to purple/green as this
+works better for colorblind viewers (see below).</p>
 <p><img src="screenshots/nigeria-rainbow.png" style="width:49.0%"><img src="screenshots/nigeria-purplegreen.png" style="width:49.0%"></p>
-<p>Emulating protanope vision most of the green-yellow contrasts in the RGB rainbow are collpased, making the plot very misleading while the HCL-based purple/green palette still works very well for colorblind viewers.</p>
+<p>Emulating protanope vision most of the green-yellow contrasts in the
+RGB rainbow are collpased, making the plot very misleading while the
+HCL-based purple/green palette still works very well for colorblind
+viewers.</p>
 <p><img src="screenshots/nigeria-rainbow-protan.png" style="width:49.0%"><img src="screenshots/nigeria-purplegreen-protan.png" style="width:49.0%"></p>
-<p>Another important difference between the two palettes is that the HCL-based alternative is completely balanced between the two “arms” of the palette while the rainbow is not. Specifically, the green arm has an almost flat luminance trajectory while the red arm reaches much lower luminances (i.e., darker colors).</p>
+<p>Another important difference between the two palettes is that the
+HCL-based alternative is completely balanced between the two “arms” of
+the palette while the rainbow is not. Specifically, the green arm has an
+almost flat luminance trajectory while the red arm reaches much lower
+luminances (i.e., darker colors).</p>
 <p><img src="screenshots/nigeria-rainbow-spectrum.png" style="width:49.0%"><img src="screenshots/nigeria-purplegreen-spectrum.png" style="width:49.0%"></p>
 </div>
 <div id="weather-map-precipitation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#weather-map-precipitation" class="anchor"></a>Weather map: Precipitation</h2>
-<p>The shaded weather map below was taken from the web site of the <a href="https://www.noaa.gov/">NOAA</a> (National Oceanic and Atmospheric Administration) and it shows a 5-day accumulated precipitation forecast in the United States during the landfall of Hurricane Sandy in 2012. The original color palette (left) is not a classic rainbow but also combines flashy and highly-saturated colors almost everywhere in the palette. For experienced users of this particular product regions with low (vivid green colors) and high (reddish colors) precipitation amounts can be quickly identified. However, it is hard to grasp the message of the figure as a whole.</p>
-<p>As an alternative, a proper multi-hue <code>sequential_hcl(13, "Purple-Yellow")</code> palette is used on the right. This has smooth gradients and the overall message can be grasped quickly, giving focus to the high-precipitation regions depicted with dark/colorful colors.</p>
+<p>The shaded weather map below was taken from the web site of the <a href="https://www.noaa.gov/">NOAA</a> (National Oceanic and Atmospheric
+Administration) and it shows a 5-day accumulated precipitation forecast
+in the United States during the landfall of Hurricane Sandy in 2012. The
+original color palette (left) is not a classic rainbow but also combines
+flashy and highly-saturated colors almost everywhere in the palette. For
+experienced users of this particular product regions with low (vivid
+green colors) and high (reddish colors) precipitation amounts can be
+quickly identified. However, it is hard to grasp the message of the
+figure as a whole.</p>
+<p>As an alternative, a proper multi-hue
+<code>sequential_hcl(13, "Purple-Yellow")</code> palette is used on the
+right. This has smooth gradients and the overall message can be grasped
+quickly, giving focus to the high-precipitation regions depicted with
+dark/colorful colors.</p>
 <p><img src="screenshots/noaa-orig.png" style="width:49.0%"><img src="screenshots/noaa-purpleyellow.png" style="width:49.0%"></p>
-<p>Converting all colors to grayscale brings out even more clearly why the overall picture is so hard to grasp with the original palette: The gradients are discontinuous switching several times between bright and dark. Thus, it is hard to identify the region with the maximum precipitation forecast while this is very natural and straightforward with the HCL-based sequential palette.</p>
+<p>Converting all colors to grayscale brings out even more clearly why
+the overall picture is so hard to grasp with the original palette: The
+gradients are discontinuous switching several times between bright and
+dark. Thus, it is hard to identify the region with the maximum
+precipitation forecast while this is very natural and straightforward
+with the HCL-based sequential palette.</p>
 <p><img src="screenshots/noaa-orig-desaturate.png" style="width:49.0%"><img src="screenshots/noaa-purpleyellow-desaturate.png" style="width:49.0%"></p>
-<p>Emulating deuteranope vision emphasizes the same problems as the desaturated version above but shows even more problems with the original palette.</p>
+<p>Emulating deuteranope vision emphasizes the same problems as the
+desaturated version above but shows even more problems with the original
+palette.</p>
 <p><img src="screenshots/noaa-orig-deutan.png" style="width:49.0%"><img src="screenshots/noaa-purpleyellow-deutan.png" style="width:49.0%"></p>
-<p>Showing changes in hue/chroma/luminance across the two palettes also highlights the discontinuity vs. smoothness of the two palettes.</p>
+<p>Showing changes in hue/chroma/luminance across the two palettes also
+highlights the discontinuity vs. smoothness of the two palettes.</p>
 <p><img src="screenshots/noaa-orig-spectrum.png" style="width:49.0%"><img src="screenshots/noaa-purpleyellow-spectrum.png" style="width:49.0%"></p>
 </div>
 <div id="weather-map-dewpoint-temperature" class="section level2">
 <h2 class="hasAnchor">
 <a href="#weather-map-dewpoint-temperature" class="anchor"></a>Weather map: Dewpoint temperature</h2>
-<p>Another shaded map for communicating a weather forecast is shown below, depicting <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll.arch/Tue/00z/east.3mods.2mtd_animate.html">dewpoint temperature forecasts</a> from a certain FV3 Global Forecast System (GFS) <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll/">product</a>. It also does not use a standard rainbow but a palette of similarly highly-saturated colors from a wide range of hues (left panel).</p>
-<p>As in the previous section, the palette is very discontinuous and breaks the values down into separate “classes” or “bands”. For experienced users this may help locating bands with very specific numeric values but leads to an uneven overall picture. In contrast, the <code>sequential_hcl(23, "ag_Sunset")</code> palette (right panel) shows a smooth gradient, giving somewhat more emphasis to the darker low-temperature regions.</p>
+<p>Another shaded map for communicating a weather forecast is shown
+below, depicting <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll.arch/Tue/00z/east.3mods.2mtd_animate.html">dewpoint
+temperature forecasts</a> from a certain FV3 Global Forecast System
+(GFS) <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll/">product</a>.
+It also does not use a standard rainbow but a palette of similarly
+highly-saturated colors from a wide range of hues (left panel).</p>
+<p>As in the previous section, the palette is very discontinuous and
+breaks the values down into separate “classes” or “bands”. For
+experienced users this may help locating bands with very specific
+numeric values but leads to an uneven overall picture. In contrast, the
+<code>sequential_hcl(23, "ag_Sunset")</code> palette (right panel) shows
+a smooth gradient, giving somewhat more emphasis to the darker
+low-temperature regions.</p>
 <p><img src="screenshots/fv3gfs-rainbow.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset.png" style="width:49.0%"></p>
-<p>Depicting the hue/chroma/luminance trajectories of both palettes also shows the abrupt changes in the original palette which do not convey a continuous temperature scale. Instead, the HCL-based sunset palette is also built from a wide range of hues but changes hue, chroma, and luminance smoothly.</p>
+<p>Depicting the hue/chroma/luminance trajectories of both palettes also
+shows the abrupt changes in the original palette which do not convey a
+continuous temperature scale. Instead, the HCL-based sunset palette is
+also built from a wide range of hues but changes hue, chroma, and
+luminance smoothly.</p>
 <p><img src="screenshots/fv3gfs-rainbow-spectrum.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset-spectrum.png" style="width:49.0%"></p>
-<p>Consequently, the figure with the sunset palette also works reasonably well in grayscale or for colorblind viewers while the original palette is rather problematic.</p>
+<p>Consequently, the figure with the sunset palette also works
+reasonably well in grayscale or for colorblind viewers while the
+original palette is rather problematic.</p>
 <p><img src="screenshots/fv3gfs-rainbow-gray.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset-gray.png" style="width:49.0%"></p>
 <p><img src="screenshots/fv3gfs-rainbow-deutan.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset-deutan.png" style="width:49.0%"></p>
 </div>
 <div id="risk-map-influenza" class="section level2">
 <h2 class="hasAnchor">
 <a href="#risk-map-influenza" class="anchor"></a>Risk map: Influenza</h2>
-<p>The shaded map below was taken from the web site of the <a href="https://influenza.rki.de/">Robert Koch-Institut</a> (Arbeitsgemeinschaft Influenza) and it shows the severity of influenza in Germany in week 8, 2019. The original color palette (left) is the classic rainbow ranging from “normal” (blue) to “strongly increased” (red). As all colors in the palette are very flashy and highly-saturated it is hard to grasp intuitively which areas are most affected by influenza. Also, the least interesting “normal” areas stand out as blue is the darkest color in the palette.</p>
-<p>As an alternative, a proper multi-hue <code>sequential_hcl(99, "Purple-Yellow")</code> palette is used on the right. This has smooth gradients and the overall message can be grasped quickly, giving focus to the high-risk regions depicted with dark/colorful colors. However, the extremely sharp transitions between “normal” and “strongly increased” areas (e.g., in the North and the East) might indicate some overfitting in the underlying smoothing for the map.</p>
+<p>The shaded map below was taken from the web site of the <a href="https://influenza.rki.de/">Robert Koch-Institut</a>
+(Arbeitsgemeinschaft Influenza) and it shows the severity of influenza
+in Germany in week 8, 2019. The original color palette (left) is the
+classic rainbow ranging from “normal” (blue) to “strongly increased”
+(red). As all colors in the palette are very flashy and highly-saturated
+it is hard to grasp intuitively which areas are most affected by
+influenza. Also, the least interesting “normal” areas stand out as blue
+is the darkest color in the palette.</p>
+<p>As an alternative, a proper multi-hue
+<code>sequential_hcl(99, "Purple-Yellow")</code> palette is used on the
+right. This has smooth gradients and the overall message can be grasped
+quickly, giving focus to the high-risk regions depicted with
+dark/colorful colors. However, the extremely sharp transitions between
+“normal” and “strongly increased” areas (e.g., in the North and the
+East) might indicate some overfitting in the underlying smoothing for
+the map.</p>
 <p><img src="screenshots/influenza-rainbow.png" style="width:49.0%"><img src="screenshots/influenza-purpleyellow.png" style="width:49.0%"></p>
-<p>Converting all colors to grayscale brings out even more clearly why the overall picture is so hard to grasp with the original palette: The gradients are discontinuous switching several times between bright and dark. Thus, it is hard to identify the high-risk regions while this is more natural and straightforward with the HCL-based sequential palette.</p>
+<p>Converting all colors to grayscale brings out even more clearly why
+the overall picture is so hard to grasp with the original palette: The
+gradients are discontinuous switching several times between bright and
+dark. Thus, it is hard to identify the high-risk regions while this is
+more natural and straightforward with the HCL-based sequential
+palette.</p>
 <p><img src="screenshots/influenza-rainbow-gray.png" style="width:49.0%"><img src="screenshots/influenza-purpleyellow-gray.png" style="width:49.0%"></p>
-<p>Emulating deuteranope vision emphasizes the same problems as the desaturated version above but shows even more problems with the original palette.</p>
+<p>Emulating deuteranope vision emphasizes the same problems as the
+desaturated version above but shows even more problems with the original
+palette.</p>
 <p><img src="screenshots/influenza-rainbow-deutan.png" style="width:49.0%"><img src="screenshots/influenza-purpleyellow-deutan.png" style="width:49.0%"></p>
-<p>Showing changes in hue/chroma/luminance across the two palettes also highlights the discontinuity vs. smoothness of the two palettes.</p>
+<p>Showing changes in hue/chroma/luminance across the two palettes also
+highlights the discontinuity vs. smoothness of the two palettes.</p>
 <p><img src="screenshots/influenza-rainbow-spectrum.png" style="width:49.0%"><img src="screenshots/influenza-purpleyellow-spectrum.png" style="width:49.0%"></p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references hanging-indent">
-<div id="ref-color:Hawkins+McNeall+Stephenson:2014">
-<p>Hawkins, Ed, Doug McNeall, David Stephenson, Jonny Williams, and Dave Carlson. 2014. “The End of the Rainbow – an Open Letter to the Climate Science Community.” <a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/">http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-color:Hawkins+McNeall+Stephenson:2014" class="csl-entry">
+Hawkins, Ed, Doug McNeall, David Stephenson, Jonny Williams, and Dave
+Carlson. 2014. <span>“The End of the Rainbow – an Open Letter to the
+Climate Science Community.”</span> <a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/">http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/</a>.
 </div>
-<div id="ref-color:Kneib:2006">
-<p>Kneib, Thomas. 2006. “Mixed Model-Based Inference in Geoadditive Hazard Regression for Interval-Censored Survival Times.” <em>Computational Statistics &amp; Data Analysis</em> 51: 777–92. <a href="https://doi.org/10.1016/j.csda.2006.06.019">https://doi.org/10.1016/j.csda.2006.06.019</a>.</p>
+<div id="ref-color:Kneib:2006" class="csl-entry">
+Kneib, Thomas. 2006. <span>“Mixed Model-Based Inference in Geoadditive
+Hazard Regression for Interval-Censored Survival Times.”</span>
+<em>Computational Statistics &amp; Data Analysis</em> 51: 777–92. <a href="https://doi.org/10.1016/j.csda.2006.06.019">https://doi.org/10.1016/j.csda.2006.06.019</a>.
 </div>
-<div id="ref-color:Quinan+Padilla+CreemRegehr:2019">
-<p>Quinan, P. S., L. M. Padilla, S. H. Creem-Regehr, and M. Meyer. 2019. “Examining Implicit Discretization in Spectral Schemes.” In <em>Eurographics Conference on Visualization (Eurovis) 2019</em>, edited by M. Gleicher, H. Leitte, and I. Viola, 38:3. John Wiley &amp; Sons. <a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/">https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/</a>.</p>
+<div id="ref-color:Quinan+Padilla+CreemRegehr:2019" class="csl-entry">
+Quinan, P. S., L. M. Padilla, S. H. Creem-Regehr, and M. Meyer. 2019.
+<span>“Examining Implicit Discretization in Spectral Schemes.”</span> In
+<em>Eurographics Conference on Visualization (EuroVis) 2019</em>, edited
+by M. Gleicher, H. Leitte, and I. Viola, 38:3. John Wiley &amp; Sons. <a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/">https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/</a>.
 </div>
-<div id="ref-color:Stauffer+Mayr+Dabernig:2015">
-<p>Stauffer, Reto, Georg J. Mayr, Markus Dabernig, and Achim Zeileis. 2015. “Somewhere over the Rainbow: How to Make Effective Use of Colors in Meteorological Visualizations.” <em>Bulletin of the American Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.</p>
+<div id="ref-color:Stauffer+Mayr+Dabernig:2015" class="csl-entry">
+Stauffer, Reto, Georg J. Mayr, Markus Dabernig, and Achim Zeileis. 2015.
+<span>“Somewhere over the Rainbow: How to Make Effective Use of Colors
+in Meteorological Visualizations.”</span> <em>Bulletin of the American
+Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.
 </div>
-<div id="ref-color:Wilkinson:2005">
-<p>Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. 2nd ed. Springer-Verlag.</p>
+<div id="ref-color:Wilkinson:2005" class="csl-entry">
+Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. 2nd ed.
+Springer-Verlag.
 </div>
 </div>
 </div>
