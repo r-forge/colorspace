@@ -480,8 +480,9 @@ Type 'q()' to quit R.
 > wheel(desaturate(rainbow_hcl(12)))
 > wheel(desaturate(rainbow(12)))
 > 
-> ## apply desaturation directly on RGB values
-> RGB <- t(hex2RGB(rainbow(3))@coords * 255)
+> ## apply desaturation directly on wide RGB matrix (with R/G/B channels in rows)
+> RGB <- diag(3) * 255
+> rownames(RGB) <- c("R", "G", "B")
 > desaturate(RGB)
       [,1]     [,2]     [,3]
 R 127.1223 219.9281 75.94690
@@ -1511,8 +1512,9 @@ detaching ‘package:ggplot2’
 +              interpolate_cvd_transform(tritanomaly_cvd, severity = 0.6))
 [1] "#004D19" "#000FAD" "#00B53B"
 > 
-> # apply CVD directly on RGB matrix
-> RGB <- t(hex2RGB(rainbow(3))@coords*255)
+> # apply CVD directly on wide RGB matrix (with R/G/B channels in rows)
+> RGB <- diag(3) * 255
+> rownames(RGB) <- c("R", "G", "B")
 > deutan(RGB)
       [,1]     [,2]      [,3]
 R 93.66711 219.4647   0.00000
@@ -1674,7 +1676,7 @@ $hex
 > x <- sRGB(runif(10), runif(10), runif(10))
 > ## IGNORE_RDIFF_BEGIN
 > writehex(x, file.path(tempdir(), "random.txt"))
-[1] "/tmp/RtmpRg4Umj/random.txt"
+[1] "/tmp/Rtmp0mXIw5/random.txt"
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -1684,7 +1686,7 @@ $hex
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.446 0.064 7.511 0 0 
+Time elapsed:  7.404 0.055 7.468 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -244,8 +244,9 @@ This can be handy to avoid too many conversions.</p>
 <span class='r-in'><span class='fu'>wheel</span><span class='op'>(</span><span class='fu'>desaturate</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-plt img'><img src='desaturate-1.png' alt='' width='700' height='433' /></span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'>## apply desaturation directly on RGB values</span></span>
-<span class='r-in'><span class='va'>RGB</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='hex2RGB.html'>hex2RGB</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>@</span><span class='va'>coords</span> <span class='op'>*</span> <span class='fl'>255</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'>## apply desaturation directly on wide RGB matrix (with R/G/B channels in rows)</span></span>
+<span class='r-in'><span class='va'>RGB</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>255</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>RGB</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"R"</span>, <span class='st'>"G"</span>, <span class='st'>"B"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>desaturate</span><span class='op'>(</span><span class='va'>RGB</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       [,1]     [,2]     [,3]</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> R 127.1223 219.9281 75.94690</span>

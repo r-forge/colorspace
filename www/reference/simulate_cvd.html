@@ -181,8 +181,12 @@ based on a CVD transform matrix.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>col</th>
-      <td><p>character. A color or vector of colors, e.g., <code>"#FFA801"</code> or <code>"blue"</code>.
-Input <code>col</code> can also be a matrix with three rows containing R/G/B (0-255) values, see details.</p></td>
+      <td><p>vector of R colors. Can be any of the three kinds of R colors,
+i.e., either a color name (an element of <code><a href='https://rdrr.io/r/grDevices/colors.html'>colors</a></code>), a hexadecimal (hex)
+string of the form <code>"#rrggbb"</code> or <code>"#rrggbbaa"</code> (see <code><a href='https://rdrr.io/r/grDevices/rgb.html'>rgb</a></code>), or
+an integer <code>i</code> meaning <code>palette()[i]</code>. Additionally, <code>col</code> can be
+a formal <code><a href='color-class.html'>color-class</a></code> object or a matrix with three named
+rows (or columns) containing R/G/B (0-255) values.</p></td>
     </tr>
     <tr>
       <th>cvd_transform</th>
@@ -198,6 +202,10 @@ Input <code>col</code> can also be a matrix with three rows containing R/G/B (0-
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A color object as specified in the input <code>col</code> (hexadecimal string, RGB matrix,
+or formal color class) with simulated color vision deficiency.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Using the physiologically-based model for simulating color vision deficiency (CVD)
@@ -211,24 +219,28 @@ matrix (see <code><a href='cvd.html'>cvd</a></code>) and transformation equation
 simulating the corresponding kind of colorblindness with a given severity.
 Internally, they all call <code>simulate_cvd</code> along with a (possibly interpolated)
 version of the matrices from <code><a href='cvd.html'>cvd</a></code>. Matrix interpolation can be carried out with
-the function <code>interpolate_cvd_transform</code> (see Examples).</p>
+the function <code>interpolate_cvd_transform</code> (see examples).</p>
 <p>If input <code>col</code> is a matrix with three rows named <code>R</code>, <code>G</code>, and
 <code>B</code> (top down) they are interpreted as Red-Green-Blue values within the
 range <code>[0-255]</code>. Instead of an (s)RGB color vector a matrix of the same size as the
 input <code>col</code> with the corresponding simulated Red-Green-Blue values will be returned.
 This can be handy to avoid too many conversions.</p>
+<p>Finally, if <code>col</code> is a formal <code><a href='color-class.html'>color-class</a></code> object, then its
+coordinates are transformed to sRGB coordinates, as described above, and returned as a formal
+object of the same class after the color vision deficiency simulation.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Machado GM, Oliveira MM, Fernandes LAF (2009).
-  A Physiologically-Based Model for Simulation of Color Vision Deficiency.
+  &#8220;A Physiologically-Based Model for Simulation of Color Vision Deficiency.&#8221;
   <em>IEEE Transactions on Visualization and Computer Graphics</em>. <b>15</b>(6), 1291--1298.
   doi: <a href='https://doi.org/10.1109/TVCG.2009.113'>10.1109/TVCG.2009.113</a>
 
   Online version with supplements at
   <a href='http://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html'>http://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html</a>.</p>
 <p>Zeileis A, Fisher JC, Hornik K, Ihaka R, McWhite CD, Murrell P, Stauffer R, Wilke CO (2020).
-&#8220;colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes.&#8221;
-<em>Journal of Statistical Software</em>, <b>96</b>(1), 1--49. doi: <a href='https://doi.org/10.18637/jss.v096.i01'>10.18637/jss.v096.i01</a></p>
+  &#8220;colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes.&#8221;
+  <em>Journal of Statistical Software</em>, <b>96</b>(1), 1--49.
+  doi: <a href='https://doi.org/10.18637/jss.v096.i01'>10.18637/jss.v096.i01</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='cvd.html'>cvd</a></code></p></div>
@@ -247,8 +259,9 @@ This can be handy to avoid too many conversions.</p>
 <span class='r-in'>             <span class='fu'>interpolate_cvd_transform</span><span class='op'>(</span><span class='va'>tritanomaly_cvd</span>, severity <span class='op'>=</span> <span class='fl'>0.6</span><span class='op'>)</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "#004D19" "#000FAD" "#00B53B"</span>
 <span class='r-in'></span>
-<span class='r-in'><span class='co'># apply CVD directly on RGB matrix</span></span>
-<span class='r-in'><span class='va'>RGB</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='hex2RGB.html'>hex2RGB</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span><span class='op'>@</span><span class='va'>coords</span><span class='op'>*</span><span class='fl'>255</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># apply CVD directly on wide RGB matrix (with R/G/B channels in rows)</span></span>
+<span class='r-in'><span class='va'>RGB</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/diag.html'>diag</a></span><span class='op'>(</span><span class='fl'>3</span><span class='op'>)</span> <span class='op'>*</span> <span class='fl'>255</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>RGB</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"R"</span>, <span class='st'>"G"</span>, <span class='st'>"B"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='fu'>deutan</span><span class='op'>(</span><span class='va'>RGB</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       [,1]     [,2]      [,3]</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> R 93.66711 219.4647   0.00000</span>

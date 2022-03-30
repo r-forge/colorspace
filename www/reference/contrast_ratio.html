@@ -248,7 +248,7 @@ colors, respectively. The relative luminances are weighted sums of scaled sRGB c
 <code>0.2126 * R + 0.7152 * G + 0.0722 * B</code> where each of <code>R</code>, <code>G</code>, and <code>B</code>
 is defined as <code>ifelse(RGB &lt;= 0.03928, RGB/12.92, ((RGB + 0.055)/1.055)^2.4)</code> based on
 the <code>RGB</code> coordinates between 0 and 1.</p>
-<p>For use in the next major revision of the WCAG a new accessible perceptual contrast algorithm
+<p>For use in the next major revision of the WCAG a new advanced perceptual contrast algorithm
 (APCA) has been proposed by Somers (2022), see also Muth (2022) for more background and details.
 APCA is still under development, here version 0.98G-4g is implemented. Unlike the standard WCAG
 algorithm, APCA takes into account which color is the text and which is the background. Hence
@@ -258,7 +258,7 @@ value of 45 is "sort of" like a WCAG ratio of 3, 60 is "sort of" like 4.5.</p>
 
     <p>W3C (2018). &#8220;Web Content Accessibility Guidelines (WCAG) 2.1.&#8221;
 <a href='https://www.w3.org/TR/WCAG21/'>https://www.w3.org/TR/WCAG21/</a></p>
-<p>Somers A (2022). &#8220;Accessible Perceptual Contrast Algorithm.&#8221;
+<p>Somers A (2022). &#8220;Advanced Perceptual Contrast Algorithm.&#8221;
 <a href='https://github.com/Myndex/SAPC-APCA'>https://github.com/Myndex/SAPC-APCA</a></p>
 <p>Muth LC (2022). &#8220;It's Time for a More Sophisticated Color Contrast Check for Data Visualizations.&#8221;
 Datawrapper Blog. <a href='https://blog.datawrapper.de/color-contrast-check-data-vis-wcag-apca/'>https://blog.datawrapper.de/color-contrast-check-data-vis-wcag-apca/</a></p>

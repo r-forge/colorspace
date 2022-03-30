@@ -19,14 +19,22 @@ tritan(col, severity = 1)
 interpolate_cvd_transform(cvd, severity = 1)
 }
 \arguments{
-\item{col}{character. A color or vector of colors, e.g., \code{"#FFA801"} or \code{"blue"}.
-Input \code{col} can also be a matrix with three rows containing R/G/B (0-255) values, see details.}
+\item{col}{vector of R colors. Can be any of the three kinds of R colors,
+i.e., either a color name (an element of \code{\link[grDevices]{colors}}), a hexadecimal (hex)
+string of the form \code{"#rrggbb"} or \code{"#rrggbbaa"} (see \code{\link[grDevices]{rgb}}), or
+an integer \code{i} meaning \code{palette()[i]}. Additionally, \code{col} can be
+a formal \code{\link[colorspace]{color-class}} object or a matrix with three named
+rows (or columns) containing R/G/B (0-255) values.}
 
 \item{cvd_transform}{numeric 3x3 matrix, specifying the color vision deficiency transform matrix.}
 
 \item{severity}{numeric. Severity of the color vision defect, a number between 0 and 1.}
 
 \item{cvd}{list of cvd transformation matrices. See \code{\link{cvd}} for available options.}
+}
+\value{
+A color object as specified in the input \code{col} (hexadecimal string, RGB matrix,
+or formal color class) with simulated color vision deficiency.
 }
 \description{
 Transformation of R colors by simulating color vision deficiencies,
@@ -45,13 +53,17 @@ The functions \code{deutan}, \code{protan}, and \code{tritan} are the high-level
 simulating the corresponding kind of colorblindness with a given severity.
 Internally, they all call \code{simulate_cvd} along with a (possibly interpolated)
 version of the matrices from \code{\link{cvd}}. Matrix interpolation can be carried out with
-the function \code{interpolate_cvd_transform} (see Examples).
+the function \code{interpolate_cvd_transform} (see examples).
 
 If input \code{col} is a matrix with three rows named \code{R}, \code{G}, and
 \code{B} (top down) they are interpreted as Red-Green-Blue values within the
 range \code{[0-255]}. Instead of an (s)RGB color vector a matrix of the same size as the
 input \code{col} with the corresponding simulated Red-Green-Blue values will be returned.
 This can be handy to avoid too many conversions.
+
+Finally, if \code{col} is a formal \code{\link[colorspace]{color-class}} object, then its
+coordinates are transformed to sRGB coordinates, as described above, and returned as a formal
+object of the same class after the color vision deficiency simulation.
 }
 \examples{
 # simulate color-vision deficiency by calling `simulate_cvd` with specified matrix
@@ -64,22 +76,24 @@ tritan(c("#005000", "blue", "#00BB00"), severity = 0.6)
 simulate_cvd(c("#005000", "blue", "#00BB00"),
              interpolate_cvd_transform(tritanomaly_cvd, severity = 0.6))
 
-# apply CVD directly on RGB matrix
-RGB <- t(hex2RGB(rainbow(3))@coords*255)
+# apply CVD directly on wide RGB matrix (with R/G/B channels in rows)
+RGB <- diag(3) * 255
+rownames(RGB) <- c("R", "G", "B")
 deutan(RGB)
 
 }
 \references{
 Machado GM, Oliveira MM, Fernandes LAF (2009).
-  A Physiologically-Based Model for Simulation of Color Vision Deficiency.
+  \dQuote{A Physiologically-Based Model for Simulation of Color Vision Deficiency.}
   \emph{IEEE Transactions on Visualization and Computer Graphics}. \bold{15}(6), 1291--1298.
   \doi{10.1109/TVCG.2009.113}
   Online version with supplements at
   \url{http://www.inf.ufrgs.br/~oliveira/pubs_files/CVD_Simulation/CVD_Simulation.html}.
 
 Zeileis A, Fisher JC, Hornik K, Ihaka R, McWhite CD, Murrell P, Stauffer R, Wilke CO (2020).
-\dQuote{colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes.}
-\emph{Journal of Statistical Software}, \bold{96}(1), 1--49. \doi{10.18637/jss.v096.i01}
+  \dQuote{colorspace: A Toolbox for Manipulating and Assessing Colors and Palettes.}
+  \emph{Journal of Statistical Software}, \bold{96}(1), 1--49.
+  \doi{10.18637/jss.v096.i01}
 }
 \seealso{
 \code{\link{cvd}}
