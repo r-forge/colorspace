@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
       </span>
     </div>
 
@@ -52,7 +54,7 @@
   <a href="../articles/colorspace.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -107,7 +109,7 @@
 
       
 
-      </header><script src="color_spaces_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Color Spaces: S4 Classes and Utilities</h1>
@@ -120,9 +122,9 @@
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>At the core of the <em>colorspace</em> package are various utilities
 for computing with color spaces <span class="citation">(<a href="#ref-color:Wiki+Colorspace" role="doc-biblioref">Wikipedia
 2020d</a>)</span>, as the name conveys. Thus, the package helps to map
@@ -217,17 +219,17 @@ approaches. (More details follow below.)</li>
 with three columns (corresponding to the three dimensions).</p>
 <p>Note that since the inception of the color space conversion tools in
 <span class="citation">(in , <a href="#ref-color:Ihaka:2003" role="doc-biblioref">Ihaka 2003</a>)</span> other tools for this purpose
-became available, notably <code><a href="https://rdrr.io/r/grDevices/convertColor.html">grDevices::convertColor()</a></code> <span class="citation">(in high-level , <a href="#ref-color:R" role="doc-biblioref">R Core Team 2020</a>)</span> and
-<code><a href="https://farver.data-imaginist.com/reference/convert_colour.html">farver::convert_colour()</a></code> <span class="citation">(in , <a href="#ref-color:farver" role="doc-biblioref">Pedersen, Nicolae, and
+became available, notably <code><a href="https://rdrr.io/r/grDevices/convertColor.html" class="external-link">grDevices::convertColor()</a></code> <span class="citation">(in high-level , <a href="#ref-color:R" role="doc-biblioref">R Core Team 2020</a>)</span> and
+<code><a href="https://farver.data-imaginist.com/reference/convert_colour.html" class="external-link">farver::convert_colour()</a></code> <span class="citation">(in , <a href="#ref-color:farver" role="doc-biblioref">Pedersen, Nicolae, and
 François 2020</a>)</span>. For many basic color conversion purposes the
 <em>colorspace</em> package and these alternatives are equally suitable.
 Some details differ, though, and the color conversion tools in
 <em>colorspace</em> are well-embedded into the remaining functionality
 of the package and make it self-contained.</p>
 </div>
-<div id="human-color-vision-and-the-hcl-color-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#human-color-vision-and-the-hcl-color-model" class="anchor"></a>Human color vision and the HCL color model</h2>
+<div class="section level2">
+<h2 id="human-color-vision-and-the-hcl-color-model">Human color vision and the HCL color model<a class="anchor" aria-label="anchor" href="#human-color-vision-and-the-hcl-color-model"></a>
+</h2>
 <p>It has been hypothesized that human color vision has evolved in three
 distinct stages:</p>
 <ol style="list-style-type: decimal">
@@ -270,9 +272,9 @@ colors (luminance = 70). At that luminance, green and orange can become
 much more colorful compared to blue or red.</p>
 <p><img src="color_spaces_files/figure-html/hcl-projections-1.png" width="912" style="display: block; margin: auto;"></p>
 </div>
-<div id="utilities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#utilities" class="anchor"></a>Utilities</h2>
+<div class="section level2">
+<h2 id="utilities">Utilities<a class="anchor" aria-label="anchor" href="#utilities"></a>
+</h2>
 <p>Several utilities are available for working with the S4 classes
 implementing the color spaces listed above.</p>
 <ul>
@@ -301,54 +303,54 @@ point employed in conversions from CIE XYZ to RGB. Defaults to D65 that
 has been specified by the CIE to approximate daylight.</li>
 </ul>
 </div>
-<div id="illustration-of-basic-colorspace-functionality" class="section level2">
-<h2 class="hasAnchor">
-<a href="#illustration-of-basic-colorspace-functionality" class="anchor"></a>Illustration of basic colorspace functionality</h2>
+<div class="section level2">
+<h2 id="illustration-of-basic-colorspace-functionality">Illustration of basic colorspace functionality<a class="anchor" aria-label="anchor" href="#illustration-of-basic-colorspace-functionality"></a>
+</h2>
 <p>As an example a vector of colors <code>x</code> can be specified in
 the HCL (or polar LUV) model:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/polarLUV.html">polarLUV</a></span><span class="op">(</span>L <span class="op">=</span> <span class="fl">70</span>, C <span class="op">=</span> <span class="fl">50</span>, H <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">120</span>, <span class="fl">240</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##       L  C   H
-## [1,] 70 50   0
-## [2,] 70 50 120
-## [3,] 70 50 240</code></pre>
+<code class="sourceCode R"><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/polarLUV.html">polarLUV</a></span><span class="op">(</span>L <span class="op">=</span> <span class="fl">70</span>, C <span class="op">=</span> <span class="fl">50</span>, H <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">120</span>, <span class="fl">240</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##       L  C   H</span>
+<span class="co">## [1,] 70 50   0</span>
+<span class="co">## [2,] 70 50 120</span>
+<span class="co">## [3,] 70 50 240</span></code></pre>
 <p>The resulting three colors are pastel red (hue = 0), green (hue =
 120), and blue (hue = 240) with moderate chroma and luminance. For
 display in other systems an sRGB representation might be needed:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">as</span><span class="op">(</span><span class="va">x</span>, <span class="st">"sRGB"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##              R         G         B
-## [1,] 0.8931564 0.5853740 0.6465459
-## [2,] 0.5266113 0.7224335 0.4590469
-## [3,] 0.4907804 0.6911937 0.8673877</code></pre>
+<pre><code><span class="co">##              R         G         B</span>
+<span class="co">## [1,] 0.8931564 0.5853740 0.6465459</span>
+<span class="co">## [2,] 0.5266113 0.7224335 0.4590469</span>
+<span class="co">## [3,] 0.4907804 0.6911937 0.8673877</span></code></pre>
 <p>The displayed coordinates can also be extracted as numeric matrices
 by <code>coords(x)</code> or <code>coords(y)</code>. We can also, for
 example, coerce from sRGB to HSV:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">as</span><span class="op">(</span><span class="va">y</span>, <span class="st">"HSV"</span><span class="op">)</span></code></pre></div>
-<pre><code>##             H         S         V
-## [1,] 348.0750 0.3446008 0.8931564
-## [2,] 104.6087 0.3645825 0.7224335
-## [3,] 208.0707 0.4341857 0.8673877</code></pre>
+<pre><code><span class="co">##             H         S         V</span>
+<span class="co">## [1,] 348.0750 0.3446008 0.8931564</span>
+<span class="co">## [2,] 104.6087 0.3645825 0.7224335</span>
+<span class="co">## [3,] 208.0707 0.4341857 0.8673877</span></code></pre>
 <p>For display in many systems (including R itself) hex color codes
 based on the sRGB coordinates can be created:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "#E495A5" "#86B875" "#7DB0DD"</code></pre>
+<pre><code><span class="co">## [1] "#E495A5" "#86B875" "#7DB0DD"</span></code></pre>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-color:Horvath+Lipka:2017" class="csl-entry">
 Horvath, Michael, and Christoph Lipka. 2017. <span>“<span class="nocase">sRGB</span> Gamut Within <span>CIELCHuv</span> Color
-Space Mesh.”</span> <a href="https://commons.wikimedia.org/wiki/File:SRGB_gamut_within_CIELCHuv_color_space_mesh.webm">https://commons.wikimedia.org/wiki/File:SRGB_gamut_within_CIELCHuv_color_space_mesh.webm</a>.
+Space Mesh.”</span> <a href="https://commons.wikimedia.org/wiki/File:SRGB_gamut_within_CIELCHuv_color_space_mesh.webm" class="external-link">https://commons.wikimedia.org/wiki/File:SRGB_gamut_within_CIELCHuv_color_space_mesh.webm</a>.
 </div>
 <div id="ref-color:Ihaka:2003" class="csl-entry">
 Ihaka, Ross. 2003. <span>“Colour for Presentation Graphics.”</span> In
 <em>Proceedings of the 3rd International Workshop on Distributed
 Statistical Computing, Vienna, Austria</em>, edited by Kurt Hornik,
-Friedrich Leisch, and Achim Zeileis. <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/">http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/</a>.
+Friedrich Leisch, and Achim Zeileis. <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/" class="external-link">http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/</a>.
 </div>
 <div id="ref-color:Kaiser+Boynton:1996" class="csl-entry">
 Kaiser, Peter K., and Robert M. Boynton. 1996. <em>Human Color
@@ -363,74 +365,74 @@ John Wiley &amp; Sons.
 <div id="ref-color:Lumley:2006" class="csl-entry">
 Lumley, Thomas. 2006. <span>“Color Coding and Color Blindness in
 Statistical Graphics.”</span> <em>ASA Statistical Computing &amp;
-Graphics Newsletter</em> 17 (2): 4–7. <a href="http://stat-computing.org/newsletter/issues/scgn-17-2.pdf">http://stat-computing.org/newsletter/issues/scgn-17-2.pdf</a>.
+Graphics Newsletter</em> 17 (2): 4–7. <a href="http://stat-computing.org/newsletter/issues/scgn-17-2.pdf" class="external-link">http://stat-computing.org/newsletter/issues/scgn-17-2.pdf</a>.
 </div>
 <div id="ref-color:farver" class="csl-entry">
 Pedersen, Thomas Lin, Berendea Nicolae, and Romain François. 2020.
 <em><em>Farver</em>: Vectorised Colour Conversion and Comparison</em>.
-<a href="https://CRAN.R-project.org/package=farver">https://CRAN.R-project.org/package=farver</a>.
+<a href="https://CRAN.R-project.org/package=farver" class="external-link">https://CRAN.R-project.org/package=farver</a>.
 </div>
 <div id="ref-color:R" class="csl-entry">
 R Core Team. 2020. <em><span class="sans-serif">R</span>: <span>A</span>
 Language and Environment for Statistical Computing</em>. Vienna,
 Austria: <span class="sans-serif">R</span> Foundation for Statistical
-Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+Computing. <a href="https://www.R-project.org/" class="external-link">https://www.R-project.org/</a>.
 </div>
 <div id="ref-color:Wiki+CIEXYZ" class="csl-entry">
 Wikipedia. 2020a. <span>“<span>CIE</span> 1931 Color Space —
 <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
-<a href="https://en.wikipedia.org/wiki/CIE_1931_color_space" class="uri">https://en.wikipedia.org/wiki/CIE_1931_color_space</a>,
+<a href="https://en.wikipedia.org/wiki/CIE_1931_color_space" class="external-link uri">https://en.wikipedia.org/wiki/CIE_1931_color_space</a>,
 accessed 2020-11-03.
 </div>
 <div id="ref-color:Wiki+CIELAB" class="csl-entry">
 ———. 2020b. <span>“<span>CIELAB</span> Color Space —
 <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
-<a href="https://en.wikipedia.org/wiki/CIELAB_color_space" class="uri">https://en.wikipedia.org/wiki/CIELAB_color_space</a>,
+<a href="https://en.wikipedia.org/wiki/CIELAB_color_space" class="external-link uri">https://en.wikipedia.org/wiki/CIELAB_color_space</a>,
 accessed 2020-11-03.
 </div>
 <div id="ref-color:Wiki+CIELUV" class="csl-entry">
 ———. 2020c. <span>“<span>CIELUV</span> —
 <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
-<a href="https://en.wikipedia.org/wiki/CIELUV" class="uri">https://en.wikipedia.org/wiki/CIELUV</a>, accessed
+<a href="https://en.wikipedia.org/wiki/CIELUV" class="external-link uri">https://en.wikipedia.org/wiki/CIELUV</a>, accessed
 2020-11-03.
 </div>
 <div id="ref-color:Wiki+Colorspace" class="csl-entry">
 ———. 2020d. <span>“Color Space — <span>W</span>ikipedia<span>,</span>
-the Free Encyclopedia.”</span> URL <a href="https://en.wikipedia.org/wiki/Color_space" class="uri">https://en.wikipedia.org/wiki/Color_space</a>, accessed
+the Free Encyclopedia.”</span> URL <a href="https://en.wikipedia.org/wiki/Color_space" class="external-link uri">https://en.wikipedia.org/wiki/Color_space</a>, accessed
 2019-03-11.
 </div>
 <div id="ref-color:Wiki+HCL" class="csl-entry">
 ———. 2020e. <span>“<span>HCL</span> Color Space —
 <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
-<a href="https://en.wikipedia.org/wiki/HCL_color_space" class="uri">https://en.wikipedia.org/wiki/HCL_color_space</a>, accessed
+<a href="https://en.wikipedia.org/wiki/HCL_color_space" class="external-link uri">https://en.wikipedia.org/wiki/HCL_color_space</a>, accessed
 2019-08-23.
 </div>
 <div id="ref-color:Wiki+HSV" class="csl-entry">
 ———. 2020f. <span>“<span>HSL</span> and <span>HSV</span> —
 <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
-<a href="https://en.wikipedia.org/wiki/HSL_and_HSV" class="uri">https://en.wikipedia.org/wiki/HSL_and_HSV</a>, accessed
+<a href="https://en.wikipedia.org/wiki/HSL_and_HSV" class="external-link uri">https://en.wikipedia.org/wiki/HSL_and_HSV</a>, accessed
 2020-11-03.
 </div>
 <div id="ref-color:Wiki+RGB" class="csl-entry">
 ———. 2020g. <span>“<span>RGB</span> Color Space —
 <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
-<a href="https://en.wikipedia.org/wiki/RGB_color_space" class="uri">https://en.wikipedia.org/wiki/RGB_color_space</a>, accessed
+<a href="https://en.wikipedia.org/wiki/RGB_color_space" class="external-link uri">https://en.wikipedia.org/wiki/RGB_color_space</a>, accessed
 2020-11-03.
 </div>
 <div id="ref-color:Wiki+sRGB" class="csl-entry">
 ———. 2020h. <span>“<span class="nocase">sRGB</span> —
 <span>W</span>ikipedia<span>,</span> the Free Encyclopedia.”</span> URL
-<a href="https://en.wikipedia.org/wiki/sRGB" class="uri">https://en.wikipedia.org/wiki/sRGB</a>, accessed 2020-11-03.
+<a href="https://en.wikipedia.org/wiki/sRGB" class="external-link uri">https://en.wikipedia.org/wiki/sRGB</a>, accessed 2020-11-03.
 </div>
 <div id="ref-color:Wiki+Webcolors" class="csl-entry">
 ———. 2020i. <span>“Web Colors — <span>W</span>ikipedia<span>,</span> the
-Free Encyclopedia.”</span> URL <a href="https://en.wikipedia.org/wiki/Web_colors" class="uri">https://en.wikipedia.org/wiki/Web_colors</a>, accessed
+Free Encyclopedia.”</span> URL <a href="https://en.wikipedia.org/wiki/Web_colors" class="external-link uri">https://en.wikipedia.org/wiki/Web_colors</a>, accessed
 2019-03-11.
 </div>
 <div id="ref-color:Zeileis+Hornik+Murrell:2009" class="csl-entry">
 Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. <span>“Escaping
 <span>RGB</span>land: Selecting Colors for Statistical Graphics.”</span>
-<em>Computational Statistics &amp; Data Analysis</em> 53: 3259–70. <a href="https://doi.org/10.1016/j.csda.2008.11.033">https://doi.org/10.1016/j.csda.2008.11.033</a>.
+<em>Computational Statistics &amp; Data Analysis</em> 53: 3259–70. <a href="https://doi.org/10.1016/j.csda.2008.11.033" class="external-link">https://doi.org/10.1016/j.csda.2008.11.033</a>.
 </div>
 </div>
 </div>
@@ -447,11 +449,13 @@ Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. <span>“Escaping
 
 
       <footer><div class="copyright">
-  <p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
+  <p></p>
+<p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -459,6 +463,8 @@ Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. <span>“Escaping
 
   
 
+
+  
 
   </body>
 </html>

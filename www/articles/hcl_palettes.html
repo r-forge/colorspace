@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
       </span>
     </div>
 
@@ -52,7 +54,7 @@
   <a href="../articles/colorspace.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -107,7 +109,7 @@
 
       
 
-      </header><script src="hcl_palettes_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>HCL-Based Color Palettes</h1>
@@ -120,9 +122,9 @@
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>As motivated in the previous article (<a href="color_spaces.html">Color Spaces: S4 Classes and Utilities</a>),
 the HCL space is particularly useful for specifying individual colors
 and color palettes, as its three axes match those of the human visual
@@ -158,42 +160,42 @@ combinations that yield useful palettes are accessible by name. These
 can be listed using the function <code><a href="../reference/hcl_palettes.html">hcl_palettes()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## HCL palettes
-## 
-## Type:  Qualitative 
-## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic
-## 
-## Type:  Sequential (single-hue) 
-## Names: Grays, Light Grays, Blues 2, Blues 3, Purples 2, Purples 3, Reds 2,
-##        Reds 3, Greens 2, Greens 3, Oslo
-## 
-## Type:  Sequential (multi-hue) 
-## Names: Purple-Blue, Red-Purple, Red-Blue, Purple-Orange, Purple-Yellow,
-##        Blue-Yellow, Green-Yellow, Red-Yellow, Heat, Heat 2, Terrain,
-##        Terrain 2, Viridis, Plasma, Inferno, Rocket, Mako, Dark Mint,
-##        Mint, BluGrn, Teal, TealGrn, Emrld, BluYl, ag_GrnYl, Peach,
-##        PinkYl, Burg, BurgYl, RedOr, OrYel, Purp, PurpOr, Sunset,
-##        Magenta, SunsetDark, ag_Sunset, BrwnYl, YlOrRd, YlOrBr, OrRd,
-##        Oranges, YlGn, YlGnBu, Reds, RdPu, PuRd, Purples, PuBuGn, PuBu,
-##        Greens, BuGn, GnBu, BuPu, Blues, Lajolla, Turku, Hawaii, Batlow
-## 
-## Type:  Diverging 
-## Names: Blue-Red, Blue-Red 2, Blue-Red 3, Red-Green, Purple-Green,
-##        Purple-Brown, Green-Brown, Blue-Yellow 2, Blue-Yellow 3,
-##        Green-Orange, Cyan-Magenta, Tropic, Broc, Cork, Vik, Berlin,
-##        Lisbon, Tofino</code></pre>
+<pre><code><span class="co">## HCL palettes</span>
+<span class="co">## </span>
+<span class="co">## Type:  Qualitative </span>
+<span class="co">## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic</span>
+<span class="co">## </span>
+<span class="co">## Type:  Sequential (single-hue) </span>
+<span class="co">## Names: Grays, Light Grays, Blues 2, Blues 3, Purples 2, Purples 3, Reds 2,</span>
+<span class="co">##        Reds 3, Greens 2, Greens 3, Oslo</span>
+<span class="co">## </span>
+<span class="co">## Type:  Sequential (multi-hue) </span>
+<span class="co">## Names: Purple-Blue, Red-Purple, Red-Blue, Purple-Orange, Purple-Yellow,</span>
+<span class="co">##        Blue-Yellow, Green-Yellow, Red-Yellow, Heat, Heat 2, Terrain,</span>
+<span class="co">##        Terrain 2, Viridis, Plasma, Inferno, Rocket, Mako, Dark Mint,</span>
+<span class="co">##        Mint, BluGrn, Teal, TealGrn, Emrld, BluYl, ag_GrnYl, Peach,</span>
+<span class="co">##        PinkYl, Burg, BurgYl, RedOr, OrYel, Purp, PurpOr, Sunset,</span>
+<span class="co">##        Magenta, SunsetDark, ag_Sunset, BrwnYl, YlOrRd, YlOrBr, OrRd,</span>
+<span class="co">##        Oranges, YlGn, YlGnBu, Reds, RdPu, PuRd, Purples, PuBuGn, PuBu,</span>
+<span class="co">##        Greens, BuGn, GnBu, BuPu, Blues, Lajolla, Turku, Hawaii, Batlow</span>
+<span class="co">## </span>
+<span class="co">## Type:  Diverging </span>
+<span class="co">## Names: Blue-Red, Blue-Red 2, Blue-Red 3, Red-Green, Purple-Green,</span>
+<span class="co">##        Purple-Brown, Green-Brown, Blue-Yellow 2, Blue-Yellow 3,</span>
+<span class="co">##        Green-Orange, Cyan-Magenta, Tropic, Broc, Cork, Vik, Berlin,</span>
+<span class="co">##        Lisbon, Tofino</span></code></pre>
 <p>To inspect the HCL parameter combinations for a specific palette
 simply include the <code>palette</code> name where upper-
 vs. lower-case, spaces, etc. are ignored for matching the label, e.g.,
 <code>"set2"</code> matches <code>"Set 2"</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"set2"</span><span class="op">)</span></code></pre></div>
-<pre><code>## HCL palette
-## Name: Set 2
-## Type: Qualitative
-## Parameter ranges:
-##  h1 h2 c1 c2 l1 l2 p1 p2 cmax fixup
-##   0 NA 60 NA 70 NA NA NA   NA  TRUE</code></pre>
+<pre><code><span class="co">## HCL palette</span>
+<span class="co">## Name: Set 2</span>
+<span class="co">## Type: Qualitative</span>
+<span class="co">## Parameter ranges:</span>
+<span class="co">##  h1 h2 c1 c2 l1 l2 p1 p2 cmax fixup</span>
+<span class="co">##   0 NA 60 NA 70 NA NA NA   NA  TRUE</span></code></pre>
 <p>To compute the actual color hex codes (representing sRGB
 coordinates), the functions <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code>,
 <code><a href="../reference/hcl_palettes.html">sequential_hcl()</a></code>, and <code><a href="../reference/hcl_palettes.html">diverging_hcl()</a></code>,
@@ -208,21 +210,21 @@ used.</p>
 The fourth command yields a modified set of colors (lighter due to a
 luminance of 80 instead of 70).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">270</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">270</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, h1 <span class="op">=</span> <span class="fl">0</span>, h2 <span class="op">=</span> <span class="fl">270</span>, c1 <span class="op">=</span> <span class="fl">60</span>, l1 <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</code></pre>
+<pre><code><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"set2"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</code></pre>
+<pre><code><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"set2"</span>, l <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</code></pre>
+<pre><code><span class="co">## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</span></code></pre>
 </div>
-<div id="qualitative-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#qualitative-palettes" class="anchor"></a>Qualitative palettes</h2>
+<div class="section level2">
+<h2 id="qualitative-palettes">Qualitative palettes<a class="anchor" aria-label="anchor" href="#qualitative-palettes"></a>
+</h2>
 <p><code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code> distinguishes the underlying
 categories by a sequence of hues while keeping both chroma and luminance
 constant, to give each color in the resulting palette the same
@@ -254,16 +256,16 @@ white background a moderate luminance as in “Dark 2” or “Dark 3” usually
 works better while on a black/dark background the luminance should be
 higher as in “Set 2” for example.</p>
 </div>
-<div id="sequential-palettes-single-hue" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sequential-palettes-single-hue" class="anchor"></a>Sequential palettes (single-hue)</h2>
+<div class="section level2">
+<h2 id="sequential-palettes-single-hue">Sequential palettes (single-hue)<a class="anchor" aria-label="anchor" href="#sequential-palettes-single-hue"></a>
+</h2>
 <p><code><a href="../reference/hcl_palettes.html">sequential_hcl()</a></code> codes the underlying numeric values by
 a monotonic sequence of increasing (or decreasing) luminance. Thus, the
 function’s <code>l</code> argument should provide a vector of length 2
 with starting and ending luminance (equivalently, <code>l1</code> and
 <code>l2</code> can be used). Without chroma (i.e., <code>c = 0</code>),
 this simply corresponds to a grayscale palette like
-<code><a href="https://rdrr.io/r/grDevices/gray.colors.html">gray.colors()</a></code>, see “Grays” and “Light Grays” below.</p>
+<code><a href="https://rdrr.io/r/grDevices/gray.colors.html" class="external-link">gray.colors()</a></code>, see “Grays” and “Light Grays” below.</p>
 <p>For adding chroma, a simple strategy would be to pick a single hue
 (via <code>h</code> or <code>h1</code>) and then decrease chroma from
 some value (<code>c</code> or <code>c1</code>) to zero (i.e., gray)
@@ -303,9 +305,9 @@ accompanying pronounced variation in chroma. When only a few colors are
 needed (e.g., for coding an ordinal categorical variable with few
 levels) then a lower luminance contrast may suffice.</p>
 </div>
-<div id="sequential-palettes-multi-hue" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sequential-palettes-multi-hue" class="anchor"></a>Sequential palettes (multi-hue)</h2>
+<div class="section level2">
+<h2 id="sequential-palettes-multi-hue">Sequential palettes (multi-hue)<a class="anchor" aria-label="anchor" href="#sequential-palettes-multi-hue"></a>
+</h2>
 <p>To not only bring out extreme colors in a sequential palette but also
 better distinguish middle colors it is a common strategy to employ a
 sequence of hues. Thus, the basis of such a palette is still a monotonic
@@ -351,9 +353,9 @@ emphasize the extremes the former strategy is typically more suitable
 while the latter works better if all values along the sequence should
 receive some more perceptual weight.</p>
 </div>
-<div id="diverging-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#diverging-palettes" class="anchor"></a>Diverging palettes</h2>
+<div class="section level2">
+<h2 id="diverging-palettes">Diverging palettes<a class="anchor" aria-label="anchor" href="#diverging-palettes"></a>
+</h2>
 <p><code><a href="../reference/hcl_palettes.html">diverging_hcl()</a></code> codes the underlying numeric values by a
 triangular luminance sequence with different hues in the left and in the
 right “arms” of the palette. Thus, it can be seen as a combination of
@@ -396,9 +398,9 @@ luminance differences are important when many colors are used while
 smaller luminance contrasts may suffice for palettes with fewer colors
 etc.</p>
 </div>
-<div id="construction-details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#construction-details" class="anchor"></a>Construction details</h2>
+<div class="section level2">
+<h2 id="construction-details">Construction details<a class="anchor" aria-label="anchor" href="#construction-details"></a>
+</h2>
 <p>The three different types of palettes (<em>qualitative</em>,
 <em>sequential</em>, and <em>diverging</em>) are all constructed by
 combining three different types of trajectories (<em>constant</em>,
@@ -498,9 +500,9 @@ visualized and assessed for a given color palette is provided in the
 article: <a href="palette_visualization.html">Palette Visualization and
 Assessment</a>.</p>
 </div>
-<div id="registering-your-own-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#registering-your-own-palettes" class="anchor"></a>Registering your own palettes</h2>
+<div class="section level2">
+<h2 id="registering-your-own-palettes">Registering your own palettes<a class="anchor" aria-label="anchor" href="#registering-your-own-palettes"></a>
+</h2>
 <p>The <code><a href="../reference/hcl_palettes.html">hcl_palettes()</a></code> already come with a wide range of
 predefined palettes to which customizations can be easily added.
 However, it might also be convenient to register a custom palette so
@@ -513,16 +515,16 @@ supported by adding a <code>register</code> argument once to a call to
 <p>The new palette is then included in <code><a href="../reference/hcl_palettes.html">hcl_palettes()</a></code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"Qualitative"</span><span class="op">)</span></code></pre></div>
-<pre><code>## HCL palettes
-## 
-## Type:  Qualitative 
-## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic,
-##        myset</code></pre>
+<pre><code><span class="co">## HCL palettes</span>
+<span class="co">## </span>
+<span class="co">## Type:  Qualitative </span>
+<span class="co">## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic,</span>
+<span class="co">##        myset</span></code></pre>
 <p>The palette can be used subsequently in
 <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code> as well as the qualitative <a href="ggplot2_color_scales.html">ggplot2 color scales</a>, e.g.,</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"myset"</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</code></pre>
+<pre><code><span class="co">## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</span></code></pre>
 <p>Remarks:</p>
 <ul>
 <li>The number of colors in the palette that was used during
@@ -541,9 +543,9 @@ can be placed in your <code>.Rprofile</code> or similar startup
 scripts.</li>
 </ul>
 </div>
-<div id="flexible-diverging-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#flexible-diverging-palettes" class="anchor"></a>Flexible diverging palettes</h2>
+<div class="section level2">
+<h2 id="flexible-diverging-palettes">Flexible diverging palettes<a class="anchor" aria-label="anchor" href="#flexible-diverging-palettes"></a>
+</h2>
 <p>The <code><a href="../reference/divergingx_hcl.html">divergingx_hcl()</a></code> function provides more flexible
 diverging palettes by simply calling <code><a href="../reference/hcl_palettes.html">sequential_hcl()</a></code> twice
 with prespecified sets of hue, chroma, and luminance parameters. Thus,
@@ -579,9 +581,9 @@ should be preferred because they are more balanced. However, by being
 able to go through light yellow as the neutral color warmer diverging
 palettes are available.</p>
 </div>
-<div id="hcl-and-hsv-color-palettes-corresponding-to-base-r-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hcl-and-hsv-color-palettes-corresponding-to-base-r-palettes" class="anchor"></a>HCL (and HSV) color palettes corresponding to base R palettes</h2>
+<div class="section level2">
+<h2 id="hcl-and-hsv-color-palettes-corresponding-to-base-r-palettes">HCL (and HSV) color palettes corresponding to base R palettes<a class="anchor" aria-label="anchor" href="#hcl-and-hsv-color-palettes-corresponding-to-base-r-palettes"></a>
+</h2>
 <p>To facilitate switching from base R palette functions to the
 HCL-based palettes above, <em>colorspace</em> provides a few convenience
 interfaces:</p>
@@ -589,17 +591,17 @@ interfaces:</p>
 <li>
 <code><a href="../reference/rainbow_hcl.html">rainbow_hcl()</a></code>: Convenience interface to
 <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code> for a HCL-based “rainbow” palette to
-replace the (in)famous <code><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow()</a></code> palette.</li>
+replace the (in)famous <code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow()</a></code> palette.</li>
 <li>
 <code><a href="../reference/rainbow_hcl.html">heat_hcl()</a></code>: Convenience interface to
 <code><a href="../reference/hcl_palettes.html">sequential_hcl()</a></code> with default parameters chosen to generate
-more balanced heat colors than the basic <code><a href="https://rdrr.io/r/grDevices/palettes.html">heat.colors()</a></code>
+more balanced heat colors than the basic <code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">heat.colors()</a></code>
 function.</li>
 <li>
 <code><a href="../reference/rainbow_hcl.html">terrain_hcl()</a></code>: Convenience interface to
 <code><a href="../reference/hcl_palettes.html">sequential_hcl()</a></code> with default parameters chosen to generate
 more balanced terrain colors than the basic
-<code><a href="https://rdrr.io/r/grDevices/palettes.html">terrain.colors()</a></code> function.</li>
+<code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors()</a></code> function.</li>
 <li>
 <code><a href="../reference/rainbow_hcl.html">diverging_hsv()</a></code>: Diverging palettes generated in HSV
 space rather than HCL space as in <code><a href="../reference/hcl_palettes.html">diverging_hcl()</a></code>. This is
@@ -607,13 +609,13 @@ provided for didactic purposes to contrast the more balanced HCL
 palettes with the more flashy and unbalanced HSV palettes.</li>
 </ul>
 <p>Meanwhile, base R has also adopted the HCL-based palettes from
-<em>colorspace</em> into the function <code><a href="https://rdrr.io/r/grDevices/palettes.html">hcl.colors()</a></code> in
+<em>colorspace</em> into the function <code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">hcl.colors()</a></code> in
 <em>grDevices</em> <span class="citation">(<a href="#ref-color:grDevices" role="doc-biblioref">Zeileis and Murrell
 2019</a>)</span>. This provides all the named palettes introduced in
 <em>colorspace</em> (with the same names) but without the flexibility to
 modify or adapt existing palettes.</p>
 <p>Moreover, the <em>grDevices</em> package in base R gained a new
-function <code><a href="https://rdrr.io/r/grDevices/palette.html">palette.colors()</a></code> <span class="citation">(<a href="#ref-color:grDevices2" role="doc-biblioref">Zeileis et al.
+function <code><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette.colors()</a></code> <span class="citation">(<a href="#ref-color:grDevices2" role="doc-biblioref">Zeileis et al.
 2019</a>)</span> that provides various well-established qualitative
 color palettes that can not be approximated well by
 <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code> due to pronounced variations in luminance
@@ -622,61 +624,61 @@ is more balanced, a certain amount of variations in these properties
 might be necessary to make more colors distinguishable, especially for
 viewers with color vision deficiencies.</p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-color:CARTO" class="csl-entry">
-CARTO. 2019. <span>“CARTOColors – Data-Driven Color Schemes.”</span> <a href="https://carto.com/carto-colors/">https://carto.com/carto-colors/</a>.
+CARTO. 2019. <span>“CARTOColors – Data-Driven Color Schemes.”</span> <a href="https://carto.com/carto-colors/" class="external-link">https://carto.com/carto-colors/</a>.
 </div>
 <div id="ref-color:Crameri:2018" class="csl-entry">
 Crameri, Fabio. 2018. <span>“Geodynamic Diagnostics, Scientific
 Visualisation and <em>StagLab</em> 3.0.”</span> <em>Geoscientific Model
-Development</em> 11 (6): 2541–62. <a href="https://doi.org/10.5194/gmd-11-2541-2018">https://doi.org/10.5194/gmd-11-2541-2018</a>.
+Development</em> 11 (6): 2541–62. <a href="https://doi.org/10.5194/gmd-11-2541-2018" class="external-link">https://doi.org/10.5194/gmd-11-2541-2018</a>.
 </div>
 <div id="ref-color:viridis" class="csl-entry">
 Garnier, Simon. 2018. <em><em>Viridis</em>: Default Color Maps from
-<em>Matplotlib</em></em>. <a href="https://CRAN.R-project.org/package=viridis">https://CRAN.R-project.org/package=viridis</a>.
+<em>Matplotlib</em></em>. <a href="https://CRAN.R-project.org/package=viridis" class="external-link">https://CRAN.R-project.org/package=viridis</a>.
 </div>
 <div id="ref-color:Harrower+Brewer:2003" class="csl-entry">
 Harrower, Mark A., and Cynthia A. Brewer. 2003.
 <span>“<em>ColorBrewer.org</em>: An Online Tool for Selecting Color
 Schemes for Maps.”</span> <em>The Cartographic Journal</em> 40 (1):
-27–37. <a href="https://doi.org/10.1179/000870403235002042">https://doi.org/10.1179/000870403235002042</a>.
+27–37. <a href="https://doi.org/10.1179/000870403235002042" class="external-link">https://doi.org/10.1179/000870403235002042</a>.
 </div>
 <div id="ref-color:Ihaka:2003" class="csl-entry">
 Ihaka, Ross. 2003. <span>“Colour for Presentation Graphics.”</span> In
 <em>Proceedings of the 3rd International Workshop on Distributed
 Statistical Computing, Vienna, Austria</em>, edited by Kurt Hornik,
-Friedrich Leisch, and Achim Zeileis. <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/">http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/</a>.
+Friedrich Leisch, and Achim Zeileis. <a href="http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/" class="external-link">http://www.ci.tuwien.ac.at/Conferences/DSC-2003/Proceedings/</a>.
 </div>
 <div id="ref-color:wesanderson" class="csl-entry">
 Ram, Karthik, and Hadley Wickham. 2018. <em><em>Wesanderson</em>: A
-<span>W</span>es <span>A</span>nderson Palette Generator</em>. <a href="https://CRAN.R-project.org/package=wesanderson">https://CRAN.R-project.org/package=wesanderson</a>.
+<span>W</span>es <span>A</span>nderson Palette Generator</em>. <a href="https://CRAN.R-project.org/package=wesanderson" class="external-link">https://CRAN.R-project.org/package=wesanderson</a>.
 </div>
 <div id="ref-color:Smith+VanDerWalt:2015" class="csl-entry">
 Smith, Nathaniel, and Stéfan Van der Walt. 2015. <span>“A Better Default
 Colormap for <em>Matplotlib</em>.”</span> In <em>SciPy 2015 – Scientific
-Computing with <span class="sans-serif">Python</span></em>. Austin. <a href="https://www.youtube.com/watch?v=xAoljeRJ3lU">https://www.youtube.com/watch?v=xAoljeRJ3lU</a>.
+Computing with <span class="sans-serif">Python</span></em>. Austin. <a href="https://www.youtube.com/watch?v=xAoljeRJ3lU" class="external-link">https://www.youtube.com/watch?v=xAoljeRJ3lU</a>.
 </div>
 <div id="ref-color:Stauffer+Mayr+Dabernig:2015" class="csl-entry">
 Stauffer, Reto, Georg J. Mayr, Markus Dabernig, and Achim Zeileis. 2015.
 <span>“Somewhere over the Rainbow: How to Make Effective Use of Colors
 in Meteorological Visualizations.”</span> <em>Bulletin of the American
-Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.
+Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1" class="external-link">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.
 </div>
 <div id="ref-color:Zeileis+Hornik+Murrell:2009" class="csl-entry">
 Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. <span>“Escaping
 <span>RGB</span>land: Selecting Colors for Statistical Graphics.”</span>
-<em>Computational Statistics &amp; Data Analysis</em> 53: 3259–70. <a href="https://doi.org/10.1016/j.csda.2008.11.033">https://doi.org/10.1016/j.csda.2008.11.033</a>.
+<em>Computational Statistics &amp; Data Analysis</em> 53: 3259–70. <a href="https://doi.org/10.1016/j.csda.2008.11.033" class="external-link">https://doi.org/10.1016/j.csda.2008.11.033</a>.
 </div>
 <div id="ref-color:grDevices" class="csl-entry">
 Zeileis, Achim, and Paul Murrell. 2019. <span>“<span>HCL</span>-Based
-Color Palettes in <em>grDevices</em>.”</span> <a href="https://developer.R-project.org/Blog/public/2019/04/01/hcl-based-color-palettes-in-grdevices/">https://developer.R-project.org/Blog/public/2019/04/01/hcl-based-color-palettes-in-grdevices/</a>.
+Color Palettes in <em>grDevices</em>.”</span> <a href="https://developer.R-project.org/Blog/public/2019/04/01/hcl-based-color-palettes-in-grdevices/" class="external-link">https://developer.R-project.org/Blog/public/2019/04/01/hcl-based-color-palettes-in-grdevices/</a>.
 </div>
 <div id="ref-color:grDevices2" class="csl-entry">
 Zeileis, Achim, Paul Murrell, Martin Maechler, and Deepayan Sarkar.
-2019. <span>“A New <code><a href="https://rdrr.io/r/grDevices/palette.html">palette()</a></code> for .”</span> <a href="https://developer.R-project.org/Blog/public/2019/11/21/a-new-palette-for-r/">https://developer.R-project.org/Blog/public/2019/11/21/a-new-palette-for-r/</a>.
+2019. <span>“A New <code><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette()</a></code> for .”</span> <a href="https://developer.R-project.org/Blog/public/2019/11/21/a-new-palette-for-r/" class="external-link">https://developer.R-project.org/Blog/public/2019/11/21/a-new-palette-for-r/</a>.
 </div>
 </div>
 </div>
@@ -693,11 +695,13 @@ Zeileis, Achim, Paul Murrell, Martin Maechler, and Deepayan Sarkar.
 
 
       <footer><div class="copyright">
-  <p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
+  <p></p>
+<p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -705,6 +709,8 @@ Zeileis, Achim, Paul Murrell, Martin Maechler, and Deepayan Sarkar.
 
   
 
+
+  
 
   </body>
 </html>

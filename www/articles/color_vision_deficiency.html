@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
       </span>
     </div>
 
@@ -52,7 +54,7 @@
   <a href="../articles/colorspace.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -107,7 +109,7 @@
 
       
 
-      </header><script src="color_vision_deficiency_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Color Vision Deficiency Emulation</h1>
@@ -120,9 +122,9 @@
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>Different kinds of limitations can be emulated using the
 physiologically-based model for simulating color vision deficiency (CVD)
 of <span class="citation">Machado, Oliveira, and Fernandes (<a href="#ref-color:Machado+Oliveira+Fernandes:2009" role="doc-biblioref">2009</a>)</span>: deuteranomaly (green cone cells
@@ -153,9 +155,9 @@ which accompanies the R package dichromat <span class="citation">(<a href="#ref-
 and is based on earlier emulation techniques <span class="citation">(<a href="#ref-color:Vienot+Brettel+Ott:1995" role="doc-biblioref">Viénot et
 al. 1995</a>; <a href="#ref-color:Brettel+Vienot+Mollon:1997" role="doc-biblioref">Brettel, Viénot, and Mollon 1997</a>; <a href="#ref-color:Vienot+Brettel+Mollon:1999" role="doc-biblioref">Viénot, Brettel, and Mollon 1999</a>)</span>.</p>
 </div>
-<div id="illustration-heatmap-with-sequential-palette" class="section level2">
-<h2 class="hasAnchor">
-<a href="#illustration-heatmap-with-sequential-palette" class="anchor"></a>Illustration: Heatmap with sequential palette</h2>
+<div class="section level2">
+<h2 id="illustration-heatmap-with-sequential-palette">Illustration: Heatmap with sequential palette<a class="anchor" aria-label="anchor" href="#illustration-heatmap-with-sequential-palette"></a>
+</h2>
 <p>To illustrate that poor color choices can severely reduce the
 usefulness of a statistical graphic for readers with color vision
 deficiencies, we employ the infamous RGB rainbow color palette in a
@@ -170,13 +172,13 @@ well-known Maunga Whau <code>volcano</code> data from base R. This
 heatmap is easily available as <code>demoplot(x, "heatmap")</code> where
 <code>x</code> is the color vector to be used, e.g.,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "#FF0000" "#FF6600" "#FFCC00" "#CCFF00" "#66FF00" "#00FF00" "#00FF66"
-##  [8] "#00FFCC" "#00CCFF" "#0066FF" "#0000FF"</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##  [1] "#FF0000" "#FF6600" "#FFCC00" "#CCFF00" "#66FF00" "#00FF00" "#00FF66"</span>
+<span class="co">##  [8] "#00FFCC" "#00CCFF" "#0066FF" "#0000FF"</span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/simulate_cvd.html">deutan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] "#5D4700" "#B58C01" "#FFD005" "#FFE408" "#FFC809" "#DBAB0A" "#C4B06D"
-##  [8] "#ACB5D0" "#7595FF" "#1D50FB" "#000CF7"</code></pre>
+<code class="sourceCode R"><span class="fu"><a href="../reference/simulate_cvd.html">deutan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##  [1] "#5D4700" "#B58C01" "#FFD005" "#FFE408" "#FFC809" "#DBAB0A" "#C4B06D"</span>
+<span class="co">##  [8] "#ACB5D0" "#7595FF" "#1D50FB" "#000CF7"</span></code></pre>
 <p>and so on. To aid the interpretation of the heatmap a perspective
 display using only gray shades is included first, providing another
 intuitive display of what the terrain around Maunga Whau looks like.</p>
@@ -193,9 +195,9 @@ not monotonic in luminance, making correct interpretation quite hard.
 Moreover, the red-green contrasts deteriorate substantially in the
 dichromatic emulations.</p>
 </div>
-<div id="illustration-map-with-diverging-palette" class="section level2">
-<h2 class="hasAnchor">
-<a href="#illustration-map-with-diverging-palette" class="anchor"></a>Illustration: Map with diverging palette</h2>
+<div class="section level2">
+<h2 id="illustration-map-with-diverging-palette">Illustration: Map with diverging palette<a class="anchor" aria-label="anchor" href="#illustration-map-with-diverging-palette"></a>
+</h2>
 <p>As another example for the poor performance of the RGB rainbow we
 employ a shaded map. This is available as
 <code>demoplot(..., "map")</code> and is based on county polygons for
@@ -224,42 +226,42 @@ RGB rainbow which hides all differences in the green-yellow arm of the
 palette. (However, if grayscale printing is desired a sequential rather
 than a diverging palette is probably necessary.)</p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-color:Brettel+Vienot+Mollon:1997" class="csl-entry">
 Brettel, H, F Viénot, and J D Mollon. 1997. <span>“Computerized
 Simulation of Color Appearance for Dichromats.”</span> <em>Journal of
-the Optical Society of America A</em> 14: 2647–55. <a href="https://doi.org/10.1364/josaa.14.002647">https://doi.org/10.1364/josaa.14.002647</a>.
+the Optical Society of America A</em> 14: 2647–55. <a href="https://doi.org/10.1364/josaa.14.002647" class="external-link">https://doi.org/10.1364/josaa.14.002647</a>.
 </div>
 <div id="ref-color:CARTO" class="csl-entry">
-CARTO. 2019. <span>“CARTOColors – Data-Driven Color Schemes.”</span> <a href="https://carto.com/carto-colors/">https://carto.com/carto-colors/</a>.
+CARTO. 2019. <span>“CARTOColors – Data-Driven Color Schemes.”</span> <a href="https://carto.com/carto-colors/" class="external-link">https://carto.com/carto-colors/</a>.
 </div>
 <div id="ref-color:Lumley:2006" class="csl-entry">
 Lumley, Thomas. 2006. <span>“Color Coding and Color Blindness in
 Statistical Graphics.”</span> <em>ASA Statistical Computing &amp;
-Graphics Newsletter</em> 17 (2): 4–7. <a href="http://stat-computing.org/newsletter/issues/scgn-17-2.pdf">http://stat-computing.org/newsletter/issues/scgn-17-2.pdf</a>.
+Graphics Newsletter</em> 17 (2): 4–7. <a href="http://stat-computing.org/newsletter/issues/scgn-17-2.pdf" class="external-link">http://stat-computing.org/newsletter/issues/scgn-17-2.pdf</a>.
 </div>
 <div id="ref-color:dichromat" class="csl-entry">
-———. 2013. <em><em>Dichromat</em>: Color Schemes for Dichromats</em>. <a href="https://CRAN.R-project.org/package=dichromat">https://CRAN.R-project.org/package=dichromat</a>.
+———. 2013. <em><em>Dichromat</em>: Color Schemes for Dichromats</em>. <a href="https://CRAN.R-project.org/package=dichromat" class="external-link">https://CRAN.R-project.org/package=dichromat</a>.
 </div>
 <div id="ref-color:Machado+Oliveira+Fernandes:2009" class="csl-entry">
 Machado, Gustavo M., Manuel M. Oliveira, and Leandro A. F. Fernandes.
 2009. <span>“A Physiologically-Based Model for Simulation of Color
 Vision Deficiency.”</span> <em>IEEE Transactions on Visualization and
-Computer Graphics</em> 15 (6): 1291–98. <a href="https://doi.org/10.1109/tvcg.2009.113">https://doi.org/10.1109/tvcg.2009.113</a>.
+Computer Graphics</em> 15 (6): 1291–98. <a href="https://doi.org/10.1109/tvcg.2009.113" class="external-link">https://doi.org/10.1109/tvcg.2009.113</a>.
 </div>
 <div id="ref-color:Vienot+Brettel+Mollon:1999" class="csl-entry">
 Viénot, F, H Brettel, and J D Mollon. 1999. <span>“Digital Video
 Colourmaps for Checking the Legibility of Displays by
 Dichromats.”</span> <em>Color Research and Application</em> 24 (4):
-243–52. <a href="https://doi.org/10.1002/(sici)1520-6378(199908)24:4&lt;243::aid-col5&gt;3.3.co;2-v">https://doi.org/10.1002/(sici)1520-6378(199908)24:4&lt;243::aid-col5&gt;3.3.co;2-v</a>.
+243–52. <a href="https://doi.org/10.1002/(sici)1520-6378(199908)24:4&lt;243::aid-col5&gt;3.3.co;2-v" class="external-link">https://doi.org/10.1002/(sici)1520-6378(199908)24:4&lt;243::aid-col5&gt;3.3.co;2-v</a>.
 </div>
 <div id="ref-color:Vienot+Brettel+Ott:1995" class="csl-entry">
 Viénot, F, H Brettel, L Ott, A B M’Barek, and J D Mollon. 1995.
 <span>“What Do Colour-Blind People See?”</span> <em>Nature</em> 376:
-127–28. <a href="https://doi.org/10.1038/376127a0">https://doi.org/10.1038/376127a0</a>.
+127–28. <a href="https://doi.org/10.1038/376127a0" class="external-link">https://doi.org/10.1038/376127a0</a>.
 </div>
 </div>
 </div>
@@ -276,11 +278,13 @@ Viénot, F, H Brettel, L Ott, A B M’Barek, and J D Mollon. 1995.
 
 
       <footer><div class="copyright">
-  <p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
+  <p></p>
+<p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -288,6 +292,8 @@ Viénot, F, H Brettel, L Ott, A B M’Barek, and J D Mollon. 1995.
 
   
 
+
+  
 
   </body>
 </html>

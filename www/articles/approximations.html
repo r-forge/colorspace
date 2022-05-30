@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
       </span>
     </div>
 
@@ -52,7 +54,7 @@
   <a href="../articles/colorspace.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -107,7 +109,7 @@
 
       
 
-      </header><script src="approximations_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Approximating Palettes from Other Packages</h1>
@@ -120,9 +122,9 @@
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>The flexible specification of HCL-based color palettes in
 <em>colorspace</em> allows one to closely approximate color palettes
 from various other packages:</p>
@@ -193,11 +195,11 @@ trajectories manually, using a linear luminance, piecewise linear
 chroma, and piecewise constant hue:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cividis_hcl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span>
+  <span class="va">i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, length.out <span class="op">=</span> <span class="va">n</span><span class="op">)</span>
   <span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="fu"><a href="../reference/polarLUV.html">polarLUV</a></span><span class="op">(</span>
     L <span class="op">=</span> <span class="fl">92</span> <span class="op">-</span> <span class="op">(</span><span class="fl">92</span> <span class="op">-</span> <span class="fl">13</span><span class="op">)</span> <span class="op">*</span> <span class="va">i</span>,
-    C <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html">approx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.9</span>, <span class="fl">0.5</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">50</span>, <span class="fl">0</span>, <span class="fl">95</span><span class="op">)</span>, xout <span class="op">=</span> <span class="va">i</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>,
-    H <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">255</span>, <span class="fl">75</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="va">i</span> <span class="op">&lt;</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">]</span>
+    C <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.9</span>, <span class="fl">0.5</span>, <span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">50</span>, <span class="fl">0</span>, <span class="fl">95</span><span class="op">)</span>, xout <span class="op">=</span> <span class="va">i</span><span class="op">)</span><span class="op">$</span><span class="va">y</span>,
+    H <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">255</span>, <span class="fl">75</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span> <span class="op">+</span> <span class="op">(</span><span class="va">i</span> <span class="op">&lt;</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">]</span>
   <span class="op">)</span>, fix <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 <p>Instead of constructing the hex code from the HCL coordinates via
@@ -231,76 +233,76 @@ colors throughout. Thus, both palettes are more suitable for palettes
 with fewer colors but in “Zissou 1” this issue is more pronounced.</p>
 <p><img src="approximations_files/figure-html/temps-zissou-1.png" width="288"><img src="approximations_files/figure-html/temps-zissou-2.png" width="288"></p>
 </div>
-<div id="approximations-of-colorbrewer-org-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#approximations-of-colorbrewer-org-palettes" class="anchor"></a>Approximations of ColorBrewer.org palettes</h2>
+<div class="section level2">
+<h2 id="approximations-of-colorbrewer-org-palettes">Approximations of ColorBrewer.org palettes<a class="anchor" aria-label="anchor" href="#approximations-of-colorbrewer-org-palettes"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"brewer"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"brewer"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
 <p><img src="approximations_files/figure-html/brewer-1.png" width="288"><img src="approximations_files/figure-html/brewer-2.png" width="288"><img src="approximations_files/figure-html/brewer-3.png" width="288"><img src="approximations_files/figure-html/brewer-4.png" width="288"><img src="approximations_files/figure-html/brewer-5.png" width="288"><img src="approximations_files/figure-html/brewer-6.png" width="288"><img src="approximations_files/figure-html/brewer-7.png" width="288"><img src="approximations_files/figure-html/brewer-8.png" width="288"><img src="approximations_files/figure-html/brewer-9.png" width="288"><img src="approximations_files/figure-html/brewer-10.png" width="288"><img src="approximations_files/figure-html/brewer-11.png" width="288"><img src="approximations_files/figure-html/brewer-12.png" width="288"><img src="approximations_files/figure-html/brewer-13.png" width="288"><img src="approximations_files/figure-html/brewer-14.png" width="288"><img src="approximations_files/figure-html/brewer-15.png" width="288"><img src="approximations_files/figure-html/brewer-16.png" width="288"><img src="approximations_files/figure-html/brewer-17.png" width="288"><img src="approximations_files/figure-html/brewer-18.png" width="288"><img src="approximations_files/figure-html/brewer-19.png" width="288"><img src="approximations_files/figure-html/brewer-20.png" width="288"><img src="approximations_files/figure-html/brewer-21.png" width="288"><img src="approximations_files/figure-html/brewer-22.png" width="288"><img src="approximations_files/figure-html/brewer-23.png" width="288"><img src="approximations_files/figure-html/brewer-24.png" width="288"><img src="approximations_files/figure-html/brewer-25.png" width="288"><img src="approximations_files/figure-html/brewer-26.png" width="288"></p>
 </div>
-<div id="approximations-of-carto-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#approximations-of-carto-palettes" class="anchor"></a>Approximations of CARTO palettes</h2>
+<div class="section level2">
+<h2 id="approximations-of-carto-palettes">Approximations of CARTO palettes<a class="anchor" aria-label="anchor" href="#approximations-of-carto-palettes"></a>
+</h2>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"carto"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"carto"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
 <p><img src="approximations_files/figure-html/carto-1.png" width="288"><img src="approximations_files/figure-html/carto-2.png" width="288"><img src="approximations_files/figure-html/carto-3.png" width="288"><img src="approximations_files/figure-html/carto-4.png" width="288"><img src="approximations_files/figure-html/carto-5.png" width="288"><img src="approximations_files/figure-html/carto-6.png" width="288"><img src="approximations_files/figure-html/carto-7.png" width="288"><img src="approximations_files/figure-html/carto-8.png" width="288"><img src="approximations_files/figure-html/carto-9.png" width="288"><img src="approximations_files/figure-html/carto-10.png" width="288"><img src="approximations_files/figure-html/carto-11.png" width="288"><img src="approximations_files/figure-html/carto-12.png" width="288"><img src="approximations_files/figure-html/carto-13.png" width="288"><img src="approximations_files/figure-html/carto-14.png" width="288"><img src="approximations_files/figure-html/carto-15.png" width="288"><img src="approximations_files/figure-html/carto-16.png" width="288"><img src="approximations_files/figure-html/carto-17.png" width="288"><img src="approximations_files/figure-html/carto-18.png" width="288"><img src="approximations_files/figure-html/carto-19.png" width="288"><img src="approximations_files/figure-html/carto-20.png" width="288"><img src="approximations_files/figure-html/carto-21.png" width="288"><img src="approximations_files/figure-html/carto-22.png" width="288"><img src="approximations_files/figure-html/carto-23.png" width="288"><img src="approximations_files/figure-html/carto-24.png" width="288"><img src="approximations_files/figure-html/carto-25.png" width="288"><img src="approximations_files/figure-html/carto-26.png" width="288"><img src="approximations_files/figure-html/carto-27.png" width="288"><img src="approximations_files/figure-html/carto-28.png" width="288"></p>
 </div>
-<div id="approximations-of-viridis-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#approximations-of-viridis-palettes" class="anchor"></a>Approximations of viridis palettes</h2>
+<div class="section level2">
+<h2 id="approximations-of-viridis-palettes">Approximations of viridis palettes<a class="anchor" aria-label="anchor" href="#approximations-of-viridis-palettes"></a>
+</h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"viridis"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"viridis"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
 <p><img src="approximations_files/figure-html/viridis-1.png" width="288"><img src="approximations_files/figure-html/viridis-2.png" width="288"><img src="approximations_files/figure-html/viridis-3.png" width="288"><img src="approximations_files/figure-html/viridis-4.png" width="288"><img src="approximations_files/figure-html/viridis-5.png" width="288"><img src="approximations_files/figure-html/viridis-6.png" width="288"></p>
 </div>
-<div id="approximations-of-crameris-scientific-color-scico-palettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#approximations-of-crameris-scientific-color-scico-palettes" class="anchor"></a>Approximations of Crameri’s scientific color (scico) palettes</h2>
+<div class="section level2">
+<h2 id="approximations-of-crameris-scientific-color-scico-palettes">Approximations of Crameri’s scientific color (scico) palettes<a class="anchor" aria-label="anchor" href="#approximations-of-crameris-scientific-color-scico-palettes"></a>
+</h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html">demo</a></span><span class="op">(</span><span class="st">"scico"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/demo.html" class="external-link">demo</a></span><span class="op">(</span><span class="st">"scico"</span>, package <span class="op">=</span> <span class="st">"colorspace"</span><span class="op">)</span></code></pre></div>
 <p><img src="approximations_files/figure-html/scico-1.png" width="288"><img src="approximations_files/figure-html/scico-2.png" width="288"><img src="approximations_files/figure-html/scico-3.png" width="288"><img src="approximations_files/figure-html/scico-4.png" width="288"><img src="approximations_files/figure-html/scico-5.png" width="288"><img src="approximations_files/figure-html/scico-6.png" width="288"><img src="approximations_files/figure-html/scico-7.png" width="288"><img src="approximations_files/figure-html/scico-8.png" width="288"><img src="approximations_files/figure-html/scico-9.png" width="288"><img src="approximations_files/figure-html/scico-10.png" width="288"><img src="approximations_files/figure-html/scico-11.png" width="288"><img src="approximations_files/figure-html/scico-12.png" width="288"></p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-color:CARTO" class="csl-entry">
-CARTO. 2019. <span>“CARTOColors – Data-Driven Color Schemes.”</span> <a href="https://carto.com/carto-colors/">https://carto.com/carto-colors/</a>.
+CARTO. 2019. <span>“CARTOColors – Data-Driven Color Schemes.”</span> <a href="https://carto.com/carto-colors/" class="external-link">https://carto.com/carto-colors/</a>.
 </div>
 <div id="ref-color:Crameri:2018" class="csl-entry">
 Crameri, Fabio. 2018. <span>“Geodynamic Diagnostics, Scientific
 Visualisation and <em>StagLab</em> 3.0.”</span> <em>Geoscientific Model
-Development</em> 11 (6): 2541–62. <a href="https://doi.org/10.5194/gmd-11-2541-2018">https://doi.org/10.5194/gmd-11-2541-2018</a>.
+Development</em> 11 (6): 2541–62. <a href="https://doi.org/10.5194/gmd-11-2541-2018" class="external-link">https://doi.org/10.5194/gmd-11-2541-2018</a>.
 </div>
 <div id="ref-color:viridis" class="csl-entry">
 Garnier, Simon. 2018. <em><em>Viridis</em>: Default Color Maps from
-<em>Matplotlib</em></em>. <a href="https://CRAN.R-project.org/package=viridis">https://CRAN.R-project.org/package=viridis</a>.
+<em>Matplotlib</em></em>. <a href="https://CRAN.R-project.org/package=viridis" class="external-link">https://CRAN.R-project.org/package=viridis</a>.
 </div>
 <div id="ref-color:Harrower+Brewer:2003" class="csl-entry">
 Harrower, Mark A., and Cynthia A. Brewer. 2003.
 <span>“<em>ColorBrewer.org</em>: An Online Tool for Selecting Color
 Schemes for Maps.”</span> <em>The Cartographic Journal</em> 40 (1):
-27–37. <a href="https://doi.org/10.1179/000870403235002042">https://doi.org/10.1179/000870403235002042</a>.
+27–37. <a href="https://doi.org/10.1179/000870403235002042" class="external-link">https://doi.org/10.1179/000870403235002042</a>.
 </div>
 <div id="ref-color:RColorBrewer" class="csl-entry">
 Neuwirth, Erich. 2014. <em><em>RColorBrewer</em>: ColorBrewer
-Palettes</em>. <a href="https://CRAN.R-project.org/package=RColorBrewer">https://CRAN.R-project.org/package=RColorBrewer</a>.
+Palettes</em>. <a href="https://CRAN.R-project.org/package=RColorBrewer" class="external-link">https://CRAN.R-project.org/package=RColorBrewer</a>.
 </div>
 <div id="ref-color:rcartocolor" class="csl-entry">
 Nowosad, Jakub. 2019. <em><em>Rcartocolor</em>: CARTOColors
-Palettes</em>. <a href="https://CRAN.R-project.org/package=rcartocolor">https://CRAN.R-project.org/package=rcartocolor</a>.
+Palettes</em>. <a href="https://CRAN.R-project.org/package=rcartocolor" class="external-link">https://CRAN.R-project.org/package=rcartocolor</a>.
 </div>
 <div id="ref-color:scico" class="csl-entry">
 Pedersen, Thomas Lin, and Fabio Crameri. 2020. <em><em>Scico</em>:
-Colour Palettes Based on the Scientific Colour-Maps</em>. <a href="https://CRAN.R-project.org/package=scico">https://CRAN.R-project.org/package=scico</a>.
+Colour Palettes Based on the Scientific Colour-Maps</em>. <a href="https://CRAN.R-project.org/package=scico" class="external-link">https://CRAN.R-project.org/package=scico</a>.
 </div>
 <div id="ref-color:wesanderson" class="csl-entry">
 Ram, Karthik, and Hadley Wickham. 2018. <em><em>Wesanderson</em>: A
-<span>W</span>es <span>A</span>nderson Palette Generator</em>. <a href="https://CRAN.R-project.org/package=wesanderson">https://CRAN.R-project.org/package=wesanderson</a>.
+<span>W</span>es <span>A</span>nderson Palette Generator</em>. <a href="https://CRAN.R-project.org/package=wesanderson" class="external-link">https://CRAN.R-project.org/package=wesanderson</a>.
 </div>
 <div id="ref-color:Smith+VanDerWalt:2015" class="csl-entry">
 Smith, Nathaniel, and Stéfan Van der Walt. 2015. <span>“A Better Default
 Colormap for <em>Matplotlib</em>.”</span> In <em>SciPy 2015 – Scientific
-Computing with <span class="sans-serif">Python</span></em>. Austin. <a href="https://www.youtube.com/watch?v=xAoljeRJ3lU">https://www.youtube.com/watch?v=xAoljeRJ3lU</a>.
+Computing with <span class="sans-serif">Python</span></em>. Austin. <a href="https://www.youtube.com/watch?v=xAoljeRJ3lU" class="external-link">https://www.youtube.com/watch?v=xAoljeRJ3lU</a>.
 </div>
 </div>
 </div>
@@ -317,11 +319,13 @@ Computing with <span class="sans-serif">Python</span></em>. Austin. <a href="htt
 
 
       <footer><div class="copyright">
-  <p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
+  <p></p>
+<p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -329,6 +333,8 @@ Computing with <span class="sans-serif">Python</span></em>. Austin. <a href="htt
 
   
 
+
+  
 
   </body>
 </html>

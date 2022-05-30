@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
       </span>
     </div>
 
@@ -52,7 +54,7 @@
   <a href="../articles/colorspace.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -107,7 +109,7 @@
 
       
 
-      </header><script src="palette_visualization_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Palette Visualization and Assessment</h1>
@@ -120,9 +122,9 @@
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>The <em>colorspace</em> package provides several visualization
 functions for depicting one or more color palettes and their underlying
 properties. Color palettes can be visualized by:</p>
@@ -140,13 +142,13 @@ projections.</li>
 statistical graphics.</li>
 </ul>
 </div>
-<div id="color-swatches" class="section level2">
-<h2 class="hasAnchor">
-<a href="#color-swatches" class="anchor"></a>Color swatches</h2>
+<div class="section level2">
+<h2 id="color-swatches">Color swatches<a class="anchor" aria-label="anchor" href="#color-swatches"></a>
+</h2>
 <p>The function <code><a href="../reference/swatchplot.html">swatchplot()</a></code> is a convenience function for
 displaying collections of palettes that can be specified as lists or
 matrices of hex color codes. Essentially, it is just a call to the base
-graphics <code><a href="https://rdrr.io/r/graphics/rect.html">rect()</a></code> function but with heuristics for choosing
+graphics <code><a href="https://rdrr.io/r/graphics/rect.html" class="external-link">rect()</a></code> function but with heuristics for choosing
 default labels, margins, spacings, borders, etc. These heuristics are
 selected to work well for <code><a href="../reference/hcl_palettes.html">hcl_palettes()</a></code> and might need
 further tweaking in future versions of the package.</p>
@@ -155,9 +157,9 @@ brought out by varying only one coordinate while keeping the other two
 fixed:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span>
-  <span class="st">"Hue"</span>       <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">60</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span><span class="op">)</span>,
-  <span class="st">"Chroma"</span>    <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  <span class="st">"Luminance"</span> <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">90</span><span class="op">)</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  <span class="st">"Hue"</span>       <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">60</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span><span class="op">)</span>,
+  <span class="st">"Chroma"</span>    <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  <span class="st">"Luminance"</span> <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">90</span><span class="op">)</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
   off <span class="op">=</span> <span class="fl">0</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="palette_visualization_files/figure-html/swatch-hcl-1.png" width="384" style="display: block; margin: auto;"></p>
@@ -194,20 +196,20 @@ slightly. This can further enhance the distinction of colors in the
 middle of the palette.</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bprg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Blues"</span>, <span class="st">"Purples"</span>, <span class="st">"Reds"</span>, <span class="st">"Greens"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">bprg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Blues"</span>, <span class="st">"Purples"</span>, <span class="st">"Reds"</span>, <span class="st">"Greens"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span>
-  <span class="st">"Single-hue"</span>            <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">bprg</span>, <span class="fl">2</span><span class="op">)</span>, <span class="va">sequential_hcl</span>, n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span>,
-  <span class="st">"Single-hue (advanced)"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">bprg</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">sequential_hcl</span>, n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span>,
-  <span class="st">"Multi-hue (advanced)"</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">bprg</span>,           <span class="va">sequential_hcl</span>, n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span>,
+  <span class="st">"Single-hue"</span>            <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">bprg</span>, <span class="fl">2</span><span class="op">)</span>, <span class="va">sequential_hcl</span>, n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span>,
+  <span class="st">"Single-hue (advanced)"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">bprg</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">sequential_hcl</span>, n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span>,
+  <span class="st">"Multi-hue (advanced)"</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">bprg</span>,           <span class="va">sequential_hcl</span>, n <span class="op">=</span> <span class="fl">7</span><span class="op">)</span><span class="op">)</span>,
   nrow <span class="op">=</span> <span class="fl">5</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="palette_visualization_files/figure-html/swatch-brpg-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>Another convenient option of <code><a href="../reference/swatchplot.html">swatchplot()</a></code> for a single
 palette or list of palettes is to add swatches that emulate <a href="color_vision_deficiency.html">color vision deficiency</a> by
 setting <code>cvd = TRUE</code>, e.g., for the Okabe-Ito palette
-provided in the base R <code><a href="https://rdrr.io/r/grDevices/palette.html">palette.colors()</a></code> function:</p>
+provided in the base R <code><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette.colors()</a></code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette.colors</a></span><span class="op">(</span><span class="op">)</span>, cvd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette.colors</a></span><span class="op">(</span><span class="op">)</span>, cvd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="palette_visualization_files/figure-html/swatch-cvd-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>This shows that the Okabe-Ito palette is quite robust under various
 forms of color vision deficiency, by avoiding pure red or green and by
@@ -220,14 +222,14 @@ under deuteranopia and desaturation.</p>
 <code class="sourceCode R"><span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span>
   <span class="st">"YlGnBu"</span>  <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, <span class="st">"YlGnBu"</span><span class="op">)</span>,
   <span class="st">"Viridis"</span> <span class="op">=</span> <span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, <span class="st">"Viridis"</span><span class="op">)</span>,
-  cvd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"deutan"</span>, <span class="st">"desaturate"</span><span class="op">)</span>,
+  cvd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"deutan"</span>, <span class="st">"desaturate"</span><span class="op">)</span>,
   nrow <span class="op">=</span> <span class="fl">4</span>
 <span class="op">)</span></code></pre></div>
 <p><img src="palette_visualization_files/figure-html/swatch-cvd2-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
-<div id="hcl-and-rgb-spectrum" class="section level2">
-<h2 class="hasAnchor">
-<a href="#hcl-and-rgb-spectrum" class="anchor"></a>HCL (and RGB) spectrum</h2>
+<div class="section level2">
+<h2 id="hcl-and-rgb-spectrum">HCL (and RGB) spectrum<a class="anchor" aria-label="anchor" href="#hcl-and-rgb-spectrum"></a>
+</h2>
 <p>As the properties of a palette in terms of the perceptual dimensions
 <em>hue</em>, <em>chroma</em>, and <em>luminance</em> are not always
 clear from looking just at color swatches or (statistical) graphics
@@ -290,7 +292,7 @@ between both arms. In the center the palette passes through a light gray
 poorly-balanced palette, the spectrum of the (in)famous RGB rainbow
 palette is depicted in both RGB and HCL space.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/specplot.html">specplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, rgb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/specplot.html">specplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, rgb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="palette_visualization_files/figure-html/spec-rainbow-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>The RGB spectrum shows that the trajectories are quite simple in RGB
 space but the HCL spectrum shows that the result is very unbalanced with
@@ -298,9 +300,9 @@ shifts and kinks in both chroma and (more importantly) luminance. This
 is why this palette is not suitable for encoding underlying data in
 statistical graphics. See also the related discussion of <a href="color_vision_deficiency.html">color vision deficiency</a>.</p>
 </div>
-<div id="trajectories-in-hcl-space" class="section level2">
-<h2 class="hasAnchor">
-<a href="#trajectories-in-hcl-space" class="anchor"></a>Trajectories in HCL space</h2>
+<div class="section level2">
+<h2 id="trajectories-in-hcl-space">Trajectories in HCL space<a class="anchor" aria-label="anchor" href="#trajectories-in-hcl-space"></a>
+</h2>
 <p>While the <code><a href="../reference/specplot.html">specplot()</a></code> function above works well for
 bringing out the HCL coordinates associated with a given palette, it
 does not show how the palette fits into the HCL space. For example, it
@@ -351,10 +353,10 @@ hue 260 is used with a simple linear chroma trajectory. The other two
 panels employ a triangular chroma trajectory for hue 245, either with a
 piecewise-linear (center) or power-transformed (right) trajectory.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">1.4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">1.4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="palette_visualization_files/figure-html/hcl-sequential-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>Note that for H = 260 it is possible to go to dark colors (= low
 luminance) with high chroma while this is not possible to the same
@@ -363,10 +365,10 @@ the dark low-luminance colors.</p>
 <p>Finally, the display below compares two multi-hue sequential palettes
 along with a diverging palette.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">220</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">60</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">diverging_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">0</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">220</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">60</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="../reference/hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">diverging_hcl</a></span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">0</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="palette_visualization_files/figure-html/hcl-multi-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>The multi-hue palette on the left employs a small hue range,
 resulting in a palette of “blues” just with slightly more distinction of
@@ -377,9 +379,9 @@ balanced diverging palette in the right panel is constructed from two
 simple single-hue sequential palettes (for hues 260/blue and 0/red) that
 are completely balanced between the two “arms” of the palette.</p>
 </div>
-<div id="demonstration-of-statistical-graphics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#demonstration-of-statistical-graphics" class="anchor"></a>Demonstration of statistical graphics</h2>
+<div class="section level2">
+<h2 id="demonstration-of-statistical-graphics">Demonstration of statistical graphics<a class="anchor" aria-label="anchor" href="#demonstration-of-statistical-graphics"></a>
+</h2>
 <p>To demonstrate how different kinds of color palettes work in
 different kinds of statistical displays, <code><a href="../reference/demoplot.html">demoplot()</a></code>
 provides a simple convenience interface to some base graphics with
@@ -404,7 +406,7 @@ type of palette, using suitable demos for the particular palettes.</p>
 better for shading areas (pie, left) while darker and more colorful
 palettes are usually preferred for points (center) or lines (right).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, <span class="st">"Pastel 1"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"pie"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, <span class="st">"Set 2"</span><span class="op">)</span>,    type <span class="op">=</span> <span class="st">"scatter"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, <span class="st">"Dark 3"</span><span class="op">)</span>,   type <span class="op">=</span> <span class="st">"lines"</span><span class="op">)</span></code></pre></div>
@@ -415,7 +417,7 @@ contrasts. In contrast, when only a few ordered categories are to be
 displayed (e.g., in a spine plot, right) more colorful sequential
 palettes like the viridis palette can be useful.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">99</span>, <span class="st">"Purple-Blue"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"heatmap"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">99</span>, <span class="st">"Reds"</span><span class="op">)</span>,        type <span class="op">=</span> <span class="st">"perspective"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span> <span class="fl">4</span>, <span class="st">"Viridis"</span><span class="op">)</span>,     type <span class="op">=</span> <span class="st">"spine"</span><span class="op">)</span></code></pre></div>
@@ -428,7 +430,7 @@ further. In contrast, when fewer colors are needed more colorful
 palettes with lower luminance contrasts can be desired. This is
 exemplified by a mosaic (center) and bar plot (right).</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">diverging_hcl</a></span><span class="op">(</span><span class="fl">99</span>, <span class="st">"Tropic"</span>, power <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"map"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">diverging_hcl</a></span><span class="op">(</span> <span class="fl">5</span>, <span class="st">"Green-Orange"</span><span class="op">)</span>,        type <span class="op">=</span> <span class="st">"mosaic"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">diverging_hcl</a></span><span class="op">(</span> <span class="fl">5</span>, <span class="st">"Blue-Red 2"</span><span class="op">)</span>,          type <span class="op">=</span> <span class="st">"bar"</span><span class="op">)</span></code></pre></div>
@@ -437,7 +439,7 @@ exemplified by a mosaic (center) and bar plot (right).</p>
 backgrounds. Therefore, to conclude, some palettes are highlighted that
 work well on dark/black backgrounds.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, bg <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, bg <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">9</span>, <span class="st">"Oslo"</span><span class="op">)</span>, <span class="st">"heatmap"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">9</span>, <span class="st">"Turku"</span><span class="op">)</span>, <span class="st">"heatmap"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu"><a href="../reference/hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">9</span>, <span class="st">"Inferno"</span>, rev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="st">"heatmap"</span><span class="op">)</span>
@@ -459,11 +461,13 @@ work well on dark/black backgrounds.</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
+  <p></p>
+<p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -471,6 +475,8 @@ work well on dark/black backgrounds.</p>
 
   
 
+
+  
 
   </body>
 </html>

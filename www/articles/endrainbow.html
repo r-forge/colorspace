@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
       </span>
     </div>
 
@@ -52,7 +54,7 @@
   <a href="../articles/colorspace.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -107,7 +109,7 @@
 
       
 
-      </header><script src="endrainbow_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Somewhere over the Rainbow</h1>
@@ -120,25 +122,25 @@
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>The go-to palette in many software packages is - or used to be until
 rather recently - the so-called rainbow: a palette created by changing
 the hue in highly-saturated RGB colors. This has been widely recognized
 as having a number of disadvantages including: abrupt shifts in
 brightness, misleading for viewers with color vision deficiencies, too
 flashy to look at for a longer time. See also the article on <a href="color_vision_deficiency.html">color vision deficiencies</a> that
-compares the base R <code><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow()</a></code> with better HCL-based
+compares the base R <code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow()</a></code> with better HCL-based
 alternatives using <code><a href="../reference/demoplot.html">demoplot()</a></code>. Here, we provide further
 rainbow examples taken from actual publications (rather than simplified
 demos).</p>
 <p>For more details on the limitations of the rainbow palette and
-further pointers see “<a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/">The
-End of the Rainbow</a>” by <span class="citation">Hawkins et al. (<a href="#ref-color:Hawkins+McNeall+Stephenson:2014" role="doc-biblioref">2014</a>)</span>, “<a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/">Examining
-Implicit Discretization in Spectral Schemes</a>” by <span class="citation">Quinan et al. (<a href="#ref-color:Quinan+Padilla+CreemRegehr:2019" role="doc-biblioref">2019</a>)</span>, or “<a href="https://dx.doi.org/10.1175/BAMS-D-13-00155.1">Somewhere over the
+further pointers see “<a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/" class="external-link">The
+End of the Rainbow</a>” by <span class="citation">Hawkins et al. (<a href="#ref-color:Hawkins+McNeall+Stephenson:2014" role="doc-biblioref">2014</a>)</span>, “<a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/" class="external-link">Examining
+Implicit Discretization in Spectral Schemes</a>” by <span class="citation">Quinan et al. (<a href="#ref-color:Quinan+Padilla+CreemRegehr:2019" role="doc-biblioref">2019</a>)</span>, or “<a href="https://dx.doi.org/10.1175/BAMS-D-13-00155.1" class="external-link">Somewhere over the
 Rainbow: How to Make Effective Use of Colors in Meteorological
-Visualizations</a>” by <span class="citation">Stauffer et al. (<a href="#ref-color:Stauffer+Mayr+Dabernig:2015" role="doc-biblioref">2015</a>)</span> as well as the <a href="https://twitter.com/hashtag/endrainbow">#endrainbow</a> hashtag on
+Visualizations</a>” by <span class="citation">Stauffer et al. (<a href="#ref-color:Stauffer+Mayr+Dabernig:2015" role="doc-biblioref">2015</a>)</span> as well as the <a href="https://twitter.com/hashtag/endrainbow" class="external-link">#endrainbow</a> hashtag on
 Twitter.</p>
 <p>In a nutshell, the (in-)famous RGB rainbow palette is virtually
 always a poor choice and properly balanced qualitative, sequential, or
@@ -150,21 +152,21 @@ examples, highlight their problems (e.g., by desaturation to grayscale
 or by emulating color vision deficiencies), and suggest better
 alternatives.</p>
 </div>
-<div id="would-bob-ross-approve" class="section level2">
-<h2 class="hasAnchor">
-<a href="#would-bob-ross-approve" class="anchor"></a>Would Bob Ross approve?</h2>
+<div class="section level2">
+<h2 id="would-bob-ross-approve">Would Bob Ross approve?<a class="anchor" aria-label="anchor" href="#would-bob-ross-approve"></a>
+</h2>
 <p>When you see a (scientific) data visualization with a rainbow, ask
-yourself: Would <a href="https://www.bobross.com/">Bob Ross</a> approve
+yourself: Would <a href="https://www.bobross.com/" class="external-link">Bob Ross</a> approve
 of this?</p>
 <p><img src="screenshots/bobross.jpg"></p>
 <p>Most likely not. In contrast, choosing a HCL-based palette instead
 will yield less flashy colors that change smoothly…very much in the
 spirit of <em>The Joy of Painting</em>.</p>
 </div>
-<div id="heatmap-from-the-grammar-of-graphics" class="section level2">
-<h2 class="hasAnchor">
-<a href="#heatmap-from-the-grammar-of-graphics" class="anchor"></a>Heatmap from The Grammar of Graphics</h2>
-<p>Even in the excellent book <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“The
+<div class="section level2">
+<h2 id="heatmap-from-the-grammar-of-graphics">Heatmap from The Grammar of Graphics<a class="anchor" aria-label="anchor" href="#heatmap-from-the-grammar-of-graphics"></a>
+</h2>
+<p>Even in the excellent book <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html" class="external-link">“The
 Grammar of Graphics”</a> by <span class="citation">Wilkinson (<a href="#ref-color:Wilkinson:2005" role="doc-biblioref">2005</a>)</span>,
 the rainbow palette is used in one of the first figures, depicting a
 heatmap of a bivariate kernel density estimate. The figure is shown
@@ -182,9 +184,9 @@ distinguish for colorblind viewers in the original rainbow palette
 compared to the heat colors. Below deuteranope vision is emulated.</p>
 <p><img src="screenshots/bkde-rainbow-deutan.png" style="width:49.0%"><img src="screenshots/bkde-heat-deutan.png" style="width:49.0%"></p>
 </div>
-<div id="map-of-model-deviations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#map-of-model-deviations" class="anchor"></a>Map of model deviations</h2>
+<div class="section level2">
+<h2 id="map-of-model-deviations">Map of model deviations<a class="anchor" aria-label="anchor" href="#map-of-model-deviations"></a>
+</h2>
 <p>Often a subset of the RGB rainbow palette is used as a “traffic
 light”, coding “positive” (green) and “negative” (red) deviations from
 some neutral value (yellow), e.g., forecast errors or other model
@@ -212,10 +214,10 @@ almost flat luminance trajectory while the red arm reaches much lower
 luminances (i.e., darker colors).</p>
 <p><img src="screenshots/nigeria-rainbow-spectrum.png" style="width:49.0%"><img src="screenshots/nigeria-purplegreen-spectrum.png" style="width:49.0%"></p>
 </div>
-<div id="weather-map-precipitation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#weather-map-precipitation" class="anchor"></a>Weather map: Precipitation</h2>
-<p>The shaded weather map below was taken from the web site of the <a href="https://www.noaa.gov/">NOAA</a> (National Oceanic and Atmospheric
+<div class="section level2">
+<h2 id="weather-map-precipitation">Weather map: Precipitation<a class="anchor" aria-label="anchor" href="#weather-map-precipitation"></a>
+</h2>
+<p>The shaded weather map below was taken from the web site of the <a href="https://www.noaa.gov/" class="external-link">NOAA</a> (National Oceanic and Atmospheric
 Administration) and it shows a 5-day accumulated precipitation forecast
 in the United States during the landfall of Hurricane Sandy in 2012. The
 original color palette (left) is not a classic rainbow but also combines
@@ -245,13 +247,13 @@ palette.</p>
 highlights the discontinuity vs. smoothness of the two palettes.</p>
 <p><img src="screenshots/noaa-orig-spectrum.png" style="width:49.0%"><img src="screenshots/noaa-purpleyellow-spectrum.png" style="width:49.0%"></p>
 </div>
-<div id="weather-map-dewpoint-temperature" class="section level2">
-<h2 class="hasAnchor">
-<a href="#weather-map-dewpoint-temperature" class="anchor"></a>Weather map: Dewpoint temperature</h2>
+<div class="section level2">
+<h2 id="weather-map-dewpoint-temperature">Weather map: Dewpoint temperature<a class="anchor" aria-label="anchor" href="#weather-map-dewpoint-temperature"></a>
+</h2>
 <p>Another shaded map for communicating a weather forecast is shown
-below, depicting <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll.arch/Tue/00z/east.3mods.2mtd_animate.html">dewpoint
+below, depicting <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll.arch/Tue/00z/east.3mods.2mtd_animate.html" class="external-link">dewpoint
 temperature forecasts</a> from a certain FV3 Global Forecast System
-(GFS) <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll/">product</a>.
+(GFS) <a href="https://www.emc.ncep.noaa.gov/mmb/mmbpll/ncepmods_gfspll/" class="external-link">product</a>.
 It also does not use a standard rainbow but a palette of similarly
 highly-saturated colors from a wide range of hues (left panel).</p>
 <p>As in the previous section, the palette is very discontinuous and
@@ -274,10 +276,10 @@ original palette is rather problematic.</p>
 <p><img src="screenshots/fv3gfs-rainbow-gray.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset-gray.png" style="width:49.0%"></p>
 <p><img src="screenshots/fv3gfs-rainbow-deutan.png" style="width:49.0%"><img src="screenshots/fv3gfs-sunset-deutan.png" style="width:49.0%"></p>
 </div>
-<div id="risk-map-influenza" class="section level2">
-<h2 class="hasAnchor">
-<a href="#risk-map-influenza" class="anchor"></a>Risk map: Influenza</h2>
-<p>The shaded map below was taken from the web site of the <a href="https://influenza.rki.de/">Robert Koch-Institut</a>
+<div class="section level2">
+<h2 id="risk-map-influenza">Risk map: Influenza<a class="anchor" aria-label="anchor" href="#risk-map-influenza"></a>
+</h2>
+<p>The shaded map below was taken from the web site of the <a href="https://influenza.rki.de/" class="external-link">Robert Koch-Institut</a>
 (Arbeitsgemeinschaft Influenza) and it shows the severity of influenza
 in Germany in week 8, 2019. The original color palette (left) is the
 classic rainbow ranging from “normal” (blue) to “strongly increased”
@@ -309,31 +311,31 @@ palette.</p>
 highlights the discontinuity vs. smoothness of the two palettes.</p>
 <p><img src="screenshots/influenza-rainbow-spectrum.png" style="width:49.0%"><img src="screenshots/influenza-purpleyellow-spectrum.png" style="width:49.0%"></p>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-color:Hawkins+McNeall+Stephenson:2014" class="csl-entry">
 Hawkins, Ed, Doug McNeall, David Stephenson, Jonny Williams, and Dave
 Carlson. 2014. <span>“The End of the Rainbow – an Open Letter to the
-Climate Science Community.”</span> <a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/">http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/</a>.
+Climate Science Community.”</span> <a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/" class="external-link">http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/</a>.
 </div>
 <div id="ref-color:Kneib:2006" class="csl-entry">
 Kneib, Thomas. 2006. <span>“Mixed Model-Based Inference in Geoadditive
 Hazard Regression for Interval-Censored Survival Times.”</span>
-<em>Computational Statistics &amp; Data Analysis</em> 51: 777–92. <a href="https://doi.org/10.1016/j.csda.2006.06.019">https://doi.org/10.1016/j.csda.2006.06.019</a>.
+<em>Computational Statistics &amp; Data Analysis</em> 51: 777–92. <a href="https://doi.org/10.1016/j.csda.2006.06.019" class="external-link">https://doi.org/10.1016/j.csda.2006.06.019</a>.
 </div>
 <div id="ref-color:Quinan+Padilla+CreemRegehr:2019" class="csl-entry">
 Quinan, P. S., L. M. Padilla, S. H. Creem-Regehr, and M. Meyer. 2019.
 <span>“Examining Implicit Discretization in Spectral Schemes.”</span> In
 <em>Eurographics Conference on Visualization (EuroVis) 2019</em>, edited
-by M. Gleicher, H. Leitte, and I. Viola, 38:3. John Wiley &amp; Sons. <a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/">https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/</a>.
+by M. Gleicher, H. Leitte, and I. Viola, 38:3. John Wiley &amp; Sons. <a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/" class="external-link">https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/</a>.
 </div>
 <div id="ref-color:Stauffer+Mayr+Dabernig:2015" class="csl-entry">
 Stauffer, Reto, Georg J. Mayr, Markus Dabernig, and Achim Zeileis. 2015.
 <span>“Somewhere over the Rainbow: How to Make Effective Use of Colors
 in Meteorological Visualizations.”</span> <em>Bulletin of the American
-Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.
+Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1" class="external-link">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.
 </div>
 <div id="ref-color:Wilkinson:2005" class="csl-entry">
 Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. 2nd ed.
@@ -354,11 +356,13 @@ Springer-Verlag.
 
 
       <footer><div class="copyright">
-  <p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
+  <p></p>
+<p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -366,6 +370,8 @@ Springer-Verlag.
 
   
 
+
+  
 
   </body>
 </html>

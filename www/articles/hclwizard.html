@@ -30,6 +30,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -42,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
       </span>
     </div>
 
@@ -52,7 +54,7 @@
   <a href="../articles/colorspace.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -107,7 +109,7 @@
 
       
 
-      </header><script src="hclwizard_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Apps for Choosing Colors and Palettes
@@ -121,14 +123,14 @@ Interactively</h1>
 
     
     
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>To facilitate exploring the package and employing it when working
 with colors, several graphical user interfaces (GUIs) are provided
 within the package as <em>shiny</em> apps <span class="citation">(<a href="#ref-color:shiny" role="doc-biblioref">Chang et al.
 2020</a>)</span>. All of these GUIs/apps can be run locally from within
-R and are also provided at <a href="https://hclwizard.org/" class="uri">https://hclwizard.org/</a>.</p>
+R and are also provided at <a href="https://hclwizard.org/" class="external-link uri">https://hclwizard.org/</a>.</p>
 <ul>
 <li>
 <em>Palette constructor:</em> <code><a href="../reference/choose_palette.html">choose_palette()</a></code> or
@@ -150,9 +152,9 @@ function by default starts the <em>tcltk</em> version while
 <code><a href="../reference/choose_palette.html">hclwizard()</a></code>/<code><a href="../reference/choose_palette.html">hcl_wizard()</a></code> by default start the
 <em>shiny</em> version.</p>
 </div>
-<div id="choose-palettes-with-the-hcl-color-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#choose-palettes-with-the-hcl-color-model" class="anchor"></a>Choose palettes with the HCL color model</h2>
+<div class="section level2">
+<h2 id="choose-palettes-with-the-hcl-color-model">Choose palettes with the HCL color model<a class="anchor" aria-label="anchor" href="#choose-palettes-with-the-hcl-color-model"></a>
+</h2>
 <p>The palette constructor GUI can either be started with
 <code><a href="../reference/choose_palette.html">hclwizard()</a></code> (or equivalently <code><a href="../reference/choose_palette.html">hcl_wizard()</a></code>)
 which by default starts the <em>shiny</em> version:</p>
@@ -190,9 +192,9 @@ functions. To facilitate generation of palettes for black/dark
 backgrounds, a “dark mode” of the GUIs is also available:</p>
 <p><img src="screenshots/choose_palette_2.png"></p>
 </div>
-<div id="choose-individual-colors-with-the-hcl-color-model" class="section level2">
-<h2 class="hasAnchor">
-<a href="#choose-individual-colors-with-the-hcl-color-model" class="anchor"></a>Choose individual colors with the HCL color model</h2>
+<div class="section level2">
+<h2 id="choose-individual-colors-with-the-hcl-color-model">Choose individual colors with the HCL color model<a class="anchor" aria-label="anchor" href="#choose-individual-colors-with-the-hcl-color-model"></a>
+</h2>
 <p>This GUI can be started with either <code><a href="../reference/hcl_color_picker.html">choose_color()</a></code> or
 equivalently <code><a href="../reference/hcl_color_picker.html">hcl_color_picker()</a></code>.</p>
 <p><img src="screenshots/choose_color.png"></p>
@@ -208,9 +210,9 @@ plane.</li>
 <p>By repeating the selection a palette of colors can be constructed and
 returned within R for subsequent usage in visualizations.</p>
 </div>
-<div id="emulate-color-vision-deficiencies" class="section level2">
-<h2 class="hasAnchor">
-<a href="#emulate-color-vision-deficiencies" class="anchor"></a>Emulate color vision deficiencies</h2>
+<div class="section level2">
+<h2 id="emulate-color-vision-deficiencies">Emulate color vision deficiencies<a class="anchor" aria-label="anchor" href="#emulate-color-vision-deficiencies"></a>
+</h2>
 <p>This GUI can be started with <code><a href="../reference/cvd_emulator.html">cvd_emulator()</a></code>.</p>
 <p><img src="screenshots/cvd_emulator_1.png" style="width:49.0%"><img src="screenshots/cvd_emulator_2.png" style="width:49.0%"></p>
 <p>The GUI supports uploading a raster image in JPG or PNG format which
@@ -224,30 +226,30 @@ supported kinds of color vision deficiency are checked for, i.e.,</p>
 <li>Tritanope vision (blue deficient).</li>
 </ul>
 </div>
-<div id="references" class="section level2 unnumbered">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2 unnumbered">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-color:shiny" class="csl-entry">
 Chang, Winston, Joe Cheng, J. J. Allaire, Yihui Xie, and Jonathan
-McPherson. 2020. <em><em>Shiny</em>: Web Application Framework for <span class="sans-serif">r</span></em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.
+McPherson. 2020. <em><em>Shiny</em>: Web Application Framework for <span class="sans-serif">r</span></em>. <a href="https://CRAN.R-project.org/package=shiny" class="external-link">https://CRAN.R-project.org/package=shiny</a>.
 </div>
 <div id="ref-color:R" class="csl-entry">
 R Core Team. 2020. <em><span class="sans-serif">R</span>: <span>A</span>
 Language and Environment for Statistical Computing</em>. Vienna,
 Austria: <span class="sans-serif">R</span> Foundation for Statistical
-Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+Computing. <a href="https://www.R-project.org/" class="external-link">https://www.R-project.org/</a>.
 </div>
 <div id="ref-color:Stauffer+Mayr+Dabernig:2015" class="csl-entry">
 Stauffer, Reto, Georg J. Mayr, Markus Dabernig, and Achim Zeileis. 2015.
 <span>“Somewhere over the Rainbow: How to Make Effective Use of Colors
 in Meteorological Visualizations.”</span> <em>Bulletin of the American
-Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.
+Meteorological Society</em> 96 (2): 203–16. <a href="https://doi.org/10.1175/BAMS-D-13-00155.1" class="external-link">https://doi.org/10.1175/BAMS-D-13-00155.1</a>.
 </div>
 <div id="ref-color:Zeileis+Hornik+Murrell:2009" class="csl-entry">
 Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. <span>“Escaping
 <span>RGB</span>land: Selecting Colors for Statistical Graphics.”</span>
-<em>Computational Statistics &amp; Data Analysis</em> 53: 3259–70. <a href="https://doi.org/10.1016/j.csda.2008.11.033">https://doi.org/10.1016/j.csda.2008.11.033</a>.
+<em>Computational Statistics &amp; Data Analysis</em> 53: 3259–70. <a href="https://doi.org/10.1016/j.csda.2008.11.033" class="external-link">https://doi.org/10.1016/j.csda.2008.11.033</a>.
 </div>
 </div>
 </div>
@@ -264,11 +266,13 @@ Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. <span>“Escaping
 
 
       <footer><div class="copyright">
-  <p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
+  <p></p>
+<p>Developed by Ross Ihaka, Paul Murrell, Kurt Hornik, Jason C. Fisher, Reto Stauffer, Claus O. Wilke, Claire D. McWhite, Achim Zeileis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -276,6 +280,8 @@ Zeileis, Achim, Kurt Hornik, and Paul Murrell. 2009. <span>“Escaping
 
   
 
+
+  
 
   </body>
 </html>
