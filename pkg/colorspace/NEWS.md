@@ -1,5 +1,19 @@
 # colorspace 2.0-4
 
+* New support for applying the color vision deficiency simulations in
+  `simulate_cvd()` to the linearized RGB coordinates rather than the
+  gamma-corrected sRGB coordinates. The idea for the underlying transformations
+  developed by [Machado _et al._ (2009)](https://doi.org10.1109/TVCG.2009.113)
+  is, in fact, based on linearized RGB coordinates but their empirical
+  illustrations are based on gamma-corrected sRGB coordinates instead.
+  Hence, previous versions of the function followed what Machado _et al._
+  actually do and applied the transformations based on gamma-corrected
+  sRGB coordinates. This is still the default in `simulate_cvd()` (and
+  hence in `deutan()`, `protan()`, and `tritan()`) but optionally the argument
+  `linear` can be set to `TRUE` rathern than the default `FALSE`. For most
+  colors the difference between the two strategies is negligible but for some
+  highly-saturated colors it becomes more noticable, e.g., for red or orange.
+
 * Support formal S4 color objects in `simulate_cvd()` (and hence in `deutan()`,
   `protan()`, and `tritan()`). In that case colors are transformed internally
   to sRGB coordinates, color vision deficiency is simulated, and then a formal

@@ -35,6 +35,9 @@
 #' rows (or columns) containing R/G/B (0-255) values.
 #' @param severity numeric. Severity of the color vision defect, a number between 0 and 1.
 #' @param cvd_transform numeric 3x3 matrix, specifying the color vision deficiency transform matrix.
+#' @param linear logical. Should the color vision deficiency transformation be applied to the
+#' linearized RGB coordinates? If \code{FALSE}, the transformation is applied to the
+#' gamma-corrected (sRGB) coordinates.
 #' @param cvd list of cvd transformation matrices. See \code{\link{cvd}} for available options.
 #'
 #' @return A color object as specified in the input \code{col} (hexadecimal string, RGB matrix,
@@ -71,7 +74,7 @@
 #' deutan(RGB)
 #' 
 #' @importFrom grDevices col2rgb
-simulate_cvd <- function(col, cvd_transform) {
+simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
   ## determine input type
   input_type <- if (inherits(col, "color")) {
     ## S4 colorspace class
@@ -128,6 +131,17 @@ simulate_cvd <- function(col, cvd_transform) {
 
   }
 
+  if (linear) {
+    sRGB_to_linearRGB <- function(x) {
+      x <- x/255
+      y <- ((x + 0.055)/1.055)^2.4
+      small <- x <= 0.03928
+      y[small] <- x[small]/12.92
+      return(y * 255)
+    }
+    col <- sRGB_to_linearRGB(col)
+  }
+
   ## transform color
   RGB <- cvd_transform %*% col
   rownames(RGB) <- c("R", "G", "B")
@@ -135,6 +149,17 @@ simulate_cvd <- function(col, cvd_transform) {
   ## bound RGB values
   RGB[RGB < 0]   <- 0
   RGB[RGB > 255] <- 255
+
+  if (linear) {
+    linearRGB_to_sRGB <- function(y) {
+      y <- y/255
+      x <- 1.055 * y^(1/2.4) - 0.055
+      small <- y <= 0.03928/12.92
+      x[small] <- 12.92 * y[small]
+      return(x * 255)
+    }
+    RGB <- linearRGB_to_sRGB(RGB)
+  }
 
   ## convert back to input type
   if (input_type == "colorspace") {
@@ -151,20 +176,20 @@ simulate_cvd <- function(col, cvd_transform) {
 
 #' @rdname simulate_cvd
 #' @export
-deutan <- function(col, severity = 1) {
-  simulate_cvd(col, cvd_transform = interpolate_cvd_transform(deutanomaly_cvd, severity))
+deutan <- function(col, severity = 1, linear = FALSE) {
+  simulate_cvd(col, cvd_transform = interpolate_cvd_transform(deutanomaly_cvd, severity), linear = linear)
 }
 
 #' @rdname simulate_cvd
 #' @export
-protan <- function(col, severity = 1) {
-  simulate_cvd(col, cvd_transform = interpolate_cvd_transform(protanomaly_cvd, severity))
+protan <- function(col, severity = 1, linear = FALSE) {
+  simulate_cvd(col, cvd_transform = interpolate_cvd_transform(protanomaly_cvd, severity), linear = linear)
 }
 
 #' @rdname simulate_cvd
 #' @export
-tritan <- function(col, severity = 1){
-  simulate_cvd(col, cvd_transform = interpolate_cvd_transform(tritanomaly_cvd, severity))
+tritan <- function(col, severity = 1, linear = FALSE) {
+  simulate_cvd(col, cvd_transform = interpolate_cvd_transform(tritanomaly_cvd, severity), linear = linear)
 }
 
 #' @rdname simulate_cvd

@@ -8,13 +8,13 @@
 \alias{interpolate_cvd_transform}
 \title{Simulate Color Vision Deficiency}
 \usage{
-simulate_cvd(col, cvd_transform)
+simulate_cvd(col, cvd_transform, linear = FALSE)
 
-deutan(col, severity = 1)
+deutan(col, severity = 1, linear = FALSE)
 
-protan(col, severity = 1)
+protan(col, severity = 1, linear = FALSE)
 
-tritan(col, severity = 1)
+tritan(col, severity = 1, linear = FALSE)
 
 interpolate_cvd_transform(cvd, severity = 1)
 }
@@ -27,6 +27,10 @@ a formal \code{\link[colorspace]{color-class}} object or a matrix with three nam
 rows (or columns) containing R/G/B (0-255) values.}
 
 \item{cvd_transform}{numeric 3x3 matrix, specifying the color vision deficiency transform matrix.}
+
+\item{linear}{logical. Should the color vision deficiency transformation be applied to the
+linearized RGB coordinates? If \code{FALSE}, the transformation is applied to the
+gamma-corrected (sRGB) coordinates.}
 
 \item{severity}{numeric. Severity of the color vision defect, a number between 0 and 1.}
 
