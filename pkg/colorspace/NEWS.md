@@ -1,7 +1,7 @@
 # colorspace 2.1-0
 
 * Bug fix for color vision deficiency simulations in `simulate_cvd()` based
-  on the work of [Machado _et al._ (2009)](https://doi.org10.1109/TVCG.2009.113):
+  on the work of [Machado _et al._ (2009)](https://doi.org/10.1109/TVCG.2009.113):
   Following some illustrations from the supplementary materials, the transformations
   in previous versions of the package had been applied to gamma-corrected sRGB
   coordinates directly. However, the Machado _et al._ paper implicitly relies
