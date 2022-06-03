@@ -8,13 +8,13 @@
 \alias{interpolate_cvd_transform}
 \title{Simulate Color Vision Deficiency}
 \usage{
-simulate_cvd(col, cvd_transform, linear = FALSE)
+simulate_cvd(col, cvd_transform, linear = TRUE)
 
-deutan(col, severity = 1, linear = FALSE)
+deutan(col, severity = 1, linear = TRUE)
 
-protan(col, severity = 1, linear = FALSE)
+protan(col, severity = 1, linear = TRUE)
 
-tritan(col, severity = 1, linear = FALSE)
+tritan(col, severity = 1, linear = TRUE)
 
 interpolate_cvd_transform(cvd, severity = 1)
 }
@@ -29,8 +29,8 @@ rows (or columns) containing R/G/B (0-255) values.}
 \item{cvd_transform}{numeric 3x3 matrix, specifying the color vision deficiency transform matrix.}
 
 \item{linear}{logical. Should the color vision deficiency transformation be applied to the
-linearized RGB coordinates? If \code{FALSE}, the transformation is applied to the
-gamma-corrected (sRGB) coordinates.}
+linearized RGB coordinates (default)? If \code{FALSE}, the transformation is applied to the
+gamma-corrected sRGB coordinates (which was the default up to version 2.0-3 of the package).}
 
 \item{severity}{numeric. Severity of the color vision defect, a number between 0 and 1.}
 
@@ -61,12 +61,11 @@ the function \code{interpolate_cvd_transform} (see examples).
 
 If input \code{col} is a matrix with three rows named \code{R}, \code{G}, and
 \code{B} (top down) they are interpreted as Red-Green-Blue values within the
-range \code{[0-255]}. Instead of an (s)RGB color vector a matrix of the same size as the
-input \code{col} with the corresponding simulated Red-Green-Blue values will be returned.
-This can be handy to avoid too many conversions.
+range \code{[0-255]}. Then the CVD transformation is applied directly to these
+coordinates avoiding any further conversions.
 
 Finally, if \code{col} is a formal \code{\link[colorspace]{color-class}} object, then its
-coordinates are transformed to sRGB coordinates, as described above, and returned as a formal
+coordinates are transformed to (s)RGB coordinates, as described above, and returned as a formal
 object of the same class after the color vision deficiency simulation.
 }
 \examples{

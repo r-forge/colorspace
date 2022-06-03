@@ -1,18 +1,28 @@
-# colorspace 2.0-4
+# colorspace 2.1-0
 
-* New support for applying the color vision deficiency simulations in
-  `simulate_cvd()` to the linearized RGB coordinates rather than the
-  gamma-corrected sRGB coordinates. The idea for the underlying transformations
-  developed by [Machado _et al._ (2009)](https://doi.org10.1109/TVCG.2009.113)
-  is, in fact, based on linearized RGB coordinates but their empirical
-  illustrations are based on gamma-corrected sRGB coordinates instead.
-  Hence, previous versions of the function followed what Machado _et al._
-  actually do and applied the transformations based on gamma-corrected
-  sRGB coordinates. This is still the default in `simulate_cvd()` (and
-  hence in `deutan()`, `protan()`, and `tritan()`) but optionally the argument
-  `linear` can be set to `TRUE` rathern than the default `FALSE`. For most
-  colors the difference between the two strategies is negligible but for some
-  highly-saturated colors it becomes more noticable, e.g., for red or orange.
+* Bug fix for color vision deficiency simulations in `simulate_cvd()` based
+  on the work of [Machado _et al._ (2009)](https://doi.org10.1109/TVCG.2009.113):
+  Following some illustrations from the supplementary materials, the transformations
+  in previous versions of the package had been applied to gamma-corrected sRGB
+  coordinates directly. However, the Machado _et al._ paper implicitly relies
+  on a linear RGB space (see page 1294, column 1) where their linear matrix
+  transformations for simulating color vision deficiencies are applied.
+  Therefore, a new argument `linear = TRUE` has been added to `simulate_cvd()`
+  (and hence in `deutan()`, `protan()`, and `tritan()`) that first maps the
+  provided colors to linearized RGB coordinates, applies the color vision
+  deficiency transformation, and then maps back to gamma-corrected sRGB
+  coordinates. Optionally, `linear = FALSE` can be used to restore the behavior
+  from previous versions where the transformations are applied directly to
+  the sRGB coordinates. For most colors the difference between the two
+  strategies is negligible but for some highly-saturated colors it becomes
+  more noticable, e.g., for red, purple, or orange. Thanks to Matthew Petroff
+  for reporting this issue and to Kenneth Knoblauch for advice and guidance.
+
+* Improvement in `simulate_cvd()` (and hence in `deutan()`, `protan()`, and
+  `tritan()`): When colors are specified as hex strings or named colors, the
+  sRGB coordinates after transformation are rounded appropriately to integers
+  in 0-255. Previous versions implicitly took the floor rather than round of
+  the coordinates.
 
 * Support formal S4 color objects in `simulate_cvd()` (and hence in `deutan()`,
   `protan()`, and `tritan()`). In that case colors are transformed internally

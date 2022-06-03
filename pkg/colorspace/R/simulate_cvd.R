@@ -19,12 +19,11 @@
 #'
 #' If input \code{col} is a matrix with three rows named \code{R}, \code{G}, and
 #' \code{B} (top down) they are interpreted as Red-Green-Blue values within the
-#' range \code{[0-255]}. Instead of an (s)RGB color vector a matrix of the same size as the
-#' input \code{col} with the corresponding simulated Red-Green-Blue values will be returned.
-#' This can be handy to avoid too many conversions.
+#' range \code{[0-255]}. Then the CVD transformation is applied directly to these
+#' coordinates avoiding any further conversions.
 #'
 #' Finally, if \code{col} is a formal \code{\link[colorspace]{color-class}} object, then its
-#' coordinates are transformed to sRGB coordinates, as described above, and returned as a formal
+#' coordinates are transformed to (s)RGB coordinates, as described above, and returned as a formal
 #' object of the same class after the color vision deficiency simulation.
 #'
 #' @param col vector of R colors. Can be any of the three kinds of R colors,
@@ -36,8 +35,8 @@
 #' @param severity numeric. Severity of the color vision defect, a number between 0 and 1.
 #' @param cvd_transform numeric 3x3 matrix, specifying the color vision deficiency transform matrix.
 #' @param linear logical. Should the color vision deficiency transformation be applied to the
-#' linearized RGB coordinates? If \code{FALSE}, the transformation is applied to the
-#' gamma-corrected (sRGB) coordinates.
+#' linearized RGB coordinates (default)? If \code{FALSE}, the transformation is applied to the
+#' gamma-corrected sRGB coordinates (which was the default up to version 2.0-3 of the package).
 #' @param cvd list of cvd transformation matrices. See \code{\link{cvd}} for available options.
 #'
 #' @return A color object as specified in the input \code{col} (hexadecimal string, RGB matrix,
@@ -74,7 +73,7 @@
 #' deutan(RGB)
 #' 
 #' @importFrom grDevices col2rgb
-simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
+simulate_cvd <- function(col, cvd_transform, linear = TRUE) {
   ## determine input type
   input_type <- if (inherits(col, "color")) {
     ## S4 colorspace class
@@ -97,17 +96,8 @@ simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
   if (input_type == "colorspace") {
   
     color_class <- class(col)
-    col <- t(coords(as(col, "sRGB"))) * 255
+    col <- t(coords(as(col, if(linear) "RGB" else "sRGB"))) * 255
   
-  } else if (input_type == "hex") {
-
-    # Save transparency value for later
-    alpha <- substr(col, 8L, 9L)
-    # keep indizes of NA colors
-    NAidx <- which(is.na(col))
-    col <- substr(col, 1L, 7L)
-    col <- grDevices::col2rgb(col)
-
   } else if (input_type == "matrix") { 
 
     if(NROW(col) != 3L && NCOL(col) == 3L && all(toupper(colnames(col)) == c("R", "G", "B"))) {
@@ -117,6 +107,15 @@ simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
       transpose <- FALSE
     }
     stopifnot(all(toupper(rownames(col)) == c("R", "G", "B")))
+
+  } else if (input_type == "hex") {
+
+    # Save transparency value for later
+    alpha <- substr(col, 8L, 9L)
+    # keep indizes of NA colors
+    NAidx <- which(is.na(col))
+    col <- substr(col, 1L, 7L)
+    col <- grDevices::col2rgb(col)
 
   } else {
 
@@ -131,7 +130,7 @@ simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
 
   }
 
-  if (linear) {
+  if (linear && input_type %in% c("hex", "other")) {
     sRGB_to_linearRGB <- function(x) {
       x <- x/255
       y <- ((x + 0.055)/1.055)^2.4
@@ -150,7 +149,7 @@ simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
   RGB[RGB < 0]   <- 0
   RGB[RGB > 255] <- 255
 
-  if (linear) {
+  if (linear && input_type %in% c("hex", "other")) {
     linearRGB_to_sRGB <- function(y) {
       y <- y/255
       x <- 1.055 * y^(1/2.4) - 0.055
@@ -163,10 +162,13 @@ simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
 
   ## convert back to input type
   if (input_type == "colorspace") {
-    col <- as(sRGB(t(RGB/255)), color_class)
+    col <- t(RGB/255)
+    col <- if(linear) RGB(col) else sRGB(col)
+    col <- as(col, color_class)
   } else if (input_type == "matrix") {
     col <- if(transpose) t(RGB) else RGB
   } else {
+    RGB <- round(RGB)
     col <- paste(grDevices::rgb(RGB[1L, ], RGB[2L, ], RGB[3L, ], maxColorValue = 255), alpha, sep = "")
     if(length(NAidx) > 0L) col[NAidx] <- NA
   }
@@ -176,19 +178,19 @@ simulate_cvd <- function(col, cvd_transform, linear = FALSE) {
 
 #' @rdname simulate_cvd
 #' @export
-deutan <- function(col, severity = 1, linear = FALSE) {
+deutan <- function(col, severity = 1, linear = TRUE) {
   simulate_cvd(col, cvd_transform = interpolate_cvd_transform(deutanomaly_cvd, severity), linear = linear)
 }
 
 #' @rdname simulate_cvd
 #' @export
-protan <- function(col, severity = 1, linear = FALSE) {
+protan <- function(col, severity = 1, linear = TRUE) {
   simulate_cvd(col, cvd_transform = interpolate_cvd_transform(protanomaly_cvd, severity), linear = linear)
 }
 
 #' @rdname simulate_cvd
 #' @export
-tritan <- function(col, severity = 1, linear = FALSE) {
+tritan <- function(col, severity = 1, linear = TRUE) {
   simulate_cvd(col, cvd_transform = interpolate_cvd_transform(tritanomaly_cvd, severity), linear = linear)
 }
 
