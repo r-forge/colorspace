@@ -18,7 +18,7 @@ based on a CVD transform matrix."><meta property="og:image" content="https://col
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0-4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1-0</span>
       </span>
     </div>
 
@@ -89,13 +89,13 @@ based on a CVD transform matrix.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">simulate_cvd</span><span class="op">(</span><span class="va">col</span>, <span class="va">cvd_transform</span>, linear <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">simulate_cvd</span><span class="op">(</span><span class="va">col</span>, <span class="va">cvd_transform</span>, linear <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu">deutan</span><span class="op">(</span><span class="va">col</span>, severity <span class="op">=</span> <span class="fl">1</span>, linear <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu">deutan</span><span class="op">(</span><span class="va">col</span>, severity <span class="op">=</span> <span class="fl">1</span>, linear <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu">protan</span><span class="op">(</span><span class="va">col</span>, severity <span class="op">=</span> <span class="fl">1</span>, linear <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu">protan</span><span class="op">(</span><span class="va">col</span>, severity <span class="op">=</span> <span class="fl">1</span>, linear <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="fu">tritan</span><span class="op">(</span><span class="va">col</span>, severity <span class="op">=</span> <span class="fl">1</span>, linear <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu">tritan</span><span class="op">(</span><span class="va">col</span>, severity <span class="op">=</span> <span class="fl">1</span>, linear <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="fu">interpolate_cvd_transform</span><span class="op">(</span><span class="va">cvd</span>, severity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
     </div>
@@ -113,8 +113,8 @@ rows (or columns) containing R/G/B (0-255) values.</p></dd>
 <dd><p>numeric 3x3 matrix, specifying the color vision deficiency transform matrix.</p></dd>
 <dt>linear</dt>
 <dd><p>logical. Should the color vision deficiency transformation be applied to the
-linearized RGB coordinates? If <code>FALSE</code>, the transformation is applied to the
-gamma-corrected (sRGB) coordinates.</p></dd>
+linearized RGB coordinates (default)? If <code>FALSE</code>, the transformation is applied to the
+gamma-corrected sRGB coordinates (which was the default up to version 2.0-3 of the package).</p></dd>
 <dt>severity</dt>
 <dd><p>numeric. Severity of the color vision defect, a number between 0 and 1.</p></dd>
 <dt>cvd</dt>
@@ -141,11 +141,10 @@ version of the matrices from <code><a href="cvd.html">cvd</a></code>. Matrix int
 the function <code>interpolate_cvd_transform</code> (see examples).</p>
 <p>If input <code>col</code> is a matrix with three rows named <code>R</code>, <code>G</code>, and
 <code>B</code> (top down) they are interpreted as Red-Green-Blue values within the
-range <code>[0-255]</code>. Instead of an (s)RGB color vector a matrix of the same size as the
-input <code>col</code> with the corresponding simulated Red-Green-Blue values will be returned.
-This can be handy to avoid too many conversions.</p>
+range <code>[0-255]</code>. Then the CVD transformation is applied directly to these
+coordinates avoiding any further conversions.</p>
 <p>Finally, if <code>col</code> is a formal <code><a href="color-class.html">color-class</a></code> object, then its
-coordinates are transformed to sRGB coordinates, as described above, and returned as a formal
+coordinates are transformed to (s)RGB coordinates, as described above, and returned as a formal
 object of the same class after the color vision deficiency simulation.</p>
     </div>
     <div id="references">
@@ -171,16 +170,16 @@ object of the same class after the color vision deficiency simulation.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># simulate color-vision deficiency by calling `simulate_cvd` with specified matrix</span></span>
 <span class="r-in"><span class="fu">simulate_cvd</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#005000"</span>, <span class="st">"blue"</span>, <span class="st">"#00BB00"</span><span class="op">)</span>, <span class="va">tritanomaly_cvd</span><span class="op">[</span><span class="st">"6"</span><span class="op">]</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#004D19" "#000FAD" "#00B53B"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#004F2C" "#0046D7" "#00B96F"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># simulate color-vision deficiency by calling the shortcut high-level function</span></span>
 <span class="r-in"><span class="fu">tritan</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#005000"</span>, <span class="st">"blue"</span>, <span class="st">"#00BB00"</span><span class="op">)</span>, severity <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#004D19" "#000FAD" "#00B53B"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#004F2C" "#0046D7" "#00B96F"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># simulate color-vision deficiency by calling `simulate_cvd` with interpolated cvd matrix</span></span>
 <span class="r-in"><span class="fu">simulate_cvd</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#005000"</span>, <span class="st">"blue"</span>, <span class="st">"#00BB00"</span><span class="op">)</span>,</span>
 <span class="r-in">             <span class="fu">interpolate_cvd_transform</span><span class="op">(</span><span class="va">tritanomaly_cvd</span>, severity <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#004D19" "#000FAD" "#00B53B"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#004F2C" "#0046D7" "#00B96F"</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># apply CVD directly on wide RGB matrix (with R/G/B channels in rows)</span></span>
 <span class="r-in"><span class="va">RGB</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op">*</span> <span class="fl">255</span></span>
