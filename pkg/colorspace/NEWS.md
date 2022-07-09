@@ -31,6 +31,11 @@
   advantage that no rounding is applied as when going through hex color strings.
   Similarly, for an RGB matrix input, the output is also not rounded anymore.
 
+* Bug fix in `scale_colour_discrete_qualitative()` (and analogously for sequential,
+  diverging, and divergingx) to make sure that the scale functions can also
+  be called within a function whose arguments are controlled by an outer
+  function (reported by Marcelo S. Perlin).
+
 
 # colorspace 2.0-3
 
