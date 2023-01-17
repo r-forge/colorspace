@@ -16,14 +16,15 @@ paletteGrid <- function(cols, qual=FALSE) {
     x <- rep((1:ncol - 1)/ncol, nrow)[1:n] + .5/ncol
     y <- rep(1 - (1:nrow - 1)/nrow, each=ncol)[1:n] - .5/nrow
     if (qual) {
+        ## grid.rect(x=0, width=n/ncol, just="left", gp=gpar(col=NA, fill="grey90"))
         grid.circle(x, y, r=.4/nrow,
-                    gp=gpar(col=desaturate(darken(cols, .5), .5),
-                            fill=cols, lwd=2))
+                    gp=gpar(col="grey40",
+                            fill=cols, lwd=.5))
     } else {    
         grid.rect(x, y, 
                   width=unit(1/ncol, "npc"),
                   height=unit(1/nrow, "npc"),
-                  gp=gpar(col=desaturate(darken(cols, .5), .5),
+                  gp=gpar(col="grey40",
                           fill=cols, lwd=1,
                           linejoin="mitre"))
     }

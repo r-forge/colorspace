@@ -180,23 +180,25 @@ which leads to clustering of colors at the red, green, and blue primaries.
 
 Although these limitations have been well known for some time, no changes
 were made to these palettes provided by the core R graphics system for
-a number of years. The were various reasons for this including the following:
+a number of years. There were various reasons for this including the following:
 
-In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
-This makes it easier to generate a palette, though the user is still required
-to select, for example, start and end colors from which
-a palette of colors can then be interpolated.
+* In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
+  This makes it easier to generate a palette, though the user is still required
+  to select, for example, start and end colors from which
+  a palette of colors can then be interpolated.
 
-Over time, 
-better palettes became available via packages on CRAN (Comprehensive R Archive Network)
+* Better palettes became available via packages on CRAN 
+  (Comprehensive R Archive Network)
   starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
-  \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and somewhat more recently
-  \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], or \CRANpkg{scico} [@scico],
+  \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
+  somewhat more recently
+  \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], or 
+  \CRANpkg{scico} [@scico],
   among many others.
 
-In addition, higher-level graphics systems
- like \CRANpkg{ggplot2} [@ggplot2] and \CRANpkg{lattice} [@lattice]
-developed their own color themes.
+* Higher-level graphics systems
+  like \CRANpkg{ggplot2} [@ggplot2] and \CRANpkg{lattice} [@lattice]
+  developed their own color themes.
 
 ```{r oldbase, eval=FALSE, echo=FALSE, fig.height=1.75, fig.width=13, out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Old R palette functions.  The label above each swatch shows the function call that produces that set of colors.'}
 oldbase.pals <- function() {
@@ -320,10 +322,17 @@ By default `palette.colors()` returns the
 the different colors in this palette should be distinguishable
 for all viewers. 
 
-The `palette` argument allows us to select a different palette.
-For example, the old R default palette is available via the name `"R3"`.
-This palette is really only useful to reproduce old behaviour
-and remind us how bad things used to be.
+The `palette` argument to the `palette.colors()` function allows us to select a
+different palette.  For example, the old R default palette is available via the
+name `"R3"`, though this palette is really only useful to reproduce old
+behaviour and remind us how bad things used to be.  The `palette.pals()`
+function returns a character vector of the available palette names and Figure
+\ref{fig:newPalettes} shows swatches for each of the
+available palettes.
+
+```{r}
+palette.pals()
+```
 
 There are several palettes that have been taken from the color schemes of
 the \pkg{ggplot2} package and Tableau [@Tableau], both 
@@ -341,8 +350,8 @@ they deliberately contain darker and lighter colors:
 the `"Accent"` palette may be useful to emphasise one or more categories
 over the others;
 the `"Paired"` palette may be useful to represent more than one
-categorical variable via color, e.g., high vs. low versions of 
-            
+categorical variable via color, e.g., different types of treatment
+as well as high vs. low levels of each treatment.
 
 Finally, there are two palettes from the 
 \CRANpkg{Polychrome} package [@Polychrome].
@@ -356,13 +365,6 @@ may be useful if you are attempting to represent a very large
 number of categories at once.  The result is unlikely to be
 easy to interpret, but these palettes will be your best chance.
 
-The `palette.pals()` function returns a character vector of 
-the available palette names.
-
-```{r}
-palette.pals()
-```
-
 The first argument to `palette.colors()` is a number of colors.
 Each palette has a fixed number of colors, but we can ask for fewer or,
 with `recycle = TRUE`, we can get more colors by recycling.
@@ -372,7 +374,7 @@ with `recycle = TRUE`, we can get more colors by recycling.
                     'palette.colors(10, recycle=TRUE)'=palette.colors(10, recycle=TRUE)), qual=TRUE)
   ```
 
-Each of these palettes can be set as the default palette by passing
+Each of the predefined palettes can be set as the default palette by passing
 the palette name to the `palette()` function.  For example,
 the following code sets the Okabe-Ito palette as the default palette.
 
@@ -388,6 +390,8 @@ including sequential and diverging palettes as well as qualitative
 palettes.  As with the `palette.colors()` function, the first
 argument is a number of colors to generate and the second argument
 specifies a palette to generate colours from.
+The `hcl.pals()` function provides a full list of the
+available palette names that we can choose from.
 
 ```{r}
 hcl.colors(5, palette="viridis")
@@ -413,10 +417,9 @@ specplot(hcl.colors(100, "Blues 3"))
 
 Because the palettes from `hcl.colors()` are based on a continuous
 path in HCL space, we can select as many colors as we like.
-The `hcl.pals()` function provides a full list of the
-available palette names that we can choose from.
 
-Most of these palettes have one or more desirable perceptual properties:
+Most of the palettes that are provided by `hcl.colors()`
+have one or more desirable perceptual properties:
 
 * **perceptual uniformity**. This means that if we take a step along
   the path of the palette in HCL space, the perceived difference
@@ -427,7 +430,7 @@ Most of these palettes have one or more desirable perceptual properties:
 * **colorblind-safe**.  This means that the palette retains
   its perceptual properties for colorblind users.
 * **perceptual balance**.  This means that, for example,
-  while there are changes in hue, chroma and luminance remain 
+  while there are changes in hue and chroma, luminance remains 
   pretty much the same, so no colour stands out from the others.  
 
 These properties are very difficult to achieve in
@@ -436,8 +439,8 @@ available.  Furthermore, different properties will be more or less
 important depending on the data being displayed and the point that
 a data visualisation is attempting to make.  For example, perceptual
 balance is not desirable when we want to highlight a particular
-point or category of interest, so we want some colours to
-be more obvious than others.
+point or category of interest;  in that scenario we explicitly 
+want some colours to have a greater visual impact than others.
 The details always depend a lot on how many colors you need. For
 example, a palette with light gray, medium color, and full color may still
 work great on a white background if you are not interested much in the
@@ -505,15 +508,13 @@ should be higher as in `"Set 3"` for example.
 
 ### Single-hue sequential palettes
 
-We further divide sequential palettes into single-hue (this section)
+We divide sequential palettes into single-hue (this section)
 and multi-hue palettes (the next section).
 
-Several of the sequential palettes vary only from dark to light, with
-a selection of underlying hues.  Certain hues will be more 
+Single-hue sequential palettes vary only from dark to light, with
+a constant underlying hue.  Certain hues will be more 
 appropriate for representing data on specific concepts, such
-as green for "nature" and red for "temperature".  Other
-sequential palettes also vary hue;  this may be appropriate 
-for drawing attention to very high or very low values.
+as green for "nature" and red for "temperature".  
 
 Figure \ref{fig:singleSeqPalettes} shows the sequential palettes that
 hold hue largely constant.  All of these palettes have a large
@@ -557,6 +558,10 @@ levels) then a lower luminance contrast may suffice
 
 ### Multi-hue sequential palettes
 
+Multi-hue
+sequential palettes not only vary luminance, from light to dark, but 
+also vary hue (and in some cases chroma);  this can be useful
+for drawing attention to very high or very low values.
 To not only bring out extreme colors in a sequential palette but also
 better distinguish middle colors it is a common strategy to employ a
 sequence of hues.  This leads to a large range of possible palettes.
@@ -568,10 +573,11 @@ high-chroma color to a neutral low-chroma color (e.g., `"Reds"`,
 `"Purples"`, `"Greens"`, `"Blues"`) or even light gray (e.g.,
 `"Purple-Blue"`). But some palettes also employ relatively high chroma
 throughout the palette (e.g., emulations of palettes from
-the \pkg{viridis} and \pkg{rcartocolors} packages). To
-emphasize the extremes the former strategy is typically more suitable
+the \pkg{viridis} and \pkg{rcartocolors} packages). 
+The former strategy is suitable to
+emphasize extreme values, 
 while the latter works better if all values along the sequence should
-receive some more perceptual weight.
+receive the same perceptual weight.
 
 ```{r multiSeqPalettes, echo=FALSE, fig.width=6, fig.height=8, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Multi-hue sequential palettes.'}
 single <- rownames(hcl_palettes("sequential (single-hue)"))
@@ -612,7 +618,7 @@ the Python community.
 The `"Viridis"`, `"Plasma"`,
 and `"Inferno"` palettes come from the matplotlib Python library
 and work well for identifying features of interest in false-color images.
-This means that they should also work well for heatmaps.  
+This means that they should also work well for heatmaps.
 The large range of hues means that these palettes can also serve
 as qualitative palettes, which makes them robust default palettes.
 However, this versatility means that 
@@ -625,7 +631,7 @@ This makes these palettes a good choice for heatmaps.
 
 The remaining palettes in Figure \ref{fig:multiSeqPalettes}, from
 `"Mint"` to `"Sunset"` closely match palettes provided in the
-\pkg{rcartocolors} package.  
+\pkg{rcartocolors} package.
 These palettes tend to span a much narrower range of hues, chroma,
 and luminance, so can be useful if we just need to represent a
 small number of ordered values, e.g., three-to-four. 
@@ -676,13 +682,11 @@ are intended for use with a black/dark background.
 Figure \ref{fig:diverPalettes} shows the selection of diverging
 palettes for use with `hcl.colors()`.
 
-The diverging palettes again offer a range of underlying hues
+The diverging palettes offer a range of underlying hues
 for either extreme, with either white or yellow as the central "neutral"
 value.  The palettes with yellow at the centre provide less of a
 change in colourfulness, so the "neutral" value is more of 
-a turning point rather than a local minimum.  This is particularly
-true of the `"spectral"` palette which is almost a qualitative
-palette rather than a diverging palette.
+a turning point rather than a local minimum.  
 
 When choosing a particular palette for a display similar
 considerations apply as for the sequential palettes.  For example,
@@ -713,7 +717,7 @@ involving simple colour pairs like
 `"Blue-Red"` or `"Cyan-Magenta"`, were developed as part of the
 \pkg{colorspace} package, taking inspiration
 from various other palettes, including more balanced and simplified
-versions of several ColorBrewer.org palettes.  
+versions of several ColorBrewer.org palettes.
 The exception is the `"Tropic"` palette,
 which closely matches the palette of the same name from the
 \pkg{rcartocolors} package.  
@@ -730,8 +734,8 @@ more flexible diverging
 palettes.  These do not impose
 any restrictions that the two "arms" of the palette need to be
 balanced and also may go through a non-gray neutral color (typically
-light yellow). Consequently, the chroma/luminance paths can be rather
-unbalanced.
+light yellow). Consequently, the chroma/luminance within these palettes
+can be rather unbalanced.
 
 ```{r diverxPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Flexible diverging palettes.'}
 pals <- hcl.pals("divergingx")
@@ -771,37 +775,6 @@ from the \pkg{scico} package.
 
 
 \newpage
-
-\newpage
-
-
- base R was finally overcome by introducing two new palette functions:
-
-- `palette.colors()` provides a new improved default color palette as well as a few other well-established qualitative palettes [@grDevices2]
-- `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
-  the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL], see @grDevices and @Zeileis+Fisher+Hornik:2020.
-  Most of these HCL palettes approximate very closely well-established palettes from \pkg{RColorBrewer}, \pkg{viridis}, \pkg{rcartocolor},
-  \pkg{scico}, and others.
-
-Both are accompanied by functions to query the available palette names (`palette.pals()` and `hcl.pals()`, respectively).
-The color swatches shown in Figures \ref{fig:palette}, \ref{fig:hcls}, and \ref{fig:hcld} which are also shown by running
-the `example()` of the two functions which make basic `palette.swatch()` and `hcl.swatch()` functions available.
-Here, focus on `palette.colors()`, more details on `hcl.colors()` later.
-
-Briefly explain principles for selection of `R4` (similar hues, limited differences in chroma/luminance, dark/colorful, work ok for colorblind viewers).
-`Okabe-Ito` [@Okabe+Ito:2008] was designed to be very robust under color vision deficiencies. As it uses somewhat different hues than the old `R4` palette
-and was hence not used as the new default palette in R but it is the default in `palette.colors()`.
-The robustness of both palettes is illustrated in Figure \ref{fig:cvd}.
-
-```{r cvd, echo=FALSE, fig.height=3.5, fig.width=12, out.width='0.85\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Color vision deficiency emulation for \\code{R4} (left) and \\code{Okabe-Ito} (right) palettes.'}
-layout(rbind(1:2), widths = c(0.46, 0.54))
-swatchplot(palette.colors(palette = "R4"), cvd = TRUE)
-swatchplot(palette.colors(palette = "Okabe-Ito"), cvd = TRUE)
-```
-
-The other palettes are from well-established software packages like \pkg{ggplot2} [@ggplot2], ColorBrewer.org [@Harrower+Brewer:2003],
-or Tableau [@Tableau]. Moreover, two palettes with many colors (36 and 26, respectively) are used from the
-\CRANpkg{Polychrome} package [@Polychrome].
 
 ## Illustration
 
