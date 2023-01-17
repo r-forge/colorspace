@@ -359,7 +359,7 @@ These are much larger palettes, with colors chosen to be evenly
 spread throughout HCL colorspace.  The `"Polychrome 36"` palette
 represents the largest set of colors that could be generated
 while still being visually distinguishable.  The `"Alphabet"`
-palette is just a smaller, but still large, set (one for each letter
+palette is a smaller, but still large, set (one for each letter
 of the alphabet).  These palettes
 may be useful if you are attempting to represent a very large
 number of categories at once.  The result is unlikely to be
@@ -384,7 +384,7 @@ palette("Okabe-Ito")
 
 ## The `hcl.colors()` function
 
-The `hcl.colors()` function was also added in R 4.0.0.
+The `hcl.colors()` function was added in R 3.6.0.
 This function provides access to another range of palettes, this time
 including sequential and diverging palettes as well as qualitative 
 palettes.  As with the `palette.colors()` function, the first
@@ -410,7 +410,7 @@ the blues vary from very dark to very light.  Finally, the palette has a
 triangular trajectory in the chroma dimension, so the blues are more
 colourful towards the middle of the palette.
 
-```{r viridishcl, echo=FALSE, fig.width=5, fig.height=4, out.width='.8\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.'}
+```{r viridishcl, echo=FALSE, fig.width=5, fig.height=4, out.width='.6\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.'}
 library(colorspace)
 specplot(hcl.colors(100, "Blues 3"))
 ```
@@ -421,15 +421,15 @@ path in HCL space, we can select as many colors as we like.
 Most of the palettes that are provided by `hcl.colors()`
 have one or more desirable perceptual properties:
 
-* **perceptual uniformity**. This means that if we take a step along
+* **Perceptual uniformity:** This means that if we take a step along
   the path of the palette in HCL space, the perceived difference
   between the two colors will be the same anywhere along the path.
-* **perceptual order**.  This means that there is a perceived ordering
+* **Perceptual order:**  This means that there is a perceived ordering
   of the colors, typically arising from a monotonic change from
   light to dark or vice versa.
-* **colorblind-safe**.  This means that the palette retains
+* **Colorblind-safe:**  This means that the palette retains
   its perceptual properties for colorblind users.
-* **perceptual balance**.  This means that, for example,
+* **Perceptual balance:**  This means that, for example,
   while there are changes in hue and chroma, luminance remains 
   pretty much the same, so no colour stands out from the others.  
 
@@ -437,7 +437,7 @@ These properties are very difficult to achieve in
 a single palette, which is one reason why there are multiple palettes
 available.  Furthermore, different properties will be more or less 
 important depending on the data being displayed and the point that
-a data visualisation is attempting to make.  For example, perceptual
+a data visualization is attempting to make.  For example, perceptual
 balance is not desirable when we want to highlight a particular
 point or category of interest;  in that scenario we explicitly 
 want some colours to have a greater visual impact than others.
@@ -456,7 +456,8 @@ broken down into qualitative, sequential, and diverging palettes.
 
 The qualitative palettes available from `hcl.colors()` are shown
 in Figure \ref{fig:qualPalettes}.
-The common feature of these palettes are that they mainly vary hue. 
+The common feature of these palettes is that they only vary hue
+while using the same chroma and luminance for all their colors.
 
 ```{r qualPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Qualitative palettes.'}
 pals <- hcl.pals("qualitative")
@@ -514,7 +515,7 @@ and multi-hue palettes (the next section).
 Single-hue sequential palettes vary only from dark to light, with
 a constant underlying hue.  Certain hues will be more 
 appropriate for representing data on specific concepts, such
-as green for "nature" and red for "temperature".  
+as green for "vegetation" and red for "temperature".  
 
 Figure \ref{fig:singleSeqPalettes} shows the sequential palettes that
 hold hue largely constant.  All of these palettes have a large
