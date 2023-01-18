@@ -46,7 +46,7 @@ paletteGrids <- function(colList, nswatch=ns, qual=FALSE) {
         col <- (i-1) %% nswatch + 1
         if (!is.null(colList[[i]])) {
             pushViewport(viewport(layout.pos.row=row, layout.pos.col=col))
-            grid.text(names(colList)[i], 0, unit(1, "npc") - .5*gap, 
+            grid.text(names(colList)[i], 0, unit(1, "npc") - .7*gap, 
                       just=c("left", "top"),
                       gp=gpar(cex=.7, fontfamily="mono"))
             pushViewport(viewport(y=unit(1, "npc") - gap, just="top"))
