@@ -26,6 +26,19 @@
 #' coordinates are transformed to (s)RGB coordinates, as described above, and returned as a formal
 #' object of the same class after the color vision deficiency simulation.
 #'
+#' Up to version 2.0-3 of the package, the CVD transformations had been applied
+#' directly to the gamma-corrected sRGB coordinates (corresponding to the hex coordinates
+#' of the colors), following the illustrations of Machado et al. (2009). However,
+#' the paper implicitly relies on a linear RGB space (see page 1294, column 1) where their
+#' linear matrix transformations for simulating color vision deficiencies are applied.
+#' Therefore, starting from version 2.1-0 of the package, a new argument \code{linear = TRUE}
+#' has been added that first maps the provided colors to linearized RGB coordinates, applies
+#' the color vision deficiency transformation, and then maps back to gamma-corrected sRGB
+#' coordinates. Optionally, \code{linear = FALSE} can be used to restore the behavior
+#' from previous versions. For most colors the difference between the two strategies is
+#' negligible but for some highly-saturated colors it becomes more noticable, e.g., for
+#' red, purple, or orange.
+#'
 #' @param col vector of R colors. Can be any of the three kinds of R colors,
 #' i.e., either a color name (an element of \code{\link[grDevices]{colors}}), a hexadecimal (hex)
 #' string of the form \code{"#rrggbb"} or \code{"#rrggbbaa"} (see \code{\link[grDevices]{rgb}}), or

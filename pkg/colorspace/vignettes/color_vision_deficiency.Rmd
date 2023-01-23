@@ -49,6 +49,11 @@ relation to statistical graphics see @color:Lumley:2006 which accompanies the R
 package dichromat [@color:dichromat] and is based on earlier emulation techniques
 [@color:Vienot+Brettel+Ott:1995; @color:Brettel+Vienot+Mollon:1997; @color:Vienot+Brettel+Mollon:1999].
 
+_Note:_ Up to version 2.0-3 of the package, the CVD transformations had been applied
+to the gamma-corrected sRGB coordinates [following the illustrations of
+@color:Machado+Oliveira+Fernandes:2009] instead of the more appropriate linear RGB
+coordinates. The latter is the default starting from version 2.1-0 of the package.
+
 
 ## Illustration: Heatmap with sequential palette
 
