@@ -159,43 +159,43 @@ properties of color palettes.</p>
 combinations that yield useful palettes are accessible by name. These
 can be listed using the function <code><a href="../reference/hcl_palettes.html">hcl_palettes()</a></code>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## HCL palettes</span>
-<span class="co">## </span>
-<span class="co">## Type:  Qualitative </span>
-<span class="co">## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic</span>
-<span class="co">## </span>
-<span class="co">## Type:  Sequential (single-hue) </span>
-<span class="co">## Names: Grays, Light Grays, Blues 2, Blues 3, Purples 2, Purples 3, Reds 2,</span>
-<span class="co">##        Reds 3, Greens 2, Greens 3, Oslo</span>
-<span class="co">## </span>
-<span class="co">## Type:  Sequential (multi-hue) </span>
-<span class="co">## Names: Purple-Blue, Red-Purple, Red-Blue, Purple-Orange, Purple-Yellow,</span>
-<span class="co">##        Blue-Yellow, Green-Yellow, Red-Yellow, Heat, Heat 2, Terrain,</span>
-<span class="co">##        Terrain 2, Viridis, Plasma, Inferno, Rocket, Mako, Dark Mint,</span>
-<span class="co">##        Mint, BluGrn, Teal, TealGrn, Emrld, BluYl, ag_GrnYl, Peach,</span>
-<span class="co">##        PinkYl, Burg, BurgYl, RedOr, OrYel, Purp, PurpOr, Sunset,</span>
-<span class="co">##        Magenta, SunsetDark, ag_Sunset, BrwnYl, YlOrRd, YlOrBr, OrRd,</span>
-<span class="co">##        Oranges, YlGn, YlGnBu, Reds, RdPu, PuRd, Purples, PuBuGn, PuBu,</span>
-<span class="co">##        Greens, BuGn, GnBu, BuPu, Blues, Lajolla, Turku, Hawaii, Batlow</span>
-<span class="co">## </span>
-<span class="co">## Type:  Diverging </span>
-<span class="co">## Names: Blue-Red, Blue-Red 2, Blue-Red 3, Red-Green, Purple-Green,</span>
-<span class="co">##        Purple-Brown, Green-Brown, Blue-Yellow 2, Blue-Yellow 3,</span>
-<span class="co">##        Green-Orange, Cyan-Magenta, Tropic, Broc, Cork, Vik, Berlin,</span>
-<span class="co">##        Lisbon, Tofino</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## HCL palettes</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Type:  Qualitative </span></span>
+<span><span class="co">## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Type:  Sequential (single-hue) </span></span>
+<span><span class="co">## Names: Grays, Light Grays, Blues 2, Blues 3, Purples 2, Purples 3, Reds 2,</span></span>
+<span><span class="co">##        Reds 3, Greens 2, Greens 3, Oslo</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Type:  Sequential (multi-hue) </span></span>
+<span><span class="co">## Names: Purple-Blue, Red-Purple, Red-Blue, Purple-Orange, Purple-Yellow,</span></span>
+<span><span class="co">##        Blue-Yellow, Green-Yellow, Red-Yellow, Heat, Heat 2, Terrain,</span></span>
+<span><span class="co">##        Terrain 2, Viridis, Plasma, Inferno, Rocket, Mako, Dark Mint,</span></span>
+<span><span class="co">##        Mint, BluGrn, Teal, TealGrn, Emrld, BluYl, ag_GrnYl, Peach,</span></span>
+<span><span class="co">##        PinkYl, Burg, BurgYl, RedOr, OrYel, Purp, PurpOr, Sunset,</span></span>
+<span><span class="co">##        Magenta, SunsetDark, ag_Sunset, BrwnYl, YlOrRd, YlOrBr, OrRd,</span></span>
+<span><span class="co">##        Oranges, YlGn, YlGnBu, Reds, RdPu, PuRd, Purples, PuBuGn, PuBu,</span></span>
+<span><span class="co">##        Greens, BuGn, GnBu, BuPu, Blues, Lajolla, Turku, Hawaii, Batlow</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Type:  Diverging </span></span>
+<span><span class="co">## Names: Blue-Red, Blue-Red 2, Blue-Red 3, Red-Green, Purple-Green,</span></span>
+<span><span class="co">##        Purple-Brown, Green-Brown, Blue-Yellow 2, Blue-Yellow 3,</span></span>
+<span><span class="co">##        Green-Orange, Cyan-Magenta, Tropic, Broc, Cork, Vik, Berlin,</span></span>
+<span><span class="co">##        Lisbon, Tofino</span></span></code></pre>
 <p>To inspect the HCL parameter combinations for a specific palette
 simply include the <code>palette</code> name where upper-
 vs. lower-case, spaces, etc. are ignored for matching the label, e.g.,
 <code>"set2"</code> matches <code>"Set 2"</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"set2"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## HCL palette</span>
-<span class="co">## Name: Set 2</span>
-<span class="co">## Type: Qualitative</span>
-<span class="co">## Parameter ranges:</span>
-<span class="co">##  h1 h2 c1 c2 l1 l2 p1 p2 cmax fixup</span>
-<span class="co">##   0 NA 60 NA 70 NA NA NA   NA  TRUE</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"set2"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## HCL palette</span></span>
+<span><span class="co">## Name: Set 2</span></span>
+<span><span class="co">## Type: Qualitative</span></span>
+<span><span class="co">## Parameter ranges:</span></span>
+<span><span class="co">##  h1 h2 c1 c2 l1 l2 p1 p2 cmax fixup</span></span>
+<span><span class="co">##   0 NA 60 NA 70 NA NA NA   NA  TRUE</span></span></code></pre>
 <p>To compute the actual color hex codes (representing sRGB
 coordinates), the functions <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code>,
 <code><a href="../reference/hcl_palettes.html">sequential_hcl()</a></code>, and <code><a href="../reference/hcl_palettes.html">diverging_hcl()</a></code>,
@@ -210,17 +210,17 @@ used.</p>
 The fourth command yields a modified set of colors (lighter due to a
 luminance of 80 instead of 70).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">270</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">270</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, h1 <span class="op">=</span> <span class="fl">0</span>, h2 <span class="op">=</span> <span class="fl">270</span>, c1 <span class="op">=</span> <span class="fl">60</span>, l1 <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, h1 <span class="op">=</span> <span class="fl">0</span>, h2 <span class="op">=</span> <span class="fl">270</span>, c1 <span class="op">=</span> <span class="fl">60</span>, l1 <span class="op">=</span> <span class="fl">70</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"set2"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"set2"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#ED90A4" "#ABB150" "#00C1B2" "#ACA2EC"</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"set2"</span>, l <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"set2"</span>, l <span class="op">=</span> <span class="fl">80</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="qualitative-palettes">Qualitative palettes<a class="anchor" aria-label="anchor" href="#qualitative-palettes"></a>
@@ -245,7 +245,7 @@ palettes are taken from <span class="citation">Ihaka (<a href="#ref-color:Ihaka:
 are based on the same chroma (50) and luminance (70) but the hue is
 restricted to different intervals.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"qualitative"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"qualitative"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hcl_palettes_files/figure-html/hcl-palettes-qualitative-1.png" width="60%" style="display: block; margin: auto;"></p>
 <p>When palettes are employed for shading areas in statistical displays
 (e.g., in bar plots, pie charts, or regions in maps), lighter colors
@@ -290,7 +290,7 @@ length 2 or separate <code>p1</code> (for chroma) and <code>p2</code>
 (for luminance) can be specified. If the latter is missing, it defaults
 to the former.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"sequential (single-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"sequential (single-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hcl_palettes_files/figure-html/hcl-palettes-sequentials-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>All except the last are inspired by the <em>ColorBrewer.org</em>
 palettes with the same base name <span class="citation">(<a href="#ref-color:Harrower+Brewer:2003" role="doc-biblioref">Harrower and
@@ -341,7 +341,7 @@ same name by <span class="citation">Crameri (<a href="#ref-color:Crameri:2018" r
 the first two of these are intended for a black/dark background.</li>
 </ul>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"sequential (multi-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"sequential (multi-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hcl_palettes_files/figure-html/hcl-palettes-sequentialm-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>Note that the palettes differ substantially in the amount of chroma
 and luminance contrasts. For example, many palettes go from a dark
@@ -390,7 +390,7 @@ intended for a white/light background and the other three for a
 black/dark background.</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"diverging"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"diverging"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hcl_palettes_files/figure-html/hcl-palettes-diverging-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>When choosing a particular palette for a display similar
 considerations apply as for the sequential palettes. Thus, large
@@ -511,20 +511,20 @@ supported by adding a <code>register</code> argument once to a call to
 <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code>, <code><a href="../reference/hcl_palettes.html">sequential_hcl()</a></code>, or
 <code><a href="../reference/hcl_palettes.html">diverging_hcl()</a></code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">3</span>, palette <span class="op">=</span> <span class="st">"set2"</span>, l <span class="op">=</span> <span class="fl">80</span>, register <span class="op">=</span> <span class="st">"myset"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">3</span>, palette <span class="op">=</span> <span class="st">"set2"</span>, l <span class="op">=</span> <span class="fl">80</span>, register <span class="op">=</span> <span class="st">"myset"</span><span class="op">)</span></span></code></pre></div>
 <p>The new palette is then included in <code><a href="../reference/hcl_palettes.html">hcl_palettes()</a></code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"Qualitative"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## HCL palettes</span>
-<span class="co">## </span>
-<span class="co">## Type:  Qualitative </span>
-<span class="co">## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic,</span>
-<span class="co">##        myset</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">hcl_palettes</a></span><span class="op">(</span><span class="st">"Qualitative"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## HCL palettes</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Type:  Qualitative </span></span>
+<span><span class="co">## Names: Pastel 1, Dark 2, Dark 3, Set 2, Set 3, Warm, Cold, Harmonic, Dynamic,</span></span>
+<span><span class="co">##        myset</span></span></code></pre>
 <p>The palette can be used subsequently in
 <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code> as well as the qualitative <a href="ggplot2_color_scales.html">ggplot2 color scales</a>, e.g.,</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"myset"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"myset"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#FFACBF" "#C6CD70" "#32DDCD" "#C7BEFF"</span></span></code></pre>
 <p>Remarks:</p>
 <ul>
 <li>The number of colors in the palette that was used during
@@ -574,7 +574,7 @@ Packages</a> for more details.)</li>
 <li>“Roma” closely matches the palette of the same name by <span class="citation">Crameri (<a href="#ref-color:Crameri:2018" role="doc-biblioref">2018</a>)</span>.</li>
 </ul>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/divergingx_hcl.html">divergingx_palettes</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/divergingx_hcl.html">divergingx_palettes</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="hcl_palettes_files/figure-html/divergingx-palettes-1.png" width="70%" style="display: block; margin: auto;"></p>
 <p>Typically, the more restricted <code><a href="../reference/hcl_palettes.html">diverging_hcl()</a></code> palettes
 should be preferred because they are more balanced. However, by being
@@ -701,7 +701,7 @@ Zeileis, Achim, Paul Murrell, Martin Maechler, and Deepayan Sarkar.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

@@ -89,7 +89,7 @@ color-class class."><meta property="og:image" content="https://colorspace.R-Forg
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sRGB</span><span class="op">(</span><span class="va">R</span>, <span class="va">G</span>, <span class="va">B</span>, <span class="va">names</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sRGB</span><span class="op">(</span><span class="va">R</span>, <span class="va">G</span>, <span class="va">B</span>, <span class="va">names</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -99,13 +99,18 @@ color-class class."><meta property="og:image" content="https://colorspace.R-Forg
 colors (the values should lie between 0 and 1).  The values can be provided
 in separate <code>R</code>, <code>G</code> and <code>B</code> vectors or in a three-column
 matrix passed as <code>R</code>.</p></dd>
+
+
 <dt>names</dt>
 <dd><p>A vector of names for the colors (by default the row names of
 <code>R</code> are used).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>sRGB</code> which inherits from class <code>color</code>.</p>
+    
+
+<p>An object of class <code>sRGB</code> which inherits from class <code>color</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -125,9 +130,9 @@ matrix passed as <code>R</code>.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create a random set of colors</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">sRGB</span><span class="op">(</span>R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>, G <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>, B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create a random set of colors</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">sRGB</span><span class="op">(</span>R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>, G <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>, B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                R          G          B</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,] 0.26550866 0.93470523 0.82094629</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,] 0.37212390 0.21214252 0.64706019</span>
@@ -163,7 +168,7 @@ matrix passed as <code>R</code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

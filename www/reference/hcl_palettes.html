@@ -89,132 +89,177 @@ color palettes based on the HCL (hue-chroma-luminance) color model.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hcl_palettes</span><span class="op">(</span>type <span class="op">=</span> <span class="cn">NULL</span>, palette <span class="op">=</span> <span class="cn">NULL</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, n <span class="op">=</span> <span class="fl">5L</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for hcl_palettes</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for hcl_palettes</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S3 method for hcl_palettes</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">5L</span>, fixup <span class="op">=</span> <span class="cn">TRUE</span>, off <span class="op">=</span> <span class="cn">NULL</span>, border <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">qualitative_hcl</span><span class="op">(</span>
-  <span class="va">n</span>,
-  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span> <span class="op">*</span> <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span>,
-  c <span class="op">=</span> <span class="fl">80</span>,
-  l <span class="op">=</span> <span class="fl">60</span>,
-  fixup <span class="op">=</span> <span class="cn">TRUE</span>,
-  alpha <span class="op">=</span> <span class="fl">1</span>,
-  palette <span class="op">=</span> <span class="cn">NULL</span>,
-  rev <span class="op">=</span> <span class="cn">FALSE</span>,
-  register <span class="op">=</span> <span class="st">""</span>,
-  <span class="va">...</span>,
-  <span class="va">h1</span>,
-  <span class="va">h2</span>,
-  <span class="va">c1</span>,
-  <span class="va">l1</span>
-<span class="op">)</span>
-
-<span class="fu">sequential_hcl</span><span class="op">(</span>
-  <span class="va">n</span>,
-  h <span class="op">=</span> <span class="fl">260</span>,
-  c <span class="op">=</span> <span class="fl">80</span>,
-  l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">90</span><span class="op">)</span>,
-  power <span class="op">=</span> <span class="fl">1.5</span>,
-  gamma <span class="op">=</span> <span class="cn">NULL</span>,
-  fixup <span class="op">=</span> <span class="cn">TRUE</span>,
-  alpha <span class="op">=</span> <span class="fl">1</span>,
-  palette <span class="op">=</span> <span class="cn">NULL</span>,
-  rev <span class="op">=</span> <span class="cn">FALSE</span>,
-  register <span class="op">=</span> <span class="st">""</span>,
-  <span class="va">...</span>,
-  <span class="va">h1</span>,
-  <span class="va">h2</span>,
-  <span class="va">c1</span>,
-  <span class="va">c2</span>,
-  <span class="va">l1</span>,
-  <span class="va">l2</span>,
-  <span class="va">p1</span>,
-  <span class="va">p2</span>,
-  <span class="va">cmax</span>,
-  <span class="va">c.</span>
-<span class="op">)</span>
-
-<span class="fu">diverging_hcl</span><span class="op">(</span>
-  <span class="va">n</span>,
-  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">0</span><span class="op">)</span>,
-  c <span class="op">=</span> <span class="fl">80</span>,
-  l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">90</span><span class="op">)</span>,
-  power <span class="op">=</span> <span class="fl">1.5</span>,
-  gamma <span class="op">=</span> <span class="cn">NULL</span>,
-  fixup <span class="op">=</span> <span class="cn">TRUE</span>,
-  alpha <span class="op">=</span> <span class="fl">1</span>,
-  palette <span class="op">=</span> <span class="cn">NULL</span>,
-  rev <span class="op">=</span> <span class="cn">FALSE</span>,
-  register <span class="op">=</span> <span class="st">""</span>,
-  <span class="va">...</span>,
-  <span class="va">h1</span>,
-  <span class="va">h2</span>,
-  <span class="va">c1</span>,
-  <span class="va">l1</span>,
-  <span class="va">l2</span>,
-  <span class="va">p1</span>,
-  <span class="va">p2</span>,
-  <span class="va">cmax</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hcl_palettes</span><span class="op">(</span>type <span class="op">=</span> <span class="cn">NULL</span>, palette <span class="op">=</span> <span class="cn">NULL</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, n <span class="op">=</span> <span class="fl">5L</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for hcl_palettes</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for hcl_palettes</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for hcl_palettes</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="fl">5L</span>, fixup <span class="op">=</span> <span class="cn">TRUE</span>, off <span class="op">=</span> <span class="cn">NULL</span>, border <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">qualitative_hcl</span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span> <span class="op">*</span> <span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="va">n</span><span class="op">)</span>,</span>
+<span>  c <span class="op">=</span> <span class="fl">80</span>,</span>
+<span>  l <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>  fixup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rev <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  register <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">h1</span>,</span>
+<span>  <span class="va">h2</span>,</span>
+<span>  <span class="va">c1</span>,</span>
+<span>  <span class="va">l1</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">sequential_hcl</span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  h <span class="op">=</span> <span class="fl">260</span>,</span>
+<span>  c <span class="op">=</span> <span class="fl">80</span>,</span>
+<span>  l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  power <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  gamma <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fixup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rev <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  register <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">h1</span>,</span>
+<span>  <span class="va">h2</span>,</span>
+<span>  <span class="va">c1</span>,</span>
+<span>  <span class="va">c2</span>,</span>
+<span>  <span class="va">l1</span>,</span>
+<span>  <span class="va">l2</span>,</span>
+<span>  <span class="va">p1</span>,</span>
+<span>  <span class="va">p2</span>,</span>
+<span>  <span class="va">cmax</span>,</span>
+<span>  <span class="va">c.</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">diverging_hcl</span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  c <span class="op">=</span> <span class="fl">80</span>,</span>
+<span>  l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">90</span><span class="op">)</span>,</span>
+<span>  power <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  gamma <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  fixup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rev <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  register <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  <span class="va">h1</span>,</span>
+<span>  <span class="va">h2</span>,</span>
+<span>  <span class="va">c1</span>,</span>
+<span>  <span class="va">l1</span>,</span>
+<span>  <span class="va">l2</span>,</span>
+<span>  <span class="va">p1</span>,</span>
+<span>  <span class="va">p2</span>,</span>
+<span>  <span class="va">cmax</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>type</dt>
 <dd><p>character indicating type of HCL palette.</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>character. Name of HCL color palette.</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>logical. Should the selected HCL color palettes be visualized?</p></dd>
+
+
 <dt>n</dt>
 <dd><p>the number of colors (\(\ge 1\)) to be in the palette.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments passed to <code><a href="hex.html">hex</a></code>.</p></dd>
+
+
 <dt>x, object</dt>
 <dd><p>A <code>hcl_palettes</code> object.</p></dd>
+
+
 <dt>fixup</dt>
 <dd><p>logical. Should the color be corrected to a valid RGB value?</p></dd>
+
+
 <dt>off</dt>
 <dd><p>numeric. Vector of length 2 indicating horizontal and vertical
 offsets between the color rectangles displayed.</p></dd>
+
+
 <dt>border</dt>
 <dd><p>character. Color of rectangle borders.</p></dd>
+
+
 <dt>h, h1, h2</dt>
 <dd><p>hue value in the HCL color description, has to be in [0, 360].</p></dd>
+
+
 <dt>c, c., c1, c2</dt>
 <dd><p>chroma value in the HCL color description.</p></dd>
+
+
 <dt>l, l1, l2</dt>
 <dd><p>luminance value in the HCL color description.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>numeric vector of values in the range <code>[0, 1]</code> for alpha
 transparency channel (0 means transparent and 1 means opaque).</p></dd>
+
+
 <dt>rev</dt>
 <dd><p>logical. Should the color palette vector be returned in reverse order?</p></dd>
+
+
 <dt>register</dt>
 <dd><p>character. If set to a non-empty character string, the corresponding
 palette is registered with that name for subsequent use (within the same session).</p></dd>
+
+
 <dt>power, p1, p2</dt>
 <dd><p>control parameter determining how chroma and luminance should
 be increased (1 = linear, 2 = quadratic, etc.).</p></dd>
+
+
 <dt>gamma</dt>
 <dd><p>Deprecated.</p></dd>
+
+
 <dt>cmax</dt>
 <dd><p>Maximum chroma value in the HCL color description.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>qualitative_hcl</code>, <code>sequential_hcl</code>, <code>diverging_hcl</code> return
-a vector of <code>n</code> color strings (hex codes).
-The function <code>hcl_palettes</code> returns a data frame of class <code>"hcl_palettes"</code>where each row contains information about one of the requested palettes (name, type,
-HCL trajectory coordinates). Suitable <code>print</code>, <code>summary</code>, and <code>plot</code>methods are available.</p>
+    
+
+<p><code>qualitative_hcl</code>, <code>sequential_hcl</code>, <code>diverging_hcl</code> return
+a vector of <code>n</code> color strings (hex codes).</p>
+
+
+<p>The function <code>hcl_palettes</code> returns a data frame of class <code>"hcl_palettes"</code></p>
+
+
+<p>where each row contains information about one of the requested palettes (name, type,
+HCL trajectory coordinates). Suitable <code>print</code>, <code>summary</code>, and <code>plot</code></p>
+
+
+<p>methods are available.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -329,8 +374,8 @@ Visualizations.  <em>Bulletin of the American Meteorological Society</em>,
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## overview of all _named_ HCL palettes</span></span>
-<span class="r-in"><span class="fu">hcl_palettes</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## overview of all _named_ HCL palettes</span></span></span>
+<span class="r-in"><span><span class="fu">hcl_palettes</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> HCL palettes</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Type:  Qualitative </span>
@@ -355,94 +400,94 @@ Visualizations.  <em>Bulletin of the American Meteorological Society</em>,
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Purple-Brown, Green-Brown, Blue-Yellow 2, Blue-Yellow 3,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Green-Orange, Cyan-Magenta, Tropic, Broc, Cork, Vik, Berlin,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Lisbon, Tofino</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize</span></span>
-<span class="r-in"><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"qualitative"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize</span></span></span>
+<span class="r-in"><span><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"qualitative"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"sequential (single-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"sequential (single-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"sequential (multi-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"sequential (multi-hue)"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"diverging"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">hcl_palettes</span><span class="op">(</span><span class="st">"diverging"</span>, n <span class="op">=</span> <span class="fl">7</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## inspect a specific palette</span></span>
-<span class="r-in"><span class="co">## (upper-case, spaces, etc. are ignored for matching)</span></span>
-<span class="r-in"><span class="fu">hcl_palettes</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark 2"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## inspect a specific palette</span></span></span>
+<span class="r-in"><span><span class="co">## (upper-case, spaces, etc. are ignored for matching)</span></span></span>
+<span class="r-in"><span><span class="fu">hcl_palettes</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark 2"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> HCL palette</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name: Dark 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Type: Qualitative</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter ranges:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  h1 h2 c1 c2 l1 l2 p1 p2 cmax fixup</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0 NA 50 NA 60 NA NA NA   NA  TRUE</span>
-<span class="r-in"><span class="fu">hcl_palettes</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"dark2"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">hcl_palettes</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"dark2"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> HCL palette</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Name: Dark 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Type: Qualitative</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter ranges:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  h1 h2 c1 c2 l1 l2 p1 p2 cmax fixup</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0 NA 50 NA 60 NA NA NA   NA  TRUE</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## set up actual colors</span></span>
-<span class="r-in"><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">4</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">288</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">50</span>, l <span class="op">=</span> <span class="fl">60</span><span class="op">)</span> <span class="co">## by hand</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## set up actual colors</span></span></span>
+<span class="r-in"><span><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">4</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">288</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">50</span>, l <span class="op">=</span> <span class="fl">60</span><span class="op">)</span> <span class="co">## by hand</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#C87A8A" "#8A9748" "#00A2A2" "#A782C3"</span>
-<span class="r-in"><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"dark2"</span><span class="op">)</span>             <span class="co">## by name</span></span>
+<span class="r-in"><span><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"dark2"</span><span class="op">)</span>             <span class="co">## by name</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#C87A8A" "#909646" "#00A396" "#9189C7"</span>
-<span class="r-in"><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"dark2"</span>, c <span class="op">=</span> <span class="fl">80</span><span class="op">)</span>     <span class="co">## by name plus modification</span></span>
+<span class="r-in"><span><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"dark2"</span>, c <span class="op">=</span> <span class="fl">80</span><span class="op">)</span>     <span class="co">## by name plus modification</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#E16A86" "#909800" "#00AD9A" "#9183E6"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## how HCL palettes are constructed:</span></span>
-<span class="r-in"><span class="co">## by varying the perceptual properties via hue/chroma/luminance</span></span>
-<span class="r-in"><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"Hue"</span>       <span class="op">=</span> <span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">60</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="st">"Chroma"</span>    <span class="op">=</span> <span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="st">"Luminance"</span> <span class="op">=</span> <span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">90</span><span class="op">)</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  off <span class="op">=</span> <span class="fl">0</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## how HCL palettes are constructed:</span></span></span>
+<span class="r-in"><span><span class="co">## by varying the perceptual properties via hue/chroma/luminance</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"Hue"</span>       <span class="op">=</span> <span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">60</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Chroma"</span>    <span class="op">=</span> <span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">65</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"Luminance"</span> <span class="op">=</span> <span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">5</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">25</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">90</span><span class="op">)</span>, rev <span class="op">=</span> <span class="cn">TRUE</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  off <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## for qualitative palettes luminance and chroma are fixed, varying only hue</span></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">9</span>, c <span class="op">=</span> <span class="fl">50</span>, l <span class="op">=</span> <span class="fl">70</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## for qualitative palettes luminance and chroma are fixed, varying only hue</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">qualitative_hcl</span><span class="op">(</span><span class="fl">9</span>, c <span class="op">=</span> <span class="fl">50</span>, l <span class="op">=</span> <span class="fl">70</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## single-hue sequential palette (h = 260) with linear vs. power-transformed trajectory</span></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## single-hue sequential palette (h = 260) with linear vs. power-transformed trajectory</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-7.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">260</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-8.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## advanced single-hue sequential palette with triangular chroma trajectory</span></span>
-<span class="r-in"><span class="co">## (piecewise linear vs. power-transformed)</span></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## advanced single-hue sequential palette with triangular chroma trajectory</span></span></span>
+<span class="r-in"><span><span class="co">## (piecewise linear vs. power-transformed)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-9.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">1.4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fl">245</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">1.4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-10.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## multi-hue sequential palette with small hue range and triangular chroma vs.</span></span>
-<span class="r-in"><span class="co">## large hue range and linear chroma trajectory</span></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">220</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## multi-hue sequential palette with small hue range and triangular chroma vs.</span></span></span>
+<span class="r-in"><span><span class="co">## large hue range and linear chroma trajectory</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">220</span><span class="op">)</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">75</span>, <span class="fl">0</span><span class="op">)</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-11.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">60</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">sequential_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">60</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">60</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-12.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## balanced diverging palette constructed from two simple single-hue sequential</span></span>
-<span class="r-in"><span class="co">## palettes (for hues 260/blue and 0/red)</span></span>
-<span class="r-in"><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">diverging_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">0</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## balanced diverging palette constructed from two simple single-hue sequential</span></span></span>
+<span class="r-in"><span><span class="co">## palettes (for hues 260/blue and 0/red)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="hclplot.html">hclplot</a></span><span class="op">(</span><span class="fu">diverging_hcl</span><span class="op">(</span><span class="fl">7</span>, h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">260</span>, <span class="fl">0</span><span class="op">)</span>, c <span class="op">=</span> <span class="fl">80</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">95</span><span class="op">)</span>, power <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-13.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## to register a particular adapted palette for re-use in the same session</span></span>
-<span class="r-in"><span class="co">## with a new name the register=... argument can be used once, e.g.,</span></span>
-<span class="r-in"><span class="fu">diverging_hcl</span><span class="op">(</span><span class="fl">7</span>, palette <span class="op">=</span> <span class="st">"Tropic"</span>, h2 <span class="op">=</span> <span class="fl">0</span>, register <span class="op">=</span> <span class="st">"mytropic"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## subsequently palete="mytropic" is available in diverging_hcl() and the diverging</span></span>
-<span class="r-in"><span class="co">## ggplot2 scales such as scale_color_continuous_diverging() etc.</span></span>
-<span class="r-in"><span class="fu"><a href="demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu">diverging_hcl</span><span class="op">(</span><span class="fl">11</span>, <span class="st">"mytropic"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"map"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## to register a particular adapted palette for re-use in the same session</span></span></span>
+<span class="r-in"><span><span class="co">## with a new name the register=... argument can be used once, e.g.,</span></span></span>
+<span class="r-in"><span><span class="fu">diverging_hcl</span><span class="op">(</span><span class="fl">7</span>, palette <span class="op">=</span> <span class="st">"Tropic"</span>, h2 <span class="op">=</span> <span class="fl">0</span>, register <span class="op">=</span> <span class="st">"mytropic"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## subsequently palete="mytropic" is available in diverging_hcl() and the diverging</span></span></span>
+<span class="r-in"><span><span class="co">## ggplot2 scales such as scale_color_continuous_diverging() etc.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="demoplot.html">demoplot</a></span><span class="op">(</span><span class="fu">diverging_hcl</span><span class="op">(</span><span class="fl">11</span>, <span class="st">"mytropic"</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"map"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="hcl_palettes-14.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## to register this palette in all R sessions you could place the following</span></span>
-<span class="r-in"><span class="co">## code in a startup script (e.g., .Rprofile):</span></span>
-<span class="r-in"><span class="co">## colorspace::diverging_hcl(7, palette = "Tropic", h2 = 0, register = "mytropic")</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## to register this palette in all R sessions you could place the following</span></span></span>
+<span class="r-in"><span><span class="co">## code in a startup script (e.g., .Rprofile):</span></span></span>
+<span class="r-in"><span><span class="co">## colorspace::diverging_hcl(7, palette = "Tropic", h2 = 0, register = "mytropic")</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -457,7 +502,7 @@ Visualizations.  <em>Bulletin of the American Meteorological Society</em>,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

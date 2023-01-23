@@ -89,15 +89,15 @@ they appear lightened or darkened, respectively.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">lighten</span><span class="op">(</span>
-  <span class="va">col</span>,
-  amount <span class="op">=</span> <span class="fl">0.1</span>,
-  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"relative"</span>, <span class="st">"absolute"</span><span class="op">)</span>,
-  space <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HCL"</span>, <span class="st">"HLS"</span>, <span class="st">"combined"</span><span class="op">)</span>,
-  fixup <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-
-<span class="fu">darken</span><span class="op">(</span><span class="va">col</span>, amount <span class="op">=</span> <span class="fl">0.1</span>, space <span class="op">=</span> <span class="st">"combined"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lighten</span><span class="op">(</span></span>
+<span>  <span class="va">col</span>,</span>
+<span>  amount <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"relative"</span>, <span class="st">"absolute"</span><span class="op">)</span>,</span>
+<span>  space <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HCL"</span>, <span class="st">"HLS"</span>, <span class="st">"combined"</span><span class="op">)</span>,</span>
+<span>  fixup <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">darken</span><span class="op">(</span><span class="va">col</span>, amount <span class="op">=</span> <span class="fl">0.1</span>, space <span class="op">=</span> <span class="st">"combined"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -108,25 +108,38 @@ name (an element of <code><a href="https://rdrr.io/r/grDevices/colors.html" clas
 of the form <code>"#rrggbb"</code> or <code>"#rrggbbaa"</code> (see
 <code><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></code>), or an integer <code>i</code> meaning
 <code>palette()[i]</code>.</p></dd>
+
+
 <dt>amount</dt>
 <dd><p>numeric specifying the amount of lightening. This is applied either
 multiplicatively or additively to the luminance value, depending on the
 setting of <code>method</code> (either relative or absolute). Negative numbers
 cause darkening.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>character string specifying the adjustment method. Can be either <code>"relative"</code> or <code>"absolute"</code>.</p></dd>
+
+
 <dt>space</dt>
 <dd><p>character string specifying the color space in which adjustment happens. Can be either <code>"HLS"</code> or <code>"HCL"</code>.</p></dd>
+
+
 <dt>fixup</dt>
 <dd><p>logical If set to <code>TRUE</code>, colors that fall outside of the RGB color gamut are slightly modified
 by translating individual primary values so they lie between 0 and 255. If set to <code>FALSE</code>, out-of-gamut colors
 are replaced by <code>NA</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other parameters handed to the function <code>lighten()</code>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A character vector with (s)RGB codings of the colors in the palette.</p>
+    
+
+<p>A character vector with (s)RGB codings of the colors in the palette.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -166,68 +179,68 @@ or <code>darken</code>) does not look right in a specific application.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># lighten dark colors, example 1</span></span>
-<span class="r-in"><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># lighten dark colors, example 1</span></span></span>
+<span class="r-in"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="lighten-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># lighten dark colors, example 2</span></span>
-<span class="r-in"><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#61A9D9"</span>, <span class="st">"#ADD668"</span>, <span class="st">"#E6D152"</span>, <span class="st">"#CE6BAF"</span>, <span class="st">"#797CBA"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># lighten dark colors, example 2</span></span></span>
+<span class="r-in"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#61A9D9"</span>, <span class="st">"#ADD668"</span>, <span class="st">"#E6D152"</span>, <span class="st">"#CE6BAF"</span>, <span class="st">"#797CBA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">lighten</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"combined"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="lighten-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># darken light colors, example 1</span></span>
-<span class="r-in"><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">5</span>, <span class="st">"Pastel 1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># darken light colors, example 1</span></span></span>
+<span class="r-in"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">5</span>, <span class="st">"Pastel 1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="lighten-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># darken light colors, example 2 </span></span>
-<span class="r-in"><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#CDE4F3"</span>,<span class="st">"#E7F3D3"</span>,<span class="st">"#F7F0C7"</span>,<span class="st">"#EFCFE5"</span>,<span class="st">"#D0D1E7"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span>
-<span class="r-in">              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span>
-<span class="r-in">              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># darken light colors, example 2 </span></span></span>
+<span class="r-in"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#CDE4F3"</span>,<span class="st">"#E7F3D3"</span>,<span class="st">"#F7F0C7"</span>,<span class="st">"#EFCFE5"</span>,<span class="st">"#D0D1E7"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  combined <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  HCL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HCL"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  HLS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="st">"0%"</span> <span class="op">=</span> <span class="va">cl</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"15%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.15</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>              <span class="st">"30%"</span> <span class="op">=</span> <span class="fu">darken</span><span class="op">(</span><span class="va">cl</span>, <span class="fl">0.3</span>, space <span class="op">=</span> <span class="st">"HLS"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  nrow <span class="op">=</span> <span class="fl">4</span>, line <span class="op">=</span> <span class="fl">2.5</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="lighten-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -243,7 +256,7 @@ or <code>darken</code>) does not look right in a specific application.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

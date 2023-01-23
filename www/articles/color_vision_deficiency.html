@@ -154,6 +154,11 @@ graphics see <span class="citation">Lumley (<a href="#ref-color:Lumley:2006" rol
 which accompanies the R package dichromat <span class="citation">(<a href="#ref-color:dichromat" role="doc-biblioref">Lumley 2013</a>)</span>
 and is based on earlier emulation techniques <span class="citation">(<a href="#ref-color:Vienot+Brettel+Ott:1995" role="doc-biblioref">Viénot et
 al. 1995</a>; <a href="#ref-color:Brettel+Vienot+Mollon:1997" role="doc-biblioref">Brettel, Viénot, and Mollon 1997</a>; <a href="#ref-color:Vienot+Brettel+Mollon:1999" role="doc-biblioref">Viénot, Brettel, and Mollon 1999</a>)</span>.</p>
+<p><em>Note:</em> Up to version 2.0-3 of the package, the CVD
+transformations had been applied to the gamma-corrected sRGB coordinates
+<span class="citation">(following the illustrations of <a href="#ref-color:Machado+Oliveira+Fernandes:2009" role="doc-biblioref">Machado, Oliveira, and Fernandes 2009</a>)</span>
+instead of the more appropriate linear RGB coordinates. The latter is
+the default starting from version 2.1-0 of the package.</p>
 </div>
 <div class="section level2">
 <h2 id="illustration-heatmap-with-sequential-palette">Illustration: Heatmap with sequential palette<a class="anchor" aria-label="anchor" href="#illustration-heatmap-with-sequential-palette"></a>
@@ -172,13 +177,13 @@ well-known Maunga Whau <code>volcano</code> data from base R. This
 heatmap is easily available as <code>demoplot(x, "heatmap")</code> where
 <code>x</code> is the color vector to be used, e.g.,</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##  [1] "#FF0000" "#FF6600" "#FFCC00" "#CCFF00" "#66FF00" "#00FF00" "#00FF66"</span>
-<span class="co">##  [8] "#00FFCC" "#00CCFF" "#0066FF" "#0000FF"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "#FF0000" "#FF6600" "#FFCC00" "#CCFF00" "#66FF00" "#00FF00" "#00FF66"</span></span>
+<span><span class="co">##  [8] "#00FFCC" "#00CCFF" "#0066FF" "#0000FF"</span></span></code></pre>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/simulate_cvd.html">deutan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##  [1] "#A39000" "#B8A400" "#F2D820" "#FFEC35" "#F5DB39" "#EFD63A" "#EBD773"</span>
-<span class="co">##  [8] "#DDDAD0" "#93B3FE" "#0067FC" "#003DFB"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/simulate_cvd.html">deutan</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">11</span>, end <span class="op">=</span> <span class="fl">2</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##  [1] "#A39000" "#B8A400" "#F2D820" "#FFEC35" "#F5DB39" "#EFD63A" "#EBD773"</span></span>
+<span><span class="co">##  [8] "#DDDAD0" "#93B3FE" "#0067FC" "#003DFB"</span></span></code></pre>
 <p>and so on. To aid the interpretation of the heatmap a perspective
 display using only gray shades is included first, providing another
 intuitive display of what the terrain around Maunga Whau looks like.</p>
@@ -284,7 +289,7 @@ Viénot, F, H Brettel, L Ott, A B M’Barek, and J D Mollon. 1995.
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

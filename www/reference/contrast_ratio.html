@@ -89,18 +89,18 @@ Web Consortium (W3C).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">contrast_ratio</span><span class="op">(</span>
-  <span class="va">col</span>,
-  col2 <span class="op">=</span> <span class="st">"white"</span>,
-  algorithm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WCAG"</span>, <span class="st">"APCA"</span><span class="op">)</span>,
-  plot <span class="op">=</span> <span class="cn">FALSE</span>,
-  border <span class="op">=</span> <span class="cn">FALSE</span>,
-  cex <span class="op">=</span> <span class="fl">2</span>,
-  off <span class="op">=</span> <span class="fl">0.05</span>,
-  mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">4</span><span class="op">)</span>,
-  digits <span class="op">=</span> <span class="fl">2L</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">contrast_ratio</span><span class="op">(</span></span>
+<span>  <span class="va">col</span>,</span>
+<span>  col2 <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  algorithm <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"WCAG"</span>, <span class="st">"APCA"</span><span class="op">)</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  border <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cex <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  off <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fl">2L</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -111,35 +111,54 @@ name (an element of <code><a href="https://rdrr.io/r/grDevices/colors.html" clas
 of the form <code>"#rrggbb"</code> or <code>"#rrggbbaa"</code> (see
 <code><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></code>), or an integer <code>i</code> meaning
 <code>palette()[i]</code>. Both can be vectors and are recycled as necessary.</p></dd>
+
+
 <dt>algorithm</dt>
 <dd><p>character specifying whether the established standard <code>"WCAG"</code> 2.1 algorithm
 should be used or the improved <code>"APCA"</code> 0.98G-4g algorithm, still under development.</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>logical indicating whether the contrast ratios should also be
 visualized by simple color swatches. Can also be a vector of length 2, indicating
 whether the foreground color should be visualized on the background color and/or
 the background color on the foreground color.</p></dd>
+
+
 <dt>border</dt>
 <dd><p>logical or color specification for the borders around the color swatches (only
 used if <code>plot = TRUE</code>). The default is <code>FALSE</code> which is equivalent to
 <code>"transparent"</code>. If <code>TRUE</code> the border is drawn in the same color as the text in the
 rectangle.</p></dd>
+
+
 <dt>cex</dt>
 <dd><p>numeric. Size of the text in the color color swatches (only if <code>plot = TRUE</code>).</p></dd>
+
+
 <dt>off</dt>
 <dd><p>numeric. Vertical offset between the different color swatches (only if <code>plot = TRUE</code>).
 Can also be of length 2 giving both vertical and horizontal offsets, respectively.</p></dd>
+
+
 <dt>mar</dt>
 <dd><p>numeric. Size of the margins around the color swatches (only if <code>plot = TRUE</code>).</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>numeric. Number of digits for the contrast ratios displayed in the color swatches
 (only if <code>plot = TRUE</code>)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>further arguments passed to the plot of the color swatches (only if <code>plot = TRUE</code>).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A numeric vector with the contrast ratios is returned (invisibly, if <code>plot</code> is <code>TRUE</code>).</p>
+    
+
+<p>A numeric vector with the contrast ratios is returned (invisibly, if <code>plot</code> is <code>TRUE</code>).</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -176,19 +195,19 @@ Datawrapper Blog. <a href="https://blog.datawrapper.de/color-contrast-check-data
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># check contrast ratio of default palette on white background</span></span>
-<span class="r-in"><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># check contrast ratio of default palette on white background</span></span></span>
+<span class="r-in"><span><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 21.000000  3.758588  1.973030  3.163940  1.603030  4.805641  1.608044</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [8]  2.679156</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># visualize contrast ratio of default palette on white and black background</span></span>
-<span class="r-in"><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># visualize contrast ratio of default palette on white and black background</span></span></span>
+<span class="r-in"><span><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="contrast_ratio-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"black"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, <span class="st">"black"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="contrast_ratio-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># APCA algorithm</span></span>
-<span class="r-in"><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, algorithm <span class="op">=</span> <span class="st">"APCA"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># APCA algorithm</span></span></span>
+<span class="r-in"><span><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, algorithm <span class="op">=</span> <span class="st">"APCA"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         normal    reverse</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 106.04067 -107.88473</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  64.27800  -69.77386</span>
@@ -198,7 +217,7 @@ Datawrapper Blog. <a href="https://blog.datawrapper.de/color-contrast-check-data
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,]  71.04046  -76.51234</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [7,]  27.09773  -30.60320</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [8,]  52.07286  -57.27345</span>
-<span class="r-in"><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, algorithm <span class="op">=</span> <span class="st">"APCA"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">contrast_ratio</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, algorithm <span class="op">=</span> <span class="st">"APCA"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="contrast_ratio-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -214,7 +233,7 @@ Datawrapper Blog. <a href="https://blog.datawrapper.de/color-contrast-check-data
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -89,84 +89,129 @@ flexible (and possibly unbalanced) multi-hue sequential palettes.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">divergingx_hcl</span><span class="op">(</span>
-  <span class="va">n</span>,
-  palette <span class="op">=</span> <span class="st">"Geyser"</span>,
-  <span class="va">...</span>,
-  fixup <span class="op">=</span> <span class="cn">TRUE</span>,
-  alpha <span class="op">=</span> <span class="fl">1</span>,
-  rev <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">h1</span>,
-  <span class="va">h2</span>,
-  <span class="va">h3</span>,
-  <span class="va">c1</span>,
-  <span class="va">c2</span>,
-  <span class="va">c3</span>,
-  <span class="va">l1</span>,
-  <span class="va">l2</span>,
-  <span class="va">l3</span>,
-  <span class="va">p1</span>,
-  <span class="va">p2</span>,
-  <span class="va">p3</span>,
-  <span class="va">p4</span>,
-  <span class="va">cmax1</span>,
-  <span class="va">cmax2</span>
-<span class="op">)</span>
-
-<span class="fu">divergingx_palettes</span><span class="op">(</span>palette <span class="op">=</span> <span class="cn">NULL</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, n <span class="op">=</span> <span class="fl">7L</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">divergingx_hcl</span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"Geyser"</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  fixup <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  rev <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">h1</span>,</span>
+<span>  <span class="va">h2</span>,</span>
+<span>  <span class="va">h3</span>,</span>
+<span>  <span class="va">c1</span>,</span>
+<span>  <span class="va">c2</span>,</span>
+<span>  <span class="va">c3</span>,</span>
+<span>  <span class="va">l1</span>,</span>
+<span>  <span class="va">l2</span>,</span>
+<span>  <span class="va">l3</span>,</span>
+<span>  <span class="va">p1</span>,</span>
+<span>  <span class="va">p2</span>,</span>
+<span>  <span class="va">p3</span>,</span>
+<span>  <span class="va">p4</span>,</span>
+<span>  <span class="va">cmax1</span>,</span>
+<span>  <span class="va">cmax2</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">divergingx_palettes</span><span class="op">(</span>palette <span class="op">=</span> <span class="cn">NULL</span>, plot <span class="op">=</span> <span class="cn">FALSE</span>, n <span class="op">=</span> <span class="fl">7L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>n</dt>
 <dd><p>the number of colors (\(\ge 1\)) to be in the palette.</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>character with the name (see details).</p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed to <code><a href="hex.html">hex</a></code>.</p></dd>
+
+
 <dt>fixup</dt>
 <dd><p>logical. Should the color be corrected to a valid RGB value?</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>numeric vector of values in the range <code>[0, 1]</code> for alpha
 transparency channel (0 means transparent and 1 means opaque).</p></dd>
+
+
 <dt>rev</dt>
 <dd><p>logical. Should the palette be reversed?</p></dd>
+
+
 <dt>h1</dt>
 <dd><p>numeric. Starting hue coordinate.</p></dd>
+
+
 <dt>h2</dt>
 <dd><p>numeric. Center hue coordinate.</p></dd>
+
+
 <dt>h3</dt>
 <dd><p>numeric. Ending hue coordinate.</p></dd>
+
+
 <dt>c1</dt>
 <dd><p>numeric. Chroma coordinate corresponding to <code>h1</code>.</p></dd>
+
+
 <dt>c2</dt>
 <dd><p>numeric. Chroma coordinate corresponding to <code>h2</code> (if <code>NA</code>, set to 0).</p></dd>
+
+
 <dt>c3</dt>
 <dd><p>numeric. Chroma coordinate corresponding to <code>h3</code>.</p></dd>
+
+
 <dt>l1</dt>
 <dd><p>numeric. Luminance coordinate corresponding to <code>h1</code>.</p></dd>
+
+
 <dt>l2</dt>
 <dd><p>numeric. Luminance coordinate corresponding to <code>h2</code>.</p></dd>
+
+
 <dt>l3</dt>
 <dd><p>numeric. Luminance coordinate corresponding to <code>h3</code> (if <code>NA</code>, <code>l1</code> is used).</p></dd>
+
+
 <dt>p1</dt>
 <dd><p>numeric. Power parameter for chroma coordinates in first sequential palette.</p></dd>
+
+
 <dt>p2</dt>
 <dd><p>numeric. Power parameter for luminance coordinates in first sequential palette (if <code>NA</code>, <code>p1</code> is used).</p></dd>
+
+
 <dt>p3</dt>
 <dd><p>numeric. Power parameter for chroma coordinates in second sequential palette (if <code>NA</code>, <code>p1</code> is used).</p></dd>
+
+
 <dt>p4</dt>
 <dd><p>numeric. Power parameter for luminance coordinates in second sequential palette (if <code>NA</code>, <code>p3</code> is used).</p></dd>
+
+
 <dt>cmax1</dt>
 <dd><p>numeric. Maximum chroma coordinate in first sequential palette (not used if <code>NA</code>).</p></dd>
+
+
 <dt>cmax2</dt>
 <dd><p>numeric. Maximum chroma coordinate in second sequential palette (if <code>NA</code>, <code>cmax1</code> is used).</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>logical. Should the selected HCL color palettes be visualized?</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A character vector with (s)RGB codings of the colors in the palette.</p>
+    
+
+<p>A character vector with (s)RGB codings of the colors in the palette.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -202,13 +247,13 @@ RdYlGn, Spectral.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## show emulated CARTO/ColorBrewer.org palettes</span></span>
-<span class="r-in"><span class="fu">divergingx_palettes</span><span class="op">(</span>plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## show emulated CARTO/ColorBrewer.org palettes</span></span></span>
+<span class="r-in"><span><span class="fu">divergingx_palettes</span><span class="op">(</span>plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="divergingx_hcl-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## compared to diverging_hcl() the diverging CARTO palettes are typically warmer</span></span>
-<span class="r-in"><span class="co">## but also less balanced with respect to chroma/luminance, see e.g.,</span></span>
-<span class="r-in"><span class="fu"><a href="specplot.html">specplot</a></span><span class="op">(</span><span class="fu">divergingx_hcl</span><span class="op">(</span><span class="fl">7</span>, <span class="st">"ArmyRose"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## compared to diverging_hcl() the diverging CARTO palettes are typically warmer</span></span></span>
+<span class="r-in"><span><span class="co">## but also less balanced with respect to chroma/luminance, see e.g.,</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="specplot.html">specplot</a></span><span class="op">(</span><span class="fu">divergingx_hcl</span><span class="op">(</span><span class="fl">7</span>, <span class="st">"ArmyRose"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="divergingx_hcl-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -224,7 +269,7 @@ RdYlGn, Spectral.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -89,73 +89,103 @@ coordinates.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">specplot</span><span class="op">(</span>
-  <span class="va">x</span>,
-  y <span class="op">=</span> <span class="cn">NULL</span>,
-  rgb <span class="op">=</span> <span class="cn">FALSE</span>,
-  hcl <span class="op">=</span> <span class="cn">TRUE</span>,
-  fix <span class="op">=</span> <span class="cn">TRUE</span>,
-  cex <span class="op">=</span> <span class="fl">1</span>,
-  type <span class="op">=</span> <span class="st">"l"</span>,
-  lwd <span class="op">=</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">cex</span>,
-  lty <span class="op">=</span> <span class="fl">1</span>,
-  pch <span class="op">=</span> <span class="cn">NULL</span>,
-  mar <span class="op">=</span> <span class="cn">NULL</span>,
-  oma <span class="op">=</span> <span class="cn">NULL</span>,
-  main <span class="op">=</span> <span class="cn">NULL</span>,
-  legend <span class="op">=</span> <span class="cn">TRUE</span>,
-  palette <span class="op">=</span> <span class="cn">TRUE</span>,
-  plot <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">specplot</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  y <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rgb <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  hcl <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fix <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  cex <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  lwd <span class="op">=</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">cex</span>,</span>
+<span>  lty <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  pch <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mar <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  oma <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  main <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  legend <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  palette <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>character vector containing color hex codes.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>optional second character vector containing further color hex codes,
 to be used for comparing two palettes (<code>x</code> vs. <code>y</code>).</p></dd>
+
+
 <dt>rgb</dt>
 <dd><p>logical or color specification. Should the RGB spectrum be
 visualized? Can also be a vector of three colors for the legend of R/G/B coordinates.</p></dd>
+
+
 <dt>hcl</dt>
 <dd><p>logical or color specification. Should the HCL spectrum be
 visualized? Can also be a vector of three colors for the legend of H/C/L coordinates.</p></dd>
+
+
 <dt>fix</dt>
 <dd><p>logical. Should the hues be fixed to be on a smooth(er) curve?
 For details see below.</p></dd>
+
+
 <dt>cex</dt>
 <dd><p>numeric. Character extension for figure axes and labels.</p></dd>
+
+
 <dt>type, lwd, lty, pch</dt>
 <dd><p>plotting parameters passed to
 <code><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></code> for drawing the RGB and HCL coordinates,
 respectively. Can be vectors of length 3.</p></dd>
+
+
 <dt>mar, oma</dt>
 <dd><p>numeric or logical. Either numeric vectors of length 4 giving
 the (outer) margins or a logical indicating whether <code>mar</code>/<code>oma</code>
 should be set.</p></dd>
+
+
 <dt>main</dt>
 <dd><p>character. Main title of the plot.</p></dd>
+
+
 <dt>legend</dt>
 <dd><p>logical. Should legends for the coordinates be plotted?</p></dd>
+
+
 <dt>palette</dt>
 <dd><p>logical. Should the given palette <code>x</code> be plotted?</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>logical. Should the RGB and/or HCL coordinates be plotted?</p></dd>
+
+
 <dt>...</dt>
 <dd><p>currently not used.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>specplot</code> invisibly returns a list with components</p>
+    
+
+<p><code>specplot</code> invisibly returns a list with components</p>
 <dl><dt>HCL</dt>
 <dd><p>a matrix of HCL coordinates,</p></dd>
+
 <dt>RGB</dt>
 <dd><p>a matrix of sRGB coordinates,</p></dd>
+
 <dt>hex</dt>
 <dd><p>original color palette <code>x</code>.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -211,21 +241,21 @@ Visualizations.  <em>Bulletin of the American Meteorological Society</em>,
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## spectrum of the (in)famous RGB rainbow palette (in both RGB and HCL)</span></span>
-<span class="r-in"><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, rgb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## spectrum of the (in)famous RGB rainbow palette (in both RGB and HCL)</span></span></span>
+<span class="r-in"><span><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, rgb <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="specplot-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## spectrum of HCL-based palettes: qualitative/sequential/diverging</span></span>
-<span class="r-in"><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">100</span>, <span class="st">"Set 2"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## spectrum of HCL-based palettes: qualitative/sequential/diverging</span></span></span>
+<span class="r-in"><span><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="hcl_palettes.html">qualitative_hcl</a></span><span class="op">(</span><span class="fl">100</span>, <span class="st">"Set 2"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="specplot-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">100</span>, <span class="st">"Blues 2"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="hcl_palettes.html">sequential_hcl</a></span><span class="op">(</span><span class="fl">100</span>, <span class="st">"Blues 2"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="specplot-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="hcl_palettes.html">diverging_hcl</a></span><span class="op">(</span><span class="fl">100</span>, <span class="st">"Blue-Red"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="hcl_palettes.html">diverging_hcl</a></span><span class="op">(</span><span class="fl">100</span>, <span class="st">"Blue-Red"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="specplot-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## return computed RGB and HCL coordinates</span></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## return computed RGB and HCL coordinates</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">specplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $HCL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               H         C        L</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]  12.17395 179.04076 53.24059</span>
@@ -270,7 +300,7 @@ Visualizations.  <em>Bulletin of the American Meteorological Society</em>,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

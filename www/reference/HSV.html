@@ -89,7 +89,7 @@ color-class class."><meta property="og:image" content="https://colorspace.R-Forg
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">HSV</span><span class="op">(</span><span class="va">H</span>, <span class="va">S</span>, <span class="va">V</span>, <span class="va">names</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">HSV</span><span class="op">(</span><span class="va">H</span>, <span class="va">S</span>, <span class="va">V</span>, <span class="va">names</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -98,13 +98,18 @@ color-class class."><meta property="og:image" content="https://colorspace.R-Forg
 <dd><p>These arguments give the hue, saturation and value of the
 colors. The values can be provided in separate <code>H</code>, <code>S</code> and
 <code>V</code> vectors or in a three-column matrix passed as <code>H</code>.</p></dd>
+
+
 <dt>names</dt>
 <dd><p>A vector of names for the colors (by default the row names of
 <code>H</code> are used).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>HSV</code> which inherits from class <code>color</code>.</p>
+    
+
+<p>An object of class <code>HSV</code> which inherits from class <code>color</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -128,8 +133,8 @@ standard <code><a href="sRGB.html">sRGB</a></code> color space (IEC standard 619
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># A rainbow of full-intensity hues</span></span>
-<span class="r-in"><span class="fu">HSV</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span>, length.out <span class="op">=</span> <span class="fl">13</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">13</span><span class="op">]</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># A rainbow of full-intensity hues</span></span></span>
+<span class="r-in"><span><span class="fu">HSV</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span>, length.out <span class="op">=</span> <span class="fl">13</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">13</span><span class="op">]</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         H S V</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1,]   0 1 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [2,]  30 1 1</span>
@@ -157,7 +162,7 @@ standard <code><a href="sRGB.html">sRGB</a></code> color space (IEC standard 619
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

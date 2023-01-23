@@ -170,18 +170,18 @@ vision deficiency</a> article.</p>
 <p>First, <code><a href="../reference/desaturate.html">desaturate()</a></code> is used to desaturate a vector of R
 color names:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"orange"</span>, <span class="st">"blue"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#FFFFFF" "#B8B8B8" "#4C4C4C" "#000000"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"orange"</span>, <span class="st">"blue"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#FFFFFF" "#B8B8B8" "#4C4C4C" "#000000"</span></span></code></pre>
 <p>Notice that the hex codes corresponding to three coordinates in sRGB
 space are always the same, indicating gray colors.</p>
 <p>Analogously, hex color codes can also be transformed - in this case
 RGB rainbow colors from the base R function <code><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#FF0000" "#00FF00" "#0000FF"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#FF0000" "#00FF00" "#0000FF"</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#7F7F7F" "#DCDCDC" "#4C4C4C"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#7F7F7F" "#DCDCDC" "#4C4C4C"</span></span></code></pre>
 <p>Even this simple example suffices to show that the three RGB rainbow
 colors have very different grayscale levels. This deficiency is even
 clearer when using a full color wheel (of colors with hues in [0, 360]
@@ -189,13 +189,13 @@ degrees). While the RGB <code><a href="https://rdrr.io/r/grDevices/palettes.html
 HCL <code><a href="../reference/rainbow_hcl.html">rainbow_hcl()</a></code> (or also <code><a href="../reference/hcl_palettes.html">qualitative_hcl()</a></code>)
 is (by design) balanced with respect to luminance.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">wheel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">col</span>, <span class="va">radius</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/graphics/pie.html" class="external-link">pie</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">col</span><span class="op">)</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">col</span>, radius <span class="op">=</span> <span class="va">radius</span>, <span class="va">...</span><span class="op">)</span> 
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">4</span><span class="op">)</span>, mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="../reference/rainbow_hcl.html">rainbow_hcl</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="../reference/rainbow_hcl.html">rainbow_hcl</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">wheel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">col</span>, <span class="va">radius</span> <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/pie.html" class="external-link">pie</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">col</span><span class="op">)</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">col</span>, radius <span class="op">=</span> <span class="va">radius</span>, <span class="va">...</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">4</span><span class="op">)</span>, mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">rainbow</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="../reference/rainbow_hcl.html">rainbow_hcl</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">wheel</span><span class="op">(</span><span class="fu"><a href="../reference/desaturate.html">desaturate</a></span><span class="op">(</span><span class="fu"><a href="../reference/rainbow_hcl.html">rainbow_hcl</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="manipulation_utilities_files/figure-html/desaturate-wheel-1.png" width="576"></p>
 </div>
 <div class="section level2">
@@ -231,15 +231,15 @@ details.</p>
 <p>For illustration a qualitative palette (Okabe-Ito) is transformed by
 two levels of both lightening and darkening, respectively.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">oi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#61A9D9"</span>, <span class="st">"#ADD668"</span>, <span class="st">"#E6D152"</span>, <span class="st">"#CE6BAF"</span>, <span class="st">"#797CBA"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span>
-  <span class="st">"-40%"</span> <span class="op">=</span> <span class="fu"><a href="../reference/lighten.html">lighten</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.4</span><span class="op">)</span>,
-  <span class="st">"-20%"</span> <span class="op">=</span> <span class="fu"><a href="../reference/lighten.html">lighten</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.2</span><span class="op">)</span>,
-  <span class="st">"  0%"</span> <span class="op">=</span> <span class="va">oi</span>,
-  <span class="st">" 20%"</span> <span class="op">=</span>  <span class="fu"><a href="../reference/lighten.html">darken</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.2</span><span class="op">)</span>,
-  <span class="st">" 40%"</span> <span class="op">=</span>  <span class="fu"><a href="../reference/lighten.html">darken</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.4</span><span class="op">)</span>,
-  off <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">oi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#61A9D9"</span>, <span class="st">"#ADD668"</span>, <span class="st">"#E6D152"</span>, <span class="st">"#CE6BAF"</span>, <span class="st">"#797CBA"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span></span>
+<span>  <span class="st">"-40%"</span> <span class="op">=</span> <span class="fu"><a href="../reference/lighten.html">lighten</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.4</span><span class="op">)</span>,</span>
+<span>  <span class="st">"-20%"</span> <span class="op">=</span> <span class="fu"><a href="../reference/lighten.html">lighten</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>  <span class="st">"  0%"</span> <span class="op">=</span> <span class="va">oi</span>,</span>
+<span>  <span class="st">" 20%"</span> <span class="op">=</span>  <span class="fu"><a href="../reference/lighten.html">darken</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>  <span class="st">" 40%"</span> <span class="op">=</span>  <span class="fu"><a href="../reference/lighten.html">darken</a></span><span class="op">(</span><span class="va">oi</span>, <span class="fl">0.4</span><span class="op">)</span>,</span>
+<span>  off <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="manipulation_utilities_files/figure-html/lighten-darken-1.png" width="432"></p>
 </div>
 <div class="section level2">
@@ -280,14 +280,14 @@ fully opaque, respectively. Black can be equivalently specified by name
 (<code>"black"</code>), hex string (<code>"#000000"</code>), or integer
 position in the palette (<code>1</code>).</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="st">"black"</span>,   alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#00000000" "#00000080" "#000000FF"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="st">"black"</span>,   alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#00000000" "#00000080" "#000000FF"</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="st">"#000000"</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#00000000" "#00000080" "#000000FF"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="st">"#000000"</span>, alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#00000000" "#00000080" "#000000FF"</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="fl">1</span>,         alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#00000000" "#00000080" "#000000FF"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="fl">1</span>,         alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#00000000" "#00000080" "#000000FF"</span></span></code></pre>
 <p>Subsequently, different settings of <code>alpha</code> are
 illustrated for adjusting a vector with three shades of gray, specified
 by name (<code>gray</code>, opaque), opaque hex string
@@ -297,18 +297,18 @@ necessary (<code>alpha = NULL</code>), add (<code>alpha = TRUE</code>),
 remove (<code>alpha = FALSE</code>), or modify
 (<code>alpha = 0.8</code>).</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gray"</span>, <span class="st">"#BEBEBE"</span>, <span class="st">"#BEBEBE80"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#BEBEBE"   "#BEBEBE"   "#BEBEBE80"</span></code></pre>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gray"</span>, <span class="st">"#BEBEBE"</span>, <span class="st">"#BEBEBE80"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#BEBEBE"   "#BEBEBE"   "#BEBEBE80"</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#BEBEBEFF" "#BEBEBEFF" "#BEBEBE80"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#BEBEBEFF" "#BEBEBEFF" "#BEBEBE80"</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#BEBEBE" "#BEBEBE" "#BEBEBE"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#BEBEBE" "#BEBEBE" "#BEBEBE"</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "#BEBEBECC" "#BEBEBECC" "#BEBEBECC"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">adjust_transparency</a></span><span class="op">(</span><span class="va">x</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "#BEBEBECC" "#BEBEBECC" "#BEBEBECC"</span></span></code></pre>
 <p>The <code><a href="../reference/adjust_transparency.html">extract_transparency()</a></code> function can be used to
 extract the alpha transparency from a set of colors. It allows to
 specify the <code>default</code> value - that should be used for colors
@@ -323,17 +323,17 @@ or be <code>NA</code>.</p>
 <code>x</code> in different formats and with different default
 values</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, mode <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 1.0000000 1.0000000 0.5019608</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, mode <span class="op">=</span> <span class="st">"numeric"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 1.0000000 1.0000000 0.5019608</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, mode <span class="op">=</span> <span class="st">"hexmode"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "ff" "ff" "80"</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, mode <span class="op">=</span> <span class="st">"hexmode"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "ff" "ff" "80"</span></span></code></pre>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1]        NA        NA 0.5019608</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1]        NA        NA 0.5019608</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="st">"80"</span>, mode <span class="op">=</span> <span class="st">"integer"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 128 128 128</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/adjust_transparency.html">extract_transparency</a></span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="st">"80"</span>, mode <span class="op">=</span> <span class="st">"integer"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 128 128 128</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="compute-and-visualize-w3c-contrast-ratios">Compute and visualize W3C contrast ratios<a class="anchor" aria-label="anchor" href="#compute-and-visualize-w3c-contrast-ratios"></a>
@@ -349,11 +349,11 @@ background color and not to colors used in data visualization.</p>
 <p>For illustration we compute and visualize the contrast ratios of the
 default palette in R compared to a white background.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/contrast_ratio.html">contrast_ratio</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 21.000000  3.758588  1.973030  3.163940  1.603030  4.805641  1.608044</span>
-<span class="co">## [8]  2.679156</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/contrast_ratio.html">contrast_ratio</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 21.000000  3.758588  1.973030  3.163940  1.603030  4.805641  1.608044</span></span>
+<span><span class="co">## [8]  2.679156</span></span></code></pre>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/contrast_ratio.html">contrast_ratio</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/contrast_ratio.html">contrast_ratio</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"white"</span>, plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="manipulation_utilities_files/figure-html/contrast-ratio-1.png" width="336"></p>
 </div>
 <div class="section level2">
@@ -369,13 +369,13 @@ chroma possible.</p>
 <p>For illustration we show that for given luminance (here: L = 50) the
 maximum chroma varies substantially with hue:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/max_chroma.html">max_chroma</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span>, by <span class="op">=</span> <span class="fl">60</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 137.96  59.99  69.06  39.81  65.45 119.54 137.96</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/max_chroma.html">max_chroma</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">360</span>, by <span class="op">=</span> <span class="fl">60</span><span class="op">)</span>, l <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 137.96  59.99  69.06  39.81  65.45 119.54 137.96</span></span></code></pre>
 <p>Similarly, maximum chroma also varies substantially across luminance
 values for a given hue (here: H = 120, green):</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/max_chroma.html">max_chroma</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">120</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1]   0.00  28.04  55.35  82.79 110.28   0.00</span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/max_chroma.html">max_chroma</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">120</span>, l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1]   0.00  28.04  55.35  82.79 110.28   0.00</span></span></code></pre>
 <p>In the plots below more combinations are visualized: In the left
 panel for maximum chroma across hues given luminance and in the right
 panel with increasing luminance given hue.</p>
@@ -389,15 +389,15 @@ panel with increasing luminance given hue.</p>
 mixing. Below a fully saturated red and green are mixed, yielding a
 medium brownish yellow.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">R</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RGB.html">RGB</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>
-<span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RGB.html">RGB</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>
-<span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mixcolor.html">mixcolor</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="va">R</span>, <span class="va">G</span><span class="op">)</span>
-<span class="va">Y</span></code></pre></div>
-<pre><code><span class="co">##        R   G B</span>
-<span class="co">## [1,] 0.5 0.5 0</span></code></pre>
+<code class="sourceCode R"><span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RGB.html">RGB</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RGB.html">RGB</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mixcolor.html">mixcolor</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="va">R</span>, <span class="va">G</span><span class="op">)</span></span>
+<span><span class="va">Y</span></span></code></pre></div>
+<pre><code><span><span class="co">##        R   G B</span></span>
+<span><span class="co">## [1,] 0.5 0.5 0</span></span></code></pre>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span>, <span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span>, <span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="va">G</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/swatchplot.html">swatchplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span>, <span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="va">Y</span><span class="op">)</span>, <span class="fu"><a href="../reference/hex.html">hex</a></span><span class="op">(</span><span class="va">G</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="manipulation_utilities_files/figure-html/mixcolor-1.png" width="240"></p>
 </div>
   </div>
@@ -419,7 +419,7 @@ medium brownish yellow.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

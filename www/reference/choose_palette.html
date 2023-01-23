@@ -89,9 +89,9 @@ color palettes.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">choose_palette</span><span class="op">(</span>pal <span class="op">=</span> <span class="va">diverging_hcl</span>, n <span class="op">=</span> <span class="fl">7L</span>, parent <span class="op">=</span> <span class="cn">NULL</span>, gui <span class="op">=</span> <span class="st">"tcltk"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">hclwizard</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">7L</span>, gui <span class="op">=</span> <span class="st">"shiny"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">choose_palette</span><span class="op">(</span>pal <span class="op">=</span> <span class="va">diverging_hcl</span>, n <span class="op">=</span> <span class="fl">7L</span>, parent <span class="op">=</span> <span class="cn">NULL</span>, gui <span class="op">=</span> <span class="st">"tcltk"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">hclwizard</span><span class="op">(</span>n <span class="op">=</span> <span class="fl">7L</span>, gui <span class="op">=</span> <span class="st">"shiny"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -99,20 +99,31 @@ color palettes.</p>
     <dl><dt>pal</dt>
 <dd><p>function; the initial palette, see ‘Value’ below.  Only
 used if <code>gui = "tcltk"</code>.</p></dd>
+
+
 <dt>n</dt>
 <dd><p>integer; the initial number of colors in the palette.</p></dd>
+
+
 <dt>parent</dt>
 <dd><p>tkwin; the GUI parent window.  Only used if <code>gui =
 "tcltk"</code>.</p></dd>
+
+
 <dt>gui</dt>
 <dd><p>character; GUI to use. Available options are <code>tcltk</code> and
 <code>shiny</code>, see ‘Details’ below.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>used for development purposes only.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a palette-generating function with the selected arguments.
+    
+
+<p>Returns a palette-generating function with the selected arguments.
 Thus, the returned function takes an integer argument and returns the
 corresponding number of HCL colors by traversing HCL space through
 interpolation of the specified hue/chroma/luminance/power values.</p>
@@ -175,18 +186,18 @@ Visualizations.  <em>Bulletin of the American Meteorological Society</em>,
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## Using tcltk GUI</span></span>
-<span class="r-in"><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu">choose_palette</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">## or equivalently: hclwizard(gui = "tcltk")</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Using shiny GUI</span></span>
-<span class="r-in"><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu">hclwizard</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="co">## or equivalently: choose_palette(gui = "shiny")</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## use resulting palette function</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/filled.contour.html" class="external-link">filled.contour</a></span><span class="op">(</span><span class="va">volcano</span>, color.palette <span class="op">=</span> <span class="va">pal</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## Using tcltk GUI</span></span></span>
+<span class="r-in"><span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu">choose_palette</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## or equivalently: hclwizard(gui = "tcltk")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Using shiny GUI</span></span></span>
+<span class="r-in"><span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu">hclwizard</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## or equivalently: choose_palette(gui = "shiny")</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## use resulting palette function</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/filled.contour.html" class="external-link">filled.contour</a></span><span class="op">(</span><span class="va">volcano</span>, color.palette <span class="op">=</span> <span class="va">pal</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -201,7 +212,7 @@ Visualizations.  <em>Bulletin of the American Meteorological Society</em>,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -93,7 +93,7 @@ will be written to disc as a PNG file.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">cvd_image</span><span class="op">(</span><span class="va">img</span>, <span class="va">type</span>, <span class="va">file</span>, severity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cvd_image</span><span class="op">(</span><span class="va">img</span>, <span class="va">type</span>, <span class="va">file</span>, severity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -102,15 +102,22 @@ will be written to disc as a PNG file.</p>
 <dd><p><code>array</code> as returned by <code>readPNG</code> and <code>readJPEG</code>
 of size <code>height x width x depth</code>. The depth coordinate contains
 R/G/B and alpha if given (png).</p></dd>
+
+
 <dt>type</dt>
 <dd><p><code>string</code> name of the function which will be used to
 convert the colors (<code>deutan</code>, <code>protan</code>, <code>tritan</code>, <code>desaturate</code>).
 If set to <code>original</code> the image will be written as is.</p></dd>
+
+
 <dt>file</dt>
 <dd><p><code>string</code> with (full) path to resulting image. Has to
 be a png image name.</p></dd>
+
+
 <dt>severity</dt>
 <dd><p>numeric. Severity of the color vision defect, a number between 0 and 1.</p></dd>
+
 </dl></div>
 
   </div>
@@ -125,7 +132,7 @@ be a png image name.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

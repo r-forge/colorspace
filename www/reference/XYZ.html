@@ -89,7 +89,7 @@ color-class class."><meta property="og:image" content="https://colorspace.R-Forg
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">XYZ</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, <span class="va">Z</span>, <span class="va">names</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">XYZ</span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, <span class="va">Z</span>, <span class="va">names</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -98,13 +98,18 @@ color-class class."><meta property="og:image" content="https://colorspace.R-Forg
 <dd><p>these arguments give the X, Y and Z coordinates of the colors.
 The values can be provided in separate <code>X</code>, <code>Y</code> and <code>Z</code>
 vectors or in a three-column matrix passed as <code>X</code>.</p></dd>
+
+
 <dt>names</dt>
 <dd><p>A vector of names for the colors (by default the row names of
 <code>X</code> are used).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>XYZ</code> which inherits from class <code>color</code>.</p>
+    
+
+<p>An object of class <code>XYZ</code> which inherits from class <code>color</code>.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -125,8 +130,8 @@ taken to be D65, which means that its coordinates are 95.047, 100.000,
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Generate white in XYZ space</span></span>
-<span class="r-in"><span class="fu">XYZ</span><span class="op">(</span><span class="fl">95.047</span>, <span class="fl">100.000</span>, <span class="fl">108.883</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Generate white in XYZ space</span></span></span>
+<span class="r-in"><span><span class="fu">XYZ</span><span class="op">(</span><span class="fl">95.047</span>, <span class="fl">100.000</span>, <span class="fl">108.883</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           X   Y       Z</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 95.047 100 108.883</span>
 </code></pre></div>
@@ -143,7 +148,7 @@ taken to be D65, which means that its coordinates are 95.047, 100.000,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
