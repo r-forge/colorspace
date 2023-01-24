@@ -191,9 +191,10 @@ a number of years. There were various reasons for this including the following:
   (Comprehensive R Archive Network)
   starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
   \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
-  somewhat more recently
-  \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], or 
-  \CRANpkg{scico} [@scico],
+  more recently
+  \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], 
+  \CRANpkg{scico} [@scico], and 
+  \CRANpkg{cols4all} [@cols4all],
   among many others.
 
 * Higher-level graphics systems
@@ -251,6 +252,105 @@ In particular, `palette()` has a new improved default color palette,
 `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
 the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL], see @grDevices and @Zeileis+Fisher+Hornik:2020.
 
+Figure \ref{fig:tsplot} shows several versions of a time series plot,
+comparing the old `"R3"` default color palette with
+the new `"R4"` default and a new `"Okabe-Ito"` qualitative 
+palette @Okabe+Ito:2008
+that can be selected using `palette.colors()`.
+The first row shows the `"R3"` default;  the second column shows
+an emulation of a kind of red-green
+color blindness known as protanopia using the \pkg{colorspace} package 
+(based on the algorithms of @Machado+Oliveira+Fernandes:2009).
+The second row uses the `"R4"` palette and the third row 
+uses `"Okabe-Ito"`.
+
+We can see that the `"R3"` colors are highly saturated and they vary in 
+luminance. For example, the cyan line is noticeably lighter than the others.
+Futhermore, for protanope viewers, the 
+DAX and the SMI lines are difficult to 
+distinguish from each other and the American FTSE line is difficult to
+distinguish from the white background.
+
+The `"R4"` palette is an improvement:  the luminance is more even and
+the colors are less saturated, plus the colors are more
+distinguishable for protanope viewers. 
+The `"Okabe-Ito"` palette also works better than `"R3"`,
+particularly for protanope viewers.
+
+```{r tsplot, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Time series line plot of \\code{EuStockMarkets}. Rows: Old \\code{"R3"} default palette (top), new \\code{"R4"} default palette (middle), \\code{"OkabeIto"} palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated protanope vision (right). A color legend is used in the first row and direct labels in the other rows.'}
+tsplot <- function(palette = "R3", protan = FALSE, legend = TRUE, ...) {
+  ## color palette
+  palette <- match.arg(palette, c("R3", "R4", "Okabe-Ito"))
+  p <- switch(palette,
+    "R3" = palette.colors(8, "R3")[c(1:3, 5)],
+    "R4" = palette.colors(8, "R4")[c(1:3, 5)],
+    "Okabe-Ito" = palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)]
+  )
+  
+  ## emulate protanope vision?
+  if(protan) p <- colorspace::protan(p) 
+  
+  ## time series plot
+  eu <- window(EuStockMarkets, end = 1998)
+  plot(eu, log = "y", ylab = "EU Stock Prices", plot.type = "single", col = p, xlim = c(1991.6, 1998.4), lwd = 1.5, ...)
+  text(1991.3, 6000, palette, pos = 4, cex = 1.5)
+
+  ## legend or direct labeling
+  if(legend) {
+    legend(1991.3, 6000, colnames(eu), col = p, lty = 1, lwd = 3, bty = "n")
+  } else {
+    text(1998, tail(eu, 1), colnames(eu), pos = 4, col = p, xpd = TRUE)
+  }
+  
+  invisible(p)
+}
+
+par(mfrow = c(3, 2), mar = c(5, 4, 2, 1))
+tsplot(palette = "R3", protan = FALSE, legend = FALSE, main = "Normal")
+tsplot(palette = "R3", protan = TRUE, legend = FALSE, main = "Protanope")
+par(mar = c(5, 4, 1, 1))
+tsplot(palette = "R4", protan = FALSE, legend = FALSE)
+tsplot(palette = "R4", protan = TRUE, legend = FALSE)
+tsplot(palette = "Okabe-Ito", protan = FALSE, legend = FALSE)
+tsplot(palette = "Okabe-Ito", protan = TRUE, legend = FALSE)
+```
+
+Figure \ref{fig:dorian} shows several versions of a weather
+map that was produced by the National Oceanic and Atmospheric Administration
+(and infamously misinterpreted by a former President of The United States). 
+The top row shows the original image along with an emulation of 
+protanopia in the second column.
+The second row uses a new sequential palette,
+`"OrRd"`, that can be selected using `hcl.colors()`.
+
+The weather map is intended to convey 
+the probability of wind speeds $>$ 39 mph, 
+during hurricane Dorian in 2019.  The probabilities are highest
+in the central magenta region and lowest in the outer green regions.
+The original image does not convey the information very well because
+there is a non-monotonic change in luminance 
+(from dark to light and back to dark);  the high saturation across
+all of the colors is also distracting.  These issues persist for 
+protanope viewers, plus any benefit of a red (danger!) to green (safe)
+change in hue is lost.
+
+The `"OrRd"` version of the image conveys the information more clearly
+by relating the monotonic changes in probability to both monotonic
+changes in luminance 
+and monotonic changes in saturation.  The protanope version retains both
+of these qualities.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orig.png} 
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orig-deutan.png} 
+
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd.png} 
+\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd-deutan.png} 
+\caption{Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$), 2019-08-30--2019-09-04..}\label{fig:dorian}
+\end{figure}
+
+The following sections describe the new color palettes in more detail.
 
 ## A new default color palette
 
@@ -403,14 +503,15 @@ the palettes in `hcl.colors()` are a path within HCL space.  For each
 dimension, hue, chroma, and luminance, a palette can have a constant
 value, a monotonic trajectory, or a triangular trajectory.  For
 example, the trajectories for the `"Blues 3"` palette are shown in
-Figure \ref{fig:viridishcl}.  The palette is constant in the hue
-dimension, so the palette consists entirely of different shades of blue.
+Figure \ref{fig:blues3hcl}.  The palette is (almost) constant in the hue
+dimension, so the palette consists entirely of different shades of 
+(almost) the same blue.
 The palette is monotonically increasing in the luminance dimension, so
 the blues vary from very dark to very light.  Finally, the palette has a
 triangular trajectory in the chroma dimension, so the blues are more
 colourful towards the middle of the palette.
 
-```{r viridishcl, echo=FALSE, fig.width=5, fig.height=4, out.width='.6\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.'}
+```{r blues3hcl, echo=FALSE, fig.width=5, fig.height=4, out.width='.6\\textwidth', fig.align='center', fig.pos='t!', fig.cap='Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.'}
 library(colorspace)
 specplot(hcl.colors(100, "Blues 3"))
 ```
@@ -421,7 +522,7 @@ path in HCL space, we can select as many colors as we like.
 Most of the palettes that are provided by `hcl.colors()`
 have one or more desirable perceptual properties:
 
-* **Perceptual uniformity:** This means that if we take a step along
+* **Perceptual uniformity:** This means that if we take a small step along
   the path of the palette in HCL space, the perceived difference
   between the two colors will be the same anywhere along the path.
 * **Perceptual order:**  This means that there is a perceived ordering
@@ -450,14 +551,14 @@ reference.
 The following sections list the palettes available via `hcl.colors()`,
 broken down into qualitative, sequential, and diverging palettes.
 
-
-
 ### Qualitative palettes
 
 The qualitative palettes available from `hcl.colors()` are shown
 in Figure \ref{fig:qualPalettes}.
 The common feature of these palettes is that they only vary hue
-while using the same chroma and luminance for all their colors.
+while using the same chroma and luminance for all of their colors.
+One drawback to this approach is that fewer easily distinguishable
+colors can be generated from these palettes.
 
 ```{r qualPalettes, echo=FALSE, fig.width=6, fig.height=7, out.width='\\textwidth', fig.align='center', fig.pos='ht!', fig.cap='Qualitative palettes.'}
 pals <- hcl.pals("qualitative")
@@ -487,7 +588,8 @@ colors from a fixed set.
 The ColorBrewer.org palettes were designed with good perceptual properties
 in mind, but also relied on expert opinion and trial and error.
 This means that a little more care should be taken when selecting one
-of these palettes because, for example, they are not all colorblind-safe.
+of the ColorBrewer-inspired
+palettes because, for example, they are not all colorblind-safe.
 
 The remaining four palettes are taken from @Ihaka:2003. These
 palettes keep chroma and luminance fixed and restrict the range
@@ -663,9 +765,13 @@ paletteGrids(args, qual=FALSE)
 
 Figure \ref{fig:multiSeqPalettes2} shows the remaining multi-hue 
 sequential palettes that are  available in `hcl.colors()`.
-The top group of palettes, starting with `"Reds"`, `"Greens"`,
+Most of the top group of palettes, starting with `"Reds"`, `"Greens"`,
 and `"Blues"`, closely match ColorBrewer.org palettes
-of the same name.  
+of the same name.  The `"YlGnBu"` palette is of particular note
+as it uses essentially the same hues as the `"Viridis"` palette
+(Figure \ref{fig:multiSeqPalettes}), but it is more useful as a 
+sequential palette because chroma monotonically decreases across
+the palette.
 
 The next group of palettes, `"Lajolla"` to `"Batlow"` closely match the
 palettes of the same name from the \pkg{scico} package.
@@ -772,205 +878,6 @@ which is a colourblind-safe version of `"Viridis"` (from
 the \pkg{viridis} package) and
 `"Roma"`, which closely matches the palette of the same name 
 from the \pkg{scico} package.
-
-
-
-\newpage
-
-## Illustration
-
-Show usage of new qualitative palettes in practice. Consider:
-Power of color often overestimated.
-Color vision deficiencies ($\sim 8$% of male and $\sim 0.5$% of female viewers).
-Other physical or technical limitations.
-
-Starting point: Time series line plot using base graphics, see Figure \ref{fig:tsplot} (top left), essentially:
-
-```{r tsplot-pseudocode, eval=FALSE}
-p <- c(1:3, 5)
-plot(EuStockMarkets, log = "y", plot.type = "single", col = p, ...)
-legend("topleft", colnames(EuStockMarkets), col = p, ...)
-```
-
-The first two rows show the old default colors from R 3.x.y and the new default colors startin from R 4.0.0.
-Additionally, the figure uses @Okabe+Ito:2008 palette and it switches from a color legend to direct labeling.
-
-In the right column: Emulation of a kind of red-green
-color blindness known as protanopia using the \pkg{colorspace} package based on
-the algorithms of @Machado+Oliveira+Fernandes:2009.
-
-```{r tsplot, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Time series line plot of \\code{EuStockMarkets}. Rows: Old \\code{"R3"} default palette (top), new \\code{"R4"} default palette (middle), \\code{"OkabeIto"} palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated protanope vision (right). A color legend is used in the first row and direct labels in the other rows.'}
-tsplot <- function(palette = "R3", protan = FALSE, legend = TRUE, ...) {
-  ## color palette
-  palette <- match.arg(palette, c("R3", "R4", "Okabe-Ito"))
-  p <- switch(palette,
-    "R3" = palette.colors(8, "R3")[c(1:3, 5)],
-    "R4" = palette.colors(8, "R4")[c(1:3, 5)],
-    "Okabe-Ito" = palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)]
-  )
-  
-  ## emulate protanope vision?
-  if(protan) p <- colorspace::protan(p) 
-  
-  ## time series plot
-  eu <- window(EuStockMarkets, end = 1998)
-  plot(eu, log = "y", ylab = "EU Stock Prices", plot.type = "single", col = p, xlim = c(1991.6, 1998.4), lwd = 1.5, ...)
-  text(1991.3, 6000, palette, pos = 4, cex = 1.5)
-
-  ## legend or direct labeling
-  if(legend) {
-    legend(1991.3, 6000, colnames(eu), col = p, lty = 1, lwd = 3, bty = "n")
-  } else {
-    text(1998, tail(eu, 1), colnames(eu), pos = 4, col = p, xpd = TRUE)
-  }
-  
-  invisible(p)
-}
-
-par(mfrow = c(3, 2), mar = c(5, 4, 2, 1))
-tsplot(palette = "R3", protan = FALSE, legend = TRUE, main = "Normal")
-tsplot(palette = "R3", protan = TRUE, legend = TRUE, main = "Protanope")
-par(mar = c(5, 4, 1, 1))
-tsplot(palette = "R4", protan = FALSE, legend = FALSE)
-tsplot(palette = "R4", protan = TRUE, legend = FALSE)
-tsplot(palette = "Okabe-Ito", protan = FALSE, legend = FALSE)
-tsplot(palette = "Okabe-Ito", protan = TRUE, legend = FALSE)
-```
-
-Old `R3` default palette: Too flashy, cyan too light, hard to distinguish for protanope viewers.
-The colors for the German stock index DAX and the Swiss stock index SMI look almost identical to protanope viewers.
-
-New `R4` default palette: Similar hues, more balanced brightness, avoid garish colors, distinguishable for viewers with color vision deficiencies. Cyan much better.
-
-`Okabe-Ito`: Even easier to distinguish.
-
-
-# HCL-based color palettes
-
-## Construction principles
-
-HCL makes it easy to describe colors for humans, using the three basic properties hue, chroma, and luminance (see Figure \ref{fig:hcl}).
-
-```{r hcl, echo=FALSE, fig.height=2.4, fig.width=5, out.width='0.4\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Varying hue, chroma, and luminance separately, keeping the other two properties fixed.'}
-swatchplot(
-  "Hue\n(Type of color)"    = sequential_hcl(5, h = c(0, 300), c = c(60, 60), l = 65),
-  "Chroma\n(Colorfulness)"  = sequential_hcl(5, h = 0, c = c(100, 0), l = 65, rev = TRUE, power = 1),
-  "Luminance\n(Brightness)" = sequential_hcl(5, h = 260, c = c(25, 25), l = c(25, 90), rev = TRUE, power = 1),
-  nrow = 3, line = 8, off = 0
-)
-```
-
-For qualitative palettes mainly vary hue. Completely balanced if chroma and luminance kept fixed which
-was suggested by @Ihaka:2003 and is implemented in `hcl.colors()`. See left panel of Figure \ref{fig:hclpal}
-and Figure \ref{fig:hclq}.
-Two drawbacks: Relatively few colors that can be clearly distinguished (about six), even fewer under
-color vision deficiencies (about three). Hence in most situations better allow limited variations in chroma and luminance
-as in `palette.colors()`. No general HCL-based strategy for such palettes.
-
-```{r hclpal, echo=FALSE, fig.height=2.4, fig.width=15, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Basic idea for HCL palettes.'}
-swatchplot(
-  "Qualitative (Set 2)"     = rbind("Color" = hcl.colors(5, "Set 2"),     "Desaturated" = desaturate(hcl.colors(5, "Set 2"))),
-  "Sequential (Blues)"    = rbind("Color" = hcl.colors(7, "Blues"),    "Desaturated" = desaturate(hcl.colors(7, "Blues"))),
-  "Diverging (Green-Brown)" = rbind("Color" = hcl.colors(7, "Green-Brown"), "Desaturated" = desaturate(hcl.colors(7, "Green-Brown"))),
-  nrow = 3, off = 0, line = 7
-)
-```
-For sequential and diverging palettes monotonic changes in luminance are most important (see middle and right panel
-in Figure \ref{fig:hclpal}). Add changes in chroma and possibly also hue (see Figure \ref{fig:specplot}).
-`Blues 2` uses a constant hue and monotonic changes in chroma and luminance going from dark and colorful blue to
-light gray. `Blues` uses similar luminance trajectory, slightly varies hue, and has triangular chroma curve (rather
-than monotonic). `Blues 2` mostly emphasizes the dark and colorful blue while `Blues` makes the colors more easily
-distinguishable in the middle.
-
-Diverging combines two sequential, making both arms as balanced as possible.
-
-
-```{r specplot, echo=TRUE, fig.height=5, fig.width=5, fig.show='hide'}
-specplot(hcl.colors(7, "Blues"), hcl.colors(7, "Blues 2"))
-specplot(hcl.colors(7, "Green-Brown"))
-```
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.49\textwidth]{color_files/figure-latex/specplot-1} 
-\includegraphics[width=0.49\textwidth]{color_files/figure-latex/specplot-2}
-\caption{Spectrum of luminance (blue, left axis), chroma (green, left axis), and hue (red, right axis) trajectories.
-Left: Sequential \code{Blues} (solid) and \code{Blues 2} (dashed) palettes.
-Right: Diverging \code{Green-Brown} palette.}\label{fig:specplot}
-\end{figure}
-
-
-## Available palettes
-
-Overview of qualitative (Figure \ref{fig:hclq}), sequential (Figure \ref{fig:hcls}), and diverging (Figure \ref{fig:hcld})
-palettes based on HCL principles. Many closely approximate colors from ColorBrewer.org, CARTO Color, Viridis, and 
-Crameri's scientific colors. See <http://colorspace.R-Forge.R-project.org/articles/approximations.html> for one-to-one
-comparisons.
-
-```{r hclq, echo=FALSE, fig.height=2, fig.width=8, out.width='0.85\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Qualitative palettes from \\code{hcl.colors()}.'}
-hcl.swatch <- function(palette = NULL, type = NULL, n = 5, nrow = 11,
-  border = if (n < 15) "black" else NA, ...) {
-    if(is.null(palette)) palette <- hcl.pals(type)
-    cols <- sapply(palette, hcl.colors, n = n)
-    ncol <- ncol(cols)
-    nswatch <- min(ncol, nrow)
-
-    par(mar = rep(0.1, 4),
-        mfrow = c(1, min(6, ceiling(ncol/nrow))),
-        cex = 0.7, ...)
-
-    while (length(palette)) {
-        subset <- 1:min(nrow, ncol(cols))
-        plot.new()
-        plot.window(c(0, n), c(0, nrow + 1))
-        text(0, rev(subset) + 0.1, palette[subset], adj = c(0, 0))
-        y <- rep(subset, each = n)
-        rect(rep(0:(n-1), n), rev(y), rep(1:n, n), rev(y) - 0.5,
-             col = cols[, subset], border = border)
-        palette <- palette[-subset]
-        cols <- cols[, -subset, drop = FALSE]
-    }
-
-    par(mfrow = c(1, 1), mar = c(5.1, 4.1, 4.1, 2.1), cex = 1)
-}
-
-hcl.swatch(type = "qualitative", nrow = 2)
-```
-
-```{r hcls, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Sequential palettes from \\code{hcl.colors()}.'}
-hcl.swatch(type = "sequential", nrow = 12)
-```
-
-```{r hcld, echo=FALSE, fig.height=4.5, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Diverging palettes from \\code{hcl.colors()}.'}
-hcl.swatch(c(hcl.pals("diverging"), hcl.pals("divergingx")), nrow = 6)
-```
-
-## Illustration
-
-Risk maps: Communication to the public particularly important.
-
-Example: Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$), 2019-08-30--2019-09-04, during hurricane Dorian.
-
-Source: National Oceanic and Atmospheric Administration.
-
-Original: Works poorly because too much chroma everywhere and non-monotonic luminance (dark to light and back to dark).
-Extremely hard to read for colorblind viewers (see Figure \ref{fig:dorian}).
-
-Better HCL-based alternative: `OrRd` and also merging some probability intervals to make matching of intervals to colors easier, still clearly conveys overall shape.
-
-Might have contributed to Trump's confusion in "Sharpiegate" incident. See @Zeileis+Stauffer:2019 for a more detailed discussion and other alternative color palettes.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orig.png} 
-\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orig-deutan.png} 
-
-\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd.png} 
-\includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd-deutan.png} 
-\caption{Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$), 2019-08-30--2019-09-04..}\label{fig:dorian}
-\end{figure}
-
-
 
 
 # New defaults in graphical functions
