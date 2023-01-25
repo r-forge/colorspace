@@ -253,32 +253,35 @@ In particular, `palette()` has a new improved default color palette,
 the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL], see @grDevices and @Zeileis+Fisher+Hornik:2020.
 
 Figure \ref{fig:tsplot} shows several versions of a time series plot,
-comparing the old `"R3"` default color palette with
+depicting four different European stock indexes during most of the 1990s
+(`EuStockMarkets` data). The plots compare
+the old `"R3"` default color palette with
 the new `"R4"` default and a new `"Okabe-Ito"` qualitative 
-palette @Okabe+Ito:2008
+palette [@Okabe+Ito:2008]
 that can be selected using `palette.colors()`.
-The first row shows the `"R3"` default;  the second column shows
-an emulation of a kind of red-green
-color blindness known as protanopia using the \pkg{colorspace} package 
+The first row shows the `"R3"` default using a typical color legend in the top left corner;
+the second column shows an emulation of a kind of red-green
+color blindness known as deuteranopia using the \pkg{colorspace} package 
 (based on the algorithms of @Machado+Oliveira+Fernandes:2009).
 The second row uses the `"R4"` palette and the third row 
-uses `"Okabe-Ito"`.
+uses `"Okabe-Ito"`; both using direct labels for the different time series instead of
+a color legend.
 
 We can see that the `"R3"` colors are highly saturated and they vary in 
 luminance. For example, the cyan line is noticeably lighter than the others.
-Futhermore, for protanope viewers, the 
-DAX and the SMI lines are difficult to 
-distinguish from each other and the American FTSE line is difficult to
-distinguish from the white background.
+Futhermore, for deuteranope viewers, the CAC and the SMI lines are difficult to 
+distinguish from each other, exacerbated by the use of a color legend that makes
+matching the lines to labels almost impossible. Moreover, the FTSE line is more
+difficult to distinguish from the white background, compared to the other lines.
 
 The `"R4"` palette is an improvement:  the luminance is more even and
-the colors are less saturated, plus the colors are more
-distinguishable for protanope viewers. 
+the colors are less saturated, plus the colors are more distinguishable for
+deuteranope viewers; aided by the use of direct color labels instead of a legend.
 The `"Okabe-Ito"` palette also works better than `"R3"`,
-particularly for protanope viewers.
+particularly for deuteranope viewers.
 
-```{r tsplot, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Time series line plot of \\code{EuStockMarkets}. Rows: Old \\code{"R3"} default palette (top), new \\code{"R4"} default palette (middle), \\code{"OkabeIto"} palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated protanope vision (right). A color legend is used in the first row and direct labels in the other rows.'}
-tsplot <- function(palette = "R3", protan = FALSE, legend = TRUE, ...) {
+```{r tsplot, echo=FALSE, fig.height=9, fig.width=10, out.width='\\textwidth', fig.align='center', fig.pos='htbp', fig.cap='Time series line plot of \\code{EuStockMarkets}. Rows: Old \\code{"R3"} default palette (top), new \\code{"R4"} default palette (middle), \\code{"OkabeIto"} palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated deuteranope vision (right). A color legend is used in the first row and direct labels in the other rows.'}
+tsplot <- function(palette = "R3", deutan = FALSE, legend = TRUE, ...) {
   ## color palette
   palette <- match.arg(palette, c("R3", "R4", "Okabe-Ito"))
   p <- switch(palette,
@@ -287,8 +290,8 @@ tsplot <- function(palette = "R3", protan = FALSE, legend = TRUE, ...) {
     "Okabe-Ito" = palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)]
   )
   
-  ## emulate protanope vision?
-  if(protan) p <- colorspace::protan(p) 
+  ## emulate deuteranope vision?
+  if(deutan) p <- colorspace::deutan(p) 
   
   ## time series plot
   eu <- window(EuStockMarkets, end = 1998)
@@ -306,18 +309,18 @@ tsplot <- function(palette = "R3", protan = FALSE, legend = TRUE, ...) {
 }
 
 par(mfrow = c(3, 2), mar = c(5, 4, 2, 1))
-tsplot(palette = "R3", protan = FALSE, legend = FALSE, main = "Normal")
-tsplot(palette = "R3", protan = TRUE, legend = FALSE, main = "Protanope")
+tsplot(palette = "R3", deutan = FALSE, legend = TRUE, main = "Normal")
+tsplot(palette = "R3", deutan = TRUE, legend = TRUE, main = "Deuteranope")
 par(mar = c(5, 4, 1, 1))
-tsplot(palette = "R4", protan = FALSE, legend = FALSE)
-tsplot(palette = "R4", protan = TRUE, legend = FALSE)
-tsplot(palette = "Okabe-Ito", protan = FALSE, legend = FALSE)
-tsplot(palette = "Okabe-Ito", protan = TRUE, legend = FALSE)
+tsplot(palette = "R4", deutan = FALSE, legend = FALSE)
+tsplot(palette = "R4", deutan = TRUE, legend = FALSE)
+tsplot(palette = "Okabe-Ito", deutan = FALSE, legend = FALSE)
+tsplot(palette = "Okabe-Ito", deutan = TRUE, legend = FALSE)
 ```
 
 Figure \ref{fig:dorian} shows several versions of a weather
 map that was produced by the National Oceanic and Atmospheric Administration
-(and infamously misinterpreted by a former President of The United States). 
+[and infamously misinterpreted by a former President of The United States, see @Zeileis+Stauffer:2019]. 
 The top row shows the original image along with an emulation of 
 protanopia in the second column.
 The second row uses a new sequential palette,
