@@ -322,25 +322,25 @@ Figure \ref{fig:dorian} shows several versions of a weather
 map that was produced by the National Oceanic and Atmospheric Administration
 [and infamously misinterpreted by a former President of The United States, see @Zeileis+Stauffer:2019]. 
 The top row shows the original image along with an emulation of 
-protanopia in the second column.
+deuteranopia in the second column.
 The second row uses a new sequential palette,
 `"OrRd"`, that can be selected using `hcl.colors()`.
 
 The weather map is intended to convey 
-the probability of wind speeds $>$ 39 mph, 
-during hurricane Dorian in 2019.  The probabilities are highest
+the probability of wind speeds $>$ 39 mph 
+during hurricane Dorian, 2019-08-30--2019-09-04.  The probabilities are highest
 in the central magenta region and lowest in the outer green regions.
 The original image does not convey the information very well because
 there is a non-monotonic change in luminance 
 (from dark to light and back to dark);  the high saturation across
 all of the colors is also distracting.  These issues persist for 
-protanope viewers, plus any benefit of a red (danger!) to green (safe)
+deuteranope viewers, plus any benefit of a red (danger!) to green (safe)
 change in hue is lost.
 
 The `"OrRd"` version of the image conveys the information more clearly
 by relating the monotonic changes in probability to both monotonic
 changes in luminance 
-and monotonic changes in saturation.  The protanope version retains both
+and monotonic changes in saturation.  The deuteranope version retains both
 of these qualities.
 
 \begin{figure}[htbp]
@@ -350,7 +350,7 @@ of these qualities.
 
 \includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd.png} 
 \includegraphics[width=0.49\textwidth]{images/dorian-useR-2021-orrd-deutan.png} 
-\caption{Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$), 2019-08-30--2019-09-04..}\label{fig:dorian}
+\caption{Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$) during hurricane Dorian in 2019.}\label{fig:dorian}
 \end{figure}
 
 The following sections describe the new color palettes in more detail.
@@ -369,7 +369,7 @@ of the colors in the default palette for colorblind viewers.
 The new, "R4", default palette is shown at top-left of Figure 
 \ref{fig:newPalettes}.
 More information about the construction of the new default palette
-is given in [@grDevices2].
+is given in @grDevices2.
 
 ```{r newPalettes, echo=FALSE, fig.width=6, fig.height=4, fig.keep="last", out.width='\\textwidth', fig.align='center', fig.pos='t!', fig.cap='New base R palettes available from the \\code{palette.colors()} function.  The label above each swatch shows the argument to provide to \\code{palette.colors()} to produce the set of colors.  The palette at top-left is the new default that is also produced by \\code{palette()}.  The "Okabe-Ito" palette is the default that is produced by \\code{palette.colors()} (with no arguments).'}
 paletteGrids(list('palette="R4"'=palette.colors(palette="R4"),

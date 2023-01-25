@@ -1,3 +1,10 @@
+# colorspace 2.1-1
+
+* Make the fixed color vision deficiency simulation in linear RGB coordinates
+  (introduced in version 2.1-0) the default in the `cvd_emulator()` shiny app
+  as well.
+
+
 # colorspace 2.1-0
 
 * Bug fix for color vision deficiency simulations in `simulate_cvd()` based

@@ -61,7 +61,7 @@ legend("topleft", colnames(EuStockMarkets), col = p, ...)
 \begin{frame}
 \frametitle{Motivation}
 
-\begin{minipage}[t]{.73\textwidth}
+\begin{minipage}[t]{.69\textwidth}
 \setkeys{Gin}{width=\textwidth}
 \vspace*{-0.6cm}
 
@@ -85,14 +85,14 @@ p <- palette.colors(8, "R3")[c(1:3, 5)]
 }%
 \only<3>{%
 <<EuStockMarkets2, fig=TRUE, height=6, width=8.5, echo=FALSE, results=hide>>=
-p <- protan(palette.colors(8, "R3")[c(1:3, 5)])
+p <- deutan(palette.colors(8, "R3")[c(1:3, 5)])
 <<EuStockMarkets0>>
 <<EuStockMarketsLegend1>>
 @
 }%
 \only<4>{%
 <<EuStockMarkets3, fig=TRUE, height=6, width=8.5, echo=FALSE, results=hide>>=
-p <- protan(palette.colors(8, "R3")[c(1:3, 5)])
+p <- deutan(palette.colors(8, "R3")[c(1:3, 5)])
 <<EuStockMarkets0>>
 <<EuStockMarketsLegend2>>
 @
@@ -113,7 +113,7 @@ p <- palette.colors(8, "R4")[c(1:3, 5)]
 }%
 \only<7>{%
 <<EuStockMarkets6, fig=TRUE, height=6, width=8.5, echo=FALSE, results=hide>>=
-p <- protan(palette.colors(8, "R4")[c(1:3, 5)])
+p <- deutan(palette.colors(8, "R4")[c(1:3, 5)])
 <<EuStockMarkets0>>
 <<EuStockMarketsLegend2>>
 @
@@ -127,7 +127,7 @@ p <- palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)]
 }%
 \only<9>{%
 <<EuStockMarkets8, fig=TRUE, height=6, width=8.5, echo=FALSE, results=hide>>=
-p <- protan(palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)])
+p <- deutan(palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)])
 <<EuStockMarkets0>>
 <<EuStockMarketsLegend2>>
 @
@@ -135,7 +135,7 @@ p <- protan(palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)])
 
 \end{minipage}
 \hfill
-\begin{minipage}[t]{0.26\textwidth}
+\begin{minipage}[t]{0.30\textwidth}
 
 \small
 
@@ -148,7 +148,7 @@ p <- protan(palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)])
 
 \textbf{Emulation:}
 \only<1-2,5-6,8>{None}%
-\only<3-4,7,9>{Protanope}
+\only<3-4,7,9>{Deuteranope}
 
 \medskip
 
@@ -176,7 +176,7 @@ Cyan too light
 
 \medskip
 
-Hard to distinguish for protanope viewers
+Hard to distinguish for deuteranope viewers
 
 }
 
