@@ -1,5 +1,12 @@
 # colorspace 2.1-1
 
+* Improvement in `desaturate()`: In addition to previous input color specifications
+  (hex strings, named colors, RGB matrices), formal S4 color objects are now
+  also supported. In this case, the desaturated colors are also returned as color
+  objects of the same class as the input. With this improvement, `desaturate()`
+  behaves exactly analogous to the color vision deficiency emulation functions
+  which had been improved in the same way in version 2.1-0 (see below).
+
 * Make the fixed color vision deficiency simulation in linear RGB coordinates
   (introduced in version 2.1-0) the default in the `cvd_emulator()` shiny app
   as well.

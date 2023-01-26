@@ -122,7 +122,6 @@ cvd_image <- function(img, type, file, severity = 1, linear = TRUE) {
    RGB <- matrix(as.numeric(img[,,1L:3L]), ncol = 3L, dimnames = list(NULL, c("R", "G", "B")))
    RGB <- colorspace::sRGB(RGB)
    RGB <- do.call(type, list(col = RGB, severity = severity, linear = linear))
-   if(type == "desaturate") RGB <- hex2RGB(RGB)
    RGB <- colorspace::coords(RGB)
    img[,,1L] <- matrix(RGB[,"R"], dim(img)[1L], dim(img)[2L])
    img[,,2L] <- matrix(RGB[,"G"], dim(img)[1L], dim(img)[2L])

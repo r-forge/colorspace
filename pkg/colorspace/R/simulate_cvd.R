@@ -125,14 +125,14 @@ simulate_cvd <- function(col, cvd_transform, linear = TRUE) {
 
     # Save transparency value for later
     alpha <- substr(col, 8L, 9L)
-    # keep indizes of NA colors
+    # keep indices of NA colors
     NAidx <- which(is.na(col))
     col <- substr(col, 1L, 7L)
     col <- grDevices::col2rgb(col)
 
   } else {
 
-    # keep indizes of NA colors
+    # keep indices of NA colors
     NAidx <- which(is.na(col))
     col <- grDevices::col2rgb(col, alpha = TRUE)
     ## extract alpha values (if non-FF)
