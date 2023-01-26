@@ -20,7 +20,7 @@ will be written to disc as a PNG file."><meta property="og:image" content="https
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1-0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1-1</span>
       </span>
     </div>
 
@@ -93,15 +93,16 @@ will be written to disc as a PNG file.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cvd_image</span><span class="op">(</span><span class="va">img</span>, <span class="va">type</span>, <span class="va">file</span>, severity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cvd_image</span><span class="op">(</span><span class="va">img</span>, <span class="va">type</span>, <span class="va">file</span>, severity <span class="op">=</span> <span class="fl">1</span>, linear <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>img</dt>
-<dd><p><code>array</code> as returned by <code>readPNG</code> and <code>readJPEG</code>
+<dd><p><code>character</code> or <code>array</code> as returned by <code>readPNG</code> and <code>readJPEG</code>
 of size <code>height x width x depth</code>. The depth coordinate contains
-R/G/B and alpha if given (png).</p></dd>
+R/G/B and alpha if given (png). In case of a single character string <code>img</code>
+has to be the full path to an image of type png or jpg/jpeg.</p></dd>
 
 
 <dt>type</dt>
@@ -117,6 +118,12 @@ be a png image name.</p></dd>
 
 <dt>severity</dt>
 <dd><p>numeric. Severity of the color vision defect, a number between 0 and 1.</p></dd>
+
+
+<dt>linear</dt>
+<dd><p>logical. Should the color vision deficiency transformation be applied to the
+linearized RGB coordinates (default)? If <code>FALSE</code>, the transformation is applied to the
+gamma-corrected sRGB coordinates (which was the default up to version 2.0-3 of the package).</p></dd>
 
 </dl></div>
 

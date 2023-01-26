@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">colorspace</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1-0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.1-1</span>
       </span>
     </div>
 
@@ -81,6 +81,11 @@
       
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="2.1-1" id="colorspace-21-1">colorspace 2.1-1<a class="anchor" aria-label="anchor" href="#colorspace-21-1"></a></h2>
+<ul><li><p>Improvement in <code><a href="../reference/desaturate.html">desaturate()</a></code>: In addition to previous input color specifications (hex strings, named colors, RGB matrices), formal S4 color objects are now also supported. In this case, the desaturated colors are also returned as color objects of the same class as the input. With this improvement, <code><a href="../reference/desaturate.html">desaturate()</a></code> behaves exactly analogous to the color vision deficiency emulation functions which had been improved in the same way in version 2.1-0 (see below).</p></li>
+<li><p>Make the fixed color vision deficiency simulation in linear RGB coordinates (introduced in version 2.1-0) the default in the <code><a href="../reference/cvd_emulator.html">cvd_emulator()</a></code> shiny app as well.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.1-0" id="colorspace-21-0">colorspace 2.1-0<small>2023-01-23</small><a class="anchor" aria-label="anchor" href="#colorspace-21-0"></a></h2>
 <ul><li><p>Bug fix for color vision deficiency simulations in <code><a href="../reference/simulate_cvd.html">simulate_cvd()</a></code> based on the work of <a href="https://doi.org/10.1109/TVCG.2009.113" class="external-link">Machado <em>et al.</em> (2009)</a>: Following some illustrations from the supplementary materials, the transformations in previous versions of the package had been applied to gamma-corrected sRGB coordinates directly. However, the Machado <em>et al.</em> paper implicitly relies on a linear RGB space (see page 1294, column 1) where their linear matrix transformations for simulating color vision deficiencies are applied. Therefore, a new argument <code>linear = TRUE</code> has been added to <code><a href="../reference/simulate_cvd.html">simulate_cvd()</a></code> (and hence in <code><a href="../reference/simulate_cvd.html">deutan()</a></code>, <code><a href="../reference/simulate_cvd.html">protan()</a></code>, and <code><a href="../reference/simulate_cvd.html">tritan()</a></code>) that first maps the provided colors to linearized RGB coordinates, applies the color vision deficiency transformation, and then maps back to gamma-corrected sRGB coordinates. Optionally, <code>linear = FALSE</code> can be used to restore the behavior from previous versions where the transformations are applied directly to the sRGB coordinates. For most colors the difference between the two strategies is negligible but for some highly-saturated colors it becomes more noticable, e.g., for red, purple, or orange. Thanks to Matthew Petroff for reporting this issue and to Kenneth Knoblauch for advice and guidance.</p></li>
