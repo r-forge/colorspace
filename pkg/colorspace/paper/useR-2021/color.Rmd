@@ -327,7 +327,7 @@ ggdraw() +
 
 The following sections describe the new color palettes in more detail.
 
-# A new default color palette
+## A new default color palette
 
 The default color palette in R -- the default set of colors that can
 be specified by integer index -- has been replaced.  The new palette
@@ -390,7 +390,7 @@ grid.newpage()
 grid.draw(scene)
 ```
 
-# The `palette.colors()` function
+## The `palette.colors()` function
 
 The `palette.colors()` function, new in R 4.0.0, provides a way to
 access several other predefined palettes (see Figure \@ref(fig:newPalettes)).
@@ -467,7 +467,7 @@ the following code sets the Okabe-Ito palette as the default palette.
 palette("Okabe-Ito")
 ```
 
-# The `hcl.colors()` function
+## The `hcl.colors()` function
 
 The `hcl.colors()` function was added in R 3.6.0, with the range
 of supported palettes slowly expanded over time.
@@ -545,7 +545,7 @@ reference.
 The following sections list the palettes available via `hcl.colors()`,
 broken down into qualitative, sequential, and diverging palettes.
 
-# Qualitative palettes
+### Qualitative palettes
 
 The qualitative palettes available from `hcl.colors()` are shown
 in Figure \@ref(fig:qualPalettes).
@@ -610,7 +610,7 @@ a white background a moderate luminance as in `"Dark 2"` or `"Dark 3"`
 usually works better while on a black/dark background the luminance
 should be higher as in `"Set 3"` for example.  
 
-# Single-hue sequential palettes
+### Single-hue sequential palettes
 
 We divide sequential palettes into single-hue (this section)
 and multi-hue palettes (the next section).
@@ -667,7 +667,7 @@ are needed (e.g., for coding an ordinal categorical variable with few
 levels) then a lower luminance contrast may suffice
 (e.g., `"Light Grays"` or `"Blues 2"`).
 
-# Multi-hue sequential palettes
+### Multi-hue sequential palettes
 
 Multi-hue
 sequential palettes not only vary luminance, from light to dark, but 
@@ -806,7 +806,7 @@ visual emphasis than any other.
 Both `"Lajolla"` and `"Turku"`
 are intended for use with a black/dark background.
 
-# Diverging palettes
+### Diverging palettes
 
 Figure \@ref(fig:diverPalettes) shows the selection of diverging
 palettes for use with `hcl.colors()`.
@@ -863,7 +863,7 @@ match the scientific color maps from the \pkg{scico} package,
 where the first three are intended for a white/light background and
 the other three for a black/dark background.
 
-# Flexible diverging palettes
+### Flexible diverging palettes
 
 Figure \@ref(fig:diverxPalettes) shows a set of 
 more flexible diverging
