@@ -55,6 +55,10 @@ paletteGrids <- function(colList, nswatch=ns, qual=FALSE) {
         }
     }
     upViewport()
+    ## Tiny dot in bottom-right corner so that PDF output does not
+    ## remove white space from right side and bottom
+    ## (so that swatches are consistent size across figures in PDF output)
+    grid.circle(x=.9, y=0, r=unit(.1, "mm"), gp=gpar(col=NA, fill="grey90"))
 }
 drawBorder <- function(row, y=.5, just="centre",
                        height=unit(1, "npc") + 2*border) {

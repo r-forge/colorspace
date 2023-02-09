@@ -40,14 +40,14 @@ Color can be a very effective way to distinguish between different groups
 within a data visualization.  Color is a "preattentive" visual feature,
 meaning that groups are identified rapidly and without conscious effort
 [@Ware:2012]. For example, it is trivially easy to identify the 
-two groups of points in the scatterplot in Figure \@ref(fig:colorcatcont).
+two groups of points in the scatterplot in Figure&nbsp;\@ref(fig:colorcatcont).
 
 Employing color to represent values on a continuous numeric scale will be
 less successful [@Cleveland+McGill:1984], but color can
 still be useful to convey additional variables when more effective
 visual features, such as location, have already been used.  For example,
 color might be used to fill in different regions on a map, as
-demonstrated in the right hand plot of Figure \@ref(fig:colorcatcont).
+demonstrated in the right hand plot of Figure&nbsp;\@ref(fig:colorcatcont).
 
 ```{r colorcatcont}
 #| echo: FALSE
@@ -99,10 +99,10 @@ means the second color in the default set of colors.
 However, a more important task than specifying one particular color
 is the task of specifying a set of colors to use in combination
 with each other.
-For example, in the left panel of Figure \@ref(fig:colorcatcont), 
+For example, in the left panel of Figure&nbsp;\@ref(fig:colorcatcont), 
 we need two colors
 that are very easily perceived as different from each other. 
-In the right panel of Figure \@ref(fig:colorcatcont),
+In the right panel of Figure&nbsp;\@ref(fig:colorcatcont),
 we require a set of colors
 that appear to change monotonically, e.g., from darker to lighter.
 
@@ -149,7 +149,7 @@ palette()
 palette("R4")
 ```
 
-See also Figure \@ref(fig:oldPalettes)
+See also Figure&nbsp;\@ref(fig:oldPalettes)
 that depicts the old default `palette()` along
 with other old base R palettes using *swatches* of circles or
 rectangles that are filled with the
@@ -211,7 +211,7 @@ In particular, `palette()` has a new improved default color palette,
 `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
 the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL]; see @grDevices and @Zeileis+Fisher+Hornik:2020.
 
-Figure \@ref(fig:tsplot) shows several versions of a time series plot,
+Figure&nbsp;\@ref(fig:tsplot) shows several versions of a time series plot,
 depicting four different European stock indexes during most of the 1990s
 (`EuStockMarkets` data). The plots compare
 the old `"R3"` default color palette with
@@ -283,7 +283,7 @@ tsplot(palette = "Okabe-Ito", deutan = FALSE, legend = FALSE)
 tsplot(palette = "Okabe-Ito", deutan = TRUE, legend = FALSE)
 ```
 
-Figure \@ref(fig:dorian) shows several versions of a weather
+Figure&nbsp;\@ref(fig:dorian) shows several versions of a weather
 map that was produced by the National Oceanic and Atmospheric Administration
 [and infamously misinterpreted by a former President of The United States, see @Zeileis+Stauffer:2019]. 
 The top row shows the original image along with an emulation of 
@@ -311,6 +311,8 @@ of these qualities.
 ```{r dorian}
 #| echo: FALSE
 #| out.width: '100%'
+#| fig.width: 6
+#| fig.height: 2.5
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
 #| fig.show: 'hold'
@@ -325,7 +327,69 @@ ggdraw() +
   draw_image("images/dorian-useR-2021-orrd-deutan.png", width = 0.5, x = 0.5)
 ```
 
-The following sections describe the new color palettes in more detail.
+With the palettes that are now available as part of the core R graphics systems,
+we have a lot more choice, but we also have some good robust
+palettes for the most common use cases.
+
+**Qualitative Palettes**
+: When we are using color to distinguish between the levels of a categorical
+  variable, we want a palette that has clear changes in hue.
+  We can generate a palette with `palette.colors()` and 
+  `palette.pals()` gives the list of available palettes.
+  We can also generate a palette with `hcl.colors()`, provided
+  we use one of the palettes listed by `hcl.pals("qualitative")`.
+  A good choice that also accommodates colorblind viewers is
+  `"Okabe-Ito"`.  When filling large areas, such as bars of a bar plot,
+  something with higher luminance, like `"Pastel 1"` may be more appropriate,
+  though this will not print well in greyscale
+  nor work well for colorblind viewers.
+
+  ```{r okabeito}
+  #| echo: FALSE
+  #| fig.width: 6
+  #| fig.height: 1.5
+  #| out.width: '100%'
+  paletteGrids(list('palette.colors(palette="Okabe-Ito")'=palette.colors(palette="Okabe-Ito"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Pastel 1")'=hcl.colors(9, palette="Pastel 1")), qual=TRUE)
+  ```
+
+**Sequential Palettes**
+: When we are using color to encode numeric (or ordered) information,
+  we want a palette that has clear changes in luminance and/or chroma.
+  We can generate palettes with `hcl.colors()`, provided 
+  we use one of the palettes listed by `hcl.pals("sequential")`.
+  A simple solution is a single-hue palette like `"Greens 3"`.
+  A greater range of distinguishable colors can be obtained by selecting
+  a multi-hue palette like `"Viridis"`. This can also be useful to
+  emphasise extreme values.
+
+  ```{r sequential}
+  #| echo: FALSE
+  #| fig.width: 6
+  #| fig.height: 1.5
+  #| out.width: '100%'
+  paletteGrids(list('hcl.colors(9, palette="Greens 3")'=hcl.colors(9, palette="Greens 3"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Viridis")'=hcl.colors(9, palette="Viridis")), qual=FALSE)
+  ```
+
+**Diverging Palettes**
+: When we are using color to encode a numeric variable with a central
+  or neutral reference value, we need changes in lumincance and/or chroma
+  in two directions away from a central neutral color, with a different
+  hue for each direction.
+  We can generate palettes with `hcl.colors()`, provided 
+  we use one of the palettes listed by `hcl.pals("diverging")`
+  or `hcl.pals("divergingx")`.
+  Examples of good choices are `"Purple-Green"` and `"Blue-Red3"`.
+
+  ```{r diverging}
+  #| echo: FALSE
+  #| fig.width: 6
+  #| fig.height: 1.5
+  #| out.width: '100%'
+  paletteGrids(list('hcl.colors(9, palette="Purple-Green")'=hcl.colors(9, palette="Purple-Green"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Blue-Red3")'=hcl.colors(9, palette="Blue-Red3")), qual=FALSE)
+  ```
+  
+The following sections describe the full range of
+new color palettes in more detail.
 
 ## A new default color palette
 
@@ -338,8 +402,8 @@ This produces a calmer and less distracting palette with a more
 even visual impact.
 An attempt has also been made to improve the discriminability
 of the colors in the default palette for colorblind viewers.
-The new, "R4", default palette is shown at top-left of Figure 
-\@ref(fig:newPalettes).
+The new, "R4", default palette is shown at top-left of 
+Figure&nbsp;\@ref(fig:newPalettes).
 More information about the construction of the new default palette
 is given in @grDevices2.
 
@@ -351,32 +415,32 @@ is given in @grDevices2.
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-paletteGrids(list('palette="R4"'=palette.colors(palette="R4"),
-                  'palette="Okabe-Ito"'=palette.colors(palette="Okabe-Ito"),
+paletteGrids(list('"R4"'=palette.colors(palette="R4"),
+                  '"Okabe-Ito"'=palette.colors(palette="Okabe-Ito"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
-                  'palette="ggplot2"'=palette.colors(palette="ggplot2"),
-                  'palette="Tableau 10"'=palette.colors(palette="Tableau 10"),
-                  'palette="Classic Tableau"'=palette.colors(palette="Classic Tableau"),
+                  '"ggplot2"'=palette.colors(palette="ggplot2"),
+                  '"Tableau 10"'=palette.colors(palette="Tableau 10"),
+                  '"Classic Tableau"'=palette.colors(palette="Classic Tableau"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
-                  'palette="Set 1"'=palette.colors(palette="Set 1"),
-                  'palette="Dark 2"'=palette.colors(palette="Dark 2"),
-                  'palette="Accent"'=palette.colors(palette="Accent"),
-                  'palette="Set 2"'=palette.colors(palette="Set 2"),
-                  'palette="Pastel 1"'=palette.colors(palette="Pastel 1"),
-                  'palette="Paired"'=palette.colors(palette="Paired"),
-                  'palette="Set 3"'=palette.colors(palette="Set 3"),
-                  'palette="Pastel 2"'=palette.colors(palette="Pastel 2"),
+                  '"Set 1"'=palette.colors(palette="Set 1"),
+                  '"Dark 2"'=palette.colors(palette="Dark 2"),
+                  '"Accent"'=palette.colors(palette="Accent"),
+                  '"Set 2"'=palette.colors(palette="Set 2"),
+                  '"Pastel 1"'=palette.colors(palette="Pastel 1"),
+                  '"Paired"'=palette.colors(palette="Paired"),
+                  '"Set 3"'=palette.colors(palette="Set 3"),
+                  '"Pastel 2"'=palette.colors(palette="Pastel 2"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
-                  'palette="Alphabet"'=palette.colors(palette="Alphabet"),
-                  'palette="Polychrome 36"'=palette.colors(palette="Polychrome 36")),
+                  '"Alphabet"'=palette.colors(palette="Alphabet"),
+                  '"Polychrome 36"'=palette.colors(palette="Polychrome 36")),
               qual=TRUE)
 downViewport("top")
 drawBorder(1, name="bg1")
@@ -393,7 +457,8 @@ grid.draw(scene)
 ## The `palette.colors()` function
 
 The `palette.colors()` function, new in R 4.0.0, provides a way to
-access several other predefined palettes (see Figure \@ref(fig:newPalettes)).
+access several other predefined palettes 
+(see Figure&nbsp;\@ref(fig:newPalettes)).
 All of these are *qualitative palettes* because they are appropriate for 
 encoding qualitative (categorical) variables.  In other words,
 these palettes are appropriate for differentiating between groups.
@@ -408,8 +473,8 @@ The `palette` argument to the `palette.colors()` function allows us to select a
 different palette.  For example, the old R default palette is available via the
 name `"R3"`, though this palette is really only useful to reproduce old
 behaviour and remind us how bad things used to be.  The `palette.pals()`
-function returns a character vector of the available palette names and Figure
-\@ref(fig:newPalettes) shows swatches for each of the
+function returns a character vector of the available palette names and 
+Figure&nbsp;\@ref(fig:newPalettes) shows swatches for each of the
 available palettes.
 
 ```{r}
@@ -455,6 +520,7 @@ with `recycle = TRUE`, we can get more colors by recycling.
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: .5
+#| out.width: '100%'
 paletteGrids(list('palette.colors(4)'=palette.colors(4),
                   'palette.colors(10, recycle=TRUE)'=palette.colors(10, recycle=TRUE)), qual=TRUE)
 ```
@@ -490,7 +556,7 @@ the palettes in `hcl.colors()` are a path within HCL colorspace.  For each
 dimension - hue, chroma, and luminance - a palette can have a constant
 value, a monotonic trajectory, or a triangular trajectory.  For
 example, the trajectories for the `"Blues 3"` palette are shown in
-Figure \@ref(fig:blues3hcl).  The palette is (almost) constant in the hue
+Figure&nbsp;\@ref(fig:blues3hcl).  The palette is (almost) constant in the hue
 dimension, so the palette consists entirely of different shades of 
 (almost) the same blue.
 The palette is monotonically increasing in the luminance dimension, so
@@ -548,7 +614,7 @@ broken down into qualitative, sequential, and diverging palettes.
 ### Qualitative palettes
 
 The qualitative palettes available from `hcl.colors()` are shown
-in Figure \@ref(fig:qualPalettes).
+in Figure&nbsp;\@ref(fig:qualPalettes).
 The common feature of these palettes is that they only vary hue
 while using the same chroma and luminance for all of their colors.
 One drawback to this approach is that fewer easily distinguishable
@@ -620,7 +686,7 @@ a constant underlying hue.  Certain hues will be more
 appropriate for representing data on specific concepts, such
 as green for "vegetation" and red for "temperature".  
 
-Figure \@ref(fig:singleSeqPalettes) shows the sequential palettes that
+Figure&nbsp;\@ref(fig:singleSeqPalettes) shows the sequential palettes that
 hold hue largely constant.  All of these palettes have a large
 monotonic variation in luminance, typically from dark to light.  This
 is also typically accompanied by a change in chroma from more
@@ -726,7 +792,7 @@ args <- c(args[c('"Red-Blue"', '"Purple-Orange"', '"Green-Yellow"')],
 paletteGrids(args, qual=FALSE)
 ```
 
-Of the palettes shown in Figure \@ref(fig:multiSeqPalettes)
+Of the palettes shown in Figure&nbsp;\@ref(fig:multiSeqPalettes)
 `"Red-Blue"` to `"Terrain 2"` are various palettes created during the
 development of the \pkg{colorspace} package.  
 
@@ -747,7 +813,7 @@ The `"Mako"` and `"Rocket"` palettes are from the Seaborn Python
 library with an emphasis on high chroma and a wide range of luminance.
 This makes these palettes a good choice for heatmaps.
 
-The remaining palettes in Figure \@ref(fig:multiSeqPalettes), from
+The remaining palettes in Figure&nbsp;\@ref(fig:multiSeqPalettes), from
 `"Mint"` to `"Sunset"` closely match palettes provided in the
 \pkg{rcartocolors} package.
 These palettes tend to span a much narrower range of hues, chroma,
@@ -785,13 +851,13 @@ args <- c(args[c('"Reds"', '"Greens"', '"Blues"')],
 paletteGrids(args, qual=FALSE)
 ```
 
-Figure \@ref(fig:multiSeqPalettes2) shows the remaining multi-hue 
+Figure&nbsp;\@ref(fig:multiSeqPalettes2) shows the remaining multi-hue 
 sequential palettes that are  available in `hcl.colors()`.
 Most of the top group of palettes, starting with `"Reds"`, `"Greens"`,
 and `"Blues"`, closely match ColorBrewer.org palettes
 of the same name.  The `"YlGnBu"` palette is of particular note
 as it uses essentially the same hues as the `"Viridis"` palette
-(Figure \@ref(fig:multiSeqPalettes)), but it is more useful as a 
+(Figure&nbsp;\@ref(fig:multiSeqPalettes)), but it is more useful as a 
 sequential palette because chroma monotonically decreases across
 the palette.
 
@@ -808,7 +874,7 @@ are intended for use with a black/dark background.
 
 ### Diverging palettes
 
-Figure \@ref(fig:diverPalettes) shows the selection of diverging
+Figure&nbsp;\@ref(fig:diverPalettes) shows the selection of diverging
 palettes for use with `hcl.colors()`.
 
 The diverging palettes offer a range of underlying hues
@@ -865,7 +931,7 @@ the other three for a black/dark background.
 
 ### Flexible diverging palettes
 
-Figure \@ref(fig:diverxPalettes) shows a set of 
+Figure&nbsp;\@ref(fig:diverxPalettes) shows a set of 
 more flexible diverging
 palettes.  These do not impose
 any restrictions that the two "arms" of the palette need to be
@@ -931,7 +997,7 @@ Moreover, a couple of functions explicitly have new defaults,
 namely: `image()` and `filled.contour()`, now using sequential `YlOrRd` palette
 (from ColorBrewer) 
 which uses similar hues as the old `heat.colors()`. 
-See Figure \@ref(fig:graphics).
+See Figure&nbsp;\@ref(fig:graphics).
 
 Finally, the `hist()` and `boxplot()` functions (and therefore
 calls of the form `plot(num ~ factor, ...)`, also have a new default color:
