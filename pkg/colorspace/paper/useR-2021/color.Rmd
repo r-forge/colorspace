@@ -24,6 +24,7 @@ abstract: >
   the function `palette.colors()` and `hcl.colors()`.
 preamble: |
   \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
+  \usepackage{longtable}
 bibliography: color.bib
 output: 
   rjtools::rjournal_web_article:
@@ -211,17 +212,20 @@ In particular, `palette()` has a new improved default color palette,
 `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
 the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL]; see @grDevices and @Zeileis+Fisher+Hornik:2020.
 
+## Illustrations
+
+To illustrate the problems with the old default palette,
 Figure&nbsp;\@ref(fig:tsplot) shows several versions of a time series plot,
 depicting four different European stock indexes during most of the 1990s
 (`EuStockMarkets` data). The plots compare
 the old `"R3"` default color palette with
-the new `"R4"` default and a new `"Okabe-Ito"` qualitative 
-palette [@Okabe+Ito:2008]
-that can be selected using `palette.colors()`.
+the new `"R4"` default and anoter new qualitative palette
+known as  `"Okabe-Ito"` [@Okabe+Ito:2008]
+that can all be selected using `palette.colors()`.
 The first row shows the `"R3"` default using a typical color legend in the top left corner;
 the second column shows an emulation of a kind of red-green
 color blindness known as deuteranopia using the \pkg{colorspace} package 
-(based on the algorithms of @Machado+Oliveira+Fernandes:2009).
+[based on the algorithms of @Machado+Oliveira+Fernandes:2009].
 The second row uses the `"R4"` palette and the third row 
 uses `"Okabe-Ito"`; both using direct labels for the different time series instead of
 a color legend.
@@ -283,13 +287,14 @@ tsplot(palette = "Okabe-Ito", deutan = FALSE, legend = FALSE)
 tsplot(palette = "Okabe-Ito", deutan = TRUE, legend = FALSE)
 ```
 
+To illustrate an application of sequential color palettes,
 Figure&nbsp;\@ref(fig:dorian) shows several versions of a weather
 map that was produced by the National Oceanic and Atmospheric Administration
 [and infamously misinterpreted by a former President of The United States, see @Zeileis+Stauffer:2019]. 
 The top row shows the original image along with an emulation of 
 deuteranopia in the second column.
-The second row uses a new sequential palette,
-`"OrRd"`, that can be selected using `hcl.colors()`.
+The second row uses the sequential palette
+`"OrRd"` that can be selected using `hcl.colors()`.
 
 The weather map is intended to convey 
 the probability of wind speeds $>$ 39 mph 
@@ -327,11 +332,13 @@ ggdraw() +
   draw_image("images/dorian-useR-2021-orrd-deutan.png", width = 0.5, x = 0.5)
 ```
 
+## Overview and Guidance
+
 With the palettes that are now available as part of the core R graphics systems,
 we have a lot more choice, but we also have some good robust
 palettes for the most common use cases.
 
-**Qualitative Palettes**
+**Qualitative palettes**
 : When we are using color to distinguish between the levels of a categorical
   variable, we want a palette that has clear changes in hue.
   We can generate a palette with `palette.colors()` and 
@@ -341,7 +348,7 @@ palettes for the most common use cases.
   A good choice that also accommodates colorblind viewers is
   `"Okabe-Ito"`.  When filling large areas, such as bars of a bar plot,
   something with higher luminance, like `"Pastel 1"` may be more appropriate,
-  though this will not print well in greyscale
+  though this will not print well in grayscale
   nor work well for colorblind viewers.
 
   ```{r okabeito}
@@ -352,7 +359,7 @@ palettes for the most common use cases.
   paletteGrids(list('palette.colors(palette="Okabe-Ito")'=palette.colors(palette="Okabe-Ito"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Pastel 1")'=hcl.colors(9, palette="Pastel 1")), qual=TRUE)
   ```
 
-**Sequential Palettes**
+**Sequential palettes**
 : When we are using color to encode numeric (or ordered) information,
   we want a palette that has clear changes in luminance and/or chroma.
   We can generate palettes with `hcl.colors()`, provided 
@@ -370,7 +377,7 @@ palettes for the most common use cases.
   paletteGrids(list('hcl.colors(9, palette="Greens 3")'=hcl.colors(9, palette="Greens 3"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Viridis")'=hcl.colors(9, palette="Viridis")), qual=FALSE)
   ```
 
-**Diverging Palettes**
+**Diverging palettes**
 : When we are using color to encode a numeric variable with a central
   or neutral reference value, we need changes in lumincance and/or chroma
   in two directions away from a central neutral color, with a different
@@ -391,7 +398,35 @@ palettes for the most common use cases.
 The following sections describe the full range of
 new color palettes in more detail.
 
-## A new default color palette
+: Palette overview.
+
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+| Type     | Qualitative                           | Sequential                          | Diverging                                     |
++:=========+:======================================+:====================================+:==============================================+
+| Purpose  | Categorical                           | Ordered or numeric                  | Ordered or numeric with center                |
+|          |                                       | (high $\rightarrow$ low)            | (high $\leftarrow$ neutral $\rightarrow$ low) |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+| Function | `palette.colors()`,                   | `hcl.colors()`                      | `hcl.colors()`                                |
+|          | `hcl.colors()`                        |                                     |                                               |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+| Listing  | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
+|          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+| Robust   | `"Okabe-Ito"`                         | Most, e.g.,                         | `"Purple-Green"`, `"Blue-Red 3"`              |
+|          |                                       | `"Viridis"`, `"YlnGnBu"`            |                                               |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+
+```{r palette-overview, include=FALSE}
+tab <- data.frame(
+  Type = c("Information", "Function", "List", "Robust"),
+  Qualitative = c("Categorical", "`palette.colors()`, `hcl.colors()`", "`palette.pals()`, `hcl.pals(\"qualitative\")`", "`\"Okabe-Ito\"`"),
+  Sequential = c("Ordered or numeric (high $\\rightarrow$ low)", "`hcl.colors()`", "`hcl.pals(\"sequential\")`", "Most? `\"Viridis\"`, `\"YlnGnBu\"`"),
+  Diverging = c("Numeric with central reference (high $\\leftarrow$ neutral $\\rightarrow$ low)", "`hcl.colors()`", "`hcl.pals(\"diverging\")`, `hcl.pals(\"divergingx\")`", "`\"Purple-Green\"`, `\"Blue-Red 3\"`")
+)
+knitr::kable(tab, caption = "Palette overview.")
+```
+
+## A new default color `palette()`
 
 The default color palette in R -- the default set of colors that can
 be specified by integer index -- has been replaced.  The new palette
@@ -581,14 +616,14 @@ path in HCL space, we can select as many colors as we like.
 Most of the palettes that are provided by `hcl.colors()`
 have one or more desirable perceptual properties:
 
-* **Perceptual uniformity:** This means that if we take a small step along
-  the path of the palette in HCL space, the perceived difference
-  between the two colors will be the same anywhere along the path.
+* **Colorblind-safe:**  This means that the palette retains
+  its perceptual properties for colorblind users.
 * **Perceptual order:**  This means that there is a perceived ordering
   of the colors, typically arising from a monotonic change from
   light to dark or vice versa.
-* **Colorblind-safe:**  This means that the palette retains
-  its perceptual properties for colorblind users.
+* **Perceptual uniformity:** This means that if we take a small step along
+  the path of the palette in HCL space, the perceived difference
+  between the two colors will be the same anywhere along the path.
 * **Perceptual balance:**  This means that, for example,
   while there are changes in hue and chroma, luminance remains 
   pretty much the same, so no colour stands out from the others.  
@@ -665,7 +700,7 @@ of hues (blues and greens for `"Cold"` and reds and oranges for
 is even across the palette.  This makes these palettes appropriate
 if all categories in a variable have equal importance, but they
 will not perform well for colorblind viewers and they will not 
-be appropriate for greyscale printing.
+be appropriate for grayscale printing.
 
 When palettes are employed for shading areas in statistical displays
 (e.g., in bar plots, pie charts, or regions in maps), lighter colors
@@ -866,7 +901,7 @@ palettes of the same name from the \pkg{scico} package.
 These palettes are constructed with a luminance scale 
 so that there is a clear visual ordering of the palette.
 They are also designed to be readable by colourblind users
-and to work for greyscale printing.  Finally, the palettes have been
+and to work for grayscale printing.  Finally, the palettes have been
 designed for perceptual balance, so that no colour has a greater
 visual emphasis than any other.
 Both `"Lajolla"` and `"Turku"`
@@ -878,7 +913,7 @@ Figure&nbsp;\@ref(fig:diverPalettes) shows the selection of diverging
 palettes for use with `hcl.colors()`.
 
 The diverging palettes offer a range of underlying hues
-for either extreme, with either white or yellow as the central "neutral"
+for either extreme, with either light gray or yellow as the central "neutral"
 value.  The palettes with yellow at the centre provide less of a
 change in colourfulness, so the "neutral" value is more of 
 a turning point rather than a local minimum.  
