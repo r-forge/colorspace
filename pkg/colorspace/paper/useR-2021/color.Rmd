@@ -173,7 +173,7 @@ stimulating, and the colors are unbalanced with respect to chroma and luminance,
 which means that they have unequal visual impact
 [@Lonsdale+Lonsdale:2019; @Bartram+Patra+Stone:2017; @Etchebehere+Fedorovskaya:2017]. 
 In addition, the palettes do not perform well for viewers with some form
-of colorblindness (nearly 10% of the population).
+of colorblindness (nearly 10% of the male population).
 Most of the palettes also use sequences
 of hues obtained in the RGB (red-green-blue) space or simple derivations thereof like HSV (hue-saturation-value) or HLS (hue-lightness-saturation),
 which leads to clustering of colors at the red, green, and blue primaries.
@@ -331,100 +331,13 @@ ggdraw() +
   draw_image("images/dorian-useR-2021-orrd.png", width = 0.5) + 
   draw_image("images/dorian-useR-2021-orrd-deutan.png", width = 0.5, x = 0.5)
 ```
-
-## Overview and Guidance
-
-With the palettes that are now available as part of the core R graphics systems,
-we have a lot more choice, but we also have some good robust
-palettes for the most common use cases.
-
-**Qualitative palettes**
-: When we are using color to distinguish between the levels of a categorical
-  variable, we want a palette that has clear changes in hue.
-  We can generate a palette with `palette.colors()` and 
-  `palette.pals()` gives the list of available palettes.
-  We can also generate a palette with `hcl.colors()`, provided
-  we use one of the palettes listed by `hcl.pals("qualitative")`.
-  A good choice that also accommodates colorblind viewers is
-  `"Okabe-Ito"`.  When filling large areas, such as bars of a bar plot,
-  something with higher luminance, like `"Pastel 1"` may be more appropriate,
-  though this will not print well in grayscale
-  nor work well for colorblind viewers.
-
-  ```{r okabeito}
-  #| echo: FALSE
-  #| fig.width: 6
-  #| fig.height: 1.5
-  #| out.width: '100%'
-  paletteGrids(list('palette.colors(palette="Okabe-Ito")'=palette.colors(palette="Okabe-Ito"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Pastel 1")'=hcl.colors(9, palette="Pastel 1")), qual=TRUE)
-  ```
-
-**Sequential palettes**
-: When we are using color to encode numeric (or ordered) information,
-  we want a palette that has clear changes in luminance and/or chroma.
-  We can generate palettes with `hcl.colors()`, provided 
-  we use one of the palettes listed by `hcl.pals("sequential")`.
-  A simple solution is a single-hue palette like `"Greens 3"`.
-  A greater range of distinguishable colors can be obtained by selecting
-  a multi-hue palette like `"Viridis"`. This can also be useful to
-  emphasise extreme values.
-
-  ```{r sequential}
-  #| echo: FALSE
-  #| fig.width: 6
-  #| fig.height: 1.5
-  #| out.width: '100%'
-  paletteGrids(list('hcl.colors(9, palette="Greens 3")'=hcl.colors(9, palette="Greens 3"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Viridis")'=hcl.colors(9, palette="Viridis")), qual=FALSE)
-  ```
-
-**Diverging palettes**
-: When we are using color to encode a numeric variable with a central
-  or neutral reference value, we need changes in lumincance and/or chroma
-  in two directions away from a central neutral color, with a different
-  hue for each direction.
-  We can generate palettes with `hcl.colors()`, provided 
-  we use one of the palettes listed by `hcl.pals("diverging")`
-  or `hcl.pals("divergingx")`.
-  Examples of good choices are `"Purple-Green"` and `"Blue-Red3"`.
-
-  ```{r diverging}
-  #| echo: FALSE
-  #| fig.width: 6
-  #| fig.height: 1.5
-  #| out.width: '100%'
-  paletteGrids(list('hcl.colors(9, palette="Purple-Green")'=hcl.colors(9, palette="Purple-Green"), NULL, NULL, NULL, NULL, NULL, 'hcl.colors(9, palette="Blue-Red3")'=hcl.colors(9, palette="Blue-Red3")), qual=FALSE)
-  ```
   
 The following sections describe the full range of
-new color palettes in more detail.
+new color palettes in more detail.  A much more condensed 
+overview of the palettes that are available and 
+some suggestions for robust default palettes are given in the
+[Summary Section](#Summary).
 
-: Palette overview.
-
-+----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-| Type     | Qualitative                           | Sequential                          | Diverging                                     |
-+:=========+:======================================+:====================================+:==============================================+
-| Purpose  | Categorical                           | Ordered or numeric                  | Ordered or numeric with center                |
-|          |                                       | (high $\rightarrow$ low)            | (high $\leftarrow$ neutral $\rightarrow$ low) |
-+----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-| Function | `palette.colors()`,                   | `hcl.colors()`                      | `hcl.colors()`                                |
-|          | `hcl.colors()`                        |                                     |                                               |
-+----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-| Listing  | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
-|          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
-+----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-| Robust   | `"Okabe-Ito"`                         | Most, e.g.,                         | `"Purple-Green"`, `"Blue-Red 3"`              |
-|          |                                       | `"Viridis"`, `"YlnGnBu"`            |                                               |
-+----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-
-```{r palette-overview, include=FALSE}
-tab <- data.frame(
-  Type = c("Information", "Function", "List", "Robust"),
-  Qualitative = c("Categorical", "`palette.colors()`, `hcl.colors()`", "`palette.pals()`, `hcl.pals(\"qualitative\")`", "`\"Okabe-Ito\"`"),
-  Sequential = c("Ordered or numeric (high $\\rightarrow$ low)", "`hcl.colors()`", "`hcl.pals(\"sequential\")`", "Most? `\"Viridis\"`, `\"YlnGnBu\"`"),
-  Diverging = c("Numeric with central reference (high $\\leftarrow$ neutral $\\rightarrow$ low)", "`hcl.colors()`", "`hcl.pals(\"diverging\")`, `hcl.pals(\"divergingx\")`", "`\"Purple-Green\"`, `\"Blue-Red 3\"`")
-)
-knitr::kable(tab, caption = "Palette overview.")
-```
 
 ## A new default color `palette()`
 
@@ -642,6 +555,16 @@ work great on a white background if the
 light gray group is less important 
 is just provided in the background for
 reference.
+Perceptual balance and colorblind-safety are closely linked
+because the easiest approach to obtaining
+a colorblind-safe palette is by using a monotonic
+change in luminance. All of the sequential palettes in `hcl.colors()` in
+fact have this property and are colorblind-safe to a certain degree, though
+it depends on the luminance range how effective this is.
+A quick way to check a palette for colorblind-safety is via
+`colorspace::swatchplot(pal, cvd = TRUE)`, where `pal` is a palette of colours.
+More elaborate tools
+are provided by the package \pkg{colorblindcheck}.
 
 The following sections list the palettes available via `hcl.colors()`,
 broken down into qualitative, sequential, and diverging palettes.
@@ -1025,7 +948,7 @@ Several functions from these packages
 now have slightly different default output, 
 namely when they are using integer color specifications such as
 `2` or `3`.
-The resulting colours will still be similar to the old output, e.g.,  
+The resulting colours will still be similar to the old output, e.g.,
 still a red or a green, but just a different shade.
 
 Moreover, a couple of functions explicitly have new defaults, 
@@ -1052,6 +975,11 @@ boxplot(weight ~ feed, data = chickwts)
 hist(chickwts$weight)
 ```
 
+Package developers may also benefit from the new palettes available
+in R;  the new functions `palette.colors()` and `hcl.colors()`
+allow good default palettes to be set without requiring additional
+package dependencies.
+
 # Summary
 
 The default colour palette in R has been improved since R version 4.0.0.
@@ -1060,4 +988,33 @@ The functions `palette.colors()` and `hcl.colors()`, from the
 palettes based on a number of widely used graphics systems.
 There are qualitative palettes for use with categorical data
 and sequential and diverging palettes for use with continuous data. 
+The table below summarises the main types of palettes and provides
+suggestions for good default palettes for each type.
 
+: An overview of the new palette functionality:  For each main type of palette, the Purpose Row describes what sort of data the type of palette is appropriate for, the Generate row gives the functions that can be used to generate palettes of that type, the List row names the functions that can be used to list available palettes, and the Robust row identifies one or two good default palettes of that type. 
+
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+|          | Qualitative                           | Sequential                          | Diverging                                     |
++:=========+:======================================+:====================================+:==============================================+
+| Purpose  | Categorical data                      | Ordered or numeric data             | Ordered or numeric data with a central value  |
+|          |                                       | (high $\rightarrow$ low)            | (high $\leftarrow$ neutral $\rightarrow$ low) |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+| Generate | `palette.colors()`,                   | `hcl.colors()`                      | `hcl.colors()`                                |
+|          | `hcl.colors()`                        |                                     |                                               |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+| List     | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
+|          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+| Robust   | `"Okabe-Ito"`                         | `"Viridis"`, `"YlnGnBu"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
+|          |                                       |                                     |                                               |
++----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
+
+```{r palette-overview, include=FALSE}
+tab <- data.frame(
+  Type = c("Information", "Function", "List", "Robust"),
+  Qualitative = c("Categorical", "`palette.colors()`, `hcl.colors()`", "`palette.pals()`, `hcl.pals(\"qualitative\")`", "`\"Okabe-Ito\"`"),
+  Sequential = c("Ordered or numeric (high $\\rightarrow$ low)", "`hcl.colors()`", "`hcl.pals(\"sequential\")`", "Most? `\"Viridis\"`, `\"YlnGnBu\"`"),
+  Diverging = c("Numeric with central reference (high $\\leftarrow$ neutral $\\rightarrow$ low)", "`hcl.colors()`", "`hcl.pals(\"diverging\")`, `hcl.pals(\"divergingx\")`", "`\"Purple-Green\"`, `\"Blue-Red 3\"`")
+)
+knitr::kable(tab, caption = "Palette overview.")
+```
