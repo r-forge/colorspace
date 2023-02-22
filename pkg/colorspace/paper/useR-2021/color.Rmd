@@ -18,18 +18,17 @@ author:
     orcid: 0000-0002-3224-8858
     email:  paul@stat.auckland.ac.nz
 abstract: >
-  Prior to R 4.0.0 R has had a poor default palette (using highly saturated red, green, blue, etc.)
+  Prior to version 4.0.0 R had a poor default color palette (using highly saturated red, green, blue, etc.)
   and only provided very few readily available alternative palettes, most of which also had poor
-  perceptual properties (like the infamous rainbow palette). Starting with R 4.0.0 R has gained a
+  perceptual properties (like the infamous rainbow palette). Starting with version 4.0.0 R gained a
   new and much improved default palette and, in addition, a selection of more than 100
   well-established palettes are now available via the functions `palette.colors()` and `hcl.colors()`.
   The former provides a range of popular qualitative palettes for categorical data while the latter
   closely approximates many popular sequential and diverging palettes by systematically varying
-  the perceptual hue, chroma, luminance (HCL) properties in the palette. Here, an overview of the
-  functions is given along with advice which palettes are particularly well-suited for which tasks,
+  the perceptual hue, chroma, luminance (HCL) properties in the palette. 
+  This paper provides an overview of the new color palettes and the new color palette
+  functions along with advice which palettes are well-suited for specific tasks,
   especially with regard to making them accessible to viewers with color vision deficiencies.
-  This should facilitate adopting the functions in particular for setting better color defaults,
-  both in daily work or in visualization functions/packages, etc.
 preamble: |
   \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
   \usepackage{longtable}
@@ -99,7 +98,7 @@ popViewport()
 print(tm, vp=viewport(x=1, width=.3, just="right"))
 ```
 
-R provides several ways to specify colors:  by name (e.g., `"red"`);
+R provides several ways to specify a color:  by name (e.g., `"red"`);
 by hexadecimal RGB code (e.g., `"#FF0000"`); or by integer (e.g., `2`).
 When we specify an integer, that provides an index into a 
 default set of colors;  the color `2`
@@ -132,17 +131,17 @@ been widely recognized as being rather poor.
 #| fig.align: 'center'
 #| fig.keep: 'last'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Old base R palettes.'
+#| fig.cap: 'Old base R palettes.  At top left is the old default palette, consisting largely of highly saturated primary colors or combinations thereof.  Below that is the rainbow palette of different highly saturated hues.  The middle column shows the old sequential palettes, with heat colors again being highly saturated.  The last column shows an old diverging palette plus two palettes motivated by shadings of geographic maps.'
 source("paletteGrid.R")
 paletteGrids(list("palette()"=palette.colors(palette="R3"),
                   "heat.colors(8)"=heat.colors(8), 
-                  "terrain.colors(8)"=terrain.colors(8), 
+                  "cm.colors(8)"=cm.colors(8), 
                   "rainbow(8)"=rainbow(8),
                   "gray.colors(8)"=gray.colors(8),
-                  "topo.colors(8)"=topo.colors(8),
+                  "terrain.colors(8)"=terrain.colors(8),
                   NULL, 
                   NULL,
-                  "cm.colors(8)"=cm.colors(8)),
+                  "topo.colors(8)"=topo.colors(8)),
              qual=c(TRUE, FALSE, FALSE, 
                     TRUE, FALSE, FALSE, 
                     FALSE, FALSE, FALSE))
@@ -151,6 +150,7 @@ paletteGrids(list("palette()"=palette.colors(palette="R3"),
 The `palette()` function generated a vector of eight colors.
 These provided the default set of colors that an integer color specification selects from
 and could be used for coding _categorical_ information.
+The output below shows what R would produce prior to version 4.0.0.
 
 ```{r echo=2}
 palette("R3")
@@ -158,8 +158,8 @@ palette()
 palette("R4")
 ```
 
-See also Figure&nbsp;\@ref(fig:oldPalettes)
-that depicts the old default `palette()` along
+Figure&nbsp;\@ref(fig:oldPalettes)
+depicts this old default `palette()` (top-left) along
 with other old base R palettes using *swatches* of circles or
 rectangles that are filled with the
 corresponding colors. The other palette functions  all take an argument `n` to generate
@@ -191,7 +191,7 @@ were made to these palettes provided by the core R graphics system for
 a number of years. There were various reasons for this including the following:
 
 * In R version 2.1.0, Thomas Lumley added the `colorRampPalette()` function.
-  This makes it easier to generate a palette, though the user is still required
+  This made it easier to generate a palette, though the user is still required
   to select, for example, start and end colors from which
   a palette of colors can then be interpolated.
 
@@ -220,6 +220,161 @@ In particular, `palette()` has a new improved default color palette,
 `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
 the so-called HCL (hue-chroma-luminance) space [@Wiki+HCL]; see @grDevices and @Zeileis+Fisher+Hornik:2020.
 
+## A new default color `palette()`
+
+The default color palette in R -- the default set of colors that can
+be specified by integer index -- has been replaced.  The new palette
+follows the same basic hues as the old default palette, but
+the palette is less saturated overall and
+reduces the size of changes in chroma and luminance across the palette.
+This produces a calmer and less distracting palette with a more
+even visual impact.
+An attempt has also been made to improve the discriminability
+of the colors in the default palette for colorblind viewers.
+The output (and swatches) below show what R produces from version 4.0.0
+onwards.
+
+```{r}
+palette()
+```
+
+```{r R4}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=palette()), qual=TRUE)
+```
+
+## The `palette.colors()` function
+
+The `palette.colors()` function, new in R 4.0.0, provides a way to
+access several other predefined palettes 
+(see Figure&nbsp;\@ref(fig:newPalettes)).
+All of these are *qualitative palettes* because they are appropriate for 
+encoding qualitative (categorical) variables.  In other words,
+these palettes are appropriate for differentiating between groups.
+
+By default `palette.colors()` returns the 
+`Okabe-Ito` [@Okabe+Ito:2008] palette.
+This palette
+ was designed to be very robust under color vision deficiencies, so
+the different colors in this palette should be distinguishable
+for all viewers. 
+
+```{r}
+palette.colors()
+```
+```{r Okabe-Ito}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=palette.colors()), qual=TRUE)
+```
+
+The first argument to `palette.colors()` is a number of colors.
+Each palette has a fixed number of colors, but we can ask for fewer or,
+with `recycle = TRUE`, we can get more colors by recycling.
+
+```{r}
+palette.colors(4)
+```
+
+```{r short}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=palette.colors(4)), qual=TRUE)
+```
+
+```{r}
+palette.colors(10)
+```
+
+```{r recycle}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=palette.colors(10, recycle=TRUE)), qual=TRUE)
+```
+
+## The `hcl.colors()` function
+
+The `hcl.colors()` function was added in R 3.6.0, with the range
+of supported palettes slowly expanded over time.
+This function provides access to another range of palettes, this time
+including sequential and diverging palettes, which are more appropriate
+for representing continuous variables.
+As with the `palette.colors()` function, the first
+argument is a number of colors to generate and the second argument
+specifies a palette to generate colors from.
+The `hcl.pals()` function provides a full list of the
+available palette names that we can choose from.
+
+```{r}
+hcl.colors(8, palette="Blues 3")
+```
+```{r Blues3}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=hcl.colors(8, palette="Blues 3")), qual=FALSE)
+```
+
+One difference with `hcl.colors()` is that the palette we are
+selecting colors from is *not* a fixed set of colors.  Instead,
+the palettes in `hcl.colors()` are a path within HCL colorspace.  For each
+dimension - hue, chroma, and luminance - a palette can have a constant
+value, a monotonic trajectory, or a triangular trajectory.  For
+example, the trajectories for the `"Blues 3"` palette are shown in
+Figure&nbsp;\@ref(fig:blues3hcl).  The palette is (almost) constant in the hue
+dimension, so the palette consists entirely of different shades of 
+(almost) the same blue.
+The palette is monotonically increasing in the luminance dimension, so
+the blues vary from very dark to very light.  Finally, the palette has a
+triangular trajectory in the chroma dimension, so the blues are more
+colorful towards the middle of the palette.
+
+```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Blues 3"} palette.')}
+#| echo: FALSE
+#| fig.width: 5
+#| fig.height: 4
+#| out.width: '60%'
+#| fig.align: 'center'
+#| fig.pos: 'ht!'
+library("colorspace")
+specplot(hcl.colors(100, "Blues 3"))
+```
+
+Because the palettes from `hcl.colors()` are based on a continuous
+path in HCL space, we can select as many colors as we like.
+
+```{r}
+hcl.colors(7, palette="Purple-Green")
+```
+```{r PurpleGreen}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=hcl.colors(7, palette="Purple-Green")), qual=FALSE)
+```
+
+```{r}
+hcl.colors(5, palette="Viridis")
+```
+```{r Viridis}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=hcl.colors(5, palette="Viridis")), qual=FALSE)
+```
+
 ## Illustrations
 
 To illustrate the problems with the old default palette,
@@ -227,7 +382,7 @@ Figure&nbsp;\@ref(fig:tsplot) shows several versions of a time series plot,
 depicting four different European stock indexes during most of the 1990s
 (`EuStockMarkets` data). The plots compare
 the old `"R3"` default color palette with
-the new `"R4"` default and anoter new qualitative palette
+the new `"R4"` default and another new qualitative palette
 known as  `"Okabe-Ito"` [@Okabe+Ito:2008]
 that can all be selected using `palette.colors()`.
 The first row shows the `"R3"` default using a typical color legend in the top left corner;
@@ -329,15 +484,15 @@ of these qualities.
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
 #| fig.show: 'hold'
-#| fig.cap: 'Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$) during hurricane Dorian in 2019.'
+#| fig.cap: 'Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$) during hurricane Dorian in 2019.  Top-left is the original image and top-right is an emulation of how the original image might appear to a colorblind viewer.  Bottom-left is a reproduction using the `"OrRd"` palette, with a colorblind emulation at bottom-right.'
 library("cowplot")
 ggdraw() + 
   draw_image("images/dorian-useR-2021-orig.png", width = 0.5) + 
   draw_image("images/dorian-useR-2021-orig-deutan.png", width = 0.5, x = 0.5)
 
 ggdraw() + 
-  draw_image("images/dorian-useR-2021-orrd.png", width = 0.5) + 
-  draw_image("images/dorian-useR-2021-orrd-deutan.png", width = 0.5, x = 0.5)
+  draw_image("images/dorian-useR-2021-orrd10.png", width = 0.5) + 
+  draw_image("images/dorian-useR-2021-orrd10-deutan.png", width = 0.5, x = 0.5)
 ```
   
 The following sections describe the full range of
@@ -347,17 +502,16 @@ some suggestions for robust default palettes are given in the
 [Summary Section](#Summary).
 
 
+# A gallery of palettes
+
+This section goes through all of the color palettes that are now
+available in R (without using any additional packages).
+There is some discussion of the background for the palettes,
+strengths and weaknesses of different palettes, and 
+appropriate uses of the palettes.
+
 ## A new default color `palette()`
 
-The default color palette in R -- the default set of colors that can
-be specified by integer index -- has been replaced.  The new palette
-follows the same basic hues as the old default palette, but
-the palette is less saturated overall and
-reduces the size of changes in chroma and luminance across the palette.
-This produces a calmer and less distracting palette with a more
-even visual impact.
-An attempt has also been made to improve the discriminability
-of the colors in the default palette for colorblind viewers.
 The new, "R4", default palette is shown at top-left of 
 Figure&nbsp;\@ref(fig:newPalettes).
 More information about the construction of the new default palette
@@ -412,19 +566,6 @@ grid.draw(scene)
 
 ## The `palette.colors()` function
 
-The `palette.colors()` function, new in R 4.0.0, provides a way to
-access several other predefined palettes 
-(see Figure&nbsp;\@ref(fig:newPalettes)).
-All of these are *qualitative palettes* because they are appropriate for 
-encoding qualitative (categorical) variables.  In other words,
-these palettes are appropriate for differentiating between groups.
-
-By default `palette.colors()` returns the 
-`Okabe-Ito` [@Okabe+Ito:2008] palette.  This palette
- was designed to be very robust under color vision deficiencies, so
-the different colors in this palette should be distinguishable
-for all viewers. 
-
 The `palette` argument to the `palette.colors()` function allows us to select a
 different palette.  For example, the old R default palette is available via the
 name `"R3"`, though this palette is really only useful to reproduce old
@@ -435,6 +576,14 @@ available palettes.
 
 ```{r}
 palette.pals()
+```
+
+Each of the predefined palettes can be set as the default palette by passing
+the palette name to the `palette()` function.  For example,
+the following code sets the Okabe-Ito palette as the default palette.
+
+```{r}
+palette("Okabe-Ito")
 ```
 
 There are several palettes that have been taken from the color schemes of
@@ -468,71 +617,8 @@ may be useful if you are attempting to represent a very large
 number of categories at once.  The result is unlikely to be
 easy to interpret, but these palettes will be your best chance.
 
-The first argument to `palette.colors()` is a number of colors.
-Each palette has a fixed number of colors, but we can ask for fewer or,
-with `recycle = TRUE`, we can get more colors by recycling.
-
-```{r recycle}
-#| echo: FALSE
-#| fig.width: 6
-#| fig.height: .5
-#| out.width: '100%'
-paletteGrids(list('palette.colors(4)'=palette.colors(4),
-                  'palette.colors(10, recycle=TRUE)'=palette.colors(10, recycle=TRUE)), qual=TRUE)
-```
-
-Each of the predefined palettes can be set as the default palette by passing
-the palette name to the `palette()` function.  For example,
-the following code sets the Okabe-Ito palette as the default palette.
-
-```{r}
-palette("Okabe-Ito")
-```
 
 ## The `hcl.colors()` function
-
-The `hcl.colors()` function was added in R 3.6.0, with the range
-of supported palettes slowly expanded over time.
-This function provides access to another range of palettes, this time
-including sequential and diverging palettes, which are more appropriate
-for representing continuous variables.  
-As with the `palette.colors()` function, the first
-argument is a number of colors to generate and the second argument
-specifies a palette to generate colors from.
-The `hcl.pals()` function provides a full list of the
-available palette names that we can choose from.
-
-```{r}
-hcl.colors(5, palette="viridis")
-```
-
-One difference with `hcl.colors()` is that the palette we are
-selecting colors from is *not* a fixed set of colors.  Instead,
-the palettes in `hcl.colors()` are a path within HCL colorspace.  For each
-dimension - hue, chroma, and luminance - a palette can have a constant
-value, a monotonic trajectory, or a triangular trajectory.  For
-example, the trajectories for the `"Blues 3"` palette are shown in
-Figure&nbsp;\@ref(fig:blues3hcl).  The palette is (almost) constant in the hue
-dimension, so the palette consists entirely of different shades of 
-(almost) the same blue.
-The palette is monotonically increasing in the luminance dimension, so
-the blues vary from very dark to very light.  Finally, the palette has a
-triangular trajectory in the chroma dimension, so the blues are more
-colorful towards the middle of the palette.
-
-```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Blues 3"} palette.')}
-#| echo: FALSE
-#| fig.width: 5
-#| fig.height: 4
-#| out.width: '60%'
-#| fig.align: 'center'
-#| fig.pos: 'ht!'
-library("colorspace")
-specplot(hcl.colors(100, "Blues 3"))
-```
-
-Because the palettes from `hcl.colors()` are based on a continuous
-path in HCL space, we can select as many colors as we like.
 
 Most of the palettes that are provided by `hcl.colors()`
 have one or more desirable perceptual properties:
@@ -563,7 +649,7 @@ work great on a white background if the
 light gray group is less important 
 is just provided in the background for
 reference.
-Perceptual balance and colorblind-safety are closely linked
+Perceptual order and colorblind-safety are closely linked
 because the easiest approach to obtaining
 a colorblind-safe palette is by using a monotonic
 change in luminance. All of the sequential palettes in `hcl.colors()` in
@@ -616,7 +702,9 @@ Most of these palettes are also available as a fixed set
 of colors via `palette.colors()`;  the difference is that
 `hcl.colors()` will return `n` colors interpolated from the full 
 range of hues, whereas `palette.colors()` will return the first `n`
-colors from a fixed set.
+colors from a fixed set.  Furthermore, the `hcl.colors()` palettes
+are only emulations based on the original ColorBrewer.org palettes
+and have subtly different properties.
 
 The ColorBrewer.org palettes were designed with good perceptual properties
 in mind, but also relied on expert opinion and trial and error.
@@ -629,8 +717,8 @@ palettes keep chroma and luminance fixed and restrict the range
 of hues (blues and greens for `"Cold"` and reds and oranges for 
 `"Warm"`).   Holding chroma and luminance fixed means that the visual impact
 is even across the palette.  This makes these palettes appropriate
-if all categories in a variable have equal importance, but they
-will not perform well for colorblind viewers and they will not 
+if all categories in a variable have equal importance, but, as with
+the ColorBrewer.org emulations, they are not colorblind-safe and they will not 
 be appropriate for grayscale printing.
 
 When palettes are employed for shading areas in statistical displays
@@ -950,7 +1038,7 @@ from the \pkg{scico} package.
 
 # New defaults in graphical functions
 
-The default color palette will be most visible in the output from
+The new default color palette will be most visible in the output from
 functions in the \pkg{grDevices} and \pkg{graphics} packages.
 Several functions from these packages
 now have slightly different default output, 
@@ -959,8 +1047,8 @@ namely when they are using integer color specifications such as
 The resulting colors will still be similar to the old output, e.g.,
 still a red or a green, but just a different shade.
 
-Moreover, a couple of functions explicitly have new defaults, 
-namely: `image()` and `filled.contour()`, now using sequential `YlOrRd` palette
+Moreover, a couple of functions explicitly have new defaults: 
+`image()` and `filled.contour()`, now use the sequential `"YlOrRd"` palette
 (from ColorBrewer) 
 which uses similar hues as the old `heat.colors()`. 
 See Figure&nbsp;\@ref(fig:graphics).
@@ -1013,7 +1101,7 @@ suggestions for good default palettes for each type.
 |_List_    | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
 |          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-|_Robust_  | `"Okabe-Ito"`                         | `"Viridis"`, `"YlnGnBu"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
+|_Robust_  | `"Okabe-Ito"`                         | `"Blues 3"`, `"Viridis"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
 |          |                                       |                                     |                                               |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
 
