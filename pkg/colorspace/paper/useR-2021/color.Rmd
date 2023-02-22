@@ -428,7 +428,7 @@ for all viewers.
 The `palette` argument to the `palette.colors()` function allows us to select a
 different palette.  For example, the old R default palette is available via the
 name `"R3"`, though this palette is really only useful to reproduce old
-behaviour and remind us how bad things used to be.  The `palette.pals()`
+behavior and remind us how bad things used to be.  The `palette.pals()`
 function returns a character vector of the available palette names and 
 Figure&nbsp;\@ref(fig:newPalettes) shows swatches for each of the
 available palettes.
@@ -450,7 +450,7 @@ are also useful for filling regions within data visualizations like bar plots,
 density plots, and heatmaps, among others.
 Two of these palettes are a bit different because 
 they deliberately contain darker and lighter colors:
-the `"Accent"` palette may be useful to emphasise one or more categories
+the `"Accent"` palette may be useful to emphasize one or more categories
 over the others;
 the `"Paired"` palette may be useful to represent more than one
 categorical variable via color, e.g., different types of treatment
@@ -498,7 +498,7 @@ including sequential and diverging palettes, which are more appropriate
 for representing continuous variables.  
 As with the `palette.colors()` function, the first
 argument is a number of colors to generate and the second argument
-specifies a palette to generate colours from.
+specifies a palette to generate colors from.
 The `hcl.pals()` function provides a full list of the
 available palette names that we can choose from.
 
@@ -507,7 +507,7 @@ hcl.colors(5, palette="viridis")
 ```
 
 One difference with `hcl.colors()` is that the palette we are
-selecting colors from is *not* a fixed set of colours.  Instead,
+selecting colors from is *not* a fixed set of colors.  Instead,
 the palettes in `hcl.colors()` are a path within HCL colorspace.  For each
 dimension - hue, chroma, and luminance - a palette can have a constant
 value, a monotonic trajectory, or a triangular trajectory.  For
@@ -518,7 +518,7 @@ dimension, so the palette consists entirely of different shades of
 The palette is monotonically increasing in the luminance dimension, so
 the blues vary from very dark to very light.  Finally, the palette has a
 triangular trajectory in the chroma dimension, so the blues are more
-colourful towards the middle of the palette.
+colorful towards the middle of the palette.
 
 ```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Blues 3"} palette.')}
 #| echo: FALSE
@@ -547,7 +547,7 @@ have one or more desirable perceptual properties:
   between the two colors will be the same anywhere along the path.
 * **Perceptual balance:**  This means that, for example,
   while there are changes in hue and chroma, luminance remains 
-  pretty much the same, so no colour stands out from the others.  
+  pretty much the same, so no color stands out from the others.  
 
 These properties are very difficult to achieve in
 a single palette, which is one reason why there are multiple palettes
@@ -556,7 +556,7 @@ important depending on the data being displayed and the point that
 a data visualization is attempting to make.  For example, perceptual
 balance is not desirable when we want to highlight a particular
 point or category of interest;  in that scenario we explicitly 
-want some colours to have a greater visual impact than others.
+want some colors to have a greater visual impact than others.
 The details always also depend a lot on how many colors you need. For
 example, a palette with light gray, medium color, and full color may still
 work great on a white background if the
@@ -570,7 +570,7 @@ change in luminance. All of the sequential palettes in `hcl.colors()` in
 fact have this property and are colorblind-safe to a certain degree, though
 it depends on the luminance range how effective this is.
 A quick way to check a palette for colorblind-safety is via
-`colorspace::swatchplot(pal, cvd = TRUE)`, where `pal` is a palette of colours.
+`colorspace::swatchplot(pal, cvd = TRUE)`, where `pal` is a palette of colors.
 More elaborate tools
 are provided by the package \pkg{colorblindcheck}.
 
@@ -656,7 +656,7 @@ Figure&nbsp;\@ref(fig:singleSeqPalettes) shows the sequential palettes that
 hold hue largely constant.  All of these palettes have a large
 monotonic variation in luminance, typically from dark to light.  This
 is also typically accompanied by a change in chroma from more
-colourful to less.  The result is a palette that makes it very easy to
+colorful to less.  The result is a palette that makes it very easy to
 distinguish extreme values.  Some palettes also have a pronounced peak
 of chroma somewhere in the middle, which makes it easier to
 distinguish moderate values from extreme values (e.g., 
@@ -831,9 +831,9 @@ The next group of palettes, `"Lajolla"` to `"Batlow"` closely match the
 palettes of the same name from the \pkg{scico} package.
 These palettes are constructed with a luminance scale 
 so that there is a clear visual ordering of the palette.
-They are also designed to be readable by colourblind users
+They are also designed to be readable by colorblind users
 and to work for grayscale printing.  Finally, the palettes have been
-designed for perceptual balance, so that no colour has a greater
+designed for perceptual balance, so that no color has a greater
 visual emphasis than any other.
 Both `"Lajolla"` and `"Turku"`
 are intended for use with a black/dark background.
@@ -846,7 +846,7 @@ palettes for use with `hcl.colors()`.
 The diverging palettes offer a range of underlying hues
 for either extreme, with either light gray or yellow as the central "neutral"
 value.  The palettes with yellow at the centre provide less of a
-change in colourfulness, so the "neutral" value is more of 
+change in colorfulness, so the "neutral" value is more of 
 a turning point rather than a local minimum.  
 
 When choosing a particular palette for a display similar
@@ -881,7 +881,7 @@ paletteGrids(args, qual=FALSE)
 ```
 
 Almost all of the palettes in the first two groups, those
-involving simple colour pairs like
+involving simple color pairs like
 `"Blue-Red"` or `"Cyan-Magenta"`, were developed as part of the
 \pkg{colorspace} package, taking inspiration
 from various other palettes, including more balanced and simplified
@@ -942,7 +942,7 @@ palettes of the same name from ColorBrewer.org.
 The final group contains
 `"Zissou 1"`, which closely matches the palette of the same name from
 the \CRANpkg{wesanderson} package [@wesanderson], `"Cividis"`,
-which is a colourblind-safe version of `"Viridis"` (from 
+which is a colorblind-safe version of `"Viridis"` (from 
 the \pkg{viridis} package) and
 `"Roma"`, which closely matches the palette of the same name 
 from the \pkg{scico} package.
@@ -950,13 +950,13 @@ from the \pkg{scico} package.
 
 # New defaults in graphical functions
 
-The default colour palette will be most visible in the output from
+The default color palette will be most visible in the output from
 functions in the \pkg{grDevices} and \pkg{graphics} packages.
 Several functions from these packages
 now have slightly different default output, 
 namely when they are using integer color specifications such as
 `2` or `3`.
-The resulting colours will still be similar to the old output, e.g.,
+The resulting colors will still be similar to the old output, e.g.,
 still a red or a green, but just a different shade.
 
 Moreover, a couple of functions explicitly have new defaults, 
@@ -990,30 +990,30 @@ package dependencies.
 
 # Summary
 
-The default colour palette in R has been improved since R version 4.0.0.
+The default color palette in R has been improved since R version 4.0.0.
 The functions `palette.colors()` and `hcl.colors()`, from the 
 \pkg{grDevices} package, also provide a wide range of predefined 
 palettes based on a number of widely used graphics systems.
 There are qualitative palettes for use with categorical data
 and sequential and diverging palettes for use with continuous data. 
-The table below summarises the main types of palettes and provides
+The table below summarizes the main types of palettes and provides
 suggestions for good default palettes for each type.
 
-: An overview of the new palette functionality:  For each main type of palette, the Purpose Row describes what sort of data the type of palette is appropriate for, the Generate row gives the functions that can be used to generate palettes of that type, the List row names the functions that can be used to list available palettes, and the Robust row identifies one or two good default palettes of that type. 
+: An overview of the new palette functionality:  For each main type of palette, the _Purpose_ row describes what sort of data the type of palette is appropriate for, the _Generate_ row gives the functions that can be used to generate palettes of that type, the _List_ row names the functions that can be used to list available palettes, and the _Robust_ row identifies one or two good default palettes of that type. 
 
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
 |          | Qualitative                           | Sequential                          | Diverging                                     |
 +:=========+:======================================+:====================================+:==============================================+
-| Purpose  | Categorical data                      | Ordered or numeric data             | Ordered or numeric data with a central value  |
-|          |                                       | (high $\rightarrow$ low)            | (high $\leftarrow$ neutral $\rightarrow$ low) |
+|_Purpose_ | Categorical data                      | Ordered or numeric data             | Ordered or numeric data with a central value  |
+|          |                                       | (high$~\rightarrow~$low)            | (high$~\leftarrow~$neutral$~\rightarrow~$low) |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-| Generate | `palette.colors()`,                   | `hcl.colors()`                      | `hcl.colors()`                                |
+|_Generate_| `palette.colors()`,                   | `hcl.colors()`                      | `hcl.colors()`                                |
 |          | `hcl.colors()`                        |                                     |                                               |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-| List     | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
+|_List_    | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
 |          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-| Robust   | `"Okabe-Ito"`                         | `"Viridis"`, `"YlnGnBu"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
+|_Robust_  | `"Okabe-Ito"`                         | `"Viridis"`, `"YlnGnBu"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
 |          |                                       |                                     |                                               |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
 
