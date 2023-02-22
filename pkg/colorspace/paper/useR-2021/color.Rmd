@@ -18,10 +18,18 @@ author:
     orcid: 0000-0002-3224-8858
     email:  paul@stat.auckland.ac.nz
 abstract: >
-  Since R 4.0.0 R has had a new and much improved default palette.
-  In addition, a selection of
-  more than 100 well-established palettes are now provided via
-  the function `palette.colors()` and `hcl.colors()`.
+  Prior to R 4.0.0 R has had a poor default palette (using highly saturated red, green, blue, etc.)
+  and only provided very few readily available alternative palettes, most of which also had poor
+  perceptual properties (like the infamous rainbow palette). Starting with R 4.0.0 R has gained a
+  new and much improved default palette and, in addition, a selection of more than 100
+  well-established palettes are now available via the functions `palette.colors()` and `hcl.colors()`.
+  The former provides a range of popular qualitative palettes for categorical data while the latter
+  closely approximates many popular sequential and diverging palettes by systematically varying
+  the perceptual hue, chroma, luminance (HCL) properties in the palette. Here, an overview of the
+  functions is given along with advice which palettes are particularly well-suited for which tasks,
+  especially with regard to making them accessible to viewers with color vision deficiencies.
+  This should facilitate adopting the functions in particular for setting better color defaults,
+  both in daily work or in visualization functions/packages, etc.
 preamble: |
   \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
   \usepackage{longtable}
