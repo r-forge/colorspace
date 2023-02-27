@@ -19,7 +19,7 @@ author:
     email:  paul@stat.auckland.ac.nz
 abstract: >
   Prior to version 4.0.0 R had a poor default color palette (using highly saturated red, green, blue, etc.)
-  and only provided very few readily available alternative palettes, most of which also had poor
+  and provided very few alternative palettes, most of which also had poor
   perceptual properties (like the infamous rainbow palette). Starting with version 4.0.0 R gained a
   new and much improved default palette and, in addition, a selection of more than 100
   well-established palettes are now available via the functions `palette.colors()` and `hcl.colors()`.
@@ -27,7 +27,7 @@ abstract: >
   closely approximates many popular sequential and diverging palettes by systematically varying
   the perceptual hue, chroma, luminance (HCL) properties in the palette. 
   This paper provides an overview of the new color palettes and the new color palette
-  functions along with advice which palettes are well-suited for specific tasks,
+  functions along with advice about which palettes are appropriate for specific tasks,
   especially with regard to making them accessible to viewers with color vision deficiencies.
 preamble: |
   \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
@@ -64,7 +64,7 @@ demonstrated in the right hand plot of Figure&nbsp;\@ref(fig:colorcatcont).
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'h!'
-#| fig.cap: 'Typical usage of color for coding qualitative/categorical (left) and quantiative/continuous (right) information. Left: Scatter plot of weekly gas consumption by outside temperature before and after installing a house insulation. Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.'
+#| fig.cap: 'Typical usage of color for coding qualitative/categorical information (left) and quantiative/continuous information (right). Left: Scatter plot of weekly gas consumption by outside temperature before and after installing a house insulation. Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.'
 library("ggplot2")
 data("whiteside", package = "MASS")
 gg <- ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
@@ -135,13 +135,13 @@ been widely recognized as being rather poor.
 source("paletteGrid.R")
 paletteGrids(list("palette()"=palette.colors(palette="R3"),
                   "heat.colors(8)"=heat.colors(8), 
-                  "cm.colors(8)"=cm.colors(8), 
+                  "terrain.colors(8)"=terrain.colors(8),
                   "rainbow(8)"=rainbow(8),
                   "gray.colors(8)"=gray.colors(8),
-                  "terrain.colors(8)"=terrain.colors(8),
+                  "topo.colors(8)"=topo.colors(8),
                   NULL, 
                   NULL,
-                  "topo.colors(8)"=topo.colors(8)),
+                  "cm.colors(8)"=cm.colors(8)), 
              qual=c(TRUE, FALSE, FALSE, 
                     TRUE, FALSE, FALSE, 
                     FALSE, FALSE, FALSE))
@@ -151,16 +151,26 @@ The `palette()` function generated a vector of eight colors.
 These provided the default set of colors that an integer color specification selects from
 and could be used for coding _categorical_ information.
 The output below shows what R would produce prior to version 4.0.0.
+A *swatch* of color circles is included below the output.
 
 ```{r echo=2}
 palette("R3")
 palette()
 palette("R4")
 ```
+```{r R3}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+palette("R3")
+paletteGrids(list(' '=palette()), qual=TRUE)
+palette("R4")
+```
 
 Figure&nbsp;\@ref(fig:oldPalettes)
 depicts this old default `palette()` (top-left) along
-with other old base R palettes using *swatches* of circles or
+with other old base R palettes using swatches of circles or
 rectangles that are filled with the
 corresponding colors. The other palette functions  all take an argument `n` to generate
 that number of colors (possibly along with further arguments that allow for
@@ -259,7 +269,7 @@ By default `palette.colors()` returns the
 `Okabe-Ito` [@Okabe+Ito:2008] palette.
 This palette
  was designed to be very robust under color vision deficiencies, so
-the different colors in this palette should be distinguishable
+the different colors in this palette should be easily distinguishable
 for all viewers. 
 
 ```{r}
@@ -377,14 +387,14 @@ paletteGrids(list(' '=hcl.colors(5, palette="Viridis")), qual=FALSE)
 
 ## Illustrations
 
-To illustrate the problems with the old default palette,
+To illustrate the benefits of the new color palettes,
 Figure&nbsp;\@ref(fig:tsplot) shows several versions of a time series plot,
 depicting four different European stock indexes during most of the 1990s
 (`EuStockMarkets` data). The plots compare
 the old `"R3"` default color palette with
-the new `"R4"` default and another new qualitative palette
-known as  `"Okabe-Ito"` [@Okabe+Ito:2008]
-that can all be selected using `palette.colors()`.
+the new `"R4"` default and the new qualitative palette
+`"Okabe-Ito"` [@Okabe+Ito:2008].
+These can all be selected using `palette.colors()`.
 The first row shows the `"R3"` default using a typical color legend in the top left corner;
 the second column shows an emulation of a kind of red-green
 color blindness known as deuteranopia using the \pkg{colorspace} package 
@@ -450,7 +460,7 @@ deuteranope viewers; aided by the use of direct color labels instead of a legend
 The `"Okabe-Ito"` palette also works better than `"R3"`,
 particularly for deuteranope viewers.
 
-To illustrate an application of sequential color palettes,
+To illustrate an application of the new sequential color palettes,
 Figure&nbsp;\@ref(fig:dorian) shows several versions of a weather
 map that was produced by the National Oceanic and Atmospheric Administration
 [and infamously misinterpreted by a former President of The United States, see @Zeileis+Stauffer:2019]. 
@@ -514,6 +524,9 @@ appropriate uses of the palettes.
 
 The new, "R4", default palette is shown at top-left of 
 Figure&nbsp;\@ref(fig:newPalettes).
+As previously mentioned, this is a qualitative palette with
+reasonable perceptual properties, including accommodation for
+color vision deficiencies.
 More information about the construction of the new default palette
 is given in @grDevices2.
 
@@ -566,8 +579,10 @@ grid.draw(scene)
 
 ## The `palette.colors()` function
 
-The `palette` argument to the `palette.colors()` function allows us to select a
-different palette.  For example, the old R default palette is available via the
+The first argument to the `palette.colors()` function specifies 
+the number of colors to return.
+The `palette` argument allows us to select the palette of colors
+to choose from.  For example, the old R default palette is available via the
 name `"R3"`, though this palette is really only useful to reproduce old
 behavior and remind us how bad things used to be.  The `palette.pals()`
 function returns a character vector of the available palette names and 
@@ -808,7 +823,10 @@ the \pkg{viridis} and \pkg{rcartocolors} packages).
 The former strategy is suitable to
 emphasize extreme values, 
 while the latter works better if all values along the sequence should
-receive the same perceptual weight.
+receive the same perceptual weight.  The palettes that maintain a 
+high chroma throughout, such as `"Viridis"`, are also more effective
+when we need to match specific colours to a legend or across several
+small-multiples, as in facetted plots.
 
 ```{r multiSeqPalettes}
 #| echo: FALSE
@@ -1101,7 +1119,7 @@ suggestions for good default palettes for each type.
 |_List_    | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
 |          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-|_Robust_  | `"Okabe-Ito"`                         | `"Blues 3"`, `"Viridis"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
+|_Robust_  | `"R4"`, `"Okabe-Ito"`                 | `"Blues 3"`, `"Viridis"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
 |          |                                       |                                     |                                               |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
 
