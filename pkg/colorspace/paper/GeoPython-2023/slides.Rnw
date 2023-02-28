@@ -33,11 +33,6 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 if(file.exists("/usr/bin/python3")) knitr::opts_chunk$set(engine.path = "/usr/bin/python3")
 @
 
-<<include=FALSE>>=
-knitr::opts_chunk$set(fig.width = 4.8, fig.height = 2.2)
-@
-
-
 <<py-setup, engine="python", include=FALSE>>=
 from colorspace import *
 from colorspace.colorlib import *
@@ -176,7 +171,8 @@ Because Bob Ross would not approve of this!
 <<hcl-properties, engine="python", fig.width = 4.8, fig.height = 2.2, out.width = "\\textwidth">>=
 swatchplot([palette(sequential_hcl(h = [0, 300], c = [60, 60], l = 65)(5),                         "Hue\n(Type of color)"),
             palette(sequential_hcl(h = 0, c = [100, 0], l = 65, rev = True, power = 1)(5),         "Chroma\n(Colorfulness)"),
-            palette(sequential_hcl(h = 260, c = [25, 25], l = [25, 90], rev = True, power = 1)(5), "Luminance\n(Brightness)")])
+            palette(sequential_hcl(h = 260, c = [25, 25], l = [25, 90], rev = True, power = 1)(5), "Luminance\n(Brightness)")],
+           figsize = (4.8, 2.2))
 @
 \end{minipage}
 \pause
@@ -191,7 +187,8 @@ zeros = [0, 0, 0, 0, 0]
 seq01 = [0, 0.25, 0.5, 0.75, 1]
 swatchplot([palette(sRGB(seq01, zeros, zeros).colors(), "Red"),
             palette(sRGB(zeros, seq01, zeros).colors(), "Green"),
-            palette(sRGB(zeros, zeros, seq01).colors(), "Blue")])
+            palette(sRGB(zeros, zeros, seq01).colors(), "Blue")],
+           figsize = (4.8, 2.2))
 @
 \end{minipage}
 
