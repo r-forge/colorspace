@@ -23,8 +23,6 @@
 
 <<setup, include=FALSE, purl=FALSE>>=
 library("colorspace")
-library("ggplot2")
-theme_set(theme_minimal())
 
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, highlight = FALSE, comment = NA, prompt = TRUE, tidy = FALSE, strip.white = TRUE)
 knitr::opts_knit$set(out.format = "sweave")
@@ -33,6 +31,16 @@ knitr::knit_hooks$set(knitr::hooks_sweave())
 
 knitr::knit_engines$set(python = reticulate::eng_python)
 if(file.exists("/usr/bin/python3")) knitr::opts_chunk$set(engine.path = "/usr/bin/python3")
+@
+
+<<include=FALSE>>=
+knitr::opts_chunk$set(fig.width = 4.8, fig.height = 2.2)
+@
+
+
+<<py-setup, engine="python", include=FALSE>>=
+from colorspace import *
+from colorspace.colorlib import *
 @
 
 \definecolor{HighlightOrange}{rgb}{0.9490196,0.5725490,0.0000000}
@@ -165,13 +173,10 @@ Because Bob Ross would not approve of this!
 
 \bigskip
 
-<<hcl-properties, fig.width = 4, fig.height = 2.2, out.width = "\\textwidth">>=
-swatchplot(
-  "Hue\n(Type of color)"       = sequential_hcl(5, h = c(0, 300), c = c(60, 60), l = 65),
-  "Chroma\n(Colorfulness)"    = sequential_hcl(5, h = 0, c = c(100, 0), l = 65, rev = TRUE, power = 1),
-  "Luminance\n(Brightness)" = sequential_hcl(5, h = 260, c = c(25, 25), l = c(25, 90), rev = TRUE, power = 1),
-  nrow = 3, line = 5.2, off = 0
-)
+<<hcl-properties, engine="python", fig.width = 4.8, fig.height = 2.2, out.width = "\\textwidth">>=
+swatchplot([palette(sequential_hcl(h = [0, 300], c = [60, 60], l = 65)(5),                         "Hue\n(Type of color)"),
+            palette(sequential_hcl(h = 0, c = [100, 0], l = 65, rev = True, power = 1)(5),         "Chroma\n(Colorfulness)"),
+            palette(sequential_hcl(h = 260, c = [25, 25], l = [25, 90], rev = True, power = 1)(5), "Luminance\n(Brightness)")])
 @
 \end{minipage}
 \pause
@@ -181,13 +186,12 @@ swatchplot(
 
 \bigskip
 
-<<rgb-properties, fig.width = 3.6, fig.height = 2.2, out.width = "\\textwidth">>=
-swatchplot(
-  "Red"       = rgb(0:4/4, 0, 0),
-  "Green"     = rgb(0, 0:4/4, 0),
-  "Blue"      = rgb(0, 0, 0:4/4),
-  nrow = 3, off = 0
-)
+<<rgb-properties, engine="python", fig.width = 4.8, fig.height = 2.2, out.width = "\\textwidth">>=
+zeros = [0, 0, 0, 0, 0]
+seq01 = [0, 0.25, 0.5, 0.75, 1]
+swatchplot([palette(sRGB(seq01, zeros, zeros).colors(), "Red"),
+            palette(sRGB(zeros, seq01, zeros).colors(), "Green"),
+            palette(sRGB(zeros, zeros, seq01).colors(), "Blue")])
 @
 \end{minipage}
 
@@ -419,7 +423,6 @@ specplot(
   \item Flexible HCL-based palettes:\\
         \code{qualitative_hcl()}, \code{sequential_hcl()}, \code{diverging_hcl()}.
   \item Named palettes available, can be easily modified.
-  \item ggplot2 scales: \code{scale_<aesthetic>_<datatype>_<colorscale>()}.
 \end{itemize}
 
 \end{frame}
@@ -439,46 +442,10 @@ hcl.colors(6, palette = "Dark 3") |>
 
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Color palettes: Somewhere over the Rainbow}
-
-\textbf{Qualitative:} New default base \code{"R4"} palette with limited luminance differences.
-
-\bigskip
-
-<<swatchplot-r4, fig.height = 4.5, fig.width = 5.75, echo = TRUE, out.width = "0.46\\textwidth">>=
-palette.colors(7, palette = "R4")[-1] |>
-  swatchplot(cvd = TRUE)
-@
-
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Color palettes: Somewhere over the Rainbow}
-
-\textbf{Qualitative:} \code{"Okabe-Ito"} palette very robust under color vision deficiencies.
-
-\bigskip
-
-<<swatchplot-okabeito, fig.height = 4.5, fig.width = 5.75, echo = TRUE, out.width = "0.46\\textwidth">>=
-palette.colors(8, palette = "Okabe-Ito")[-1] |>
-  swatchplot(cvd = TRUE)
-@
-
-\end{frame}
+\subsection{Python package colorspace}
 
 \begin{frame}
-\frametitle{Color palettes: Somewhere over the Rainbow}
-
-\includegraphics[width=1.0\textwidth]{../useR-2021/images/grdevices-qualitative.png}
-
-\end{frame}
-
-
-\subsection{R package colorspace}
-
-\begin{frame}
-\frametitle{R package colorspace}
+\frametitle{Python package colorspace}
 
 \textbf{Origin of the package:} Convert colors between various three-dimensional representations of color.
 
@@ -501,8 +468,8 @@ plot(0, 0, type = "n", axes = FALSE, xlab = "", ylab = "",
   xlim = c(0.7, 6.3), ylim = c(0.4, 3.6))
 lines(y ~ x, data = d[-c(1, 3, 7, 8),])
 lines(y ~ x, data = d[c(1, 3, 5),])
-lines(y ~ x, data = d[c(6, 7, 9),])
-lines(y ~ x, data = d[c(6, 8, 9),])
+lines(y ~ x, data = d[c(7, 9),])
+lines(y ~ x, data = d[c(8, 9),])
 points(y ~ x, data = d[c(1, 2, 7, 8), ], pch = 21, bg = "lightgray", cex = 12)
 points(y ~ x, data = d[c(3, 4, 5, 6, 9), ], pch = 22, bg = "lightgray", cex = 12)
 points(y ~ x, data = d[10, ], pch = 23, bg = "white", cex = 12)
@@ -527,29 +494,8 @@ text(4.56, 2, "gamma\n(= 2.4)", cex = 0.7, pos = 3)
 \begin{itemize}
   \item \code{swatchplot()}: Color swatches.
   \item \code{specplot()}: Spectrum of HCL and/or RGB trajectories.
-  \item \code{hclplot()}: Trajectories in 2-dimensional HCL space projections.
   \item \code{demoplot()}: Illustrations of typical (and simplified) statistical graphics.
 \end{itemize}
-
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Visualization and assessment: \texttt{hclplot()}}
-
-<<hclplot, eval = FALSE, echo = TRUE>>=
-hclplot(qualitative_hcl(7, palette = "Set 2"))
-hclplot( sequential_hcl(7, palette = "Blues 3"))
-hclplot(  diverging_hcl(7, palette = "Blue-Red"))
-@
-
-\medskip
-
-<<hclplot-plot, fig.width = 15, fig.height = 5, dev = "png", out.width = "\\textwidth">>=
-par(mfrow = c(1, 3))
-hclplot(qualitative_hcl(7, palette = "Set 2"))
-hclplot( sequential_hcl(7, palette = "Blues 3"))
-hclplot(  diverging_hcl(7, palette = "Blue-Red"))
-@
 
 \end{frame}
 
@@ -563,10 +509,10 @@ demoplot(cl, type = "...")
 
 \medskip
 
-<<demoplot, fig.width = 15, fig.height = 6, out.width = "\\textwidth">>=
-par(mfrow = c(2, 5))
+<<demoplot, fig.width = 12, fig.height = 6, out.width = "\\textwidth">>=
+par(mfrow = c(2, 4))
 cl <- sequential_hcl(5, "Heat")
-for (i in c("map", "heatmap", "scatter", "spine", "bar", "pie", "perspective", "mosaic", "lines")) {
+for (i in c("map", "heatmap", "spine", "bar", "pie", "mosaic", "lines")) {
   demoplot(cl, type = i)
   mtext(side = 3, text = i, line = 1.5)
 }
@@ -693,11 +639,10 @@ demoplot(deutan(blyl), "heatmap")
 \bigskip
 \pause
 
-\textbf{R:}
+\textbf{Python:}
 \begin{itemize}
   \item \pkg{colorspace} facilitates exploration, manipulation, and assessment.
-  \item HCL approximations of palettes from \pkg{RColorBrewer}, \pkg{rcartocolor}, \pkg{scico}, \dots
-  \item Prespecified palettes are also easily available in base R.
+  \item HCL approximations of palettes from ColorBrewer.org, CART, Crameri's scientific color maps, \dots
 \end{itemize}
 
 \end{frame}

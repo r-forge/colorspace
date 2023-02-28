@@ -1,0 +1,67 @@
+--- 
+title: 'Python code for GeoPython slides'
+---
+
+**FIXME:** I don't know why but the `fig.height` and `fig.width` options are only
+passed to Python once. Thus, only the settings from the `knitr::opts_chunk$set()`
+in this initial code chunk are used.
+
+```{r, results = 'hide', message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, highlight = FALSE, comment = NA, prompt = TRUE, tidy = FALSE, strip.white = TRUE)
+knitr::opts_chunk$set(fig.width = 4.5, fig.height = 2)
+```
+
+After I use the `python` engine for the first time the options appear to be frozen.
+Thus, setting `fig.height` and `fig.width` either via `knitr::opts_chunk$set()`
+explicitly or via the chunk options in the individual chunks does not have any
+effect for me.
+
+```{python py-setup}
+from colorspace import *
+from colorspace.colorlib import *
+```
+
+```{python hcl-properties, fig.width = 4.5, fig.height = 2.2}
+swatchplot([palette(sequential_hcl(h = [0, 300], c = [60, 60], l = 65)(5),                         'Hue\n(Type of color)'),
+            palette(sequential_hcl(h = 0, c = [100, 0], l = 65, rev = True, power = 1)(5),         'Chroma\n(Colorfulness)'),
+            palette(sequential_hcl(h = 260, c = [25, 25], l = [25, 90], rev = True, power = 1)(5), 'Luminance\n(Brightness)')])
+```
+
+```{python rgb-properties, fig.width = 4.5, fig.height = 2.2}
+zeros = [0, 0, 0, 0, 0]
+seq01 = [0, 0.25, 0.5, 0.75, 1]
+swatchplot([palette(sRGB(seq01, zeros, zeros).colors(), 'Red'),
+            palette(sRGB(zeros, seq01, zeros).colors(), 'Green'),
+            palette(sRGB(zeros, zeros, seq01).colors(), 'Blue')])
+```
+
+
+```{python hcl-rainbow, fig.width = 5.2, fig.height = 6}
+specplot(rainbow_hcl(c = 60, l = 75)(99), rgb = True)
+```
+
+```{python rgb-rainbow, fig.width = 5.2, fig.height = 6}
+specplot(rainbow()(95), rgb = True)
+```
+
+```{python demoplot, fig.width = 12, fig.height = 6}
+cl = sequential_hcl(palette = 'Heat')(5)
+demoplot(cl, type_ = 'map')
+demoplot(cl, type_ = 'heatmap')
+demoplot(cl, type_ = 'spine')
+demoplot(cl, type_ = 'bar')
+demoplot(cl, type_ = 'pie')
+demoplot(cl, type_ = 'matrix')
+demoplot(cl, type_ = 'lines')
+```
+
+```{python volcano-cvd, fig.width = 15, fig.height = 7}
+rain = rainbow(end = 2/3)(11)
+blyl = sequential_hcl(palette = 'Blue-Yellow')(11)
+demoplot(rain, type_ = 'heatmap')
+demoplot(desaturate(rain), type_ = 'heatmap')
+demoplot(deutan(rain), type_ = 'heatmap')
+demoplot(blyl, type_ = 'heatmap')
+demoplot(desaturate(blyl), type_ = 'heatmap')
+demoplot(deutan(blyl), type_ = 'heatmap')
+```
