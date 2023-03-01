@@ -673,7 +673,7 @@ it depends on the luminance range how effective this is.
 A quick way to check a palette for colorblind-safety is via
 `colorspace::swatchplot(pal, cvd = TRUE)`, where `pal` is a palette of colors.
 More elaborate tools
-are provided by the package \pkg{colorblindcheck}.
+are provided by the package \pkg{colorblindcheck} [@colorblindcheck].
 
 The following sections list the palettes available via `hcl.colors()`,
 broken down into qualitative, sequential, and diverging palettes.
@@ -805,9 +805,8 @@ levels) then a lower luminance contrast may suffice
 ### Multi-hue sequential palettes
 
 Multi-hue
-sequential palettes not only vary luminance, from light to dark, but 
-also vary hue (and in some cases chroma);  this can be useful
-for drawing attention to very high or very low values.
+sequential palettes not only vary luminance, from light to dark
+(typically along with chroma), but also vary hue.
 In order to not only bring out extreme colors in a sequential palette but also
 better distinguish middle colors, it is a common strategy to employ a
 sequence of hues.  This leads to a large range of possible palettes.
@@ -1119,7 +1118,7 @@ suggestions for good default palettes for each type.
 |_List_    | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
 |          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-|_Robust_  | `"R4"`, `"Okabe-Ito"`                 | `"Blues 3"`, `"Viridis"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
+|_Robust_  | `"Okabe-Ito"`, `"R4"`                 | `"Blues 3"`, `"Viridis"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
 |          |                                       |                                     |                                               |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
 
