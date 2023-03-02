@@ -19,7 +19,7 @@ paletteGrid <- function(cols, qual=FALSE) {
         ## grid.rect(x=0, width=n/ncol, just="left", gp=gpar(col=NA, fill="grey90"))
         grid.circle(x, y, r=.4/nrow,
                     gp=gpar(col="grey40",
-                            fill=cols, lwd=.5))
+                            fill=cols, lwd=1))
     } else {    
         grid.rect(x, y, 
                   width=unit(1/ncol, "npc"),

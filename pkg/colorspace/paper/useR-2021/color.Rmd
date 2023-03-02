@@ -349,7 +349,7 @@ the blues vary from very dark to very light.  Finally, the palette has a
 triangular trajectory in the chroma dimension, so the blues are more
 colorful towards the middle of the palette.
 
-```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Blues 3"` palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Blues 3"} palette.')}
+```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Blues 3"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Blues 3"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.')}
 #| echo: FALSE
 #| fig.width: 5
 #| fig.height: 4
@@ -362,27 +362,30 @@ specplot(hcl.colors(100, "Blues 3"))
 
 Because the palettes from `hcl.colors()` are based on a continuous
 path in HCL space, we can select as many colors as we like.
+The following code generates five colors from the multi-hue sequential 
+palette `"YlGnBu"` and nine colors from the diverging palette
+`"Purple-Green"`. 
 
 ```{r}
-hcl.colors(7, palette="Purple-Green")
+hcl.colors(5, palette="YlGnBu")
+```
+```{r YlGnBu}
+#| echo: FALSE
+#| fig.width: 6
+#| fig.height: .5
+#| out.width: '100%'
+paletteGrids(list(' '=hcl.colors(5, palette="YlGnBu")), qual=FALSE)
+```
+
+```{r}
+hcl.colors(9, palette="Purple-Green")
 ```
 ```{r PurpleGreen}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: .5
 #| out.width: '100%'
-paletteGrids(list(' '=hcl.colors(7, palette="Purple-Green")), qual=FALSE)
-```
-
-```{r}
-hcl.colors(5, palette="Viridis")
-```
-```{r Viridis}
-#| echo: FALSE
-#| fig.width: 6
-#| fig.height: .5
-#| out.width: '100%'
-paletteGrids(list(' '=hcl.colors(5, palette="Viridis")), qual=FALSE)
+paletteGrids(list(' '=hcl.colors(9, palette="Purple-Green")), qual=FALSE)
 ```
 
 ## Illustrations
@@ -466,8 +469,10 @@ map that was produced by the National Oceanic and Atmospheric Administration
 [and infamously misinterpreted by a former President of The United States, see @Zeileis+Stauffer:2019]. 
 The top row shows the original image along with an emulation of 
 deuteranopia in the second column.
-The second row uses the sequential palette
-`"OrRd"` that can be selected using `hcl.colors()`.
+The middle row uses the sequential palette
+`"Reds 3"` that can be selected using `hcl.colors()` and the
+bottom row uses the sequential palette `"YlGnBu"`, which is also
+available via `hcl.colors()`.
 
 ```{r dorian}
 #| echo: FALSE
@@ -477,15 +482,19 @@ The second row uses the sequential palette
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
 #| fig.show: 'hold'
-#| fig.cap: 'Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$) during hurricane Dorian in 2019.  Top-left is the original image and top-right is an emulation of how the original image might appear to a colorblind viewer.  Bottom-left is a reproduction using the `"OrRd"` palette, with a colorblind emulation at bottom-right.'
+#| fig.cap: 'Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$) during hurricane Dorian in 2019.  Top-left is the original image and top-right is an emulation of how the original image might appear to a colorblind viewer.  Middle-left is a reproduction using the `"Reds 3"` single-hue sequential palette, with a colorblind emulation at middle-right.  Bottom-left is a reproduction using the `"YlGnBy"` multi-hue sequential palette, with emulation at bottom-right.'
 library("cowplot")
 ggdraw() + 
   draw_image("images/dorian-useR-2021-orig.png", width = 0.5) + 
   draw_image("images/dorian-useR-2021-orig-deutan.png", width = 0.5, x = 0.5)
 
 ggdraw() + 
-  draw_image("images/dorian-useR-2021-orrd10.png", width = 0.5) + 
-  draw_image("images/dorian-useR-2021-orrd10-deutan.png", width = 0.5, x = 0.5)
+  draw_image("images/dorian-reds3.png", width = 0.5) +
+  draw_image("images/dorian-reds3.png", width = 0.5, x = 0.5)
+
+ggdraw() + 
+  draw_image("images/dorian-ylgnbu.png", width = 0.5) + 
+  draw_image("images/dorian-ylgnbu-deutan.png", width = 0.5, x = 0.5)
 ```
   
 The weather map is intended to convey 
@@ -499,18 +508,40 @@ all of the colors is also distracting.  These issues persist for
 deuteranope viewers, plus any benefit of a red (danger!) to green (safe)
 change in hue is lost.
 
-The `"OrRd"` version of the image conveys the information more clearly
-by relating the monotonic changes in probability to both monotonic
-changes in luminance 
-and monotonic changes in saturation.  The deuteranope version retains both
-of these qualities.
+The `"Reds 3"` version of the image conveys the information more clearly
+by relating the monotonic changes in probability to monotonic
+changes in luminance (hue is constant and
+the saturation peaks towards the middle, which is very similar to the
+`"Blues 3"` palette shown in 
+Figure&nbsp;\@ref(fig:blues3hcl), just with a different hue).
+The deuteranope version retains this advantage.
+
+The `"YlGnBu"` version of the image is also more effective than
+the original.  This palette varies hue as well as luminance (chroma stays
+reasonably constant; see Figure&nbsp;\@ref(fig:ylgnbuhcl)), 
+which makes individual colors in the 
+palette more distinguishable, which has the advantage of making
+it easier to associate contour bands with the legend.  This version
+does lose the benefit of red (danger!) at high probabilities; 
+an alternative would be to use the `"Purple-Yellow"` multi-hue palette 
+instead.
+
+```{r ylgnbuhcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"YlGnBu"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that luminance increases monotonically and hue is also varied, while chroma wanders around a bit.', 'Hue, Chroma, and Luminance paths for the \\code{"YlGnBu"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that luminance increases monotonically and hue is also varied, while chroma wanders around a bit.')}
+#| echo: FALSE
+#| fig.width: 5
+#| fig.height: 4
+#| out.width: '60%'
+#| fig.align: 'center'
+#| fig.pos: 'ht!'
+library("colorspace")
+specplot(hcl.colors(100, "YlGnBu"))
+```
 
 The following sections describe the full range of
 new color palettes in more detail.  A much more condensed 
-overview of the palettes that are available and 
+overview of the new functions and palettes that are available and 
 some suggestions for robust default palettes are given in the
 [Summary Section](#Summary).
-
 
 # A gallery of palettes
 
@@ -687,14 +718,13 @@ while using the same chroma and luminance for all of their colors.
 One drawback to this approach is that fewer easily distinguishable
 colors can be generated from these palettes.
 
-```{r qualPalettes}
+```{r qualPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The qualitative palettes that are available with the `hcl.colors()` function.', 'The qualitative palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: 2
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Qualitative palettes.'
 pals <- hcl.pals("qualitative")
 args <- lapply(pals,
                function(x) {
@@ -765,14 +795,13 @@ of chroma somewhere in the middle, which makes it easier to
 distinguish moderate values from extreme values (e.g., 
 `"Reds 3"` and `"Blues 3"`).
 
-```{r singleSeqPalettes}
+```{r singleSeqPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The single-hue sequential palettes that are available with the `hcl.colors()` function.', 'The single-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: 2
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Single-hue sequential palettes.'
 single <- rownames(hcl_palettes("sequential (single-hue)"))
 pals <- hcl.pals("sequential")
 singlePals <- pals[pals %in% single]
@@ -822,19 +851,21 @@ the \pkg{viridis} and \pkg{rcartocolors} packages).
 The former strategy is suitable to
 emphasize extreme values, 
 while the latter works better if all values along the sequence should
-receive the same perceptual weight.  The palettes that maintain a 
-high chroma throughout, such as `"Viridis"`, are also more effective
-when we need to match specific colours to a legend or across several
-small-multiples, as in facetted plots.
+receive the same perceptual weight.  
 
-```{r multiSeqPalettes}
+Palettes that involve a
+significant variation in hue, e.g., `"YlGnBu"`, can be more effective
+when we need to match specific colours to a legend 
+(e.g., the bottom row of Figure&nbsp;\@ref(fig:dorian)) or across several
+small-multiples, as in facetted plots.  
+
+```{r multiSeqPalettes, fig.cap = ifelse(knitr::is_html_output(), 'Some of the multi-hue sequential palettes that are available with the `hcl.colors()` function.', 'Some of the multi-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: 6.5
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Multi-hue sequential palettes.'
 single <- rownames(hcl_palettes("sequential (single-hue)"))
 pals <- hcl.pals("sequential")
 multiPals <- pals[! pals %in% single]
@@ -894,14 +925,13 @@ The resulting colors from these palettes will have, for example,
 more similar hues than a palette generated from `"Viridis"`, with
 its wide range of hues.
 
-```{r multiSeqPalettes2}
+```{r multiSeqPalettes2, fig.cap = ifelse(knitr::is_html_output(), 'Some of the multi-hue sequential palettes that are available with the `hcl.colors()` function.', 'Some of the multi-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: 4
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Multi-hue sequential palettes.'
 single <- rownames(hcl_palettes("sequential (single-hue)"))
 pals <- hcl.pals("sequential")
 multiPals <- pals[! pals %in% single]
@@ -954,20 +984,36 @@ value.  The palettes with yellow at the centre provide less of a
 change in colorfulness, so the "neutral" value is more of 
 a turning point rather than a local minimum.  
 
+All of these palettes are "balanced" in the sense that chroma and luminance
+vary in the same way as we move from the central neutral colour towards
+either end of the palette.
+Figure&nbsp;\@ref(fig:purplegreenhcl) shows this idea of balance for
+the `"Purple-Green"` palette.
+
+```{r purplegreenhcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Purple-Green"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that the palette is "balanced"; luminance and chroma vary symmetrically about the central neutral color.', 'Hue, Chroma, and Luminance paths for the \\code{"Purple-Green"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that the palette is "balanced"; luminance and chroma vary symmetrically about the central neutral color.')}
+#| echo: FALSE
+#| fig.width: 5
+#| fig.height: 4
+#| out.width: '60%'
+#| fig.align: 'center'
+#| fig.pos: 'ht!'
+library("colorspace")
+specplot(hcl.colors(100, "Purple-Green"))
+```
+
 When choosing a particular palette for a display similar
 considerations apply as for the sequential palettes.  For example,
 large luminance differences are important when many colors are used
 while smaller luminance contrasts may suffice for palettes with fewer
 colors.
 
-```{r diverPalettes}
+```{r diverPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The balanced diverging palettes that are available with the `hcl.colors()` function.', 'The balanced diverging palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: 3
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Diverging palettes.'
 pals <- hcl.pals("diverging")
 args <- lapply(pals,
                function(x) {
@@ -1009,15 +1055,27 @@ any restrictions that the two "arms" of the palette need to be
 balanced and also may go through a non-gray neutral color (typically
 light yellow). Consequently, the chroma/luminance within these palettes
 can be rather unbalanced.
+For example, Figure&nbsp;\@ref(fig:fallhcl) demonstrates this issue
+with the `"Fall"` palette.
 
-```{r diverxPalettes}
+```{r fallhcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Fall"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that the palette is "unbalanced"; the green arm of the palette has much lower chroma than the right arm of the palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Fall"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that the palette is "unbalanced"; the green arm of the palette has much lower chroma than the right arm of the palette.')}
+#| echo: FALSE
+#| fig.width: 5
+#| fig.height: 4
+#| out.width: '60%'
+#| fig.align: 'center'
+#| fig.pos: 'ht!'
+library("colorspace")
+specplot(hcl.colors(100, "Fall"))
+```
+
+```{r diverxPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The flexible diverging palettes that are available with the `hcl.colors()` function.', 'The flexible diverging palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: 4
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Flexible diverging palettes.'
 pals <- hcl.pals("divergingx")
 args <- lapply(pals,
                function(x) {
@@ -1074,14 +1132,13 @@ Finally, the `hist()` and `boxplot()` functions (and therefore
 calls of the form `plot(num ~ factor, ...)`, also have a new default color:
 light gray which makes it easier to compare the shaded areas.
 
-```{r graphics}
+```{r graphics, fig.cap = ifelse(knitr::is_html_output(), 'Examples of the new default color palettes that are used in the base graphics functions `image()`, `boxplot()`, and `hist()`.', 'Examples of the new default color palettes that are used in the base graphics functions \\code{image()}, \\code{boxplot()}, and \\code{hist()}.')}
 #| echo: -1
 #| fig.height: 4
 #| fig.width: 14
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-#| fig.cap: 'New defaults in base graphics.'
 par(mfrow = c(1, 3))
 image(volcano)
 boxplot(weight ~ feed, data = chickwts)
@@ -1118,7 +1175,7 @@ suggestions for good default palettes for each type.
 |_List_    | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
 |          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-|_Robust_  | `"Okabe-Ito"`, `"R4"`                 | `"Blues 3"`, `"Viridis"`            | `"Purple-Green"`, `"Blue-Red 3"`              |
+|_Robust_  | `"Okabe-Ito"`, `"R4"`                 | `"Blues 3"`, `"YlGnBu"`             | `"Purple-Green"`, `"Blue-Red 3"`              |
 |          |                                       |                                     |                                               |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
 
