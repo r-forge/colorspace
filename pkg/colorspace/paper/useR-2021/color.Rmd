@@ -26,8 +26,8 @@ abstract: >
   The former provides a range of popular qualitative palettes for categorical data while the latter
   closely approximates many popular sequential and diverging palettes by systematically varying
   the perceptual hue, chroma, luminance (HCL) properties in the palette. 
-  This paper provides an overview of the new color palettes and the new color palette
-  functions along with advice about which palettes are appropriate for specific tasks,
+  This paper provides an overview of these new color functions and the palettes they provide
+  along with advice about which palettes are appropriate for specific tasks,
   especially with regard to making them accessible to viewers with color vision deficiencies.
 preamble: |
   \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
@@ -92,10 +92,10 @@ tm <- tm_shape(nz) +
 
 library(grid)
 grid.newpage()
-pushViewport(viewport(x=0, width=.6, just="left"))
+pushViewport(viewport(x=0, width=.6, just = "left"))
 print(gg, newpage=FALSE)
 popViewport()
-print(tm, vp=viewport(x=1, width=.3, just="right"))
+print(tm, vp=viewport(x=1, width=.3, just = "right"))
 ```
 
 R provides several ways to specify a color:  by name (e.g., `"red"`);
@@ -131,9 +131,9 @@ been widely recognized as being rather poor.
 #| fig.align: 'center'
 #| fig.keep: 'last'
 #| fig.pos: 'ht!'
-#| fig.cap: 'Old base R palettes.  At top left is the old default palette, consisting largely of highly saturated primary colors or combinations thereof.  Below that is the rainbow palette of different highly saturated hues.  The middle column shows the old sequential palettes, with heat colors again being highly saturated.  The last column shows an old diverging palette plus two palettes motivated by shadings of geographic maps.'
+#| fig.cap: 'Old base R palettes.  At top left is the old default palette (prior to version 4.0.0), consisting largely of highly saturated primary colors or combinations thereof.  Below that is the rainbow palette of different highly saturated hues.  The middle column shows the old sequential palettes, with heat colors again being highly saturated.  The last column shows an old diverging palette plus two palettes motivated by shadings of geographic maps.'
 source("paletteGrid.R")
-paletteGrids(list("palette()"=palette.colors(palette="R3"),
+paletteGrids(list("palette()"=palette.colors(palette = "R3"),
                   "heat.colors(8)"=heat.colors(8), 
                   "terrain.colors(8)"=terrain.colors(8),
                   "rainbow(8)"=rainbow(8),
@@ -223,8 +223,8 @@ a number of years. There were various reasons for this including the following:
 # A new set of R palettes
 
 On the road to R version 4.0.0 an attempt was made to
-address the limited and deficient set of palettes that are available 
-within the core R graphics sytem and to add a range of modern color palettes.
+address the limited and deficient set of palettes in base R
+and to add a range of modern color palettes.
 In particular, `palette()` has a new improved default color palette,
 `palette.colors()` provides further well-established qualitative palettes [@grDevices2], and
 `hcl.colors()` provides a wide range of qualitative, sequential, and diverging palettes obtained by a standardized approach in
@@ -260,13 +260,12 @@ paletteGrids(list(' '=palette()), qual=TRUE)
 
 The `palette.colors()` function, new in R 4.0.0, provides a way to
 access several other predefined palettes 
-(see Figure&nbsp;\@ref(fig:newPalettes)).
+(see also Figure&nbsp;\@ref(fig:newPalettes)).
 All of these are *qualitative palettes* because they are appropriate for 
 encoding qualitative (categorical) variables.  In other words,
 these palettes are appropriate for differentiating between groups.
-
 By default `palette.colors()` returns the 
-`Okabe-Ito` [@Okabe+Ito:2008] palette.
+`"Okabe-Ito"` [@Okabe+Ito:2008] palette.
 This palette
  was designed to be very robust under color vision deficiencies, so
 the different colors in this palette should be easily distinguishable
@@ -325,20 +324,20 @@ The `hcl.pals()` function provides a full list of the
 available palette names that we can choose from.
 
 ```{r}
-hcl.colors(8, palette="Blues 3")
+hcl.colors(8, palette = "Blues 3")
 ```
 ```{r Blues3}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: .5
 #| out.width: '100%'
-paletteGrids(list(' '=hcl.colors(8, palette="Blues 3")), qual=FALSE)
+paletteGrids(list(' '=hcl.colors(8, palette = "Blues 3")), qual=FALSE)
 ```
 
 One difference with `hcl.colors()` is that the palette we are
 selecting colors from is *not* a fixed set of colors.  Instead,
 the palettes in `hcl.colors()` are a path within HCL colorspace.  For each
-dimension - hue, chroma, and luminance - a palette can have a constant
+dimension -- hue, chroma, and luminance -- a palette can have a constant
 value, a monotonic trajectory, or a triangular trajectory.  For
 example, the trajectories for the `"Blues 3"` palette are shown in
 Figure&nbsp;\@ref(fig:blues3hcl).  The palette is (almost) constant in the hue
@@ -349,43 +348,44 @@ the blues vary from very dark to very light.  Finally, the palette has a
 triangular trajectory in the chroma dimension, so the blues are more
 colorful towards the middle of the palette.
 
-```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Blues 3"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Blues 3"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.')}
+```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, chroma, and luminance paths for the `"Blues 3"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.', 'Hue, chroma, and luminance paths for the \\code{"Blues 3"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.')}
 #| echo: FALSE
 #| fig.width: 5
-#| fig.height: 4
-#| out.width: '60%'
+#| fig.height: 4.5
+#| out.width: '49%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
 library("colorspace")
-specplot(hcl.colors(100, "Blues 3"))
+specplot(hcl.colors(8, "Blues 3"))
 ```
 
 Because the palettes from `hcl.colors()` are based on a continuous
 path in HCL space, we can select as many colors as we like.
 The following code generates five colors from the multi-hue sequential 
-palette `"YlGnBu"` and nine colors from the diverging palette
-`"Purple-Green"`. 
+palette `"YlGnBu"` (see also Figure&nbsp;\@ref(fig:ylgnbu-viridis))
+and nine colors from the diverging palette `"Purple-Green"` 
+(see also Figure&nbsp;\@ref(fig:purplegreen-fall)). 
 
 ```{r}
-hcl.colors(5, palette="YlGnBu")
+hcl.colors(5, palette = "YlGnBu")
 ```
 ```{r YlGnBu}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: .5
 #| out.width: '100%'
-paletteGrids(list(' '=hcl.colors(5, palette="YlGnBu")), qual=FALSE)
+paletteGrids(list(' '=hcl.colors(5, palette = "YlGnBu")), qual=FALSE)
 ```
 
 ```{r}
-hcl.colors(9, palette="Purple-Green")
+hcl.colors(9, palette = "Purple-Green")
 ```
 ```{r PurpleGreen}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: .5
 #| out.width: '100%'
-paletteGrids(list(' '=hcl.colors(9, palette="Purple-Green")), qual=FALSE)
+paletteGrids(list(' '=hcl.colors(9, palette = "Purple-Green")), qual=FALSE)
 ```
 
 ## Illustrations
@@ -460,9 +460,30 @@ difficult to distinguish from the white background, compared to the other lines.
 The `"R4"` palette is an improvement:  the luminance is more even and
 the colors are less saturated, plus the colors are more distinguishable for
 deuteranope viewers; aided by the use of direct color labels instead of a legend.
-The `"Okabe-Ito"` palette also works better than `"R3"`,
-particularly for deuteranope viewers.
+The `"Okabe-Ito"` palette works even better, particularly for deuteranope viewers.
 
+```{r dorian, fig.cap = ifelse(knitr::is_html_output(), 'Probability of wind speeds $>$ 39 mph (63 km h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the `"Reds 3"` single-hue sequential palette (middle) and `"YlGnBu"` multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.', 'Probability of wind speeds $>$ 39\\,mph (63\\,km\\,h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the \\code{"Reds 3"} single-hue sequential palette (middle) and \\code{"YlGnBu"} multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.')}
+#| echo: FALSE
+#| out.width: '100%'
+#| fig.width: 6
+#| fig.height: 2.5
+#| fig.align: 'center'
+#| fig.pos: 't!'
+#| fig.show: 'hold'
+library("cowplot")
+ggdraw() + 
+  draw_image("images/dorian-useR-2021-orig.png", width = 0.5) + 
+  draw_image("images/dorian-useR-2021-orig-deutan.png", width = 0.5, x = 0.5)
+
+ggdraw() + 
+  draw_image("images/dorian-useR-2021-reds3.png", width = 0.5) +
+  draw_image("images/dorian-useR-2021-reds3-deutan.png", width = 0.5, x = 0.5)
+
+ggdraw() + 
+  draw_image("images/dorian-useR-2021-ylgnbu.png", width = 0.5) + 
+  draw_image("images/dorian-useR-2021-ylgnbu-deutan.png", width = 0.5, x = 0.5)
+```
+  
 To illustrate an application of the new sequential color palettes,
 Figure&nbsp;\@ref(fig:dorian) shows several versions of a weather
 map that was produced by the National Oceanic and Atmospheric Administration
@@ -474,29 +495,6 @@ The middle row uses the sequential palette
 bottom row uses the sequential palette `"YlGnBu"`, which is also
 available via `hcl.colors()`.
 
-```{r dorian}
-#| echo: FALSE
-#| out.width: '100%'
-#| fig.width: 6
-#| fig.height: 2.5
-#| fig.align: 'center'
-#| fig.pos: 'ht!'
-#| fig.show: 'hold'
-#| fig.cap: 'Probability of wind speeds $>$ 39\,mph (63\,km\,h$^{-1}$) during hurricane Dorian in 2019.  Top-left is the original image and top-right is an emulation of how the original image might appear to a colorblind viewer.  Middle-left is a reproduction using the `"Reds 3"` single-hue sequential palette, with a colorblind emulation at middle-right.  Bottom-left is a reproduction using the `"YlGnBy"` multi-hue sequential palette, with emulation at bottom-right.'
-library("cowplot")
-ggdraw() + 
-  draw_image("images/dorian-useR-2021-orig.png", width = 0.5) + 
-  draw_image("images/dorian-useR-2021-orig-deutan.png", width = 0.5, x = 0.5)
-
-ggdraw() + 
-  draw_image("images/dorian-reds3.png", width = 0.5) +
-  draw_image("images/dorian-reds3.png", width = 0.5, x = 0.5)
-
-ggdraw() + 
-  draw_image("images/dorian-ylgnbu.png", width = 0.5) + 
-  draw_image("images/dorian-ylgnbu-deutan.png", width = 0.5, x = 0.5)
-```
-  
 The weather map is intended to convey 
 the probability of wind speeds $>$ 39 mph 
 during hurricane Dorian, 2019-08-30--2019-09-04.  The probabilities are highest
@@ -517,51 +515,57 @@ Figure&nbsp;\@ref(fig:blues3hcl), just with a different hue).
 The deuteranope version retains this advantage.
 
 The `"YlGnBu"` version of the image is also more effective than
-the original.  This palette varies hue as well as luminance (chroma stays
-reasonably constant; see Figure&nbsp;\@ref(fig:ylgnbuhcl)), 
-which makes individual colors in the 
-palette more distinguishable, which has the advantage of making
-it easier to associate contour bands with the legend.  This version
+the original. This palette varies hue as well as luminance with higher
+chroma for the dark colors and lower chroma for the light colors
+(see Figure&nbsp;\@ref(fig:ylgnbu-viridis)). This still clearly conveys
+the order from light to dark but additionally yields more distinguishable
+colors, making it easier to associate contour bands with the legend.
+Note that the `"YlGnBu"` palette is very similar to the very popular
+`"Viridis"` palette (also shown in Figure&nbsp;\@ref(fig:ylgnbu-viridis)
+on the right), with almost the same hue and luminance trajectories.
+However, an important advantage of the `"YlGnBu"` palette in this
+visualization is that the light colors have low chroma and thus signal
+low risk better than the light colors in the `"Viridis"` palette which
+have very high chroma. Finally, we remark that the `"YlGnBu"` version
 does lose the benefit of red (danger!) at high probabilities; 
 an alternative would be to use the `"Purple-Yellow"` multi-hue palette 
-instead.
+instead, a variation of which was used by @Zeileis+Stauffer:2019.
 
-```{r ylgnbuhcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"YlGnBu"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that luminance increases monotonically and hue is also varied, while chroma wanders around a bit.', 'Hue, Chroma, and Luminance paths for the \\code{"YlGnBu"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that luminance increases monotonically and hue is also varied, while chroma wanders around a bit.')}
+```{r ylgnbu-viridis, fig.cap = ifelse(knitr::is_html_output(), 'Hue, chroma, and luminance paths for the `"YlGnBu"` (left) and `"Viridis"` (right) palettes. These plots are created by the `colorspace::specplot()` function. For `"YlGnBu"` we can see that hue changes from blue to yellow, luminance increases monotonically, and chroma has a small peak in the middle and then decreases with luminance. `"Viridis"`, on the other hand, has almost the same hue and luminance trajectory but chroma increases for the light colors, yielding a palette with high chroma throughout.', 'Hue, chroma, and luminance paths for the \\code{"YlGnBu"} (left) and \\code{"Viridis"} (right) palettes. These plots are created by the `colorspace::specplot()` function. For \\code{"YlGnBu"} we can see that hue changes from blue to yellow, luminance increases monotonically, and chroma has a small peak in the middle and then decreases with luminance. \\code{"Viridis"}, on the other hand, has almost the same hue and luminance trajectory but chroma increases for the light colors, yielding a palette with high chroma throughout.')}
 #| echo: FALSE
 #| fig.width: 5
-#| fig.height: 4
-#| out.width: '60%'
+#| fig.height: 4.5
+#| out.width: '49%'
 #| fig.align: 'center'
+#| fig.show: 'hold'
 #| fig.pos: 'ht!'
-library("colorspace")
-specplot(hcl.colors(100, "YlGnBu"))
+specplot(hcl.colors(10, "YlGnBu"))
+text(-0.05, 0.83, "YlGnBu", pos = 4, xpd = TRUE)
+specplot(hcl.colors(10, "Viridis"))
+text(-0.05, 0.83, "Viridis", pos = 4, xpd = TRUE)
 ```
 
 The following sections describe the full range of
 new color palettes in more detail.  A much more condensed 
 overview of the new functions and palettes that are available and 
 some suggestions for robust default palettes are given in the
-[Summary Section](#Summary).
+Section&nbsp;[6](#sec:summary).
 
 # A gallery of palettes
 
 This section goes through all of the color palettes that are now
-available in R (without using any additional packages).
+available in base R (without using any additional packages).
 There is some discussion of the background for the palettes,
 strengths and weaknesses of different palettes, and 
 appropriate uses of the palettes.
 
-## A new default color `palette()`
 
-The new, "R4", default palette is shown at top-left of 
-Figure&nbsp;\@ref(fig:newPalettes).
-As previously mentioned, this is a qualitative palette with
-reasonable perceptual properties, including accommodation for
-color vision deficiencies.
-More information about the construction of the new default palette
-is given in @grDevices2.
+## The `palette.colors()` function
 
-```{r newPalettes, fig.cap = ifelse(knitr::is_html_output(), 'New base R palettes available from the `palette.colors()` function.  The label above each swatch shows the argument to provide to `palette.colors()` to produce the set of colors.  The palette at top-left is the new default that is also produced by `palette()`.  The `"Okabe-Ito"` palette is the default that is produced by `palette.colors()` (with no arguments).', 'New base R palettes available from the \\code{palette.colors()} function.  The label above each swatch shows the argument to provide to \\code{palette.colors()} to produce the set of colors.  The palette at top-left is the new default that is also produced by \\code{palette()}.  The \\code{"Okabe-Ito"} palette is the default that is produced by \\code{palette.colors()} (with no arguments).')}
+The `palette.colors()` function provides a range of qualitative palettes, see
+Figure&nbsp;\@ref(fig:newPalettes) for an overview.
+
+```{r newPalettes, fig.cap = ifelse(knitr::is_html_output(), 'New qualitative palettes in base R available from the `palette.colors()` function.  The label above each swatch shows the argument to provide to `palette.colors()` to produce the set of colors.  The palette at top-left is the new default that is also produced by `palette()`.  The `"Okabe-Ito"` palette is the default that is produced by `palette.colors()` (with no arguments).', 'New qualitative palettes in base R available from the \\code{palette.colors()} function.  The label above each swatch shows the argument to provide to \\code{palette.colors()} to produce the set of colors.  The palette at top-left is the new default that is also produced by \\code{palette()}.  The \\code{"Okabe-Ito"} palette is the default that is produced by \\code{palette.colors()} (with no arguments).')}
 #| echo: FALSE
 #| fig.width: 6
 #| fig.height: 4
@@ -569,38 +573,38 @@ is given in @grDevices2.
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
-paletteGrids(list('"R4"'=palette.colors(palette="R4"),
-                  '"Okabe-Ito"'=palette.colors(palette="Okabe-Ito"),
+paletteGrids(list('"R4"'=palette.colors(palette = "R4"),
+                  '"Okabe-Ito"'=palette.colors(palette = "Okabe-Ito"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
-                  '"ggplot2"'=palette.colors(palette="ggplot2"),
-                  '"Tableau 10"'=palette.colors(palette="Tableau 10"),
-                  '"Classic Tableau"'=palette.colors(palette="Classic Tableau"),
+                  '"ggplot2"'=palette.colors(palette = "ggplot2"),
+                  '"Tableau 10"'=palette.colors(palette = "Tableau 10"),
+                  '"Classic Tableau"'=palette.colors(palette = "Classic Tableau"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
-                  '"Set 1"'=palette.colors(palette="Set 1"),
-                  '"Dark 2"'=palette.colors(palette="Dark 2"),
-                  '"Accent"'=palette.colors(palette="Accent"),
-                  '"Set 2"'=palette.colors(palette="Set 2"),
-                  '"Pastel 1"'=palette.colors(palette="Pastel 1"),
-                  '"Paired"'=palette.colors(palette="Paired"),
-                  '"Set 3"'=palette.colors(palette="Set 3"),
-                  '"Pastel 2"'=palette.colors(palette="Pastel 2"),
+                  '"Set 1"'=palette.colors(palette = "Set 1"),
+                  '"Dark 2"'=palette.colors(palette = "Dark 2"),
+                  '"Accent"'=palette.colors(palette = "Accent"),
+                  '"Set 2"'=palette.colors(palette = "Set 2"),
+                  '"Pastel 1"'=palette.colors(palette = "Pastel 1"),
+                  '"Paired"'=palette.colors(palette = "Paired"),
+                  '"Set 3"'=palette.colors(palette = "Set 3"),
+                  '"Pastel 2"'=palette.colors(palette = "Pastel 2"),
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
                   blank=NULL,
-                  '"Alphabet"'=palette.colors(palette="Alphabet"),
-                  '"Polychrome 36"'=palette.colors(palette="Polychrome 36")),
+                  '"Alphabet"'=palette.colors(palette = "Alphabet"),
+                  '"Polychrome 36"'=palette.colors(palette = "Polychrome 36")),
               qual=TRUE)
 downViewport("top")
-drawBorder(1, name="bg1")
-drawBorder(3, name="bg2")
-drawBorder(5:7, name="bg3")
-drawBorder(9, name="bg4",
+drawBorder(1, name = "bg1")
+drawBorder(3, name = "bg2")
+drawBorder(5:7, name = "bg3")
+drawBorder(9, name = "bg4",
            y2=unit(1, "npc") - 4*cellSize - gap)
 scene <- grid.grab()
 scene <- reorderGrob(scene, c("bg1", "bg2", "bg3", "bg4"))
@@ -608,17 +612,16 @@ grid.newpage()
 grid.draw(scene)
 ```
 
-## The `palette.colors()` function
-
 The first argument to the `palette.colors()` function specifies 
 the number of colors to return.
 The `palette` argument allows us to select the palette of colors
-to choose from.  For example, the old R default palette is available via the
-name `"R3"`, though this palette is really only useful to reproduce old
-behavior and remind us how bad things used to be.  The `palette.pals()`
-function returns a character vector of the available palette names and 
-Figure&nbsp;\@ref(fig:newPalettes) shows swatches for each of the
-available palettes.
+to choose from, e.g., `"R4"` specifies the new R default palette 
+which is also returned by `palette()` by default.
+As previously mentioned, this was constructed to have
+reasonable perceptual properties, including accommodation for
+color vision deficiencies [see @grDevices2 for more details].
+The accompanying `palette.pals()` function returns a character
+vector of the available palette names.
 
 ```{r}
 palette.pals()
@@ -666,8 +669,10 @@ easy to interpret, but these palettes will be your best chance.
 
 ## The `hcl.colors()` function
 
-Most of the palettes that are provided by `hcl.colors()`
-have one or more desirable perceptual properties:
+Qualitative, sequential, and diverging palettes, that are derived from
+certain trajectories of the perceptual properties hue, chroma, and luminance (HCL),
+are provided by `hcl.colors()`. Most of the resulting palettes have one
+or more desirable perceptual properties:
 
 * **Colorblind-safe:**  This means that the palette retains
   its perceptual properties for colorblind users.
@@ -704,10 +709,8 @@ it depends on the luminance range how effective this is.
 A quick way to check a palette for colorblind-safety is via
 `colorspace::swatchplot(pal, cvd = TRUE)`, where `pal` is a palette of colors.
 More elaborate tools
-are provided by the package \pkg{colorblindcheck} [@colorblindcheck].
+are provided by the package \CRANpkg{colorblindcheck} [@colorblindcheck].
 
-The following sections list the palettes available via `hcl.colors()`,
-broken down into qualitative, sequential, and diverging palettes.
 
 ### Qualitative palettes
 
@@ -739,23 +742,25 @@ args <- c(args[c('"Pastel 1"', '"Dark 2"', '"Set 2"')],
 paletteGrids(args, qual=TRUE)
 ```
 
-The first five palettes are close to the ColorBrewer.org 
+The first five palettes are inspired by the ColorBrewer.org 
 palettes of the same name. 
-They employ different levels of chroma and luminance and
+They employ different fixed levels of chroma and luminance and
 span the full hue range. 
 Most of these palettes are also available as a fixed set
-of colors via `palette.colors()`;  the difference is that
+of colors via `palette.colors()`. There are two key differences:
+First, chroma and luminance are fixed in `hcl.colors()` but typically
+vary somewhat in `palette.colors()`. The former has the advantage
+that the colors are more balanced. The latter has the advantage
+that more sufficiently different colors can be obtained. Second,
 `hcl.colors()` will return `n` colors interpolated from the full 
 range of hues, whereas `palette.colors()` will return the first `n`
-colors from a fixed set.  Furthermore, the `hcl.colors()` palettes
-are only emulations based on the original ColorBrewer.org palettes
-and have subtly different properties.
+colors from a fixed set.
 
 The ColorBrewer.org palettes were designed with good perceptual properties
 in mind, but also relied on expert opinion and trial and error.
 This means that a little more care should be taken when selecting one
-of the ColorBrewer-inspired
-palettes because, for example, they are not all colorblind-safe.
+of the ColorBrewer-inspired HCL-based palettes because, for example,
+they are often not colorblind-safe.
 
 The remaining four palettes are taken from @Ihaka:2003. These
 palettes keep chroma and luminance fixed and restrict the range
@@ -780,7 +785,7 @@ should be higher as in `"Set 3"` for example.
 We divide sequential palettes into single-hue (this section)
 and multi-hue palettes (the next section).
 
-Single-hue sequential palettes vary only from dark to light, with
+Single-hue sequential palettes vary only from dark/colorful to light/gray, with
 a constant underlying hue.  Certain hues will be more 
 appropriate for representing data on specific concepts, such
 as green for "vegetation" and red for "temperature".  
@@ -793,7 +798,7 @@ colorful to less.  The result is a palette that makes it very easy to
 distinguish extreme values.  Some palettes also have a pronounced peak
 of chroma somewhere in the middle, which makes it easier to
 distinguish moderate values from extreme values (e.g., 
-`"Reds 3"` and `"Blues 3"`).
+`"Reds 3"`, `"Blues 3"`, etc.).
 
 ```{r singleSeqPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The single-hue sequential palettes that are available with the `hcl.colors()` function.', 'The single-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
@@ -824,12 +829,13 @@ single hue only. They are intended for a white/light background. The
 last palette, `"Oslo"`, is taken from the scientific color maps of 
 the \pkg{scico} package
  and is intended for a black/dark background and hence the order
-is reversed starting from a light blue (not a light gray).
+is reversed starting from a very light blue (almost white).
 
 When only a few colors
 are needed (e.g., for coding an ordinal categorical variable with few
 levels) then a lower luminance contrast may suffice
-(e.g., `"Light Grays"` or `"Blues 2"`).
+(e.g., `"Light Grays"`, `"Reds 2"`, `"Blues 2"`, etc.).
+
 
 ### Multi-hue sequential palettes
 
@@ -855,7 +861,7 @@ receive the same perceptual weight.
 
 Palettes that involve a
 significant variation in hue, e.g., `"YlGnBu"`, can be more effective
-when we need to match specific colours to a legend 
+when we need to match specific colors to a legend 
 (e.g., the bottom row of Figure&nbsp;\@ref(fig:dorian)) or across several
 small-multiples, as in facetted plots.  
 
@@ -920,7 +926,7 @@ The remaining palettes in Figure&nbsp;\@ref(fig:multiSeqPalettes), from
 \pkg{rcartocolors} package.
 These palettes tend to span a much narrower range of hues, chroma,
 and luminance, so can be useful if we just need to represent a
-small number of ordered values, e.g., three-to-four. 
+small number of ordered values. 
 The resulting colors from these palettes will have, for example, 
 more similar hues than a palette generated from `"Viridis"`, with
 its wide range of hues.
@@ -959,8 +965,8 @@ and `"Blues"`, closely match ColorBrewer.org palettes
 of the same name.  The `"YlGnBu"` palette is of particular note
 as it uses essentially the same hues as the `"Viridis"` palette
 (Figure&nbsp;\@ref(fig:multiSeqPalettes)), but it is more useful as a 
-sequential palette because chroma monotonically decreases across
-the palette.
+sequential palette because chroma decreases for the high-luminance
+colors (see also Figure&nbsp;\@ref(fig:ylgnbu-viridis)).
 
 The next group of palettes, `"Lajolla"` to `"Batlow"` closely match the
 palettes of the same name from the \pkg{scico} package.
@@ -985,20 +991,24 @@ change in colorfulness, so the "neutral" value is more of
 a turning point rather than a local minimum.  
 
 All of these palettes are "balanced" in the sense that chroma and luminance
-vary in the same way as we move from the central neutral colour towards
+vary in the same way as we move from the central neutral color towards
 either end of the palette.
-Figure&nbsp;\@ref(fig:purplegreenhcl) shows this idea of balance for
+Figure&nbsp;\@ref(fig:purplegreen-fall) (left) shows this idea of balance for
 the `"Purple-Green"` palette.
 
-```{r purplegreenhcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Purple-Green"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that the palette is "balanced"; luminance and chroma vary symmetrically about the central neutral color.', 'Hue, Chroma, and Luminance paths for the \\code{"Purple-Green"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that the palette is "balanced"; luminance and chroma vary symmetrically about the central neutral color.')}
+```{r purplegreen-fall, fig.cap = ifelse(knitr::is_html_output(), 'Hue, chroma, and luminance paths for the `"Purple-Green"` (left) and `"Fall"` (right) palettes. The plots are created by the `colorspace::specplot()` function. We can see that the `"Purple-Green"` palette is "balanced" with luminance and chroma varying symmetrically about the central neutral color for both hues. In contrast, the `"Fall"` palette is "unbalanced" with the left arm of the palette having somewhat darker colors with far less chroma than the right arm. Hue changes gradually from green through yellow to red, yielding a warmer palette compared to `"Purple-Green"`.', 'Hue, chroma, and luminance paths for the \\code{"Purple-Green"} (left) and \\code{"Fall"} (right) palettes. The plots are created by the \\code{colorspace::specplot()} function. We can see that the \\code{"Purple-Green"} palette is "balanced" with luminance and chroma varying symmetrically about the central neutral color for both hues. In contrast, the \\code{"Fall"} palette is "unbalanced" with the left arm of the palette having somewhat darker colors with far less chroma than the right arm. Hue changes gradually from green through yellow to red, yielding a warmer palette compared to \\code{"Purple-Green"}.')}
 #| echo: FALSE
 #| fig.width: 5
-#| fig.height: 4
-#| out.width: '60%'
+#| fig.height: 4.5
+#| out.width: '49%'
 #| fig.align: 'center'
+#| fig.show: 'hold'
 #| fig.pos: 'ht!'
 library("colorspace")
-specplot(hcl.colors(100, "Purple-Green"))
+specplot(hcl.colors(9, "Purple-Green"))
+text(-0.05, 0.83, "Purple-Green", pos = 4, xpd = TRUE)
+specplot(hcl.colors(9, "Fall"))
+text(-0.05, 0.83, "Fall", pos = 4, xpd = TRUE)
 ```
 
 When choosing a particular palette for a display similar
@@ -1017,7 +1027,7 @@ colors.
 pals <- hcl.pals("diverging")
 args <- lapply(pals,
                function(x) {
-                    hcl.colors(8, x)
+                    hcl.colors(9, x)
                })
 names(args) <- paste0('"', pals, '"')
 args <- c(args[c('"Green-Orange"', '"Blue-Yellow 3"', '"Cyan-Magenta"',
@@ -1055,19 +1065,8 @@ any restrictions that the two "arms" of the palette need to be
 balanced and also may go through a non-gray neutral color (typically
 light yellow). Consequently, the chroma/luminance within these palettes
 can be rather unbalanced.
-For example, Figure&nbsp;\@ref(fig:fallhcl) demonstrates this issue
+For example, Figure&nbsp;\@ref(fig:purplegreen-fall) (right) demonstrates this issue
 with the `"Fall"` palette.
-
-```{r fallhcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, Chroma, and Luminance paths for the `"Fall"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that the palette is "unbalanced"; the green arm of the palette has much lower chroma than the right arm of the palette.', 'Hue, Chroma, and Luminance paths for the \\code{"Fall"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that the palette is "unbalanced"; the green arm of the palette has much lower chroma than the right arm of the palette.')}
-#| echo: FALSE
-#| fig.width: 5
-#| fig.height: 4
-#| out.width: '60%'
-#| fig.align: 'center'
-#| fig.pos: 'ht!'
-library("colorspace")
-specplot(hcl.colors(100, "Fall"))
-```
 
 ```{r diverxPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The flexible diverging palettes that are available with the `hcl.colors()` function.', 'The flexible diverging palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
@@ -1079,7 +1078,7 @@ specplot(hcl.colors(100, "Fall"))
 pals <- hcl.pals("divergingx")
 args <- lapply(pals,
                function(x) {
-                    hcl.colors(8, x)
+                    hcl.colors(9, x)
                })
 names(args) <- paste0('"', pals, '"')
 args <- c(args[c('"Temps"', '"ArmyRose"', '"Fall"')],
@@ -1105,7 +1104,7 @@ palettes of the same name from ColorBrewer.org.
 The final group contains
 `"Zissou 1"`, which closely matches the palette of the same name from
 the \CRANpkg{wesanderson} package [@wesanderson], `"Cividis"`,
-which is a colorblind-safe version of `"Viridis"` (from 
+which is an even more colorblind-safe version of `"Viridis"` (from 
 the \pkg{viridis} package) and
 `"Roma"`, which closely matches the palette of the same name 
 from the \pkg{scico} package.
@@ -1126,11 +1125,12 @@ Moreover, a couple of functions explicitly have new defaults:
 `image()` and `filled.contour()`, now use the sequential `"YlOrRd"` palette
 (from ColorBrewer) 
 which uses similar hues as the old `heat.colors()`. 
-See Figure&nbsp;\@ref(fig:graphics).
+See the left panel in Figure&nbsp;\@ref(fig:graphics).
 
 Finally, the `hist()` and `boxplot()` functions (and therefore
-calls of the form `plot(num ~ factor, ...)`, also have a new default color:
-light gray which makes it easier to compare the shaded areas.
+formula-based calls of the form `plot(num ~ factor, ...)`, also have a new default color:
+light gray which makes it easier to compare the shaded areas
+(see the middle and right panels in Figure&nbsp;\@ref(fig:graphics)).
 
 ```{r graphics, fig.cap = ifelse(knitr::is_html_output(), 'Examples of the new default color palettes that are used in the base graphics functions `image()`, `boxplot()`, and `hist()`.', 'Examples of the new default color palettes that are used in the base graphics functions \\code{image()}, \\code{boxplot()}, and \\code{hist()}.')}
 #| echo: -1
@@ -1150,14 +1150,14 @@ in R;  the new functions `palette.colors()` and `hcl.colors()`
 allow good default palettes to be set without requiring additional
 package dependencies.
 
-# Summary
+# Summary {#sec:summary}
 
 The default color palette in R has been improved since R version 4.0.0.
 The functions `palette.colors()` and `hcl.colors()`, from the 
 \pkg{grDevices} package, also provide a wide range of predefined 
 palettes based on a number of widely used graphics systems.
 There are qualitative palettes for use with categorical data
-and sequential and diverging palettes for use with continuous data. 
+and sequential and diverging palettes for use with ordinal or continuous data. 
 The table below summarizes the main types of palettes and provides
 suggestions for good default palettes for each type.
 
