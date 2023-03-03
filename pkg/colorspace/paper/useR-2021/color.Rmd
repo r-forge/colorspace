@@ -208,7 +208,7 @@ a number of years. There were various reasons for this including the following:
 * Better palettes became available via packages on CRAN 
   (Comprehensive R Archive Network)
   starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
-  \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
+  c [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
   more recently
   \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], 
   \CRANpkg{scico} [@scico], and 
@@ -254,6 +254,27 @@ palette()
 #| fig.height: .5
 #| out.width: '100%'
 paletteGrids(list(' '=palette()), qual=TRUE)
+```
+
+Figure&nbsp;\@ref(fig:r4r3hcl) 
+compares the new `"R4"` default palette with the old
+`"R3"` default palette by showing the hue, chroma, and luminance values 
+for both palettes.  This clearly shows that the hues are almost identical,
+the luminance range is narrower for the new default (especially if we exclude
+black), and the chroma values are much lower and less varied
+for the new default (again, especially if we exclude black and grey).
+We will use "spectrum" plots like this one to explore
+and compare different palettes throughout the document.
+
+```{r r4r3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, chroma, and luminance paths for both the new (`"R4"`, dashed lines) and old (`"R3"`, solid lines) palettes. This plot is created by the `colorspace::specplot()` function.  We can see that the hues are almost identical, while the `"R4"` palette has less variability in luminance and significantly lower chroma.', 'Hue, chroma, and luminance paths for both the new (\\code{"R4"}, dashed lines) and old (\\code{"R3"}, solid lines) palettes. This plot is created by the \\code{colorspace::specplot()} function.  We can see that the hues are almost identical, while the \\code{"R4"} palette has less variability in luminance and significantly lower chroma.')}
+#| echo: FALSE
+#| fig.width: 5
+#| fig.height: 4.5
+#| out.width: '49%'
+#| fig.align: 'center'
+#| fig.pos: 'ht!'
+library("colorspace")
+specplot(palette.colors(8, "R3"), palette.colors(8, "R4"))
 ```
 
 ## The `palette.colors()` function
@@ -462,7 +483,7 @@ the colors are less saturated, plus the colors are more distinguishable for
 deuteranope viewers; aided by the use of direct color labels instead of a legend.
 The `"Okabe-Ito"` palette works even better, particularly for deuteranope viewers.
 
-```{r dorian, fig.cap = ifelse(knitr::is_html_output(), 'Probability of wind speeds $>$ 39 mph (63 km h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the `"Reds 3"` single-hue sequential palette (middle) and `"YlGnBu"` multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.', 'Probability of wind speeds $>$ 39\\,mph (63\\,km\\,h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the \\code{"Reds 3"} single-hue sequential palette (middle) and \\code{"YlGnBu"} multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.')}
+```{r dorian, fig.cap = ifelse(knitr::is_html_output(), 'Probability of wind speeds $>$ 39 mph (63 km h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the `"Reds"` single-hue sequential palette (middle) and `"YlGnBu"` multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.', 'Probability of wind speeds $>$ 39\\,mph (63\\,km\\,h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the \\code{"Reds"} single-hue sequential palette (middle) and \\code{"YlGnBu"} multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.')}
 #| echo: FALSE
 #| out.width: '100%'
 #| fig.width: 6
@@ -476,8 +497,8 @@ ggdraw() +
   draw_image("images/dorian-useR-2021-orig-deutan.png", width = 0.5, x = 0.5)
 
 ggdraw() + 
-  draw_image("images/dorian-useR-2021-reds3.png", width = 0.5) +
-  draw_image("images/dorian-useR-2021-reds3-deutan.png", width = 0.5, x = 0.5)
+  draw_image("images/dorian-useR-2021-reds.png", width = 0.5) +
+  draw_image("images/dorian-useR-2021-reds-deutan.png", width = 0.5, x = 0.5)
 
 ggdraw() + 
   draw_image("images/dorian-useR-2021-ylgnbu.png", width = 0.5) + 
@@ -491,7 +512,7 @@ map that was produced by the National Oceanic and Atmospheric Administration
 The top row shows the original image along with an emulation of 
 deuteranopia in the second column.
 The middle row uses the sequential palette
-`"Reds 3"` that can be selected using `hcl.colors()` and the
+`"Reds"` that can be selected using `hcl.colors()` and the
 bottom row uses the sequential palette `"YlGnBu"`, which is also
 available via `hcl.colors()`.
 
@@ -506,10 +527,10 @@ all of the colors is also distracting.  These issues persist for
 deuteranope viewers, plus any benefit of a red (danger!) to green (safe)
 change in hue is lost.
 
-The `"Reds 3"` version of the image conveys the information more clearly
+The `"Reds"` version of the image conveys the information more clearly
 by relating the monotonic changes in probability to monotonic
 changes in luminance (hue is constant and
-the saturation peaks towards the middle, which is very similar to the
+the saturation peaks towards the middle, which is similar to the
 `"Blues 3"` palette shown in 
 Figure&nbsp;\@ref(fig:blues3hcl), just with a different hue).
 The deuteranope version retains this advantage.
@@ -700,6 +721,7 @@ work great on a white background if the
 light gray group is less important 
 is just provided in the background for
 reference.
+
 Perceptual order and colorblind-safety are closely linked
 because the easiest approach to obtaining
 a colorblind-safe palette is by using a monotonic
@@ -711,6 +733,12 @@ A quick way to check a palette for colorblind-safety is via
 More elaborate tools
 are provided by the package \CRANpkg{colorblindcheck} [@colorblindcheck].
 
+The \CRANpkg{colorspace} package also provides functions like
+`colorspace::sequential_hcl()` and `colorspace::diverging_hcl()` 
+to generate even further palettes by defining a custom set of
+hue, chroma, and luminance 
+trajectories, e.g., based on specific hues that have inherent meanings
+for a particular data set.
 
 ### Qualitative palettes
 
@@ -786,7 +814,10 @@ We divide sequential palettes into single-hue (this section)
 and multi-hue palettes (the next section).
 
 Single-hue sequential palettes vary only from dark/colorful to light/gray, with
-a constant underlying hue.  Certain hues will be more 
+a constant underlying hue.
+Figure&nbsp;\@ref(fig:blues3hcl) provides a good example of the hue, chroma,
+and luminance trajectories for these palettes.
+Certain hues will be more 
 appropriate for representing data on specific concepts, such
 as green for "vegetation" and red for "temperature".  
 
@@ -845,6 +876,8 @@ sequential palettes not only vary luminance, from light to dark
 In order to not only bring out extreme colors in a sequential palette but also
 better distinguish middle colors, it is a common strategy to employ a
 sequence of hues.  This leads to a large range of possible palettes.
+Figure&nbsp;\@ref(fig:ylgnbu-viridis) shows examples of the 
+hue, chroma, and luminance trajectories from multi-hue palettes.
 
 Note that the palettes in this section
 differ substantially in the amount of chroma
