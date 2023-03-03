@@ -1,6 +1,6 @@
 ---
 title: Coloring in R's Blind Spot
-date: 2023-01-26
+date: 2023-03-03
 draft: yes
 author:
   - name: Achim Zeileis
@@ -483,7 +483,7 @@ the colors are less saturated, plus the colors are more distinguishable for
 deuteranope viewers; aided by the use of direct color labels instead of a legend.
 The `"Okabe-Ito"` palette works even better, particularly for deuteranope viewers.
 
-```{r dorian, fig.cap = ifelse(knitr::is_html_output(), 'Probability of wind speeds $>$ 39 mph (63 km h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the `"Reds"` single-hue sequential palette (middle) and `"YlGnBu"` multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.', 'Probability of wind speeds $>$ 39\\,mph (63\\,km\\,h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the \\code{"Reds"} single-hue sequential palette (middle) and \\code{"YlGnBu"} multi-hue sequential palette (bottom). On the right are emulations of how the images on the left might appear to a colorblind viewer.')}
+```{r dorian, fig.cap = ifelse(knitr::is_html_output(), 'Probability of wind speeds $>$ 39 mph (63 km h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the `"Reds"` (middle) and `"YlGnBu"` (bottom) sequential palettes. On the right are emulations of how the images on the left might appear to a colorblind viewer.', 'Probability of wind speeds $>$ 39\\,mph (63\\,km\\,h$^{-1}$) during hurricane Dorian in 2019. On the left is the the original image (top row) and two reproductions using the \\code{"Reds"} (middle) and \\code{"YlGnBu"} (bottom) multi-hue sequential palettes. On the right are emulations of how the images on the left might appear to a colorblind viewer.')}
 #| echo: FALSE
 #| out.width: '100%'
 #| fig.width: 6
@@ -529,15 +529,16 @@ change in hue is lost.
 
 The `"Reds"` version of the image conveys the information more clearly
 by relating the monotonic changes in probability to monotonic
-changes in luminance (hue is constant and
+changes in luminance. Hue is almost constant in this palette and
 the saturation peaks towards the middle, which is similar to the
 `"Blues 3"` palette shown in 
-Figure&nbsp;\@ref(fig:blues3hcl), just with a different hue).
+Figure&nbsp;\@ref(fig:blues3hcl), just with a different narrow range of hues.
 The deuteranope version retains this advantage.
 
 The `"YlGnBu"` version of the image is also more effective than
-the original. This palette varies hue as well as luminance with higher
-chroma for the dark colors and lower chroma for the light colors
+the original. This palette employs a much broader range of hues and varies
+chroma along with luminances so that the dark colors have higher chroma and
+the light colors lower chroma
 (see Figure&nbsp;\@ref(fig:ylgnbu-viridis)). This still clearly conveys
 the order from light to dark but additionally yields more distinguishable
 colors, making it easier to associate contour bands with the legend.
