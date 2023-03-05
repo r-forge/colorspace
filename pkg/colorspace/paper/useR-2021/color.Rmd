@@ -208,7 +208,7 @@ a number of years. There were various reasons for this including the following:
 * Better palettes became available via packages on CRAN 
   (Comprehensive R Archive Network)
   starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
-  c [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
+  \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
   more recently
   \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], 
   \CRANpkg{scico} [@scico], and 
@@ -254,27 +254,6 @@ palette()
 #| fig.height: .5
 #| out.width: '100%'
 paletteGrids(list(' '=palette()), qual=TRUE)
-```
-
-Figure&nbsp;\@ref(fig:r4r3hcl) 
-compares the new `"R4"` default palette with the old
-`"R3"` default palette by showing the hue, chroma, and luminance values 
-for both palettes.  This clearly shows that the hues are almost identical,
-the luminance range is narrower for the new default (especially if we exclude
-black), and the chroma values are much lower and less varied
-for the new default (again, especially if we exclude black and grey).
-We will use "spectrum" plots like this one to explore
-and compare different palettes throughout the document.
-
-```{r r4r3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, chroma, and luminance paths for both the new (`"R4"`, dashed lines) and old (`"R3"`, solid lines) palettes. This plot is created by the `colorspace::specplot()` function.  We can see that the hues are almost identical, while the `"R4"` palette has less variability in luminance and significantly lower chroma.', 'Hue, chroma, and luminance paths for both the new (\\code{"R4"}, dashed lines) and old (\\code{"R3"}, solid lines) palettes. This plot is created by the \\code{colorspace::specplot()} function.  We can see that the hues are almost identical, while the \\code{"R4"} palette has less variability in luminance and significantly lower chroma.')}
-#| echo: FALSE
-#| fig.width: 5
-#| fig.height: 4.5
-#| out.width: '49%'
-#| fig.align: 'center'
-#| fig.pos: 'ht!'
-library("colorspace")
-specplot(palette.colors(8, "R3"), palette.colors(8, "R4"))
 ```
 
 ## The `palette.colors()` function
@@ -735,11 +714,12 @@ More elaborate tools
 are provided by the package \CRANpkg{colorblindcheck} [@colorblindcheck].
 
 The \CRANpkg{colorspace} package also provides functions like
-`colorspace::sequential_hcl()` and `colorspace::diverging_hcl()` 
+`sequential_hcl()` and `diverging_hcl()` 
 to generate even further palettes by defining a custom set of
 hue, chroma, and luminance 
 trajectories, e.g., based on specific hues that have inherent meanings
 for a particular data set.
+
 
 ### Qualitative palettes
 
@@ -1209,7 +1189,7 @@ suggestions for good default palettes for each type.
 |_List_    | `palette.pals()`,                     | `hcl.pals("sequential")`            | `hcl.pals("diverging")`,                      |
 |          | `hcl.pals("qualitative")`             |                                     | `hcl.pals("divergingx")`                      |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
-|_Robust_  | `"Okabe-Ito"`, `"R4"`                 | `"Blues 3"`, `"YlGnBu"`             | `"Purple-Green"`, `"Blue-Red 3"`              |
+|_Robust_  | `"Okabe-Ito"`, `"R4"`                 | `"Blues 3"`, `"YlGnBu"`, `Viridis`  | `"Purple-Green"`, `"Blue-Red 3"`              |
 |          |                                       |                                     |                                               |
 +----------+---------------------------------------+-------------------------------------+-----------------------------------------------+
 
