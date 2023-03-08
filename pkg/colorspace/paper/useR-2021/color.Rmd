@@ -125,7 +125,7 @@ that were provided, although standard at the time they were implemented,
 have meanwhile
 been widely recognized as being rather poor.  
 
-```{r oldPalettes, fig.width=6, fig.height=1.5}
+```{r oldPalettes, fig.width=6, fig.height=1.3}
 #| echo: FALSE
 #| out.width: '100%'
 #| fig.align: 'center'
@@ -150,8 +150,8 @@ paletteGrids(list("palette()"=palette.colors(palette = "R3"),
 The `palette()` function generates a vector of eight colors.
 These provide the default set of colors that an integer color specification selects from
 and can be used for coding _categorical_ information.
-The output below shows what R used to produce prior to version 4.0.0.
-A *swatch* of color circles is included below the output.
+The output below shows what R used to produce prior to version 4.0.0, along with a
+_swatch_ of color circles.
 
 ```{r echo=2}
 palette("R3")
@@ -161,7 +161,7 @@ palette("R4")
 ```{r R3}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 palette("R3")
 paletteGrids(list(' '=palette()), qual=TRUE)
@@ -180,10 +180,9 @@ certain customizations):
   can be used as _sequential_ palettes for ordered or numeric information.
 * `cm.colors()` can be used as a _diverging_ palette for values that are
   distributed around a "neutral" value, such as zero.
-* `rainbow()` implements the infamous rainbow (or "jet") color palette 
-  that was very widely used for all types of variables
-  (possibly after restricting 
-  the hue range): _categorical_, _sequential_, and _diverging_.
+* `rainbow()` implements the infamous rainbow (or "jet") palette 
+  that was widely used (possibly with restrictions of the hue range)
+  for all types of variables: _categorical_, _sequential_, and _diverging_.
 
 All of these palettes -- except `gray.colors()` -- have poor perceptual properties.
 The colors are highly saturated, which can be distracting and overly 
@@ -251,7 +250,7 @@ palette()
 ```{r R4}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=palette()), qual=TRUE)
 ```
@@ -277,7 +276,7 @@ palette.colors()
 ```{r Okabe-Ito}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=palette.colors()), qual=TRUE)
 ```
@@ -295,39 +294,39 @@ palette.colors(4)
 ```{r short}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=palette.colors(4)), qual=TRUE)
 ```
 
 The following code requests ten colors from the `"Okabe-Ito"` palette.
-That palette only contains nine colors, but because `recycle=TRUE`,
+That palette only contains nine colors, but because `recycle = TRUE`,
 a tenth color is provided by recycling the first color (black) from the palette.
 
 ```{r}
-palette.colors(10, recycle=TRUE)
+palette.colors(10, recycle = TRUE)
 ```
 
 ```{r recycle}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=palette.colors(10, recycle=TRUE)), qual=TRUE)
 ```
 
 The second argument to `palette.colors()` is the palette to select colors
 from.  For example, the following code requests the first four colors
-from the `"R4"` palette (the new default provided by `palette()`).
+from the `"R4"` palette (the new default in `palette()`).
 
 ```{r}
-palette.colors(4, palette="R4")
+palette.colors(4, palette = "R4")
 ```
 
 ```{r}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=palette.colors(4, palette="R4")), qual=TRUE)
 ```
@@ -337,11 +336,11 @@ paletteGrids(list(' '=palette.colors(4, palette="R4")), qual=TRUE)
 
 The `hcl.colors()` function was added in R 3.6.0, with the range
 of supported palettes slowly expanded over time.
-This function provides access to another range of palettes, this time
-including sequential and diverging palettes, which are more appropriate
+This function provides access to another range of palettes,
+including sequential and diverging palettes
 for representing continuous variables.
-As with the `palette.colors()` function, the first
-argument is a number of colors to generate and the second argument
+As with `palette.colors()`, the first
+argument is a number of colors to generate and the second
 specifies a palette to generate colors from.
 The `hcl.pals()` function provides a full list of the
 available palette names that we can choose from.
@@ -352,20 +351,19 @@ hcl.colors(8, palette = "Blues 3")
 ```{r Blues3}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=hcl.colors(8, palette = "Blues 3")), qual=FALSE)
 ```
 
 One difference with `hcl.colors()` is that the palette we are
-selecting colors from is *not* a fixed set of colors.  Instead,
+selecting colors from is _not_ a fixed set of colors.  Instead,
 the palettes in `hcl.colors()` are a path within HCL colorspace.  For each
 dimension -- hue, chroma, and luminance -- a palette can have a constant
 value, a monotonic trajectory, or a triangular trajectory.  For
 example, the trajectories for the `"Blues 3"` palette are shown in
 Figure&nbsp;\@ref(fig:blues3hcl).  The palette is (almost) constant in the hue
-dimension, so the palette consists entirely of different shades of 
-(almost) the same blue.
+dimension yielding different shades of (almost) the same blue.
 The palette is monotonically increasing in the luminance dimension, so
 the blues vary from very dark to very light.  Finally, the palette has a
 triangular trajectory in the chroma dimension, so the blues are more
@@ -396,7 +394,7 @@ hcl.colors(5, palette = "YlGnBu")
 ```{r YlGnBu}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=hcl.colors(5, palette = "YlGnBu")), qual=FALSE)
 ```
@@ -407,7 +405,7 @@ hcl.colors(9, palette = "Purple-Green")
 ```{r PurpleGreen}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: .5
+#| fig.height: .44
 #| out.width: '100%'
 paletteGrids(list(' '=hcl.colors(9, palette = "Purple-Green")), qual=FALSE)
 ```
@@ -418,25 +416,25 @@ To illustrate the benefits of the new color palettes,
 Figure&nbsp;\@ref(fig:tsplot) shows several versions of a time series plot,
 depicting four different European stock indexes during most of the 1990s
 (`EuStockMarkets` data). The plots compare
-the old `"R3"` default color palette with
+the old `"R3"` default palette with
 the new `"R4"` default and the new qualitative palette
-`"Okabe-Ito"` [@Okabe+Ito:2008].
+`"Okabe-Ito"`.
 These can all be selected using `palette.colors()`.
 The first row shows the `"R3"` default using a typical color legend in the top left corner;
 the second column shows an emulation of a kind of red-green
 color blindness known as deuteranopia using the \pkg{colorspace} package 
-[based on the algorithms of @Machado+Oliveira+Fernandes:2009].
+[based on @Machado+Oliveira+Fernandes:2009].
 The second row uses the `"R4"` palette and the third row 
 uses `"Okabe-Ito"`; both using direct labels for the different time series instead of
 a color legend.
 
 ```{r tsplot, fig.cap = ifelse(knitr::is_html_output(), 'Time series line plot of `EuStockMarkets`. Rows: Old `"R3"` default palette (top), new `"R4"` default palette (middle), `"OkabeIto"` palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated deuteranope vision (right). A color legend is used in the first row and direct labels in the other rows.', 'Time series line plot of \\code{EuStockMarkets}. Rows: Old \\code{"R3"} default palette (top), new \\code{"R4"} default palette (middle), \\code{"OkabeIto"} palette (bottom), designed to be robust under color vision deficiencies. Columns: Normal vision (left) and emulated deuteranope vision (right). A color legend is used in the first row and direct labels in the other rows.')}
 #| echo: FALSE
-#| fig.height: 9
+#| fig.height: 8.9
 #| fig.width: 10
 #| out.width: '100%'
 #| fig.align: 'center'
-#| fig.pos: 'hb!'
+#| fig.pos: 'h!'
 tsplot <- function(palette = "R3", deutan = FALSE, legend = TRUE, ...) {
   ## color palette
   palette <- match.arg(palette, c("R3", "R4", "Okabe-Ito"))
@@ -452,11 +450,11 @@ tsplot <- function(palette = "R3", deutan = FALSE, legend = TRUE, ...) {
   ## time series plot
   eu <- window(EuStockMarkets, end = 1998)
   plot(eu, log = "y", ylab = "EU Stock Prices", plot.type = "single", col = p, xlim = c(1991.6, 1998.4), lwd = 1.5, ...)
-  text(1991.3, 6000, palette, pos = 4, cex = 1.5)
+  text(1991.3, 5750, palette, pos = 4, cex = 1.3)
 
   ## legend or direct labeling
   if(legend) {
-    legend(1991.3, 6000, colnames(eu), col = p, lty = 1, lwd = 3, bty = "n")
+    legend(1991.3, 5750, colnames(eu), col = p, lty = 1, lwd = 3, bty = "n")
   } else {
     text(1998, tail(eu, 1), colnames(eu), pos = 4, col = p, xpd = TRUE)
   }
@@ -842,7 +840,7 @@ distinguish moderate values from extreme values (e.g.,
 ```{r singleSeqPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The single-hue sequential palettes that are available with the `hcl.colors()` function.', 'The single-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: 2
+#| fig.height: 1.7
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
@@ -909,7 +907,7 @@ small-multiples, as in facetted plots.
 ```{r multiSeqPalettes, fig.cap = ifelse(knitr::is_html_output(), 'Some of the multi-hue sequential palettes that are available with the `hcl.colors()` function.', 'Some of the multi-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: 6.5
+#| fig.height: 6.3
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
@@ -975,7 +973,7 @@ its wide range of hues.
 ```{r multiSeqPalettes2, fig.cap = ifelse(knitr::is_html_output(), 'Some of the multi-hue sequential palettes that are available with the `hcl.colors()` function.', 'Some of the multi-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: 4
+#| fig.height: 3.6
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
@@ -1112,7 +1110,7 @@ feature of the `"Fall"` palette.
 ```{r diverxPalettes, fig.cap = ifelse(knitr::is_html_output(), 'The flexible diverging palettes that are available with the `hcl.colors()` function.', 'The flexible diverging palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: 4
+#| fig.height: 3.8
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
