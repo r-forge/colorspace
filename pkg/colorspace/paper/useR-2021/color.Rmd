@@ -32,6 +32,8 @@ abstract: >
 preamble: |
   \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
   \usepackage{longtable}
+  \definecolor{link}{RGB}{0,158,115}
+  \pagestyle{plain}
 bibliography: color.bib
 output: 
   rjtools::rjournal_web_article:
@@ -907,7 +909,7 @@ small-multiples, as in facetted plots.
 ```{r multiSeqPalettes, fig.cap = ifelse(knitr::is_html_output(), 'Some of the multi-hue sequential palettes that are available with the `hcl.colors()` function.', 'Some of the multi-hue sequential palettes that are available with the \\code{hcl.colors()} function.')}
 #| echo: FALSE
 #| fig.width: 6
-#| fig.height: 6.3
+#| fig.height: 6.2
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'ht!'
