@@ -66,7 +66,7 @@ demonstrated in the right hand plot of Figure&nbsp;\@ref(fig:colorcatcont).
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'h!'
-#| fig.cap: 'Typical usage of color for coding qualitative/categorical information (left) and quantiative/continuous information (right). Left: Scatter plot of weekly gas consumption by outside temperature before and after installing a house insulation. Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.'
+#| fig.cap: 'Typical usage of color for coding qualitative/categorical information (left) and quantitative/continuous information (right). Left: Scatter plot of weekly gas consumption by outside temperature before and after installing a house insulation. Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.'
 library("ggplot2")
 data("whiteside", package = "MASS")
 gg <- ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
@@ -894,7 +894,7 @@ high-chroma color to a neutral low-chroma color (e.g., `"Reds"`,
 `"Purples"`, `"Greens"`, `"Blues"`) or even light gray (e.g.,
 `"Purple-Blue"`). But some palettes also employ relatively high chroma
 throughout the palette (e.g., emulations of palettes from
-the \pkg{viridis} and \pkg{rcartocolors} packages). 
+the \pkg{viridis} and \pkg{rcartocolor} packages). 
 The former strategy is suitable to
 emphasize extreme values, 
 while the latter works better if all values along the sequence should
@@ -964,7 +964,7 @@ This makes these palettes a good choice for heatmaps.
 
 The remaining palettes in Figure&nbsp;\@ref(fig:multiSeqPalettes), from
 `"Mint"` to `"Sunset"` closely match palettes provided in the
-\pkg{rcartocolors} package.
+\pkg{rcartocolor} package.
 These palettes tend to span a much narrower range of hues, chroma,
 and luminance, so can be useful if we just need to represent a
 small number of ordered values. 
@@ -1090,7 +1090,7 @@ from various other palettes, including more balanced and simplified
 versions of several ColorBrewer.org palettes.
 The exception is the `"Tropic"` palette,
 which closely matches the palette of the same name from the
-\pkg{rcartocolors} package.  
+\pkg{rcartocolor} package.  
 
 The palettes `"Broc"` to `"Vik"` and `"Berlin"` to `"Tofino"` closely
 match the scientific color maps from the \pkg{scico} package,
@@ -1136,7 +1136,7 @@ paletteGrids(args, qual=FALSE)
 ```
 The first group of palettes, including
 `"ArmyRose"` and `"Temps"` closely match the palettes of the same name
-from the \pkg{rcartocolors} package.
+from the \pkg{rcartocolor} package.
 
 The next group, based on two or three hues, like `"PuOr"` and `"RdYlGn"`
 closely match the
