@@ -210,13 +210,19 @@ a number of years. There were various reasons for this including the following:
 
 * Better palettes became available via packages on CRAN 
   (Comprehensive R Archive Network)
-  starting with \CRANpkg{RColorBrewer} [@RColorBrewer], later
+  starting with \CRANpkg{RColorBrewer} [@RColorBrewer],
+  later
   \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
   more recently
   \CRANpkg{viridis} [@viridis], \CRANpkg{rcartocolor} [@rcartocolor], 
   \CRANpkg{scico} [@scico], and 
   \CRANpkg{cols4all} [@cols4all],
-  among many others.
+  among many others.  In most cases, these made palettes available in R that
+  were developed elsewhere, for example, 
+  [ColorBrewer.org](https://colorbrewer2.org/) [@Harrower+Brewer:2003], 
+  [CARTOColors](https://carto.com/carto-colors/) [@CARTOColor],
+  Fabio Crameri's Scientific color maps [@crameri],
+  and the Viridis palette for matplotlib in Python [@scipy].
 
 * Higher-level graphics systems
   like \CRANpkg{ggplot2} [@ggplot2] and \CRANpkg{lattice} [@lattice]
@@ -372,6 +378,11 @@ The palette is monotonically increasing in the luminance dimension, so
 the blues vary from very dark to very light.  Finally, the palette has a
 triangular trajectory in the chroma dimension, so the blues are more
 colorful towards the middle of the palette.
+The trajectories do not involve exactly straight lines 
+because in some cases a power curve is employed and in other cases
+the palette has to be adjusted to remain within the range of
+representable colours - see @Zeileis+Hornik+Murrell:2009 and @colorspace
+for more details.
 
 ```{r blues3hcl, fig.cap = ifelse(knitr::is_html_output(), 'Hue, chroma, and luminance paths for the `"Blues 3"` palette. This plot is created by the `colorspace::specplot()` function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.', 'Hue, chroma, and luminance paths for the \\code{"Blues 3"} palette. This plot is created by the \\code{colorspace::specplot()} function.  We can see that hue is held constant in this palette, while luminance increases monotonically and chroma peaks towards the middle of the palette.')}
 #| echo: FALSE
@@ -666,7 +677,8 @@ palette("Okabe-Ito")
 
 There are several palettes that have been taken from the color schemes of
 the \pkg{ggplot2} package and Tableau [@Tableau], both 
-well-established graphics systems.  The `"Tableau 10"` palette
+well-established graphics systems.  
+The `"Tableau 10"` palette
 represents the redesign of the default palette in Tableau [@Stone:2016].
 These palettes may be useful
 to emulate the look and feel of plots from those other systems.
@@ -999,8 +1011,8 @@ args <- c(args[c('"Reds"', '"Greens"', '"Blues"')],
           args[c('"YlOrBr"', '"GnBu"', '"RdPu"')],
           list(NULL), args[c('"PuBuGn"', '"PuRd"')],
           list(NULL, NULL, NULL),
-          args[c('"Lajolla"', '"Hawaii"', '"Batlow"')],
-          args[c('"Turku"')], list(NULL, NULL))
+          args[c('"Lajolla"', '"Hawaii"')], list(NULL), 
+          args[c('"Turku"', '"Batlow"')], list(NULL))
 paletteGrids(args, qual=FALSE)
 ```
 
@@ -1018,12 +1030,15 @@ The next group of palettes, `"Lajolla"` to `"Batlow"` closely match the
 palettes of the same name from the \pkg{scico} package.
 These palettes are constructed with a luminance scale 
 so that there is a clear visual ordering of the palette.
+Both `"Hawaii"` and `"Batlow"` also span a large range of hues
+(a "scientific rainbow").
 They are also designed to be readable by colorblind users
 and to work for grayscale printing.  Finally, the palettes have been
 designed for perceptual balance, so that no color has a greater
 visual emphasis than any other.
 Both `"Lajolla"` and `"Turku"`
-are intended for use with a black/dark background.
+are intended for use with a black/dark background,
+while `"Hawaii"` and `"Batlow"` are for use with a white/light background.
 
 ### Diverging palettes
 
