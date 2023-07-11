@@ -72,7 +72,9 @@ data("whiteside", package = "MASS")
 gg <- ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
     geom_point(size = 2) +
     scale_color_manual(name = "Insulation", values = palette.colors(palette = "R4")[c(2, 4)]) +
-    ggtitle("Whiteside's data") + xlab("Outside temperature") + ylab("Gas consumption") +
+    ggtitle("Whiteside's data") + 
+    xlab("Outside temperature (Celsius)") + 
+    ylab("Gas consumption (1000s cubic feet)") +
     theme(legend.position = "none") +
     theme_minimal()
 
@@ -88,7 +90,7 @@ myfun <- function(x) {
 tm <- tm_shape(nz) +
   tm_polygons(col = "Median_income",
     palette = "Blues", style = "cont", breaks = seq(20, 35, by = 5/3) * 1000,
-    title = "Median income",
+    title = "Median income\n(NZD)",
     legend.format = list(fun = myfun)) +
   tm_layout(frame = FALSE)
 
@@ -192,7 +194,7 @@ stimulating, and the colors are unbalanced with respect to chroma and luminance,
 which means that they have unequal visual impact
 [@Lonsdale+Lonsdale:2019; @Bartram+Patra+Stone:2017; @Etchebehere+Fedorovskaya:2017]. 
 In addition, the palettes do not perform well for viewers with some form
-of colorblindness (nearly 10% of the male population).
+of colorblindness [about 10% of the male population, @Ware:2012].
 Most of the palettes also use sequences
 of hues obtained in the RGB (red-green-blue) space or simple derivations thereof like HSV (hue-saturation-value) or HLS (hue-lightness-saturation),
 which leads to clustering of colors at the red, green, and blue primaries.
@@ -441,9 +443,9 @@ tsplot <- function(palette = "R3", deutan = FALSE, legend = TRUE, ...) {
   ## color palette
   palette <- match.arg(palette, c("R3", "R4", "Okabe-Ito"))
   p <- switch(palette,
-    "R3" = palette.colors(8, "R3")[c(1:3, 5)],
-    "R4" = palette.colors(8, "R4")[c(1:3, 5)],
-    "Okabe-Ito" = palette.colors(4, "Okabe-Ito")[c(1, 4, 2, 3)]
+    "R3" = palette.colors(8, "R3")[c(2, 3, 4, 7)],
+    "R4" = palette.colors(8, "R4")[c(2, 3, 4, 7)],
+    "Okabe-Ito" = palette.colors(8, "Okabe-Ito")[c(7, 4, 6, 5)]
   )
   
   ## emulate deuteranope vision?
@@ -475,8 +477,8 @@ tsplot(palette = "Okabe-Ito", deutan = TRUE, legend = FALSE)
 ```
 
 We can see that the `"R3"` colors are highly saturated and they vary in 
-luminance. For example, the cyan line is noticeably lighter than the others.
-Futhermore, for deuteranope viewers, the CAC and the SMI lines are difficult to 
+luminance. For example, the yellow line is noticeably lighter than the others.
+Futhermore, for deuteranope viewers, the DAX and the SMI lines are difficult to 
 distinguish from each other (exacerbated by the use of a color legend that makes
 matching the lines to labels almost impossible). Moreover, the FTSE line is more
 difficult to distinguish from the white background, compared to the other lines.
@@ -698,7 +700,7 @@ easy to interpret, but these palettes will provide the best chance.
 
 The `hcl.colors()` function provides
 qualitative, sequential, and diverging palettes that are derived from
-certain trajectories of the perceptual properties hue, chroma, and luminance 
+certain trajectories of the perceptual properties - hue, chroma, and luminance 
 (HCL). Most of the resulting palettes have one
 or more desirable perceptual properties:
 
@@ -797,6 +799,9 @@ in mind, but also relied on expert opinion and trial and error.
 This means that a little more care should be taken when selecting one
 of the ColorBrewer-inspired HCL-based palettes because, for example,
 they are often not colorblind-safe.
+The ColorBrewer.org palettes are also available in R via the 
+\pkg{RColorBrewer} package and that includes a facility for 
+generating ColorBrewer palettes that are colorblind-safe.
 
 The remaining four palettes are taken from @Ihaka:2003. These
 palettes keep chroma and luminance fixed and restrict the range
@@ -941,8 +946,8 @@ args <- c(args[c('"Red-Blue"', '"Purple-Orange"', '"Green-Yellow"')],
 paletteGrids(args, qual=FALSE)
 ```
 
-Of the palettes shown in Figure&nbsp;\@ref(fig:multiSeqPalettes)
-`"Red-Blue"` to `"Terrain 2"` are various palettes created during the
+Of the palettes shown in Figure&nbsp;\@ref(fig:multiSeqPalettes),
+`"Red-Blue"` to `"Terrain 2"` are palettes created during the
 development of the \pkg{colorspace} package.  
 
 The next collection of palettes, `"Viridis"` to `"Mako"`, emulate 
@@ -1077,8 +1082,8 @@ args <- c(args[c('"Green-Orange"', '"Blue-Yellow 3"', '"Cyan-Magenta"',
           args[c('"Blue-Red"', '"Blue-Red 3"', '"Red-Green"',
                  '"Blue-Red 2"', '"Purple-Brown"', '"Purple-Green"')], 
           list(NULL, NULL, NULL),
-          args[c('"Broc"', '"Vik"', '"Lisbon"',
-                 '"Cork"', '"Berlin"', '"Tofino"')])
+          args[c('"Broc"', '"Cork"', '"Vik"', 
+                 '"Berlin"', '"Lisbon"', '"Tofino"')])
 paletteGrids(args, qual=FALSE)
 ```
 
@@ -1104,7 +1109,10 @@ more flexible diverging
 palettes.  These do not impose
 any restrictions that the two "arms" of the palette need to be
 balanced and also may go through a non-gray neutral color (typically
-light yellow). Consequently, the chroma/luminance within these palettes
+light yellow). Consequently, these palettes may be used to provide a larger
+set of distinguishable colours compared to the diverging palettes from
+the previous section.  The price of this flexibility is that
+the chroma/luminance within these palettes
 can be rather unbalanced.
 For example, Figure&nbsp;\@ref(fig:purplegreen-fall) (right) demonstrates this
 feature of the `"Fall"` palette.
@@ -1201,6 +1209,8 @@ There are qualitative palettes for use with categorical data
 and sequential and diverging palettes for use with ordinal or continuous data. 
 The table below summarizes the main types of palettes and provides
 suggestions for good default palettes for each type.
+We encourage package authors to make use of these palettes
+when providing default colours for functions that produce plots.
 
 : An overview of the new palette functionality:  For each main type of palette, the _Purpose_ row describes what sort of data the type of palette is appropriate for, the _Generate_ row gives the functions that can be used to generate palettes of that type, the _List_ row names the functions that can be used to list available palettes, and the _Robust_ row identifies two or three good default palettes of that type. 
 
