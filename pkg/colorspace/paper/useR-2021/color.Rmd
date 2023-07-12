@@ -221,8 +221,8 @@ a number of years. There were various reasons for this including the following:
   were developed elsewhere, for example, 
   [ColorBrewer.org](https://colorbrewer2.org/) [@Harrower+Brewer:2003], 
   [CARTOColors](https://carto.com/carto-colors/) [@CARTOColor],
-  Fabio Crameri's Scientific color maps [@crameri],
-  and the Viridis palette for matplotlib in Python [@scipy].
+  Fabio Crameri's scientific color maps [@Crameri+Shephard+Heron:2020],
+  and the Viridis palette for `matplotlib` in Python [@Smith+VanDerWalt:2015].
 
 * Higher-level graphics systems
   like \CRANpkg{ggplot2} [@ggplot2] and \CRANpkg{lattice} [@lattice]
