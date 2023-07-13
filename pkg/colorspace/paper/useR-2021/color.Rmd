@@ -220,7 +220,7 @@ a number of years. There were various reasons for this including the following:
   among many others.  In most cases, these make palettes available in R that
   were developed elsewhere, e.g., 
   [ColorBrewer.org](https://ColorBrewer2.org/) [@Harrower+Brewer:2003], 
-  [CARTO](https://carto.com/carto-colors/) [@CARTOColor],
+  [CARTOColors](https://carto.com/carto-colors/) [@CARTOColor],
   the [scientific color maps](https://www.fabiocrameri.ch/colourmaps/) of @Crameri+Shephard+Heron:2020,
   and the Viridis palettes for matplotlib in Python [@Smith+VanDerWalt:2015].
 
@@ -278,7 +278,7 @@ By default `palette.colors()` returns the
 This palette
  was designed to be very robust under color vision deficiencies, so
 the different colors in this palette should be easily distinguishable
-for all viewers. 
+for all viewers.  
 
 ```{r}
 palette.colors()
@@ -882,9 +882,8 @@ All palettes in this group,
 except the last one, are inspired by the ColorBrewer.org palettes with
 the same base name, but are restricted to a
 single hue only. They are intended for a white/light background. The
-last palette, `"Oslo"`, is taken from the scientific color maps of 
-the \pkg{scico} package
- and is intended for a black/dark background and hence the order
+last palette, `"Oslo"`, is taken from Crameri's scientific color maps
+and is intended for a black/dark background and hence the order
 is reversed starting from a very light blue (almost white).
 
 When only a few colors
@@ -910,8 +909,7 @@ and luminance contrasts. For example, many palettes go from a dark
 high-chroma color to a neutral low-chroma color (e.g., `"Reds"`,
 `"Purples"`, `"Greens"`, `"Blues"`) or even light gray (e.g.,
 `"Purple-Blue"`). But some palettes also employ relatively high chroma
-throughout the palette (e.g., emulations of palettes from
-the \pkg{viridis} and \pkg{rcartocolor} packages). 
+throughout the palette (e.g., emulations of Viridis and CARTOColor palettes). 
 The former strategy is suitable to
 emphasize extreme values, 
 while the latter works better if all values along the sequence should
@@ -980,8 +978,8 @@ library with an emphasis on high chroma and a wide range of luminance.
 This makes these palettes a good choice for heatmaps.
 
 The remaining palettes in Figure&nbsp;\@ref(fig:multiSeqPalettes), from
-`"Mint"` to `"Sunset"` closely match palettes provided in the
-\pkg{rcartocolor} package.
+`"Mint"` to `"Sunset"` closely match the corresponding CARTOColors
+palettes.
 These palettes tend to span a much narrower range of hues, chroma,
 and luminance, so can be useful if we just need to represent a
 small number of ordered values. 
@@ -1027,7 +1025,7 @@ sequential palette because chroma decreases for the high-luminance
 colors (see also Figure&nbsp;\@ref(fig:ylgnbu-viridis)).
 
 The next group of palettes, `"Lajolla"` to `"Batlow"` closely match the
-palettes of the same name from the \pkg{scico} package.
+palettes of the same name from Crameri's scientific color maps.
 These palettes are constructed with a luminance scale 
 so that there is a clear visual ordering of the palette.
 They are also designed to be readable by colorblind users,
@@ -1108,11 +1106,10 @@ involving simple color pairs like
 from various other palettes, including more balanced and simplified
 versions of several ColorBrewer.org palettes.
 The exception is the `"Tropic"` palette,
-which closely matches the palette of the same name from the
-\pkg{rcartocolor} package.  
+which closely matches the palette of the same name from CARTOColors.  
 
 The palettes `"Broc"` to `"Vik"` and `"Berlin"` to `"Tofino"` closely
-match the scientific color maps from the \pkg{scico} package,
+match Crameri's scientific color maps of the same name,
 where the first three are intended for a white/light background and
 the other three for a black/dark background.
 
@@ -1158,7 +1155,7 @@ paletteGrids(args, qual=FALSE)
 ```
 The first group of palettes, including
 `"ArmyRose"` and `"Temps"` closely match the palettes of the same name
-from the \pkg{rcartocolor} package.
+from CARTOColors.
 
 The next group, based on two or three hues, like `"PuOr"` and `"RdYlGn"`
 closely match the
@@ -1167,11 +1164,9 @@ palettes of the same name from ColorBrewer.org.
 The final group contains
 `"Zissou 1"`, which closely matches the palette of the same name from
 the \CRANpkg{wesanderson} package [@wesanderson], `"Cividis"`,
-which is an even more colorblind-safe version of `"Viridis"` (from 
-the \pkg{viridis} package) and
+which is an even more colorblind-safe version of `"Viridis"` [@cividis] and
 `"Roma"`, which closely matches the palette of the same name 
-from the \pkg{scico} package.
-
+from Crameri's scientific color maps.
 
 # New defaults in graphical functions
 
@@ -1211,7 +1206,9 @@ hist(chickwts$weight)
 Package developers may also benefit from the new palettes available
 in R;  the new functions `palette.colors()` and `hcl.colors()`
 allow good default palettes to be set without requiring additional
-package dependencies.
+package dependencies.  For example, the \pkg{lattice} package
+has already changed its default colors to use `"Okabe-Ito"` and 
+`"YlGnBu"` palettes (for categorical and numerical data, respectively).
 
 # Summary {#sec:summary}
 
