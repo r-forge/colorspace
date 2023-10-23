@@ -7,6 +7,10 @@
   behaves exactly analogous to the color vision deficiency emulation functions
   which had been improved in the same way in version 2.1-0 (see below).
 
+* Try harder to preserve the names in named color vectors when transformed with
+  `lighten()`, `darken()`, `adjust_transparency()`, `simulate_cvd()`, etc.
+  (suggested by Matias Andina).
+
 * Make the fixed color vision deficiency simulation in linear RGB coordinates
   (introduced in version 2.1-0) the default in the `cvd_emulator()` shiny app
   as well.

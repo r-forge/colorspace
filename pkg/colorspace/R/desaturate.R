@@ -63,6 +63,7 @@
 #' desaturate(RGB)
 #' @export desaturate
 #' @importFrom grDevices col2rgb
+#' @importFrom stats setNames
 
 desaturate <- function(col, amount = 1, ...) {
 
@@ -108,7 +109,7 @@ desaturate <- function(col, amount = 1, ...) {
 
     ## extract alpha (if any) and convert RGB to colorspace::sRGB
     alpha <- substr(col, 8L, 9L)
-    col <- hex2RGB(substr(col, 1L, 7L))
+    col <- hex2RGB(setNames(substr(col, 1L, 7L), names(col)))
 
   } else {
 
@@ -141,7 +142,7 @@ desaturate <- function(col, amount = 1, ...) {
   } else {
     ## convert back to hex and add alpha again (if any)
     col <- hex(col)
-    col <- paste0(col, alpha)
+    col[] <- paste0(col[], alpha)
     if (length(NAidx) > 0L) col[NAidx] <- NA
   }
   return(col)
