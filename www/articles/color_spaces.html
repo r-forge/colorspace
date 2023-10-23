@@ -126,13 +126,13 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>At the core of the <em>colorspace</em> package are various utilities
-for computing with color spaces <span class="citation">(<a href="#ref-color:Wiki+Colorspace" role="doc-biblioref">Wikipedia
-2020d</a>)</span>, as the name conveys. Thus, the package helps to map
-various three-dimensional representations of color to each other <span class="citation">(<a href="#ref-color:Ihaka:2003" role="doc-biblioref">Ihaka 2003</a>)</span>. A particularly important
-mapping is the one from the perceptually-based and device-independent
-color model HCL (Hue-Chroma-Luminance) to standard Red-Green-Blue (sRGB)
-which is the basis for color specifications in many systems based on the
-corresponding hex codes <span class="citation">(<a href="#ref-color:Wiki+Webcolors" role="doc-biblioref">Wikipedia
+for computing with color spaces <span class="citation">(<a href="#ref-color:Wiki+Colorspace">Wikipedia 2020d</a>)</span>, as the
+name conveys. Thus, the package helps to map various three-dimensional
+representations of color to each other <span class="citation">(<a href="#ref-color:Ihaka:2003">Ihaka 2003</a>)</span>. A particularly
+important mapping is the one from the perceptually-based and
+device-independent color model HCL (Hue-Chroma-Luminance) to standard
+Red-Green-Blue (sRGB) which is the basis for color specifications in
+many systems based on the corresponding hex codes <span class="citation">(<a href="#ref-color:Wiki+Webcolors">Wikipedia
 2020i</a>)</span>, e.g., in HTML but also in R. For completeness further
 standard color models are included as well in the package. Their
 connections are illustrated in the following graph:</p>
@@ -153,8 +153,7 @@ in R. However, the RGB model also has some important drawbacks: It does
 not take into account the output device properties, it is not
 perceptually uniform (a unit step within RGB does not produce a constant
 perceptual change in color), and it is unintuitive for humans to specify
-colors (say brown or pink) in this space. <span class="citation">(See <a href="#ref-color:Wiki+RGB" role="doc-biblioref">Wikipedia
-2020g</a>.)</span>
+colors (say brown or pink) in this space. <span class="citation">(See <a href="#ref-color:Wiki+RGB">Wikipedia 2020g</a>.)</span>
 </li>
 <li>
 <code><a href="../reference/sRGB.html">sRGB()</a></code> addresses the issue of device dependency by
@@ -163,8 +162,7 @@ standard RGB (sRGB), as opposed to the linearized RGB above, is a good
 model for specifying colors in software and for hardware. But it is
 still unintuitive for humans to work directly with this color space.
 Therefore, sRGB is a good place to end up in a color space manipulation
-but it is not a good place to start. <span class="citation">(See <a href="#ref-color:Wiki+sRGB" role="doc-biblioref">Wikipedia
-2020h</a>.)</span>
+but it is not a good place to start. <span class="citation">(See <a href="#ref-color:Wiki+sRGB">Wikipedia 2020h</a>.)</span>
 </li>
 <li>
 <code><a href="../reference/HSV.html">HSV()</a></code> is a simple transformation of either the sRGB or
@@ -172,14 +170,14 @@ the RGB space that tries to capture the perceptual axes: <em>hue</em>
 (dominant wavelength, the type of color), <em>saturation</em>
 (colorfulness), and <em>value</em> (brightness, i.e., light vs. dark).
 Unfortunately, the three axes in the HSV model are confounded so that,
-e.g., brightness changes dramatically with hue. <span class="citation">(See <a href="#ref-color:Wiki+HSV" role="doc-biblioref">Wikipedia 2020f</a>.)</span>
+e.g., brightness changes dramatically with hue. <span class="citation">(See <a href="#ref-color:Wiki+HSV">Wikipedia
+2020f</a>.)</span>
 </li>
 <li>
 <code><a href="../reference/HLS.html">HLS()</a></code> (Hue-Lightness-Saturation) is another
 transformation of either sRGB or RGB that tries to capture the
 perceptual axes. It does a somewhat better job but the dimensions are
-still strongly confounded. <span class="citation">(See <a href="#ref-color:Wiki+HSV" role="doc-biblioref">Wikipedia
-2020f</a>.)</span>
+still strongly confounded. <span class="citation">(See <a href="#ref-color:Wiki+HSV">Wikipedia 2020f</a>.)</span>
 </li>
 <li>
 <code><a href="../reference/XYZ.html">XYZ()</a></code> was established by the CIE (Commission
@@ -187,7 +185,7 @@ Internationale de l’Eclairage) based on experiments with human subjects.
 It provides a unique triplet of XYZ values, coding the standard
 observer’s perception of the color. It is device-independent but it is
 not perceptually uniform and the XYZ coordinates have no intuitive
-meaning. <span class="citation">(See <a href="#ref-color:Wiki+CIEXYZ" role="doc-biblioref">Wikipedia 2020a</a>.)</span>
+meaning. <span class="citation">(See <a href="#ref-color:Wiki+CIEXYZ">Wikipedia 2020a</a>.)</span>
 </li>
 <li>
 <code><a href="../reference/LUV.html">LUV()</a></code> and <code><a href="../reference/LAB.html">LAB()</a></code> were therefore proposed by
@@ -200,28 +198,28 @@ as well as the A and B coordinates measure positions on red/green and
 yellow/blue axes, respectively, albeit in somewhat different ways. While
 this corresponds to how human color vision likely evolved (see the next
 section), these two color models still not correspond to perceptual axes
-that humans use to describe colors. <span class="citation">(See also <a href="#ref-color:Wiki+CIELUV" role="doc-biblioref">Wikipedia 2020c</a>;
-<a href="#ref-color:Wiki+CIELAB" role="doc-biblioref">Wikipedia
-2020b</a>.)</span>
+that humans use to describe colors. <span class="citation">(See also <a href="#ref-color:Wiki+CIELUV">Wikipedia 2020c</a>; <a href="#ref-color:Wiki+CIELAB">Wikipedia 2020b</a>.)</span>
 </li>
 <li>
 <code><a href="../reference/polarLUV.html">polarLUV()</a></code> and <code><a href="../reference/polarLAB.html">polarLAB()</a></code> therefore take
 polar coordinates in the UV plane and AB plane, respectively.
 Specifically, the polar coordinates of the LUV model are known as the
-HCL (Hue-Chroma-Luminance) model <span class="citation">(see <a href="#ref-color:Wiki+HCL" role="doc-biblioref">Wikipedia 2020e</a>,
-which points out that the LAB-based polar coordinates are also sometimes
-referred to as HCL)</span>. The HCL model captures the human perceptual
-axes very well without confounding effects as in the HSV or HLS
-approaches. (More details follow below.)</li>
+HCL (Hue-Chroma-Luminance) model <span class="citation">(see <a href="#ref-color:Wiki+HCL">Wikipedia 2020e</a>, which points out that
+the LAB-based polar coordinates are also sometimes referred to as
+HCL)</span>. The HCL model captures the human perceptual axes very well
+without confounding effects as in the HSV or HLS approaches. (More
+details follow below.)</li>
 </ul>
 <p>All S4 classes for color spaces inherit from a virtual class
 <code>color</code> which is internally always represented by matrices
 with three columns (corresponding to the three dimensions).</p>
 <p>Note that since the inception of the color space conversion tools in
-<span class="citation">(in , <a href="#ref-color:Ihaka:2003" role="doc-biblioref">Ihaka 2003</a>)</span> other tools for this purpose
-became available, notably <code><a href="https://rdrr.io/r/grDevices/convertColor.html" class="external-link">grDevices::convertColor()</a></code> <span class="citation">(in high-level , <a href="#ref-color:R" role="doc-biblioref">R Core Team 2020</a>)</span> and
-<code><a href="https://farver.data-imaginist.com/reference/convert_colour.html" class="external-link">farver::convert_colour()</a></code> <span class="citation">(in , <a href="#ref-color:farver" role="doc-biblioref">Pedersen, Nicolae, and
-François 2020</a>)</span>. For many basic color conversion purposes the
+<span class="citation">(in , <a href="#ref-color:Ihaka:2003">Ihaka
+2003</a>)</span> other tools for this purpose became available, notably
+<code><a href="https://rdrr.io/r/grDevices/convertColor.html" class="external-link">grDevices::convertColor()</a></code> <span class="citation">(in
+high-level , <a href="#ref-color:R">R Core Team 2020</a>)</span> and
+<code><a href="https://farver.data-imaginist.com/reference/convert_colour.html" class="external-link">farver::convert_colour()</a></code> <span class="citation">(in , <a href="#ref-color:farver">Pedersen, Nicolae, and François
+2020</a>)</span>. For many basic color conversion purposes the
 <em>colorspace</em> package and these alternatives are equally suitable.
 Some details differ, though, and the color conversion tools in
 <em>colorspace</em> are well-embedded into the remaining functionality
@@ -239,11 +237,9 @@ warm/cold colors).</li>
 <li>Green/red contrasts (helpful for assessing the ripeness of
 fruit).</li>
 </ol>
-<p>See <span class="citation">Kaiser and Boynton (<a href="#ref-color:Kaiser+Boynton:1996" role="doc-biblioref">1996</a>)</span>, <span class="citation">Knoblauch
-(<a href="#ref-color:Knoblauch:2002" role="doc-biblioref">2002</a>)</span>, <span class="citation">Ihaka (<a href="#ref-color:Ihaka:2003" role="doc-biblioref">2003</a>)</span>,
-<span class="citation">Lumley (<a href="#ref-color:Lumley:2006" role="doc-biblioref">2006</a>)</span>, <span class="citation">Zeileis,
-Hornik, and Murrell (<a href="#ref-color:Zeileis+Hornik+Murrell:2009" role="doc-biblioref">2009</a>)</span> for more details and references.
-Thus, colors can be described using a 3-dimensional space:</p>
+<p>See <span class="citation">Kaiser and Boynton (<a href="#ref-color:Kaiser+Boynton:1996">1996</a>)</span>, <span class="citation">Knoblauch (<a href="#ref-color:Knoblauch:2002">2002</a>)</span>, <span class="citation">Ihaka (<a href="#ref-color:Ihaka:2003">2003</a>)</span>, <span class="citation">Lumley (<a href="#ref-color:Lumley:2006">2006</a>)</span>, <span class="citation">Zeileis, Hornik, and Murrell (<a href="#ref-color:Zeileis+Hornik+Murrell:2009">2009</a>)</span> for more
+details and references. Thus, colors can be described using a
+3-dimensional space:</p>
 <p><a href="screenshots/human-axes.svg"><img src="screenshots/human-axes.svg"></a></p>
 <p>However, for describing colors in such a space, it is more natural
 for humans to employ polar coordinates in the color plane (yellow/blue
@@ -253,7 +249,8 @@ perceptual axes are also called perceptually-based color spaces. As
 already argued above, the HCL model captures these dimensions very well,
 calling them: <em>hue</em>, <em>chroma</em>, and <em>luminance</em>. The
 corresponding sRGB gamut, i.e., the HCL colors that can also be
-represented in sRGB, is visualized in the animation below <span class="citation">(by <a href="#ref-color:Horvath+Lipka:2017" role="doc-biblioref">Horvath and Lipka 2017</a>)</span>.</p>
+represented in sRGB, is visualized in the animation below <span class="citation">(by <a href="#ref-color:Horvath+Lipka:2017">Horvath and
+Lipka 2017</a>)</span>.</p>
 <iframe src="https://commons.wikimedia.org/wiki/File:SRGB_gamut_within_CIELCHuv_color_space_mesh.webm?embedplayer=yes" width="512" height="512" frameborder="0">
 </iframe>
 <p>The shape of the HCL space is a distorted double cone which is seen

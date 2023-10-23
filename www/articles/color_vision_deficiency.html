@@ -127,38 +127,44 @@
 </h2>
 <p>Different kinds of limitations can be emulated using the
 physiologically-based model for simulating color vision deficiency (CVD)
-of <span class="citation">Machado, Oliveira, and Fernandes (<a href="#ref-color:Machado+Oliveira+Fernandes:2009" role="doc-biblioref">2009</a>)</span>: deuteranomaly (green cone cells
-defective), protanomaly (red cone cells defective), and tritanomaly
-(blue cone cells defective). While most other CVD simulations handle
-only dichromacy, where one of three cones is non-functional, <span class="citation">Machado, Oliveira, and Fernandes (<a href="#ref-color:Machado+Oliveira+Fernandes:2009" role="doc-biblioref">2009</a>)</span> provides a unified model of both
-dichromacy and anomalous trichromacy, where one cone has shifted
-spectral sensitivity. As anomalous trichromacy is the most common form
-of color vision deficiency, it is important to emulate along with the
-rarer, but more severe dichromacy.</p>
+of <span class="citation">Machado, Oliveira, and Fernandes (<a href="#ref-color:Machado+Oliveira+Fernandes:2009">2009</a>)</span>:
+deuteranomaly (green cone cells defective), protanomaly (red cone cells
+defective), and tritanomaly (blue cone cells defective). While most
+other CVD simulations handle only dichromacy, where one of three cones
+is non-functional, <span class="citation">Machado, Oliveira, and
+Fernandes (<a href="#ref-color:Machado+Oliveira+Fernandes:2009">2009</a>)</span>
+provides a unified model of both dichromacy and anomalous trichromacy,
+where one cone has shifted spectral sensitivity. As anomalous
+trichromacy is the most common form of color vision deficiency, it is
+important to emulate along with the rarer, but more severe
+dichromacy.</p>
 <p>The workhorse function to emulate color vision deficiencies is
 <code><a href="../reference/simulate_cvd.html">simulate_cvd()</a></code>, which can take any vector of valid R colors
 and transform them according to a certain CVD transformation matrix and
 transformation equation. The transformation matrices have been
 established by <span class="citation">Machado, Oliveira, and Fernandes
-(<a href="#ref-color:Machado+Oliveira+Fernandes:2009" role="doc-biblioref">2009</a>)</span> and are provided in objects
-<code>protanomaly_cvd</code>, <code>deutanomaly_cvd</code>, and
-<code>tritanomaly_cvd</code>. The convenience interfaces
-<code><a href="../reference/simulate_cvd.html">deutan()</a></code>, <code><a href="../reference/simulate_cvd.html">protan()</a></code>, and <code><a href="../reference/simulate_cvd.html">tritan()</a></code>
-are the high-level functions for simulating the corresponding kind of
-color blindness with a given <code>severity</code> (calling
-<code><a href="../reference/simulate_cvd.html">simulate_cvd()</a></code> internally). A severity of <code>1</code>
-corresponds to dichromacy, <code>0</code> to normal color vision, and
-intermediate values to varying severities of anomalous trichromacy.</p>
+(<a href="#ref-color:Machado+Oliveira+Fernandes:2009">2009</a>)</span>
+and are provided in objects <code>protanomaly_cvd</code>,
+<code>deutanomaly_cvd</code>, and <code>tritanomaly_cvd</code>. The
+convenience interfaces <code><a href="../reference/simulate_cvd.html">deutan()</a></code>, <code><a href="../reference/simulate_cvd.html">protan()</a></code>, and
+<code><a href="../reference/simulate_cvd.html">tritan()</a></code> are the high-level functions for simulating the
+corresponding kind of color blindness with a given <code>severity</code>
+(calling <code><a href="../reference/simulate_cvd.html">simulate_cvd()</a></code> internally). A severity of
+<code>1</code> corresponds to dichromacy, <code>0</code> to normal color
+vision, and intermediate values to varying severities of anomalous
+trichromacy.</p>
 <p>For further guidance on color blindness in relation to statistical
-graphics see <span class="citation">Lumley (<a href="#ref-color:Lumley:2006" role="doc-biblioref">2006</a>)</span>
-which accompanies the R package dichromat <span class="citation">(<a href="#ref-color:dichromat" role="doc-biblioref">Lumley 2013</a>)</span>
-and is based on earlier emulation techniques <span class="citation">(<a href="#ref-color:Vienot+Brettel+Ott:1995" role="doc-biblioref">Viénot et
-al. 1995</a>; <a href="#ref-color:Brettel+Vienot+Mollon:1997" role="doc-biblioref">Brettel, Viénot, and Mollon 1997</a>; <a href="#ref-color:Vienot+Brettel+Mollon:1999" role="doc-biblioref">Viénot, Brettel, and Mollon 1999</a>)</span>.</p>
+graphics see <span class="citation">Lumley (<a href="#ref-color:Lumley:2006">2006</a>)</span> which accompanies the R
+package dichromat <span class="citation">(<a href="#ref-color:dichromat">Lumley 2013</a>)</span> and is based on
+earlier emulation techniques <span class="citation">(<a href="#ref-color:Vienot+Brettel+Ott:1995">Viénot et al. 1995</a>; <a href="#ref-color:Brettel+Vienot+Mollon:1997">Brettel, Viénot, and Mollon
+1997</a>; <a href="#ref-color:Vienot+Brettel+Mollon:1999">Viénot,
+Brettel, and Mollon 1999</a>)</span>.</p>
 <p><em>Note:</em> Up to version 2.0-3 of the package, the CVD
 transformations had been applied to the gamma-corrected sRGB coordinates
-<span class="citation">(following the illustrations of <a href="#ref-color:Machado+Oliveira+Fernandes:2009" role="doc-biblioref">Machado, Oliveira, and Fernandes 2009</a>)</span>
-instead of the more appropriate linear RGB coordinates. The latter is
-the default starting from version 2.1-0 of the package.</p>
+<span class="citation">(following the illustrations of <a href="#ref-color:Machado+Oliveira+Fernandes:2009">Machado, Oliveira, and
+Fernandes 2009</a>)</span> instead of the more appropriate linear RGB
+coordinates. The latter is the default starting from version 2.1-0 of
+the package.</p>
 </div>
 <div class="section level2">
 <h2 id="illustration-heatmap-with-sequential-palette">Illustration: Heatmap with sequential palette<a class="anchor" aria-label="anchor" href="#illustration-heatmap-with-sequential-palette"></a>
@@ -215,7 +221,8 @@ has again a number of weaknesses, especially that the green-yellow part
 of the palette almost collapses to the same color when desaturated or
 when color blindness is emulated.</p>
 <p>To illustrate that much more balanced palettes for the same purpose
-are available the <code>Geyser</code> palette <span class="citation">(mimicked from <a href="#ref-color:CARTO" role="doc-biblioref">CARTO 2019</a>)</span> is adopted:
+are available the <code>Geyser</code> palette <span class="citation">(mimicked from <a href="#ref-color:CARTO">CARTO
+2019</a>)</span> is adopted:
 <code>divergingx_hcl(11, "Geyser", rev = TRUE)</code>. This also goes
 from red via yellow to a green/blue and hence needs the
 <code><a href="../reference/divergingx_hcl.html">divergingx_hcl()</a></code> function (as opposed to

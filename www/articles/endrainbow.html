@@ -137,11 +137,13 @@ rainbow examples taken from actual publications (rather than simplified
 demos).</p>
 <p>For more details on the limitations of the rainbow palette and
 further pointers see “<a href="http://www.climate-lab-book.ac.uk/2014/end-of-the-rainbow/" class="external-link">The
-End of the Rainbow</a>” by <span class="citation">Hawkins et al. (<a href="#ref-color:Hawkins+McNeall+Stephenson:2014" role="doc-biblioref">2014</a>)</span>, “<a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/" class="external-link">Examining
-Implicit Discretization in Spectral Schemes</a>” by <span class="citation">Quinan et al. (<a href="#ref-color:Quinan+Padilla+CreemRegehr:2019" role="doc-biblioref">2019</a>)</span>, or “<a href="https://dx.doi.org/10.1175/BAMS-D-13-00155.1" class="external-link">Somewhere over the
-Rainbow: How to Make Effective Use of Colors in Meteorological
-Visualizations</a>” by <span class="citation">Stauffer et al. (<a href="#ref-color:Stauffer+Mayr+Dabernig:2015" role="doc-biblioref">2015</a>)</span> as well as the <a href="https://twitter.com/hashtag/endrainbow" class="external-link">#endrainbow</a> hashtag on
-Twitter.</p>
+End of the Rainbow</a>” by <span class="citation">Hawkins et al. (<a href="#ref-color:Hawkins+McNeall+Stephenson:2014">2014</a>)</span>, “<a href="https://vdl.sci.utah.edu/publications/2019_eurovis_implicit-discretization/" class="external-link">Examining
+Implicit Discretization in Spectral Schemes</a>” by <span class="citation">Quinan et al. (<a href="#ref-color:Quinan+Padilla+CreemRegehr:2019">2019</a>)</span>, or
+“<a href="https://dx.doi.org/10.1175/BAMS-D-13-00155.1" class="external-link">Somewhere over
+the Rainbow: How to Make Effective Use of Colors in Meteorological
+Visualizations</a>” by <span class="citation">Stauffer et al. (<a href="#ref-color:Stauffer+Mayr+Dabernig:2015">2015</a>)</span> as well
+as the <a href="https://twitter.com/hashtag/endrainbow" class="external-link">#endrainbow</a>
+hashtag on Twitter.</p>
 <p>In a nutshell, the (in-)famous RGB rainbow palette is virtually
 always a poor choice and properly balanced qualitative, sequential, or
 diverging palettes - such as the <a href="hcl_palettes.html">HCL-based
@@ -167,11 +169,10 @@ spirit of <em>The Joy of Painting</em>.</p>
 <h2 id="heatmap-from-the-grammar-of-graphics">Heatmap from The Grammar of Graphics<a class="anchor" aria-label="anchor" href="#heatmap-from-the-grammar-of-graphics"></a>
 </h2>
 <p>Even in the excellent book <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html" class="external-link">“The
-Grammar of Graphics”</a> by <span class="citation">Wilkinson (<a href="#ref-color:Wilkinson:2005" role="doc-biblioref">2005</a>)</span>,
-the rainbow palette is used in one of the first figures, depicting a
-heatmap of a bivariate kernel density estimate. The figure is shown
-below on the left and is contrasted with an HCL-based sequential heat
-color palette on the right
+Grammar of Graphics”</a> by <span class="citation">Wilkinson (<a href="#ref-color:Wilkinson:2005">2005</a>)</span>, the rainbow palette
+is used in one of the first figures, depicting a heatmap of a bivariate
+kernel density estimate. The figure is shown below on the left and is
+contrasted with an HCL-based sequential heat color palette on the right
 (<code>sequential_hcl(99, palette = "Heat")</code>).</p>
 <p><img src="screenshots/bkde-rainbow.png" style="width:49.0%"><img src="screenshots/bkde-heat.png" style="width:49.0%"></p>
 <p>The original palette changes back and forth between dark and light
@@ -191,9 +192,9 @@ compared to the heat colors. Below deuteranope vision is emulated.</p>
 light”, coding “positive” (green) and “negative” (red) deviations from
 some neutral value (yellow), e.g., forecast errors or other model
 deviations, correlations, slopes, etc. A typical example is shown below,
-taken from Figure 5 of <span class="citation">Kneib (<a href="#ref-color:Kneib:2006" role="doc-biblioref">2006</a>)</span>,
-where deviations from a childhood moratlity model (without spatial
-effect) for Nigeria are depicted.</p>
+taken from Figure 5 of <span class="citation">Kneib (<a href="#ref-color:Kneib:2006">2006</a>)</span>, where deviations from a
+childhood moratlity model (without spatial effect) for Nigeria are
+depicted.</p>
 <p>The original palette is
 <code>rainbow(99, start = 0, end = 1/3)</code> (left) and as a better
 alternative <code>diverging_hcl(99, "Purple-Green")</code> is used. This

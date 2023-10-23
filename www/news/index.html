@@ -84,6 +84,7 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="2.1-1" id="colorspace-21-1">colorspace 2.1-1<a class="anchor" aria-label="anchor" href="#colorspace-21-1"></a></h2>
 <ul><li><p>Improvement in <code><a href="../reference/desaturate.html">desaturate()</a></code>: In addition to previous input color specifications (hex strings, named colors, RGB matrices), formal S4 color objects are now also supported. In this case, the desaturated colors are also returned as color objects of the same class as the input. With this improvement, <code><a href="../reference/desaturate.html">desaturate()</a></code> behaves exactly analogous to the color vision deficiency emulation functions which had been improved in the same way in version 2.1-0 (see below).</p></li>
+<li><p>Try harder to preserve the names in named color vectors when transformed with <code><a href="../reference/lighten.html">lighten()</a></code>, <code><a href="../reference/lighten.html">darken()</a></code>, <code><a href="../reference/adjust_transparency.html">adjust_transparency()</a></code>, <code><a href="../reference/simulate_cvd.html">simulate_cvd()</a></code>, etc. (suggested by Matias Andina).</p></li>
 <li><p>Make the fixed color vision deficiency simulation in linear RGB coordinates (introduced in version 2.1-0) the default in the <code><a href="../reference/cvd_emulator.html">cvd_emulator()</a></code> shiny app as well.</p></li>
 </ul></div>
     <div class="section level2">
