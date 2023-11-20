@@ -25,15 +25,15 @@ abstract: >
   well-established palettes are now available via the functions `palette.colors()` and `hcl.colors()`.
   The former provides a range of popular qualitative palettes for categorical data while the latter
   closely approximates many popular sequential and diverging palettes by systematically varying
-  the perceptual hue, chroma, luminance (HCL) properties in the palette. 
+  the perceptual hue, chroma, and luminance (HCL) properties in the palette. 
   This paper provides a mix of contributions including an overview of the new color functions and the palettes they provide
   along with advice about which palettes are appropriate for specific tasks,
   especially with regard to making them accessible to viewers with color vision deficiencies.
 preamble: |
   \newcommand{\doi}[1]{\href{https://doi.org/#1}{\normalfont\texttt{doi:\discretionary{}{}{}{#1}}}}
   \usepackage{longtable}
-  \definecolor{link}{RGB}{0,158,115}
-  \pagestyle{plain}
+  %\definecolor{link}{RGB}{0,158,115}
+  %\pagestyle{plain}
 bibliography: color.bib
 output: 
   rjtools::rjournal_web_article:
@@ -52,7 +52,7 @@ palette.colors <- function(...) unname(grDevices::palette.colors(...))
 Color can be a very effective way to distinguish between different groups
 within a data visualization.  Color is a "preattentive" visual feature,
 meaning that groups are identified rapidly and without conscious effort
-[@Ware:2012]. For example, it is trivially easy to identify the 
+[@Ware:2012]. For example, it is trivial to identify the 
 two groups of points in the scatterplot in Figure&nbsp;\@ref(fig:colorcatcont).
 
 Employing color to represent values on a continuous numeric scale will be
@@ -64,12 +64,14 @@ demonstrated in the right hand plot of Figure&nbsp;\@ref(fig:colorcatcont).
 
 ```{r colorcatcont}
 #| echo: FALSE
+#| message: FALSE
+#| warning: FALSE
 #| fig.height: 4
 #| fig.width: 8
 #| out.width: '100%'
 #| fig.align: 'center'
 #| fig.pos: 'h!'
-#| fig.cap: 'Typical usage of color for coding qualitative/categorical information (left) and quantitative/continuous information (right). Left: Scatter plot of weekly gas consumption by outside temperature before and after installing a house insulation. Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.'
+#| fig.cap: 'Typical usage of color for coding qualitative/categorical information (left) and quantitative/continuous information (right). Left: Scatter plot of weekly gas consumption by outside temperature before and after installing house insulation. Right: Choropleth map of median income in the 16 regions of New Zealand in 2018.'
 library("ggplot2")
 data("whiteside", package = "MASS")
 gg <- ggplot(whiteside, aes(Temp, Gas, color = Insul)) +
@@ -97,7 +99,7 @@ tm <- tm_shape(nz) +
     legend.format = list(fun = myfun)) +
   tm_layout(frame = FALSE)
 
-library(grid)
+library("grid")
 grid.newpage()
 pushViewport(viewport(x=0, width=.6, just = "left"))
 print(gg, newpage=FALSE)
@@ -127,7 +129,7 @@ What we need to generate is a vector of R colors, e.g.,
 
 # A brief history of R palettes
 
-Early versions of R provided very few functions for choosing colors from readily available palettes and the palettes
+Early versions of R provided very few functions for choosing colors from readily available palettes. The palettes
 that were provided, although standard at the time they were implemented, 
 have meanwhile
 been widely recognized as being rather poor.  
@@ -157,7 +159,7 @@ paletteGrids(list("palette()"=palette.colors(palette = "R3"),
 The `palette()` function generates a vector of eight colors.
 These provide the default set of colors that an integer color specification selects from
 and can be used for coding _categorical_ information.
-The output below shows what R used to produce prior to version 4.0.0, along with a
+The output below shows what R produced prior to version 4.0.0, along with a
 _swatch_ of color circles.
 
 ```{r echo=2}
@@ -213,7 +215,7 @@ a number of years. There were various reasons for this including the following:
 
 * Better palettes became available via packages on CRAN 
   (Comprehensive R Archive Network)
-  starting with \CRANpkg{RColorBrewer} [@RColorBrewer],
+  starting with \CRANpkg{RColorBrewer} [@RColorBrewer, first published on CRAN in 2002],
   later
   \CRANpkg{colorspace} [@Ihaka:2003; @Zeileis+Hornik+Murrell:2009], and 
   more recently
@@ -594,7 +596,7 @@ text(-0.05, 0.83, "Viridis", pos = 4, xpd = TRUE)
 The following sections describe the full range of
 new color palettes in more detail.  A much more condensed 
 overview of the new functions and palettes that are available and 
-some suggestions for robust default palettes are given in the
+some suggestions for robust default palettes are given in
 Section&nbsp;[6](#sec:summary).
 
 # A gallery of palettes
