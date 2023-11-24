@@ -36,7 +36,7 @@ preamble: |
   %\pagestyle{plain}
 bibliography: color.bib
 output: 
-  rjtools::rjournal_web_article:
+  rjtools::rjournal_article:
     self_contained: yes
 ---
 
