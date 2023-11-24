@@ -745,9 +745,9 @@ a data visualization is attempting to make.  For example, perceptual
 balance is not desirable when we want to highlight a particular
 point or category of interest;  in that scenario we explicitly 
 want some colors to have a greater visual impact than others.
-The details always also depend a lot on how many colors we need. For
-example, a palette with light gray, medium color, and full color may still
-work great on a white background if the
+The choice of palette may also depend on how many colors are needed. For
+example, a palette with a light gray, a medium color, and a full color may still
+work effectively on a white background if the
 light gray group is less important and
 is just provided in the background for
 reference.
@@ -757,7 +757,8 @@ because the easiest approach to obtaining
 a colorblind-safe palette is by using a monotonic
 change in luminance. All of the sequential palettes in `hcl.colors()` in
 fact have this property and are colorblind-safe to a certain degree, though
-it depends on the luminance range how effective this is.
+the effectiveness 
+depends on the range of luminance within the palette.
 A quick way to check a palette for colorblind-safety is via
 `colorspace::swatchplot(pal, cvd = TRUE)`, where `pal` is a palette of colors.
 More elaborate tools
@@ -765,7 +766,7 @@ are provided by the package \CRANpkg{colorblindcheck} [@colorblindcheck].
 
 The \CRANpkg{colorspace} package also provides functions like
 `sequential_hcl()` and `diverging_hcl()` 
-to generate even further palettes by defining a custom set of
+to generate palettes by defining a custom set of
 hue, chroma, and luminance 
 trajectories, e.g., based on specific hues that have inherent meanings
 for a particular data set.
@@ -821,7 +822,7 @@ This means that a little more care should be taken when selecting one
 of the ColorBrewer-inspired HCL-based palettes because, for example,
 they are often not colorblind-safe.
 The ColorBrewer.org palettes are also available in R via the 
-\pkg{RColorBrewer} package and that includes a facility for 
+\pkg{RColorBrewer} package, which includes a facility for 
 generating ColorBrewer palettes that are colorblind-safe.
 
 The remaining four palettes are taken from @Ihaka:2003. These
