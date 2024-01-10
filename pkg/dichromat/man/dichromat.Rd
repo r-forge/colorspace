@@ -17,7 +17,7 @@ dichromat(colours, type = c("deutan", "protan", "tritan"))
 
 \arguments{
   \item{colours}{A vector of R colors, either color names or color hex strings.}
-  \item{type}{Type of color-blindness to simulate,}
+  \item{type}{Type of color-blindness to simulate.}
 }
 
 \details{
