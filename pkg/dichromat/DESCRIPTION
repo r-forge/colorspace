@@ -1,6 +1,6 @@
 Package: dichromat
 Version: 2.0-1
-Date: 2016-12-23
+Date: 2022-05-02
 Title: Color Schemes for Dichromats
 Authors@R: c(person(given = "Thomas", family = "Lumley", role = c("aut", "cre"), email = "tlumley@u.washington.edu"),
              person(given = "Ken", family = "Knoblauch", role = "ctb", email = "ken.knoblauch@inserm.fr"),
