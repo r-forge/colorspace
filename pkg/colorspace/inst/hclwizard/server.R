@@ -530,7 +530,7 @@ shinyServer(function(input, output, session) {
       gastr <- append(gastr, sprintf("<code>'set ccols %s'</code>",
                                      paste(1:nrow(RGB) + 19, collapse = " ")))
       gastr <- append(gastr, sprintf("<code>'set clevs %s'</code>",
-                                     paste(round(seq(0, 100, length=nrow(RGB) - 1), 1), collapse=" ")))
+                                     paste(round(seq(0, 100, length.out=nrow(RGB) - 1), 1), collapse=" ")))
       gastr <- append(gastr, "<comment>** Open data set via DODS</comment>")
       gastr <- append(gastr, "<comment>** Open data set via DODS</comment>")
       gastr <- append(gastr, strftime(Sys.Date() - 1, "<code>'sdfopen http://nomads.ncep.noaa.gov:9090/dods/gfs_1p00/gfs%Y%m%d/gfs_1p00_00z_anl'</code>"))
