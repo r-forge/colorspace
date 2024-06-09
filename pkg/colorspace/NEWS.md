@@ -15,6 +15,10 @@
   (introduced in version 2.1-0) the default in the `cvd_emulator()` shiny app
   as well.
 
+* Minor bug fixes in `hclplot()`, the automatically generated figure titles
+  only use the H/L coordinates of the colors visualized. Minor fix on how
+  `right` (index of colors on the right hand side of a diverging palette)
+  is calculated.
 
 # colorspace 2.1-0
 
