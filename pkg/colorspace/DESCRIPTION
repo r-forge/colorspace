@@ -63,4 +63,4 @@ URL: https://colorspace.R-Forge.R-project.org/, https://hclwizard.org/
 BugReports: https://colorspace.R-Forge.R-project.org/contact.html
 LazyData: yes
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
