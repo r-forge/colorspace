@@ -12,27 +12,14 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="A Toolbox for Manipulating and Assessing Colors and Palettes">
-<meta property="og:description" content="Carries out mapping between assorted color spaces including RGB, HSV, HLS,
-             CIEXYZ, CIELUV, HCL (polar CIELUV), CIELAB, and polar CIELAB.
-	     Qualitative, sequential, and diverging color palettes based on HCL colors
-	     are provided along with corresponding ggplot2 color scales.
-	     Color palette choice is aided by an interactive app (with either a Tcl/Tk
-	     or a shiny graphical user interface) and shiny apps with an HCL color picker and a
-	     color vision deficiency emulator. Plotting functions for displaying
-	     and assessing palettes include color swatches, visualizations of the
-	     HCL space, and trajectories in HCL and/or RGB spectrum. Color manipulation
-	     functions include: desaturation, lightening/darkening, mixing, and
-	     simulation of color vision deficiencies (deutanomaly, protanomaly, tritanomaly).
-	     Details can be found on the project web page at &lt;https://colorspace.R-Forge.R-project.org/&gt;
-	     and in the accompanying scientific paper: Zeileis et al. (2020, Journal of Statistical
-	     Software, &lt;doi:10.18637/jss.v096.i01&gt;).">
+<meta property="og:description" content="Carries out mapping between assorted color spaces including RGB, HSV, HLS, CIEXYZ, CIELUV, HCL (polar CIELUV), CIELAB, and polar CIELAB. Qualitative, sequential, and diverging color palettes based on HCL colors are provided along with corresponding ggplot2 color scales. Color palette choice is aided by an interactive app (with either a Tcl/Tk or a shiny graphical user interface) and shiny apps with an HCL color picker and a color vision deficiency emulator. Plotting functions for displaying and assessing palettes include color swatches, visualizations of the HCL space, and trajectories in HCL and/or RGB spectrum. Color manipulation functions include: desaturation, lightening/darkening, mixing, and simulation of color vision deficiencies (deutanomaly, protanomaly, tritanomaly). Details can be found on the project web page at &lt;https://colorspace.R-Forge.R-project.org/&gt; and in the accompanying scientific paper: Zeileis et al. (2020, Journal of Statistical Software, &lt;doi:10.18637/jss.v096.i01&gt;).">
 <meta property="og:image" content="https://colorspace.R-Forge.R-project.org/logo.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@AchimZeileis">
@@ -133,22 +120,22 @@
 <col width="33%">
 <col width="34%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th align="center">Color spaces</th>
 <th align="center">HCL-based palettes</th>
 <th align="center">ggplot2 scales</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td align="center"><img src="index_files/figure-html/hcl-1.png"></td>
 <td align="center"><img src="index_files/figure-html/palettes-1.png"></td>
 <td align="center"><img src="index_files/figure-html/ggplot2-1.png"></td>
 </tr></tbody>
 </table>
 <table class="table">
-<thead><tr class="header">
+<thead><tr>
 <th align="center">Interactive color apps</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td align="center"><img src="articles/screenshots/choose_palette_1.png"></td>
 </tr></tbody>
 </table>
@@ -158,12 +145,12 @@
 <col width="33%">
 <col width="34%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th align="center">Demos</th>
 <th align="center">Color vision deficiency</th>
 <th align="center">Utilities</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody><tr>
 <td align="center"><img src="index_files/figure-html/inferno-1.png"></td>
 <td align="center"><img src="index_files/figure-html/deutan-1.png"></td>
 <td align="center"><img src="index_files/figure-html/desaturate-1.png"></td>
@@ -226,7 +213,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
       </footer>

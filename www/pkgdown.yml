@@ -1,5 +1,5 @@
-pandoc: 3.1.6
-pkgdown: 2.0.7
+pandoc: 3.2.1
+pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   approximations: approximations.html
@@ -12,7 +12,7 @@ articles:
   hclwizard: hclwizard.html
   manipulation_utilities: manipulation_utilities.html
   palette_visualization: palette_visualization.html
-last_built: 2023-10-23T09:31Z
+last_built: 2024-07-25T08:13Z
 urls:
   reference: https://colorspace.R-Forge.R-project.org/reference
   article: https://colorspace.R-Forge.R-project.org/articles
