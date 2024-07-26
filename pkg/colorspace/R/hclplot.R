@@ -186,7 +186,7 @@ hclplot <- function(x, type = NULL, h = NULL, c = NULL, l = NULL,
             # Auto-generate main title
             if(is.null(main)) {
                 # Reducing 'nd' to valid colors (!is.na(HCL2))
-                tmp  <- transform(nd[!is.na(HCL2), ], H = round(H))
+                tmp  <- nd[!is.na(HCL2), ]; tmp$H <- round(tmp$H)
                 main <- if (length(unique(tmp$H)) <= 1L) {
                     tmp$H[1L]
                 } else {
@@ -251,7 +251,7 @@ hclplot <- function(x, type = NULL, h = NULL, c = NULL, l = NULL,
             # Auto-generate main title
             if(is.null(main)) {
                 # Reducing 'nd' to valid colors (!is.na(HCL2))
-                tmp  <- transform(nd[!is.na(HCL2), ], H = round(H))
+                tmp  <- nd[!is.na(HCL2), ]; tmp$H <- round(tmp$H)
                 main <- if(length(unique(tmp$H)) <= 2L) {
                     paste(tmp$H[tmp$left][1L], "/", tmp$H[!tmp$left][1L])
                 } else {
@@ -306,7 +306,7 @@ hclplot <- function(x, type = NULL, h = NULL, c = NULL, l = NULL,
             # Auto-generate main title
             if(is.null(main)) {
                 # Reducing 'nd' to valid colors (!is.na(HCL2))
-                tmp  <- transform(nd[!is.na(HCL2), ], L = round(L))
+                tmp  <- nd[!is.na(HCL2), ]; tmp$L <- round(tmp$L)
                 main <- if (length(unique(tmp$L)) <= 1L) {
                    tmp$L[1L]
                 } else {
