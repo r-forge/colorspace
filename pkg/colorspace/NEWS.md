@@ -1,5 +1,10 @@
 # colorspace 2.1-1
 
+* In the `hclwizard()` shiny app the Python export now leverages the Python
+  _colorspace_ package available from PyPI at <https://pypi.org/project/colorspace/>.
+  For more details see the Python package documentation at
+  <https://retostauffer.github.io/python-colorspace/>.
+
 * Improvement in `desaturate()`: In addition to previous input color specifications
   (hex strings, named colors, RGB matrices), formal S4 color objects are now
   also supported. In this case, the desaturated colors are also returned as color
@@ -19,6 +24,10 @@
   only use the H/L coordinates of the colors visualized. Minor fix on how
   `right` (index of colors on the right hand side of a diverging palette)
   is calculated.
+
+* Support `n = 1` color in `diverging_hcl()` and `divergingx_hcl()` which then
+  both return the neutral color in the center of the respective palette.
+
 
 # colorspace 2.1-0
 
