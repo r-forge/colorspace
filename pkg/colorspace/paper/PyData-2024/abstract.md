@@ -5,33 +5,16 @@
 
 ## Abstract
 
-Color is a fundamental aspect in many data visualizations and suitable color
-choices are important for inclusivity, effectiveness, and clear communication
-of information. While many Python packages (e.g., including _matplotlib_ or
-_seaborn_) come with adequate color choices, they typically only provide a
-fixed set of color maps. Hence, we will discuss strategies and introduce
-software for designing and evaluating customized color maps that are suitable
-for a wide range of tasks and applications.
+Color is a fundamental aspect in many data visualizations and suitable color choices are important for inclusivity, effectiveness, and clear communication of information. While many Python packages (e.g., including _matplotlib_ or _seaborn_) come with adequate color choices, they typically only provide a fixed set of color maps. Hence, we will discuss strategies and introduce software for designing and evaluating customized color maps that are suitable for a wide range of tasks and applications.
 
 ## Description
 
-First, we will briefly motivate the importance of color along with possible
-pitfalls for a general audience interested in data visualization (~5 min).
-Afterwards, we will discuss the principles for choosing good palettes
-along with strategies for selecting robust and inclusive color maps for
-different plot types (~8 min). Subsequently, we will present our Python package
-_colorspace_ (~12 min) which enables the creation or modification of robust
-custom color maps using the Hue-Chroma-Luminance (HCL) color model.
-Additionally, _colorspace_ offers methods for assessing and transforming colors
-from any source, e.g., by simulating color vision deficiencies, adjusting
-contrast ratios, lightening/darkening, etc. This makes it easy for both novices
-and experts to create and assess robust and effective color maps taylored to
-their needs, as well as incorporate them in their existing Python workflow.
+First, we will briefly motivate the importance of color along with possible pitfalls for a general audience interested in data visualization (5 min). Afterwards, we will discuss the principles for choosing good palettes along with strategies for selecting robust and inclusive color maps for different plot types (8 min). Subsequently, we will present our Python package _colorspace_ (12 min) which enables the creation or modification of robust custom color maps using the Hue-Chroma-Luminance (HCL) color model. Additionally, _colorspace_ offers methods for assessing and transforming colors from any source, e.g., by simulating color vision deficiencies, adjusting contrast ratios, lightening/darkening, etc. This makes it easy for both novices and experts to create and assess robust and effective color maps tailored to their needs, as well as incorporate them in their existing Python workflow.
 
 
 ## Additional information
 
-* YT title (max 82 chars): Stauffer Reto - Strategies and Software for Robust Color Palettes in Python
+* YT title (max 82 chars): Stauffer Reto and Zeileis Achim - Strategies and Software for Robust Color Palettes in Python
 * Sponsoring: --no--
 * Prior knowledge: No previous knowledge expected
 * Affiliation: Universität Innsbruck
@@ -39,8 +22,7 @@ their needs, as well as incorporate them in their existing Python workflow.
 * Profile picture: Das vom DiSC ausleihen
 * Name: Reto Stauffer
 * Biography: Associate Professor at the Department of Statistics and the Digital Science Center (DiSC) at Universität Innsbruck, Austria. His research is on the intersection of data science and atmospheric science, ranging from probabilistic modeling to data management, visualization, and applications.
-* Availability: 2. Dec Weinachtsfeier DiSC
-
+* Availability: 4. Dec Weinachtsfeier DiSC
 
 
 ---
