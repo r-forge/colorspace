@@ -15,8 +15,10 @@ For discussions we also try to follow these channels:
 
 - <https://hclwizard.org/>  
   Online color apps.
-- <https://github.com/retostauffer/python-colorspace>  
+- <https://retostauffer.github.io/python-colorspace/>  
   Python re-implementation of the R package.
+- <https://doi.org/10.32614/RJ-2023-071>  
+  Overview of color infrastructure in base R (including HCL palettes).
 
 ## Authors
 

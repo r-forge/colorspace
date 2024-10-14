@@ -1,3 +1,12 @@
+# colorspace 2.1-2
+
+* Small improvements in `hclwizard()` shiny app, e.g., "R default schemes" are
+  now called "R legacy schemes" because base R color infrastructure was meanwhile
+  improved with `hcl.colors()` (prompted by the `colorspace` package) and
+  `palette.colors()`. See
+  [Zeileis & Murrell (2023, The R Journal)](https://doi.org/10.32614/RJ-2023-071).
+
+
 # colorspace 2.1-1
 
 * In the `hclwizard()` shiny app the Python export now leverages the Python
