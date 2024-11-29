@@ -38,7 +38,6 @@ For discussions we also try to follow these channels:
   <a href="https://orcid.org/0000-0002-3798-5507" target="orcid.widget"><span class="fab fa-orcid orcid"></span></a>
   <a href="http://retostauffer.org/"><span class="fa fa-user"></span></a>
   <a href="https://github.com/retostauffer/"><span class="fa fa-github"></span></a>
-  <a href="https://twitter.com/RetoStauffer2"><span class="fa fa-twitter-square"></span></a>
 - Claus O. Wilke
   <a href="https://orcid.org/0000-0002-7470-9261" target="orcid.widget"><span class="fab fa-orcid orcid"></span></a>
   <a href="https://clauswilke.com/"><span class="fa fa-user"></span></a>
