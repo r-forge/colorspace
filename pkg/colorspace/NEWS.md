@@ -6,6 +6,10 @@
   `palette.colors()`. See
   [Zeileis & Murrell (2023, The R Journal)](https://doi.org/10.32614/RJ-2023-071).
 
+* In functions `lighten()`/`darken()`, `adjust_transparency()`, `desaturate()`,
+  and in the color vision deficiency simulation functions, try to preserve the
+  `"colors"` class (from `prismatic`) along with other attributes.
+
 
 # colorspace 2.1-1
 
