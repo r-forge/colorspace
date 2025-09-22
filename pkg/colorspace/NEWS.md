@@ -13,6 +13,9 @@
 * In `max_chroma()` missing values in the input arguments are supported now,
   leading to missing values in the output. (Reported by Martin R. Smith.)
 
+* Update references and links in the documentation of `contrast_ratio()` due to
+  the release of the Web Content Accessibility Guidelines (WCAG) version 2.2.
+
 
 # colorspace 2.1-1
 
