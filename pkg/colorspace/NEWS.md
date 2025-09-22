@@ -10,6 +10,9 @@
   and in the color vision deficiency simulation functions, try to preserve the
   `"colors"` class (from `prismatic`) along with other attributes.
 
+* In `max_chroma()` missing values in the input arguments are supported now,
+  leading to missing values in the output. (Reported by Martin R. Smith.)
+
 
 # colorspace 2.1-1
 
