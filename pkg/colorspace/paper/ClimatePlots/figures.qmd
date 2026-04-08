@@ -36,7 +36,8 @@ tinyplot(Mean ~ Year | Scenario, type = "l", lwd = 2,
          col = cols,
          main = title,
          xlim = range(d$Year), ylim = range(d$Mean),
-         data = subset(d, Scenario != "historical"))
+         data = subset(d, Scenario != "historical"),
+         xlab = NA, ylab = bquote("temperature change ["~degree~C~"]"))
 tinyplot(Mean ~ Year, type = "l", lwd = 2, col = "black",
          data = subset(d, Scenario == "historical"),
          add = TRUE)
@@ -53,18 +54,51 @@ tinyplot(Mean ~ Year | Scenario, type = "l", lwd = 2,
          main = title,
          legend = FALSE,
          xlim = range(d$Year), ylim = range(d$Mean),
-         data = subset(d, Scenario != "historical"))
+         data = subset(d, Scenario != "historical"),
+         xlab = NA, ylab = bquote("temperature change ["~degree~C~"]"))
 tinyplot(Mean ~ Year, type = "l", lwd = 2, col = "black",
          data = subset(d, Scenario == "historical"),
          add = TRUE)
 tmp <- subset(d, Year == max(Year))
 for (i in seq_len(nrow(tmp))) {
     axis(side = 4, at = tmp$Mean[i], font = 2,
-         labels = bquote(.(tmp$Scenario[1])~degree*C),
+         labels = bquote(.(tmp$Scenario[i])~degree*C),
          col.axis = cols[i], las = 1, lwd = NA)
 }
 ```
 
+
+```{r ipcc_lineplot_origcolors}
+#| fig-width: 8
+#| fig-height: 4
+# Original colors of Figure 3.3 (a)
+cols <- rev(c("#00a9d1", "#29416e", "#e58c35", "#dd4048", "#942324"))
+d2 <- subset(d, Scenario != "historical")
+d2$Scenario <- factor(d2$Scenario,
+                      levels = rev(c("1-1.9", "1-2.6", "2-4.5", "3-7.0", "5-8.5")),
+                      labels = rev(c("very low", "low", "intermediate", "high", "very high")),
+                      ordered = TRUE)
+
+par(mar = c(5.1, 4.1, 4.1, 8.1), bty = "l")
+tinyplot(Mean ~ Year | Scenario, type = "l", lwd = 2,
+         col = cols,
+         main = title,
+         legend = FALSE,
+         xlim = range(d$Year), ylim = range(d$Mean),
+         data = d2,
+         xlab = NA, ylab = bquote("temperature change ["~degree~C~"]"))
+tinyplot(Mean ~ Year, type = "l", lwd = 2, col = "black",
+         data = subset(d, Scenario == "historical"),
+         add = TRUE)
+
+tmp <- subset(d2, Year == max(Year))
+for (i in seq_len(nrow(tmp))) {
+    axis(side = 4, at = tmp$Mean[i],
+         labels = tmp$Scenario[i],
+         col.axis = rev(cols)[i], las = 1, lwd = NA)
+}
+rm(d2)
+```
 
 # World bank
 
@@ -72,8 +106,9 @@ The world bank also provides gridde data set .. a lot.
 This is just an example of the Standardized Precipitation Evaporation Index (SPEI),
 a drought indicator.
 
+## Average surface temperature anomalies
 
-```{r}
+```{r wb_spatial_temperature_1}
 #| fig-width: 8
 #| fig-height: 6
 ne <- ne_countries(returnclass = "sf")
@@ -86,27 +121,75 @@ ggplot() + geom_stars(data = tas) + theme_minimal() +
     geom_sf(data = ne, fill = NA, lwd = 0.6) +
     labs(title = "Anomaly of average mean temperature, 2040-2059") +
     labs(subtitle = "Reference period 1995-2014") +
-    theme_minimal()
+    theme_minimal() +
+    theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 ```
 
+```{r wb_spatial_temperature_2}
+#| fig-width: 8
+#| fig-height: 6
+ne <- ne_countries(returnclass = "sf")
 
-```{r}
+tas <- read_stars(file.path("data",
+        "anomaly-tas-annual-mean_cmip6-x0.25_ensemble-all-ssp245_climatology_median_2040-2059.nc"))
+lim <- range(as.data.frame(tas)[, 4])
+ggplot() + geom_stars(data = tas) + theme_minimal() +
+    scale_fill_continuous_sequential("Reds 2",
+        h1 = 0, h2 = 0,
+        c1 = 5, cmax = 60, c2 = 0,
+        l1 = 7, l2 = 96,
+        p1 = 1.0, p2 = 1.6,
+        limits = lim, name = bquote(degree*C)) +
+    geom_sf(data = ne, fill = NA, lwd = 0.6) +
+    labs(title = "Anomaly of average mean temperature, 2040-2059") +
+    labs(subtitle = "Reference period 1995-2014") +
+    theme_minimal() +
+    theme(axis.title.x = element_blank(), axis.title.y = element_blank())
+```
+
+## Relative changes in precipitation amount
+
+```{r wb_spatial_prp_1}
 #| fig-width: 8
 #| fig-height: 6
 ne <- ne_countries(returnclass = "sf")
 
 prp <- read_stars(file.path("data",
         "anomaly-prpercnt-annual-mean_cmip6-x0.25_ensemble-all-ssp245_climatology_median_2040-2059.nc"))
-lim <- quantile(as.data.frame(prp)[, 4], probs = c(0.001, 0.999), na.rm = TRUE)
-lim <- c(-1, 1) * max(abs(lim))
+#lim <- quantile(as.data.frame(prp)[, 4], probs = c(0.001, 0.999), na.rm = TRUE)
+lim <- c(-1, 1) * max(abs(as.data.frame(prp)[, 4]))
 #lim <- range(as.data.frame(prp)[, 4])
 ggplot() + geom_stars(data = prp) + theme_minimal() +
-    scale_fill_continuous_diverging("Blue-Red", rev = TRUE, p1 = 0.5, limits = lim, name = bquote("%")) +
+    scale_fill_continuous_diverging("Blue-Red", rev = TRUE, h2 = 5, p1 = 0.8, limits = lim, name = bquote("%")) +
     geom_sf(data = ne, fill = NA, lwd = 0.6) +
     labs(title = "Anomaly of relative precipitation change, 2040-2059") +
     labs(subtitle = "Reference period 1995-2014") +
-    theme_minimal()
+    theme_minimal() +
+    theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 ```
+
+
+
+```{r wb_spatial_prp_2}
+#| fig-width: 8
+#| fig-height: 6
+ne <- ne_countries(returnclass = "sf")
+
+prp <- read_stars(file.path("data",
+        "anomaly-prpercnt-annual-mean_cmip6-x0.25_ensemble-all-ssp245_climatology_median_2040-2059.nc"))
+#lim <- quantile(as.data.frame(prp)[, 4], probs = c(0.001, 0.999), na.rm = TRUE)
+lim <- c(-1, 1) * max(abs(as.data.frame(prp)[, 4]))
+#lim <- range(as.data.frame(prp)[, 4])
+ggplot() + geom_stars(data = prp) + theme_minimal() +
+    scale_fill_continuous_diverging("Green-Brown", rev = TRUE, cmax = 60, limits = lim, name = bquote("%")) +
+    geom_sf(data = ne, fill = NA, lwd = 0.6) +
+    labs(title = "Anomaly of relative precipitation change, 2040-2059") +
+    labs(subtitle = "Reference period 1995-2014") +
+    theme_minimal() +
+    theme(axis.title.x = element_blank(), axis.title.y = element_blank())
+```
+
+
 
 # UWZ Warnings
 
