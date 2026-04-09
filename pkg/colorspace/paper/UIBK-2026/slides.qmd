@@ -11,7 +11,7 @@ format:
         themeoptions: quarto,foot,nofootrule,license
         header-includes:
           - \URL{https://hclwizard.org/}
-          - \headerimage{uibk-stripes.png}
+          - \headerimage{uibk-stripes.pdf}
           - \AddToHook{env/Highlighting/begin}{\small}
           - \AddToHook{env/verbatim/begin}{\small}
 
@@ -590,3 +590,8 @@ Stauffer R, Mayr GJ, Dabernig M, Zeileis A (2015).
 **Credits:** Warming stripes 1777--2024 for Innsbruck, Austria, by
 [Ed Hawkins, University of Reading](https://showyourstripes.info/s/europe/austria/innsbruck),
 under [![](license_ccby.pdf){width=6mm} CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
+
+Ed Hawkins, University of Reading: Warming stripes 1777--2024 for Innsbruck, Austria
+https://creativecommons.org/licenses/by/4.0/
+
+
