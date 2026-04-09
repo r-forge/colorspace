@@ -10,7 +10,7 @@ format:
         theme: uibk
         themeoptions: quarto,foot,nofootrule,license
         header-includes:
-          - \URL{https://www.hclwizard.org/}
+          - \URL{https://hclwizard.org/}
           - \headerimage{uibk-stripes.png}
           - \AddToHook{env/Highlighting/begin}{\small}
           - \AddToHook{env/verbatim/begin}{\small}
@@ -18,7 +18,7 @@ format:
 pdf-engine: pdflatex
 ---
 
-```{r}
+```{r setup}
 #| include: false
 library("colorspace")
 library("tinyplot")
@@ -312,28 +312,18 @@ swatchplot(
 :::
 
 ::: {.column width="50%"}
-```{r blues2-spectrum}
-#| fig-width: 5.2
-#| fig-height: 5.2
-#| fig-show: hide
-specplot(sequential_hcl(7, "Blues 2"))
-```
-```{r blues3-spectrum}
-#| fig-width: 5.2
-#| fig-height: 5.2
-#| fig-show: hide
-specplot(sequential_hcl(7, "Blues 3"))
-```
 ```{r blues-spectrum}
 #| fig-width: 5.2
 #| fig-height: 5.2
 #| fig-show: hide
+specplot(sequential_hcl(7, "Blues 2"))
+specplot(sequential_hcl(7, "Blues 3"))
 specplot(sequential_hcl(7, "Blues"))
 ```
 
-\only<2>{\includegraphics[width=0.95\textwidth]{slides_files/figure-beamer/blues2-spectrum-1.pdf}}
-\only<3>{\includegraphics[width=0.95\textwidth]{slides_files/figure-beamer/blues3-spectrum-1.pdf}}
-\only<4>{\includegraphics[width=0.95\textwidth]{slides_files/figure-beamer/blues-spectrum-1.pdf}}
+\only<2>{\includegraphics[width=0.95\textwidth]{slides_files/figure-beamer/blues-spectrum-1.pdf}}
+\only<3>{\includegraphics[width=0.95\textwidth]{slides_files/figure-beamer/blues-spectrum-2.pdf}}
+\only<4>{\includegraphics[width=0.95\textwidth]{slides_files/figure-beamer/blues-spectrum-3.pdf}}
 :::
 
 ::::
@@ -480,34 +470,34 @@ wb_prp + scale_fill_continuous_diverging("Green-Brown", rev = TRUE, cmax = 60,  
 d <- readRDS("data/IPCC_AR6_global_surface_temp_change.rds")
 title <- "Global surface temperature change relative to 1850-1900"
 
-cols <- rev(c("#000000", "#00a9d1", "#29416e", "#e58c35", "#dd4048", "#942324"))
+cols <- c("#00a9d1", "#29416e", "#e58c35", "#dd4048", "#942324", "#000000")
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
-  main = title, xlab = NA, ylab = bquote("Temperature change ["~degree~C~"]"),
+  main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols)
 
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
-  main = title, xlab = NA, ylab = bquote("Temperature change ["~degree~C~"]"),
+  main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2110))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
   labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
 
 cols <- palette.colors()[c(6, 3, 4, 2, 7, 1)]
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
-  main = title, xlab = NA, ylab = bquote("Temperature change ["~degree~C~"]"),
+  main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2110))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
   labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
 
 cols <- rev(c("#000000", diverging_hcl(5, "Blue-Red", rev = TRUE, l2 = 70)))
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
-  main = title, xlab = NA, ylab = bquote("Temperature change ["~degree~C~"]"),
+  main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2110))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
   labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
 
 cols <- rev(c("#000000", sequential_hcl(7, "ag_Sunset")[3:7]))
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
-  main = title, xlab = NA, ylab = bquote("Temperature change ["~degree~C~"]"),
+  main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2110))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
   labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
