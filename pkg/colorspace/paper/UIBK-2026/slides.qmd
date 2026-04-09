@@ -428,7 +428,7 @@ lim <- range(as.data.frame(tas)[, 4])
 wb_temp <- ggplot() + geom_stars(data = tas) + theme_minimal() +
     geom_sf(data = ne, fill = NA, lwd = 0.6) +
     labs(title = "Anomaly of average mean temperature 2040-2059") +
-    labs(subtitle = "Reference period 1995-2014") +
+    labs(subtitle = "Intermediate scenario (SSP2, 4.5°C), reference period 1995-2014") +
     theme_minimal() +
     theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 wb_temp + scale_fill_continuous_sequential("ag_Sunset", p1 = 0.6, limits = lim,              name = bquote(degree*C))
@@ -450,7 +450,7 @@ lim <- c(-1, 1) * max(abs(as.data.frame(prp)[, 4]))
 wb_prp <- ggplot() + geom_stars(data = prp) + theme_minimal() +
     geom_sf(data = ne, fill = NA, lwd = 0.6) +
     labs(title = "Anomaly of relative precipitation change, 2040-2059") +
-    labs(subtitle = "Reference period 1995-2014") +
+    labs(subtitle = "Intermediate scenario (SSP2, 4.5°C), reference period 1995-2014") +
     theme_minimal() +
     theme(axis.title.x = element_blank(), axis.title.y = element_blank())
 wb_prp + scale_fill_continuous_diverging("Blue-Red",    rev = TRUE, h2 = 5, p1 = 0.8, limits = lim, name = bquote("%"))
@@ -470,37 +470,37 @@ wb_prp + scale_fill_continuous_diverging("Green-Brown", rev = TRUE, cmax = 60,  
 d <- readRDS("data/IPCC_AR6_global_surface_temp_change.rds")
 title <- "Global surface temperature change relative to 1850-1900"
 
-cols <- c("#00a9d1", "#29416e", "#e58c35", "#dd4048", "#942324", "#000000")
+cols <- c("#000000", "#00a9d1", "#29416e", "#e58c35", "#dd4048", "#942324")
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols)
 
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
-  col = cols, legend = FALSE, xlim = c(1950, 2110))
+  col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
 
-cols <- palette.colors()[c(6, 3, 4, 2, 7, 1)]
+cols <- palette.colors()[c(1, 6, 3, 4, 2, 7)]
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
-  col = cols, legend = FALSE, xlim = c(1950, 2110))
+  col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
 
-cols <- rev(c("#000000", diverging_hcl(5, "Blue-Red", rev = TRUE, l2 = 70)))
+cols <- rev(c(diverging_hcl(5, "Blue-Red", rev = TRUE, l2 = 70), "#000000"))
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
-  col = cols, legend = FALSE, xlim = c(1950, 2110))
+  col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
 
-cols <- rev(c("#000000", sequential_hcl(7, "ag_Sunset")[3:7]))
+cols <- rev(c(sequential_hcl(7, "ag_Sunset")[3:7], "#000000"))
 tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
-  col = cols, legend = FALSE, xlim = c(1950, 2110))
+  col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste(head(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
 ```
 
 \only<1>{\includegraphics[width=0.9\textwidth]{slides_files/figure-beamer/ipcc-lineplot-1.pdf}}
@@ -584,7 +584,6 @@ Stauffer R, Mayr GJ, Dabernig M, Zeileis A (2015).
   _Bulletin of the American Meteorological Society_, **96**(2), 203--216.
   [`doi:10.1175/BAMS-D-13-00155.1`](https://doi.org/10.1175/BAMS-D-13-00155.1)
 
-
 \bigskip
 
 **Credits:** Warming stripes 1777--2024 for Innsbruck, Austria, by
@@ -595,3 +594,15 @@ Ed Hawkins, University of Reading: Warming stripes 1777--2024 for Innsbruck, Aus
 https://creativecommons.org/licenses/by/4.0/
 
 
+
+
+## References
+
+IPCC, 2024. IPCC AR6 Synthesis Report SPM.4 (a) and LR Figure 3.3 (a) (Linear graph):
+    Global surface temperature change relative to 1850-1900. Palisades, New
+    York: NASA Socioeconomic Data and Applications Center (SEDAC).
+    [`doi:10.7927/606k-d497`](https://doi.org/10.7927/606k-d497). Accessed April 6, 2026.
+
+Spatial projection data from the Climate Change Knowledge Project by
+    the World Bank under [![](license_ccby.pdf){width=6mm} CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/),
+    <https://climateknowledgeportal.worldbank.org/>.
