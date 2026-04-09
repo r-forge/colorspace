@@ -64,7 +64,7 @@ set.seed(403)
 **Challenge:**
 
 - Color memory game.
-- <https://dialed.gg/?c=QPFVHK>
+- [`https://dialed.gg/?c=QPFVHK`](https://dialed.gg/?c=QPFVHK)
 :::
 
 ::: {.column width="50%"}
@@ -468,39 +468,41 @@ wb_prp + scale_fill_continuous_diverging("Green-Brown", rev = TRUE, cmax = 60,  
 #| fig-height: 5
 #| fig-show: hide
 d <- readRDS("data/IPCC_AR6_global_surface_temp_change.rds")
+d$SSP <- gsub("SSP", "", d$Scenario)
+d <- d[order(d$SSP), ]
 title <- "Global surface temperature change relative to 1850-1900"
 
-cols <- c("#000000", "#00a9d1", "#29416e", "#e58c35", "#dd4048", "#942324")
-tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
+cols <- c("#00a9d1", "#29416e", "#e58c35", "#dd4048", "#942324", "#000000")
+tinyplot(Mean ~ Year | SSP, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols)
 
-tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
+tinyplot(Mean ~ Year | SSP, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste("SSP", head(unique(d$SSP), -1), "°C"), pos = 4, xpd = TRUE)
 
-cols <- palette.colors()[c(1, 6, 3, 4, 2, 7)]
-tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
+cols <- palette.colors()[c(6, 3, 4, 2, 7, 1)]
+tinyplot(Mean ~ Year | SSP, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste("SSP", head(unique(d$SSP), -1), "°C"), pos = 4, xpd = TRUE)
 
-cols <- rev(c(diverging_hcl(5, "Blue-Red", rev = TRUE, l2 = 70), "#000000"))
-tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
+cols <- c(diverging_hcl(5, "Blue-Red", l2 = 70), "#000000")
+tinyplot(Mean ~ Year | SSP, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste("SSP", head(unique(d$SSP), -1), "°C"), pos = 4, xpd = TRUE)
 
-cols <- rev(c(sequential_hcl(7, "ag_Sunset")[3:7], "#000000"))
-tinyplot(Mean ~ Year | Scenario, data = d, type = "l", lwd = 3, theme = "clean2",
+cols <- rev(c("#000000", sequential_hcl(8, "ag_Sunset")[3:7]))
+tinyplot(Mean ~ Year | SSP, data = d, type = "l", lwd = 3, theme = "clean2",
   main = title, xlab = NA, ylab = "Temperature change [°C]",
   col = cols, legend = FALSE, xlim = c(1950, 2120))
 tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
-  labels = paste0(tail(unique(d$Scenario), -1), "°C"), pos = 4, xpd = TRUE)
+  labels = paste("SSP", head(unique(d$SSP), -1), "°C"), pos = 4, xpd = TRUE)
 ```
 
 \only<1>{\includegraphics[width=0.9\textwidth]{slides_files/figure-beamer/ipcc-lineplot-1.pdf}}
@@ -561,6 +563,40 @@ tinyplot_add(data = subset(d, Year == max(Year)), type = "text",
 
 ---
 
+## Credits
+
+\small
+
+Hawkins E (2026).
+  "Warming stripes 1777--2024 for Innsbruck, Austria."  
+  [License: ![](license_ccby.pdf){width=6mm} CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), University of Reading.  
+  [`https://showyourstripes.info/s/europe/austria/innsbruck`](https://showyourstripes.info/s/europe/austria/innsbruck)  
+
+\medskip
+
+National Hurricane Center (2019).
+  "Tropical-Storm-Force Wind Speed Probabilities
+  for the 120 Hours (5.0 Days) from 2pm EDT Fri Aug 30 to 2pm EDT Wed Sep 04."  
+  National Oceanic and Atmospheric Administration. Public Domain.  
+  [`https://www.nhc.noaa.gov/`](https://www.nhc.noaa.gov/)
+
+\medskip
+
+International Panel for Climate Change (2024).
+  "IPCC AR6 Synthesis Report SPM.4 (a) and LR Figure 3.3 (a) (Linear graph):
+  Global Surface Temperature Change Relative to 1850--1900."
+  NASA Socioeconomic Data and Applications Center (SEDAC).
+  Palisades, New York. Accessed 2026-04-06.
+  [`doi:10.7927/606k-d497`](https://doi.org/10.7927/606k-d497)  
+
+\medskip
+
+World Bank (2026).
+  "Spatial Projection Data from the Climate Change Knowledge Project."  
+  [License: ![](license_ccby.pdf){width=6mm} CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+  [`https://climateknowledgeportal.worldbank.org/`](https://climateknowledgeportal.worldbank.org/)
+
+
 ## References
 
 \small
@@ -584,25 +620,3 @@ Stauffer R, Mayr GJ, Dabernig M, Zeileis A (2015).
   _Bulletin of the American Meteorological Society_, **96**(2), 203--216.
   [`doi:10.1175/BAMS-D-13-00155.1`](https://doi.org/10.1175/BAMS-D-13-00155.1)
 
-\bigskip
-
-**Credits:** Warming stripes 1777--2024 for Innsbruck, Austria, by
-[Ed Hawkins, University of Reading](https://showyourstripes.info/s/europe/austria/innsbruck),
-under [![](license_ccby.pdf){width=6mm} CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/).
-
-Ed Hawkins, University of Reading: Warming stripes 1777--2024 for Innsbruck, Austria
-https://creativecommons.org/licenses/by/4.0/
-
-
-
-
-## References
-
-IPCC, 2024. IPCC AR6 Synthesis Report SPM.4 (a) and LR Figure 3.3 (a) (Linear graph):
-    Global surface temperature change relative to 1850-1900. Palisades, New
-    York: NASA Socioeconomic Data and Applications Center (SEDAC).
-    [`doi:10.7927/606k-d497`](https://doi.org/10.7927/606k-d497). Accessed April 6, 2026.
-
-Spatial projection data from the Climate Change Knowledge Project by
-    the World Bank under [![](license_ccby.pdf){width=6mm} CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/),
-    <https://climateknowledgeportal.worldbank.org/>.
