@@ -1,14 +1,10 @@
 ---
 format:
-  pdf:
-    header-includes:
-    - \renewcommand{\familydefault}{\sfdefault}
-    geometry: "left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm"
-    fontfamily: helvet
-pdf-engine: pdflatex
+  html:
+    embed-resources: true
 ---
 
-## Color assessment tasks
+# Color assessment tasks
 
 Discuss the following published figures. Consider in particular the following questions:
 
